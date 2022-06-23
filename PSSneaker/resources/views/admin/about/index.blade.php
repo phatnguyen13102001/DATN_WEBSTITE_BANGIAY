@@ -20,8 +20,6 @@
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
         </div>
-
-
         <div class="row">
             <div class="col-xl-8">
                 <div class="card card-primary card-outline text-sm">

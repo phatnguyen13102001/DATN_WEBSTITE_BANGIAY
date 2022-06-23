@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'MTD Hangbird';
+    src: url('MTD.eot');
+    src: url('MTD.eot?#iefix') format('embedded-opentype'),
+        url('MTD.woff2') format('woff2'),
+        url('MTD.woff') format('woff'),
+        url('MTD.ttf') format('truetype'),
+        url('MTD.svg#MTD') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'iCiel Pacifico';
+    src: url('iCielPacifico.eot');
+    src: url('iCielPacifico.eot?#iefix') format('embedded-opentype'),
+        url('iCielPacifico.woff2') format('woff2'),
+        url('iCielPacifico.woff') format('woff'),
+        url('iCielPacifico.ttf') format('truetype'),
+        url('iCielPacifico.svg#iCielPacifico') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('Quicksand-Medium.eot');
+    src: url('Quicksand-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Quicksand-Medium.woff2') format('woff2'),
+        url('Quicksand-Medium.woff') format('woff'),
+        url('Quicksand-Medium.ttf') format('truetype'),
+        url('Quicksand-Medium.svg#Quicksand-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quicksand';
+    src: url('Quicksand-Regular.eot');
+    src: url('Quicksand-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Quicksand-Regular.woff2') format('woff2'),
+        url('Quicksand-Regular.woff') format('woff'),
+        url('Quicksand-Regular.ttf') format('truetype'),
+        url('Quicksand-Regular.svg#Quicksand-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'SFU ShadowBT';
+    src: url('SFUShadowBTBlackCondensed.eot');
+    src: url('SFUShadowBTBlackCondensed.eot?#iefix') format('embedded-opentype'),
+        url('SFUShadowBTBlackCondensed.woff2') format('woff2'),
+        url('SFUShadowBTBlackCondensed.woff') format('woff'),
+        url('SFUShadowBTBlackCondensed.ttf') format('truetype'),
+        url('SFUShadowBTBlackCondensed.svg#SFUShadowBTBlackCondensed') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'VL Miss Le Gatees';
+    src: url('VLMissLeGatees.eot');
+    src: url('VLMissLeGatees.eot?#iefix') format('embedded-opentype'),
+        url('VLMissLeGatees.woff2') format('woff2'),
+        url('VLMissLeGatees.woff') format('woff'),
+        url('VLMissLeGatees.ttf') format('truetype'),
+        url('VLMissLeGatees.svg#VLMissLeGatees') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'Blade Runner Movie Font';
+    src: url('BladeRunnerMovieFont.eot');
+    src: url('BladeRunnerMovieFont.eot?#iefix') format('embedded-opentype'),
+        url('BladeRunnerMovieFont.woff2') format('woff2'),
+        url('BladeRunnerMovieFont.woff') format('woff'),
+        url('BladeRunnerMovieFont.ttf') format('truetype'),
+        url('BladeRunnerMovieFont.svg#BladeRunnerMovieFont') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
