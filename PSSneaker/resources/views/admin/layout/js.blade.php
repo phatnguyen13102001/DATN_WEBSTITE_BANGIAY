@@ -41,7 +41,6 @@
 <script src="{{ asset('admin/rangeSlider/ion.rangeSlider.js')}}"></script>
 <script src="{{ asset('admin/js/priceFormat.js')}}"></script>
 <script src="{{ asset('admin/filer/jquery.filer.js')}}"></script>
-<script src="{{ asset('admin/js/bootstrap.js')}}"></script>
 <script src="{{ asset('AdminLTE-master/dist/js/pages/dashboard.js')}}"></script>
 <script src="{{ asset('admin/js/apps.js')}}"></script>
 <script src="{{ asset('admin/ckeditor/ckeditor.js')}}"></script>

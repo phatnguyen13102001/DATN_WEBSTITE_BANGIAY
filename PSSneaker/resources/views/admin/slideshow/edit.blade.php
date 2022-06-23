@@ -54,25 +54,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card card-primary card-outline card-outline-tabs">
-                    <div class="card-header p-0 border-bottom-0">
-                        <ul class="nav nav-tabs" id="custom-tabs-three-tab-lang" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="tabs-lang" data-toggle="pill" href="#tabs-lang-vi" role="tab" aria-controls="tabs-lang-vi" aria-selected="true">Tiếng Việt</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="custom-tabs-three-tabContent-lang">
-                            <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
-                                <div class="form-group">
-                                    <label for="namevi">Tiêu đề:</label>
-                                    <input type="text" class="form-control text-sm" name="name" id="name" placeholder="Tiêu đề" value="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </form>

@@ -42,7 +42,6 @@
                         <th class="align-middle text-center">Địa chỉ</th>
                         <th class="align-middle text-center">Phân quyền</th>
                         <th class="align-middle text-center">Khóa</th>
-                        <th class="align-middle text-center">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,9 +70,6 @@
                                 <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
                             </div>
                         </td>
-                        <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="Xóa"><i class="fas fa-trash-alt"></i></a>
-                        </td>
                     </tr>
                     <tr>
                         <td class="align-middle text-center">
@@ -100,9 +96,6 @@
                                 <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
                             </div>
                         </td>
-                        <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="Xóa"><i class="fas fa-trash-alt"></i></a>
-                        </td>
                     </tr>
                     <tr>
                         <td class="align-middle text-center">
@@ -128,9 +121,6 @@
                                 <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-noibat-48" data-table="news" data-id="48" data-attr="noibat" checked="">
                                 <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
                             </div>
-                        </td>
-                        <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="Xóa"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                     <tr>
@@ -158,9 +148,6 @@
                                 <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
                             </div>
                         </td>
-                        <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="Xóa"><i class="fas fa-trash-alt"></i></a>
-                        </td>
                     </tr>
                     <tr>
                         <td class="align-middle text-center">
@@ -186,9 +173,6 @@
                                 <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-noibat-48" data-table="news" data-id="48" data-attr="noibat" checked="">
                                 <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
                             </div>
-                        </td>
-                        <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="Xóa"><i class="fas fa-trash-alt"></i></a>
                         </td>
                     </tr>
                 </tbody>

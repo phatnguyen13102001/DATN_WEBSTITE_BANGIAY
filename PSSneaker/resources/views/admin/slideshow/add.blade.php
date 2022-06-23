@@ -56,18 +56,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="card card-primary card-outline card-outline-tabs">
-                    <div class="card-body">
-                        <div class="tab-content" id="custom-tabs-three-tabContent-lang">
-                            <div class="tab-pane fade show active" id="tabs-lang-vi-0" role="tabpanel" aria-labelledby="tabs-lang">
-                                <div class="form-group">
-                                    <label for="namevi0">Tiêu đề:</label>
-                                    <input type="text" class="form-control text-sm" name="name" id="name" placeholder="Tiêu đề" value="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </form>

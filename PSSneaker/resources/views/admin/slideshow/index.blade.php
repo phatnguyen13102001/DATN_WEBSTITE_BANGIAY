@@ -33,7 +33,6 @@
                             </div>
                         </th>
                         <th class="align-middle text-center">Hình</th>
-                        <th class="align-middle text-center">Tiêu đề</th>
                         <th class="align-middle text-center">Link</th>
                         <th class="align-middle text-center">Hiển thị</th>
                         <th class="align-middle text-center">Thao tác</th>
@@ -50,9 +49,6 @@
                         <td class="align-middle text-center">
                             <a href="" title="Slider">
                                 <img class="rounded" width="150" height="50" src="{{asset('admin/images/Slideshow.png')}}" alt="Slider"> </a>
-                        </td>
-                        <td class="align-middle text-center">
-                            <a class="text-dark text-break" href="" title="Slider">Slider PS Sneaker</a>
                         </td>
                         <td class="align-middle text-center">https://www.google.com/</td>
                         <td class="align-middle text-center">

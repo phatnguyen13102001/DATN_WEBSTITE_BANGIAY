@@ -41,10 +41,6 @@
                                             <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="desc">Mô tả:</label>
-                                            <textarea class="form-control for-seo text-sm " name="desc" id="desc" rows="5" placeholder="Mô tả"></textarea>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="content">Nội dung:</label>
                                             <textarea class="form-control for-seo text-sm form-control-ckeditor" name="content" id="content" rows="5" placeholder="Nội dung"></textarea>
                                         </div>

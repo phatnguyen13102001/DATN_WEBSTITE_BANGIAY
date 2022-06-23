@@ -16,7 +16,7 @@
     </div>
     <!-- /.content-header -->
     <div class="card-footer text-sm sticky-top">
-        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('manufacturer-add')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('manufacturer.create')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
         <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
@@ -43,10 +43,12 @@
                                 <label for="selectall-checkbox" class="custom-control-label"></label>
                             </div>
                         </th>
+                        <th class="align-middle text-center">ID</th>
                         <th class="align-middle text-center">Tên hãng</th>
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
                 </thead>
+                @foreach($lstManufacturer as $manufacturer)
                 <tbody>
                     <tr>
                         <td class="align-middle">
@@ -56,14 +58,22 @@
                             </div>
                         </td>
                         <td class="align-middle text-center">
-                            <p>Adidas</p>
+                            <p>{{$manufacturer->id}}</p>
+                        </td>
+                        <td class="align-middle text-center">
+                            <p>{{$manufacturer->name}}</p>
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-primary mr-2" href="{{route('manufacturer-edit')}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                            <form method="post" action="{{route('manufacturer.destroy',['manufacturer'=>$manufacturer])}}">
+                                @csrf
+                                @method('DELETE')
+                                <a class="text-primary mr-2" href="{{route('manufacturer.edit',['manufacturer'=>$manufacturer])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                <button style="border: none; background-color: transparent;" type="submit" class="text-danger" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
         </div>
     </div>

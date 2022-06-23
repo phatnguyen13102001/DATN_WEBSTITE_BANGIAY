@@ -61,6 +61,11 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
+        <li class="nav-item d-sm-inline-block">
+
+            <a href="" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i></a>
+
+        </li>
     </ul>
 </nav>
 <!-- /.navbar -->
@@ -104,10 +109,26 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('manufacturer')}}" class="nav-link">
+                    <a href="{{route('manufacturer.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Quản lý hãng sản xuất
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>
+                            Quản lý size
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fas fa-palette"></i>
+                        <p>
+                            Quản lý màu
                         </p>
                     </a>
                 </li>

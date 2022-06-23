@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ManufacturerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+Route::resource('/admin/manufacturer', ManufacturerController::class);
 Route::get('/', function () {
     return view('/admin/index');
 });
