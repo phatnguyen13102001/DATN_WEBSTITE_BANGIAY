@@ -117,3 +117,44 @@ Route::get('inforadmin', function () {
 Route::get('changepassword', function () {
     return view('admin.changepassword.index');
 })->name('changepassword');
+
+/*user*/
+Route::get('index', function () {
+    return view('user.body.index');
+})->name('indexuser');
+// gioi thieu
+Route::get('gioithieu', function () {
+    return view('user.introduce.index');
+})->name('gioithieuweb');
+// tin tuc
+Route::get('tintuc', function () {
+    return view('user.news.index');
+})->name('tintucweb');
+// chi tiet tin tuc
+Route::get('chitiettintuc', function () {
+    return view('user.news_detail.index');
+})->name('chitiettintucweb');
+// lien he
+Route::get('lienhe', function () {
+    return view('user.contact.index');
+})->name('lienheweb');
+// sanpham
+Route::get('sanpham', function () {
+    return view('user.product.index');
+})->name('sanphamweb');
+// thong tin ca nhan
+Route::get('thongtincanhan', function () {
+    return view('user.account.index');
+})->name('thongtincanhanweb');
+// chi tiet san pham
+Route::get('chitietsanpham', function () {
+    return view('user.product_detail.index');
+})->name('chitietsanphamweb');
+// gio hang
+Route::get('giohang', function () {
+    return view('user.cart.index');
+})->name('giohangweb');
+// login
+Route::get('dangnhap', function () {
+    return view('login.index');
+})->name('dangnhapweb');
