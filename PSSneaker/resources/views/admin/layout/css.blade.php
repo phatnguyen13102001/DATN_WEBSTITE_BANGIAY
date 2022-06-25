@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/fontawesome-free/css/all.min.css')}}">
-<!-- Ionicons -->
 <!-- Tempusdominus Bootstrap 4 -->
 <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
 <!-- iCheck -->
@@ -16,11 +15,12 @@
 <!-- Daterange picker -->
 <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/daterangepicker/daterangepicker.css')}}">
 <!-- summernote -->
-<link rel="stylesheet" href="{{ asset('admin/bootstrap/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{ asset('admin_pssneaker/bootstrap/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/summernote/summernote-bs4.min.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/css/animate.min.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/css/adminlte.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/css/adminlte-style.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/filer/jquery.filer-dragdropbox-theme.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/filer/jquery.filer.css')}}">
-<link rel="stylesheet" href="{{ asset('admin/rangeSlider/ion.rangeSlider.css')}}">
+<link rel="stylesheet" href="{{ asset('admin_pssneaker/css/animate.min.css')}}">
+<link rel="stylesheet" href="{{ asset('admin_pssneaker/css/adminlte.css')}}">
+<link rel="stylesheet" href="{{ asset('admin_pssneaker/css/adminlte-style.css')}}">
+<link rel="stylesheet" href="{{ asset('admin_pssneaker/filer/jquery.filer-dragdropbox-theme.css')}}">
+<link rel="stylesheet" href="{{ asset('admin_pssneaker/filer/jquery.filer.css')}}">
+<link rel="stylesheet" href="{{ asset('admin_pssneaker/rangeSlider/ion.rangeSlider.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

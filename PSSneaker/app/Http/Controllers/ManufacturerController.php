@@ -44,10 +44,11 @@ class ManufacturerController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required|unique:manufacturers',
             ],
             [
                 'name.required' => 'Tên Hãng Sản Xuất Không Được Bỏ Trống',
+                'name.unique' => 'Tên Hãng Sản Xuất Không Được Trùng',
             ]
         );
 
@@ -96,10 +97,11 @@ class ManufacturerController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required|unique:manufacturers,name,NULL,id,deleted_at,NULL',
             ],
             [
                 'name.required' => 'Tên Hãng Sản Xuất Không Được Bỏ Trống',
+                'name.unique' => 'Tên Hãng Sản Xuất Không Được Trùng',
             ]
         );
 

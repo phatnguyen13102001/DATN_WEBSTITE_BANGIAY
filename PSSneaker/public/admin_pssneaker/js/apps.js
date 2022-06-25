@@ -1134,7 +1134,28 @@ function loadPermissions()
 	}
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
+	
+	/* Modal */
+	$(document).on('click', '.deleteBtn', function() {
+        $('#deleteModal').modal({
+            show: true
+        });
+        var manu_id = $(this).val();
+        $('#deleteting_id').val(manu_id);
+	});
+
+	/* Img Preview */
+	const input = document.getElementById("file-zone");
+    const image = document.getElementById("photoUpload-preview");
+
+    input.addEventListener("change", (e) => {
+        if (e.target.files.length) {
+            const src = URL.createObjectURL(e.target.files[0]);
+            image.src = src;
+        }
+	});
+	
 	/* Loader */
 	if($(".loader-wrapper").length)
 	{

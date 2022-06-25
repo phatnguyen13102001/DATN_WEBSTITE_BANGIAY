@@ -64,17 +64,35 @@
                             <p>{{$manufacturer->name}}</p>
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
-                            <form method="post" action="{{route('manufacturer.destroy',['manufacturer'=>$manufacturer])}}">
-                                @csrf
-                                @method('DELETE')
-                                <a class="text-primary mr-2" href="{{route('manufacturer.edit',['manufacturer'=>$manufacturer])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                                <button style="border: none; background-color: transparent;" type="submit" class="text-danger" title="Xóa"><i class="fas fa-trash-alt"></i></button>
-                            </form>
+                            <a class="text-primary mr-2" href="{{route('manufacturer.edit',['manufacturer'=>$manufacturer])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                            <button style="border: none; background-color: transparent;" type="button" value="{{$manufacturer->id}}" class="text-danger deleteBtn" title="Xóa"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>
                 @endforeach
             </table>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-warning text-warning"></i> Thông Báo</h5>
+                        </div>
+                        <form class="validation-form" method="post" action="{{route('manufacturer.destroy',['manufacturer'=>$manufacturer])}}">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body">
+                                Bạn có chắc muốn xóa mục này ?
+                            </div>
+                            <input type="hidden" id="deleteting_id" name="deleteting_id">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>

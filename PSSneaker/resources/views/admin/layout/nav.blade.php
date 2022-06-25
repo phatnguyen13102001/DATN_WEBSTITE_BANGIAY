@@ -22,14 +22,14 @@
             <ul aria-labelledby="dropdownSubMenu-info" class="dropdown-menu dropdown-menu-right border-0 shadow" style="left: inherit; right: 0px;">
 
                 <li>
-                    <a href="{{route('inforadmin')}}" class="dropdown-item">
+                    <a href="" class="dropdown-item">
                         <i class="fas fa-user-cog"></i>
                         <span>Thông tin admin</span>
                     </a>
                 </li>
                 <div class="dropdown-divider"></div>
                 <li>
-                    <a href="{{route('changepassword')}}" class="dropdown-item">
+                    <a href="" class="dropdown-item">
                         <i class="fas fa-key"></i>
                         <span>Đổi mật khẩu</span>
                     </a>
@@ -46,7 +46,7 @@
             <div class="dropdown-menu dropdown-menu-right shadow" style="left: inherit; right: 0px;">
                 <span class="dropdown-item dropdown-header p-0">Thông báo</span>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('contact')}}" class="dropdown-item"><i class="fas fa-envelope mr-2"></i><span class="badge badge-danger mr-1">0</span> Liên hệ</a>
+                <a href="" class="dropdown-item"><i class="fas fa-envelope mr-2"></i><span class="badge badge-danger mr-1">0</span> Liên hệ</a>
                 <div class="dropdown-divider"></div>
                 <a href="index.php?com=order&amp;act=man" class="dropdown-item"><i class="fas fa-shopping-bag mr-2"></i><span class="badge badge-danger mr-1">7</span> Đơn hàng</a>
             </div>
@@ -74,7 +74,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a class="brand-link" href="index.php">
-        <img class="brand-image" src="{{ asset('admin/images/LogoShoes.png') }}" alt="PSSneaker">
+        <img class="brand-image" src="{{ asset('admin_pssneaker/images/LogoShoes.png') }}" alt="PSSneaker">
     </a>
 
     <!-- Sidebar -->
@@ -85,7 +85,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="{{route('dashboard')}}" class="nav-link active">
+                    <a href="{{route('admin')}}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Bảng điều khiển
@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('account')}}" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon fas fa-user-circle"></i>
                         <p>
                             Quản lý tài khoản
@@ -101,7 +101,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('product')}}" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
                             Quản lý sản phẩm
@@ -142,7 +142,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('about')}}" class="nav-link">
+                            <a href="{{route('about.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Giới thiệu</p>
                             </a>
@@ -159,25 +159,25 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{(route('logo'))}}" class="nav-link">
+                            <a href="{{route('logo.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Logo</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('favicon'))}}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Favicon</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('slideshow'))}}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Slideshow</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('social'))}}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Social</p>
                             </a>
@@ -194,19 +194,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{(route('news'))}}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tin tức</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('policy'))}}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Chính sách</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('payment'))}}" class="nav-link">
+                            <a href="" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Hình thức thanh toán</p>
                             </a>
@@ -214,7 +214,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{(route('order'))}}" class="nav-link">
+                    <a href="" class="nav-link">
                         <i class="nav-icon fas fa-shopping-bag"></i>
                         <p>
                             Quản lý đơn hàng
@@ -222,7 +222,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{(route('setting'))}}" class="nav-link">
+                    <a href="{{route('setting.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>
                             Cài đặt website
