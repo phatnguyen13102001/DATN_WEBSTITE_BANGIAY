@@ -16,7 +16,9 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form class="validation-form" novalidate="" method="post" action="index.php?com=news&amp;act=save&amp;type=tin-tuc" enctype="multipart/form-data">
+    <form class="validation-form" novalidate="" method="post" action="{{route('news.update',['news'=>$news])}}" enctype="multipart/form-data">
+    @csrf
+    @method('PATCH')
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
@@ -38,15 +40,15 @@
                                     <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
                                         <div class="form-group">
                                             <label for="name">Tiêu đề:</label>
-                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required="">
+                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="{{$news->name}}" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="descvi">Mô tả:</label>
-                                            <textarea class="form-control for-seo text-sm " name="desc" id="desc" rows="5" placeholder="Mô tả"></textarea>
+                                            <label for="describe">Mô tả:</label>
+                                            <textarea class="form-control for-seo text-sm "  name="describe" id="describe" rows="5" placeholder="Mô tả">{{$news->describe}}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Nội dung:</label>
-                                            <textarea class="form-control for-seo text-sm form-control-ckeditor" name="content" id="content" rows="5" placeholder="Nội dung"></textarea>
+                                            <textarea class="form-control for-seo text-sm form-control-ckeditor" name="content" id="content" rows="5" placeholder="Nội dung">{{$news->content}}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +68,10 @@
                     <div class="card-body">
                         <div class="photoUpload-zone">
                             <div class="photoUpload-detail" id="photoUpload-preview">
-                                <img class="rounded" src="{{asset('admin/images/noimage.png')}}" alt="Alt Photo">
+                                <img class="rounded" src="{{$news->image}}" alt="Alt Photo">
                             </div>
-                            <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                <input type="file" name="file" id="file-zone">
+                            <label class="photoUpload-file" id="photo-zone" for="image">
+                                <input accept="*.jpg,*.png" type="file" name="image" id="image">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                 <p class="photoUpload-or">hoặc</p>

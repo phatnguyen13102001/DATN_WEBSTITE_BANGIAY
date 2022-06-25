@@ -7,7 +7,12 @@ use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\LogoController;
-
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SlideshowController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PoliciesController;
+use App\Http\Controllers\SocialController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,11 +28,16 @@ Route::resource('/admin/manufacturer', ManufacturerController::class);
 Route::resource('/admin/setting', SettingController::class);
 Route::resource('/admin/about', AboutController::class);
 Route::resource('/admin/logo', LogoController::class);
+Route::resource('/admin/color', ColorController::class);
+Route::resource('/admin/size', SizeController::class);
+Route::resource('/admin/slideshow', SlideshowController::class);
+Route::resource('/admin/news', NewsController::class);
+Route::resource('/admin/policy', PoliciesController::class);
+Route::resource('/admin/social', SocialController::class);
 
 Route::get('admin', function () {
     return view('admin.dashboard.index');
 })->name('admin');
-
 
 /*user*/
 Route::get('', function () {

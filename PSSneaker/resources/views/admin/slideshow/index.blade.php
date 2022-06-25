@@ -38,6 +38,7 @@
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
                 </thead>
+                @foreach($lstslideshow as $slideshow)
                 <tbody>
                     <tr>
                         <td class="align-middle text-center">
@@ -48,22 +49,29 @@
                         </td>
                         <td class="align-middle text-center">
                             <a href="" title="Slider">
-                                <img class="rounded" width="150" height="50" src="{{asset('admin/images/Slideshow.png')}}" alt="Slider"> </a>
+                                <img class="rounded" style="width:100px; max-height:100px; object-fit:contain" src="{{$slideshow->image}}">
+                            </a>
                         </td>
-                        <td class="align-middle text-center">https://www.google.com/</td>
+                        <td class="align-middle text-center">{{$slideshow->link}}</td>
                         <td class="align-middle text-center">
                             <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-hienthi-96" data-table="photo" data-id="96" data-attr="hienthi" checked="">
+                                <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-hienthi-96" data-table="photo" data-id="96" data-attr="hienthi" checked="" value="{{$slideshow->show}}">
                                 <label for="show-checkbox-hienthi-96" class="custom-control-label"></label>
                             </div>
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-primary mr-2" href="{{route('slideshow-edit')}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=photo&amp;act=delete_photo&amp;type=slide&amp;id=96" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                            <form method="post" action="{{route('slideshow.destroy',['slideshow'=>$slideshow])}}">
+                                @csrf
+                                @method('DELETE')
+                                <a class="text-primary mr-2" href="{{route('slideshow.edit',['slideshow'=>$slideshow])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                <button style="border: none; background-color: transparent;" type="submit" class="text-danger" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
+
         </div>
     </div>
 </section>
