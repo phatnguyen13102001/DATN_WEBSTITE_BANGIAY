@@ -16,7 +16,8 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form class="validation-form" novalidate="" method="post" action="index.php?com=news&amp;act=save&amp;type=tin-tuc" enctype="multipart/form-data">
+    <form class="validation-form" novalidate="" method="post" action="{{route('news.store')}}" enctype="multipart/form-data">
+    @csrf
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
@@ -41,8 +42,8 @@
                                             <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="descvi">Mô tả:</label>
-                                            <textarea class="form-control for-seo text-sm " name="desc" id="desc" rows="5" placeholder="Mô tả"></textarea>
+                                            <label for="describe">Mô tả:</label>
+                                            <textarea class="form-control for-seo text-sm " name="describe" id="describe" rows="5" placeholder="Mô tả"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Nội dung:</label>
@@ -68,8 +69,8 @@
                             <div class="photoUpload-detail" id="photoUpload-preview">
                                 <img class="rounded" src="{{asset('admin/images/noimage.png')}}" alt="Alt Photo">
                             </div>
-                            <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                <input type="file" name="file" id="file-zone">
+                            <label class="photoUpload-file" id="photo-zone" for="image">
+                                <input accept="*.jpg,*.png" type="file" name="image" id="image">
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                 <p class="photoUpload-or">hoặc</p>
@@ -90,17 +91,17 @@
             <div class="card-body">
                 <div class="form-group">
                     <div class="form-group d-inline-block mb-2 mr-2">
-                        <label for="noibat-checkbox" class="d-inline-block align-middle mb-0 mr-2">Nổi bật:</label>
+                        <label for="outstanding" class="d-inline-block align-middle mb-0 mr-2">Nổi bật:</label>
                         <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input noibat-checkbox" name="status[noibat]" id="noibat-checkbox" checked="" value="noibat">
-                            <label for="noibat-checkbox" class="custom-control-label"></label>
+                            <input type="checkbox" class="custom-control-input noibat-checkbox" name="outstanding" id="outstanding" checked="" value="1">
+                            <label for="outstanding" class="custom-control-label"></label>
                         </div>
                     </div>
                     <div class="form-group d-inline-block mb-2 mr-2">
-                        <label for="hienthi-checkbox" class="d-inline-block align-middle mb-0 mr-2">Hiển thị:</label>
+                        <label for="show" class="d-inline-block align-middle mb-0 mr-2">Hiển thị:</label>
                         <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="status[hienthi]" id="hienthi-checkbox" checked="" value="hienthi">
-                            <label for="hienthi-checkbox" class="custom-control-label"></label>
+                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="show" id="show" checked="" value="show">
+                            <label for="show" class="custom-control-label"></label>
                         </div>
                     </div>
                 </div>

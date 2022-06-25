@@ -16,7 +16,9 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form class="validation-form" novalidate="" method="post" action="index.php?com=news&amp;act=save&amp;type=chinh-sach" enctype="multipart/form-data">
+    <form class="validation-form" novalidate="" method="post" action="{{route('policy.update',['policy'=>$policy])}}" enctype="multipart/form-data">
+    @csrf
+    @method('PATCH')
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
@@ -37,12 +39,17 @@
                                 <div class="tab-content" id="custom-tabs-three-tabContent-lang">
                                     <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
                                         <div class="form-group">
-                                            <label for="namevi">Tiêu đề:</label>
-                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required="">
+                                            <label for="name">Tiêu đề:</label>
+                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="{{$policy->name}}" required="">
+                                            @if($errors->has('name'))
+                                            <div class="alert alert-danger" style="margin-top:10px;">
+                                                {{$errors->first('name')}}
+                                            </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
-                                            <label for="contentvi">Nội dung:</label>
-                                            <textarea class="form-control for-seo text-sm form-control-ckeditor" name="content" id="content" rows="5" placeholder="Nội dung"></textarea>
+                                            <label for="content">Nội dung:</label>
+                                            <textarea class="form-control for-seo text-sm form-control-ckeditor" name="content" id="content" rows="5" placeholder="Nội dung">{{$policy->content}}</textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -16,7 +16,9 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form class="validation-form" novalidate="" method="post" action="index.php?com=photo&amp;act=save_photo&amp;type=slide" enctype="multipart/form-data">
+    <form class="validation-form" novalidate="" method="post" action="{{route('slideshow.update',['slideshow'=> $slideshow])}}" enctype="multipart/form-data">
+        @csrf
+        @method('PATCH')
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
@@ -32,25 +34,35 @@
                         <p>Upload hình ảnh:</p>
                         <label class="upload-file-label mb-2" for="file">
                             <div class="upload-file-image rounded mb-3">
-                                <img class="rounded img-upload" src="{{asset('admin/images/Slideshow.png')}}" alt="Alt Photo">
+                                <img class="rounded img-upload" src="{{$slideshow->image}}" alt="Alt Photo">
                             </div>
                             <div class="custom-file my-custom-file">
-                                <input type="file" class="custom-file-input" name="file" id="file" lang="vi">
-                                <label class="custom-file-label mb-0" data-browse="Chọn" for="file">Chọn file</label>
+                                <input accept="*.jpg,*.png" type="file" class="custom-file-input" name="image" id="image" lang="vi">
+                                <label class="custom-file-label mb-0" data-browse="Chọn" for="image">Chọn file</label>
+                                @if($errors->has('image'))
+                                <div class="alert alert-danger" style="margin-top:10px;">
+                                    {{$errors->first('image')}}
+                                </div>
+                                @endif
                             </div>
                         </label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="link">Link:</label>
-                    <input type="text" class="form-control text-sm" name="link]" id="link" placeholder="Link" value="">
+                    <input type="text" class="form-control text-sm" name="link" id="link" placeholder="Link" value="{{$slideshow->link}}">
+                    @if($errors->has('link'))
+                    <div class="alert alert-danger" style="margin-top:10px;">
+                        {{$errors->first('link')}}
+                    </div>
+                    @endif
                 </div>
                 <div class="form-group">
                     <div class="form-group d-inline-block mb-2 mr-2">
-                        <label for="hienthi-checkbox" class="d-inline-block align-middle mb-0 mr-2">Hiển thị:</label>
+                        <label for="show" class="d-inline-block align-middle mb-0 mr-2">Hiển thị:</label>
                         <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="hienthi" id="hienthi-checkbox" checked="" value="hienthi">
-                            <label for="hienthi-checkbox" class="custom-control-label"></label>
+                            <input type="show" class="custom-control-input hienthi-checkbox" name="show" id="show" checked="" value="{{$slideshow->show}}">
+                            <label for="show" class="custom-control-label"></label>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ManufacturerController;
-
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SlideshowController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PoliciesController;
+use App\Http\Controllers\SocialController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +22,13 @@ use App\Http\Controllers\ManufacturerController;
 */
 
 Route::resource('/admin/manufacturer', ManufacturerController::class);
+Route::resource('/admin/color', ColorController::class);
+Route::resource('/admin/size', SizeController::class);
+Route::resource('/admin/slideshow', SlideshowController::class);
+Route::resource('/admin/news', NewsController::class);
+Route::resource('/admin/policy', PoliciesController::class);
+Route::resource('/admin/social', SocialController::class);
+// 
 Route::get('/', function () {
     return view('/admin/index');
 });
@@ -35,6 +47,7 @@ Route::get('product-edit', function () {
 Route::get('product-add', function () {
     return view('admin.product.add');
 })->name('product-add');
+// hãng sản xuất
 Route::get('manufacturer', function () {
     return view('admin.manufacturer.index');
 })->name('manufacturer');
@@ -44,6 +57,18 @@ Route::get('manufacturer-edit', function () {
 Route::get('manufacturer-add', function () {
     return view('admin.manufacturer.add');
 })->name('manufacturer-add');
+// 
+// màu
+Route::get('color', function () {
+    return view('admin.color.index');
+})->name('color');
+Route::get('color-edit', function () {
+    return view('admin.color.edit');
+})->name('color-edit');
+Route::get('color-add', function () {
+    return view('admin.color.add');
+})->name('color-add');
+//
 Route::get('about', function () {
     return view('admin.about.index');
 })->name('about');

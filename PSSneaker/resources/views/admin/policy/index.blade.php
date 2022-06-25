@@ -15,7 +15,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="card-footer text-sm sticky-top">
-        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('policy-add')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('policy.create')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
         <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="index.php?com=news&amp;act=delete&amp;type=chinh-sach" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
@@ -47,6 +47,7 @@
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
                 </thead>
+                @foreach($lstpolicy as $policy)
                 <tbody>
                     <tr>
                         <td class="align-middle text-center">
@@ -56,7 +57,7 @@
                             </div>
                         </td>
                         <td class="align-middle text-center">
-                            <a class="text-dark text-break" href="index.php?com=news&amp;act=edit&amp;type=chinh-sach&amp;id=56" title="Phương Thức Thanh Toán">Phương Thức Thanh Toán</a>
+                            <a class="text-dark text-break" href="" title="">{{$policy->name}}</a>
                             <div class="tool-action mt-2 w-clear">
                                 <a class="text-primary mr-3" href="http://localhost/PhamHuuDuc_560522W/phuong-thuc-thanh-toan" target="_blank" title="Phương Thức Thanh Toán"><i class="far fa-eye mr-1"></i>View</a>
                                 <a class="text-info mr-3" href="index.php?com=news&amp;act=edit&amp;type=chinh-sach&amp;id=56" title="Phương Thức Thanh Toán"><i class="far fa-edit mr-1"></i>Edit</a>
@@ -70,11 +71,16 @@
                             </div>
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-primary mr-2" href="{{route('policy-edit')}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=chinh-sach&amp;id=56" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                            <form method="post" action="{{route('policy.destroy',['policy'=>$policy])}}">
+                                @csrf
+                                @method('DELETE')
+                                <a class="text-primary mr-2" href="{{route('policy.edit',['policy'=>$policy])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                <button style="border: none; background-color: transparent;" type="submit" class="text-danger" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
         </div>
     </div>

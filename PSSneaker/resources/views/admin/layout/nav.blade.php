@@ -117,7 +117,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('size.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Quản lý size
@@ -125,7 +125,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('color.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-palette"></i>
                         <p>
                             Quản lý màu
@@ -171,13 +171,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('slideshow'))}}" class="nav-link">
+                            <a href="{{(route('slideshow.index'))}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Slideshow</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('social'))}}" class="nav-link">
+                            <a href="{{(route('social.index'))}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Social</p>
                             </a>
@@ -194,13 +194,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{(route('news'))}}" class="nav-link">
+                            <a href="{{(route('news.index'))}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tin tức</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('policy'))}}" class="nav-link">
+                            <a href="{{(route('policy.index'))}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Chính sách</p>
                             </a>

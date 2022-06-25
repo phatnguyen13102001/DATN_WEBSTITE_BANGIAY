@@ -15,7 +15,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="card-footer text-sm sticky-top">
-        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('news-add')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('news.create')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
         <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
@@ -49,6 +49,7 @@
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
                 </thead>
+                @foreach($lstnews as $news)
                 <tbody>
                     <tr>
                         <td class="align-middle text-center">
@@ -58,15 +59,15 @@
                             </div>
                         </td>
                         <td class="align-middle text-center">
-                            <a href="index.php?com=news&amp;act=edit&amp;type=tin-tuc&amp;id=48" title="CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ">
-                                <img class="rounded img-preview" onerror="this.src='http://localhost/PhamHuuDuc_560522W/thumbs/380x250x1/assets/images/noimage.png';" src="http://localhost/PhamHuuDuc_560522W/thumbs/380x250x1/upload/news/imgmainnews-5936.jpg" alt="CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ"> </a>
+                            <a href="" title="image">
+                                <img class="rounded img-preview" src="{{$news->image}}" alt="{{$news->title}}"> </a>
                         </td>
                         <td class="align-middle text-center">
-                            <a class="text-dark text-break" href="index.php?com=news&amp;act=edit&amp;type=tin-tuc&amp;id=48" title="CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ">CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ</a>
+                            <a class="text-dark text-break" href="" title="title">{{$news->name}}</a>
                             <div class="tool-action mt-2 w-clear">
-                                <a class="text-primary mr-3" href="http://localhost/PhamHuuDuc_560522W/cach-nau-mon-ga-ac-sieu-ngon-tai-nha" target="_blank" title="CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ"><i class="far fa-eye mr-1"></i>View</a>
-                                <a class="text-info mr-3" href="index.php?com=news&amp;act=edit&amp;type=tin-tuc&amp;id=48" title="CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ"><i class="far fa-edit mr-1"></i>Edit</a>
-                                <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ"><i class="far fa-trash-alt mr-1"></i>Delete</a>
+                                <a class="text-primary mr-3" href="" target="_blank" title=""><i class="far fa-eye mr-1"></i>View</a>
+                                <a class="text-info mr-3" href="" title=""><i class="far fa-edit mr-1"></i>Edit</a>
+                                <a class="text-danger" id="delete-item" data-url="" title=""><i class="far fa-trash-alt mr-1"></i>Delete</a>
                             </div>
                         </td>
                         <td class="align-middle text-center">
@@ -82,11 +83,16 @@
                             </div>
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-primary mr-2" href="{{route('news-edit')}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=tin-tuc&amp;id=48" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                            <form method="post" action="{{route('news.destroy',['news'=>$news])}}">
+                                @csrf
+                                @method('DELETE')
+                                <a class="text-primary mr-2" href="{{route('news.edit',['news'=>$news])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                <button style="border: none; background-color: transparent;" type="submit" class="text-danger" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
         </div>
     </div>
