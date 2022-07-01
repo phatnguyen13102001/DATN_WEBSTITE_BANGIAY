@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Size;
+
 class SizeController extends Controller
 {
     /**
@@ -10,12 +13,28 @@ class SizeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lstsize = Size::all();
-        return view('admin.size.index', [
-            'lstsize' =>$lstsize
-        ]);
+        $size = Size::paginate(10);
+        if ($request->ajax()) {
+            return view('admin.size.pagination_data', ['lstsize' => $size]);
+        }
+        return view('admin.size.index', ['lstsize' => $size]);
+    }
+
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $lstsize = Size::where('size', 'LIKE', '%' . $request->keyword . '%')
+                ->paginate(10);
+            if ($lstsize->count() >= 1) {
+                return view('admin.size.pagination_data', ['lstsize' => $lstsize]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -51,7 +70,7 @@ class SizeController extends Controller
             'size' => $request->input('size'),
         ]);
         $size->save();
-        return Redirect::route('size.index', ['size' => $size]);
+        return Redirect::route('size.index');
     }
 
     /**
@@ -91,28 +110,30 @@ class SizeController extends Controller
         $validatedData = $request->validate(
             [
                 'size' => 'required',
-               
+
             ],
             [
                 'size.required' => 'Số size Không Được Bỏ Trống',
-               
+
             ]
         );
         $size->fill([
             'size' => $request->input('size'),
         ]);
         $size->save();
-        return Redirect::route('size.index', ['size' => $size]);
+        return Redirect::route('size.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Size
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Size $size)
+    public function destroy(Request $request)
     {
+        $size_id = $request->input('deleteting_id');
+        $size = Size::find($size_id);
         $size->delete();
         return Redirect::route('size.index');
     }

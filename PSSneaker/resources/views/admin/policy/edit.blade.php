@@ -7,8 +7,7 @@
             <div class="row mb-2">
                 <div>
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Quản lý chính sách</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin')}}">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active">Chỉnh sửa chính sách</li>
                     </ol>
                 </div><!-- /.col -->
@@ -17,8 +16,8 @@
     </div>
     <!-- /.content-header -->
     <form class="validation-form" novalidate="" method="post" action="{{route('policy.update',['policy'=>$policy])}}" enctype="multipart/form-data">
-    @csrf
-    @method('PATCH')
+        @csrf
+        @method('PATCH')
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
@@ -71,8 +70,13 @@
                     <div class="form-group d-inline-block mb-2 mr-2">
                         <label for="hienthi-checkbox" class="d-inline-block align-middle mb-0 mr-2">Hiển thị:</label>
                         <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="status[hienthi]" id="hienthi-checkbox" checked="" value="hienthi">
-                            <label for="hienthi-checkbox" class="custom-control-label"></label>
+                            @if(($policy->show)===1)
+                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="show" id="show" value="1" checked>
+                            <label for="show" class="custom-control-label"></label>
+                            @else
+                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="show" id="show" value="1">
+                            <label for="show" class="custom-control-label"></label>
+                            @endif
                         </div>
                     </div>
                 </div>

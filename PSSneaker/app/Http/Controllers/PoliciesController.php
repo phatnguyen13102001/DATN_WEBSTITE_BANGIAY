@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Policies;
 use Illuminate\Support\Facades\Redirect;
+
 class PoliciesController extends Controller
 {
     /**
@@ -11,14 +13,28 @@ class PoliciesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lstpolicy = Policies::all();
-        return view('admin.policy.index', [
-            'lstpolicy' =>$lstpolicy
-        ]);
+        $policies = Policies::paginate(10);
+        if ($request->ajax()) {
+            return view('admin.policy.pagination_data', ['lstpolicy' => $policies]);
+        }
+        return view('admin.policy.index', ['lstpolicy' => $policies]);
     }
-
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $lstpolicy = Policies::where('name', 'LIKE', '%' . $request->keyword . '%')
+                ->paginate(10);
+            if ($lstpolicy->count() >= 1) {
+                return view('admin.policy.pagination_data', ['lstpolicy' => $lstpolicy]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -43,21 +59,20 @@ class PoliciesController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'content'=> 'required',
             ],
             [
                 'name.required' => 'Tên chính sách Không Được Bỏ Trống',
-                'content.required' => 'Nội dung Không Được Bỏ Trống',
             ]
         );
-        $policy= new Policies;
+        $policy = new Policies;
         $policy->fill([
             'name' => $request->input('name'),
             'content' => $request->input('content'),
-            'show'=>'1'
+            'show' =>
+            $request->has('show') ? '1' : '0',
         ]);
         $policy->save();
-        return Redirect::route('policy.index', ['policy' => $policy]);
+        return Redirect::route('policy.index');
     }
 
     /**
@@ -97,20 +112,18 @@ class PoliciesController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'content'=> 'required',
             ],
             [
                 'name.required' => 'Tên chính sách Không Được Bỏ Trống',
-                'content.required' => 'Nội dung Không Được Bỏ Trống',
             ]
         );
         $policy->fill([
             'name' => $request->input('name'),
             'content' => $request->input('content'),
-            'show'=>'1'
+            'show' => $request->has('show') ? '1' : '0',
         ]);
         $policy->save();
-        return Redirect::route('policy.index', ['policy' => $policy]);
+        return Redirect::route('policy.index');
     }
 
     /**
@@ -119,8 +132,10 @@ class PoliciesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Policies $policy)
+    public function destroy(Request $request)
     {
+        $policy_id = $request->input('deleteting_id');
+        $policy = Policies::find($policy_id);
         $policy->delete();
         return Redirect::route('policy.index');
     }

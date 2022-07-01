@@ -6,17 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Manufacturer extends Model
+class Library extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = "manufacturers";
+    protected $table = "pictures";
 
     protected $fillable = [
-        'name',
+        'id_product',
+        'image',
     ];
     public function product()
     {
-        return $this->hasMany('App\Models\Product', 'id_manufacturer', 'id');
+        return $this->belongsTo('App\Models\Product', 'id_product', 'id');
     }
 }

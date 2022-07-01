@@ -13,14 +13,29 @@ class ManufacturerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lstManufacturer = Manufacturer::all();
-        return view('admin.manufacturer.index', [
-            'lstManufacturer' => $lstManufacturer
-        ]);
+        $manufacturer = Manufacturer::paginate(10);
+        if ($request->ajax()) {
+            return view('admin.manufacturer.pagination_data', ['lstManufacturer' => $manufacturer]);
+        }
+        return view('admin.manufacturer.index', ['lstManufacturer' => $manufacturer]);
     }
 
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $lstmanufacturer = Manufacturer::where('name', 'LIKE', '%' . $request->keyword . '%')
+                ->paginate(10);
+            if ($lstmanufacturer->count() >= 1) {
+                return view('admin.manufacturer.pagination_data', ['lstManufacturer' => $lstmanufacturer]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -44,7 +59,7 @@ class ManufacturerController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required|unique:manufacturers',
+                'name' => 'required|unique:manufacturers,name,NULL,id,deleted_at,NULL',
             ],
             [
                 'name.required' => 'Tên Hãng Sản Xuất Không Được Bỏ Trống',
@@ -58,7 +73,7 @@ class ManufacturerController extends Controller
             'name' => $request->input('name'),
         ]);
         $manufacturer->save();
-        return Redirect::route('manufacturer.index', ['manufacturer' => $manufacturer]);
+        return Redirect::route('manufacturer.index');
     }
 
     /**
@@ -109,7 +124,7 @@ class ManufacturerController extends Controller
             'name' => $request->input('name'),
         ]);
         $manufacturer->save();
-        return Redirect::route('manufacturer.index', ['manufacturer' => $manufacturer]);
+        return Redirect::route('manufacturer.index');
     }
 
     /**
@@ -118,8 +133,10 @@ class ManufacturerController extends Controller
      * @param  \App\Models\Manufacturer  $manufacturer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Manufacturer $manufacturer)
+    public function destroy(Request $request)
     {
+        $manu_id = $request->input('deleteting_id');
+        $manufacturer = Manufacturer::find($manu_id);
         $manufacturer->delete();
         return Redirect::route('manufacturer.index');
     }

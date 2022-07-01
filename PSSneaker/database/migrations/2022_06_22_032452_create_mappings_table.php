@@ -14,8 +14,10 @@ class CreateMappingsTable extends Migration
     public function up()
     {
         Schema::create('mappings', function (Blueprint $table) {
+            $table->id();
             $table->integer('quantity');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

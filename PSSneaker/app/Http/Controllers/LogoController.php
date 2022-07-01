@@ -97,9 +97,15 @@ class LogoController extends Controller
         if (request()->hasFile('image')) {
             $imagePath = public_path('storage/' . $logo->image);
             if (File::exists($imagePath)) {
-                unlink($imagePath);
+                if ($imagePath == (public_path('storage/'))) {
+                    $image = request()->file('image')->store('images/logo/', 'public');
+                    $data['image'] = $image;
+                    $logo->update($data);
+                } else {
+                    unlink($imagePath);
+                }
             }
-            $image = request()->file('image')->store('Images/Logo/', 'public');
+            $image = request()->file('image')->store('images/logo/', 'public');
             $logo->image = $image;
             $logo->save();
         }

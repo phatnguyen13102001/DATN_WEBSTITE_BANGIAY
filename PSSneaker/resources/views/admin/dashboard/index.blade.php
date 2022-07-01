@@ -7,12 +7,6 @@
                       <div class="col-sm-6">
                           <h5 class="m-0">Bảng điều khiển</h5>
                       </div><!-- /.col -->
-                      <div class="col-sm-6">
-                          <ol class="breadcrumb float-sm-right">
-                              <li class="breadcrumb-item"><a href="#">Home</a></li>
-                              <li class="breadcrumb-item active">Bảng điều khiển</li>
-                          </ol>
-                      </div><!-- /.col -->
                   </div><!-- /.row -->
               </div><!-- /.container-fluid -->
           </div>
@@ -25,7 +19,7 @@
                   <div class="row">
                       <div class="col-lg-3 col-6">
                           <!-- small box -->
-                          <a class="my-info-box info-box" href="#" title="Cấu hình website">
+                          <a class="my-info-box info-box" href="{{route('setting.index')}}" title="Cấu hình website">
                               <span class="my-info-box-icon info-box-icon bg-primary"><i class="fas fa-cogs"></i></span>
                               <div class="info-box-content text-dark">
                                   <span class="info-box-text text-capitalize">Cấu hình website</span>

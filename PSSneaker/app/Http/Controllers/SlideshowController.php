@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slideshow;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,15 +23,36 @@ class SlideshowController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lstslideshow = Slideshow::all();
+        $lstslideshow = Slideshow::paginate(10);
         foreach ($lstslideshow as $slideshow) {
             $this->fixImage($slideshow);
+        }
+        if ($request->ajax()) {
+            return view('admin.slideshow.pagination_data', ['lstslideshow' => $lstslideshow]);
         }
         return view('admin.slideshow.index', ['lstslideshow' => $lstslideshow]);
     }
 
+    public function search(Request $request)
+    {
+
+        $lstslideshow = Slideshow::where('link', 'LIKE', '%' . $request->keyword . '%')
+            ->paginate(10);
+        foreach ($lstslideshow as $slideshow) {
+            $this->fixImage($slideshow);
+        }
+        if ($request->ajax()) {
+            if ($lstslideshow->count() >= 1) {
+                return view('admin.slideshow.pagination_data', ['lstslideshow' => $lstslideshow]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -39,7 +61,7 @@ class SlideshowController extends Controller
     public function create()
     {
         $lstslideshow = Slideshow::all();
-        return view('admin.slideshow.index', [
+        return view('admin.slideshow.add', [
             'lstslideshow' => $lstslideshow
         ]);
     }
@@ -52,12 +74,14 @@ class SlideshowController extends Controller
      */
     public function store(Request $request)
     {
+        $url = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         $validatedData = $request->validate(
             [
-                'link' => 'required',
+                'link' => 'required|regex:' . $url,
                 'image' => 'required',
             ],
             [
+                'link.regex' => 'Link Không Hợp Lệ',
                 'link.required' => 'Link Không Được Bỏ Trống',
                 'image.required' => 'Hình Ảnh Không Được Bỏ Trống',
             ]
@@ -67,14 +91,15 @@ class SlideshowController extends Controller
         $slideshow->fill([
             'link' => $request->input('link'),
             'image' => '',
-            'show' => $request->input('show'),
+            'show' =>
+            $request->has('show') ? '1' : '0',
         ]);
         $slideshow->save();
         if ($request->hasFile('image')) {
             $slideshow->image = $request->file('image')->store('images/slideshow/', 'public');
         }
         $slideshow->save();
-        return Redirect::route('slideshow.index', ['slideshow' => $slideshow]);
+        return Redirect::route('slideshow.index');
     }
 
     /**
@@ -110,27 +135,40 @@ class SlideshowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Slideshow $slideshow)
+    public function update(Request $request, Slideshow $slideshow)
     {
+        $url = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         $validatedData = $request->validate(
             [
-                'link' => 'required',
-                'image' => 'required',
+                'link' => 'required|regex:' . $url,
             ],
             [
+                'link.regex' => 'Link Không Hợp Lệ',
                 'link.required' => 'Link Không Được Bỏ Trống',
-                'image.required' => 'Hình Ảnh Không Được Bỏ Trống',
             ]
         );
-        if ($request->hasFile('image')) {
-            $slideshow->image = $request->file('image')->store('images/slideshow/', 'public');
-        }
-        $slideshow->fill([
+        $data = [
             'link' => $request->input('link'),
-            'show' => $request->has('show'),
-        ]);
-        $slideshow->save();
-        return Redirect::route('slideshow.index', ['slideshow' => $slideshow]);
+            'show' =>
+            $request->has('show') ? '1' : '0',
+        ];
+        if (request()->hasFile('image')) {
+            $imagePath = public_path('storage/' . $slideshow->image);
+            if (File::exists($imagePath)) {
+                if ($imagePath == (public_path('storage/'))) {
+                    $image = request()->file('image')->store('images/slideshow/', 'public');
+                    $data['image'] = $image;
+                    $slideshow->update($data);
+                } else {
+                    unlink($imagePath);
+                }
+            }
+            $image = request()->file('image')->store('images/slideshow/', 'public');
+            $data['image'] = $image;
+            $slideshow->update($data);
+        }
+        $slideshow->update($data);
+        return Redirect::route('slideshow.index');
     }
 
     /**
@@ -139,8 +177,18 @@ class SlideshowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Slideshow $slideshow)
+    public function destroy(Request $request)
     {
+        $slide_id = $request->input('deleteting_id');
+        $slideshow = Slideshow::find($slide_id);
+        $imagePath = public_path('storage/' . $slideshow->image);
+        if (File::exists($imagePath)) {
+            if ($imagePath == (public_path('storage/'))) {
+                $slideshow->delete();
+            } else {
+                unlink($imagePath);
+            }
+        }
         $slideshow->delete();
         return Redirect::route('slideshow.index');
     }

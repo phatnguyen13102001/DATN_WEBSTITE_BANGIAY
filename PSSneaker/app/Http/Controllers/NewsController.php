@@ -1,9 +1,13 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Models\News;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+
 class NewsController extends Controller
 {
     protected function fixImage(News $news)
@@ -19,15 +23,37 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $lstnews = News::all();
+        $lstnews = News::paginate(10);
         foreach ($lstnews as $news) {
             $this->fixImage($news);
+        }
+        if ($request->ajax()) {
+            return view('admin.news.pagination_data', ['lstnews' => $lstnews]);
         }
         return view('admin.news.index', ['lstnews' => $lstnews]);
     }
 
+    public function search(Request $request)
+    {
+
+        $lstnews = News::where('name', 'LIKE', '%' . $request->keyword . '%')
+            ->paginate(10);
+        foreach ($lstnews as $news) {
+            $this->fixImage($news);
+        }
+        if ($request->ajax()) {
+            if ($lstnews->count() >= 1) {
+                return view('admin.news.pagination_data', ['lstnews' => $lstnews]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,15 +78,9 @@ class NewsController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'image' => 'required',
-                'describe' => 'required',
-                'content' => 'required',
             ],
             [
                 'name.required' => 'name Không Được Bỏ Trống',
-                'image.required' => 'Hình Ảnh Không Được Bỏ Trống',
-                'describe.required' => 'describe Không Được Bỏ Trống',
-                'content.required' => 'content Không Được Bỏ Trống',
             ]
         );
         $news = new News;
@@ -69,15 +89,15 @@ class NewsController extends Controller
             'image' => '',
             'describe' => $request->input('describe'),
             'content' => $request->input('content'),
-            'show'=> '1',
-            'outstanding' => '1',
+            'show' => $request->has('show') ? '1' : '0',
+            'outstanding' => $request->has('outstanding') ? '1' : '0',
         ]);
         $news->save();
         if ($request->hasFile('image')) {
             $news->image = $request->file('image')->store('images/news/', 'public');
         }
         $news->save();
-        return Redirect::route('news.index', ['news' => $news]);
+        return Redirect::route('news.index');
     }
 
     /**
@@ -104,7 +124,6 @@ class NewsController extends Controller
             'admin.news.edit',
             ['news' => $news,]
         );
-        
     }
 
     /**
@@ -114,34 +133,40 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,News $news)
+    public function update(Request $request, News $news)
     {
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                // 'image' => 'required',
-                'describe' => 'required',
-                'content' => 'required',
             ],
             [
                 'name.required' => 'name Không Được Bỏ Trống',
-                // 'image.required' => 'Hình Ảnh Không Được Bỏ Trống',
-                'describe.required' => 'describe Không Được Bỏ Trống',
-                'content.required' => 'content Không Được Bỏ Trống',
             ]
         );
-        if ($request->hasFile('image')) {
-            $news->image = $request->file('image')->store('images/news/', 'public');
-        }
-        $news->fill([
+        $data = [
             'name' => $request->input('name'),
             'describe' => $request->input('describe'),
             'content' => $request->input('content'),
-            'show'=>'1',
-            'outstanding'=>'1'
-        ]);
-        $news->save();
-        return Redirect::route('news.index', ['news' => $news]);
+            'show' => $request->has('show') ? '1' : '0',
+            'outstanding' => $request->has('outstanding') ? '1' : '0',
+        ];
+        if (request()->hasFile('image')) {
+            $imagePath = public_path('storage/' . $news->image);
+            if (File::exists($imagePath)) {
+                if ($imagePath == (public_path('storage/'))) {
+                    $image = request()->file('image')->store('images/news/', 'public');
+                    $data['image'] = $image;
+                    $news->update($data);
+                } else {
+                    unlink($imagePath);
+                }
+            }
+            $image = request()->file('image')->store('images/news/', 'public');
+            $data['image'] = $image;
+            $news->update($data);
+        }
+        $news->update($data);
+        return Redirect::route('news.index');
     }
 
     /**
@@ -150,8 +175,18 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(News $news)
+    public function destroy(Request $request)
     {
+        $news_id = $request->input('deleteting_id');
+        $news = News::find($news_id);
+        $imagePath = public_path('storage/' . $news->image);
+        if (File::exists($imagePath)) {
+            if ($imagePath == (public_path('storage/'))) {
+                $news->delete();
+            } else {
+                unlink($imagePath);
+            }
+        }
         $news->delete();
         return Redirect::route('news.index');
     }

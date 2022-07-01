@@ -7,8 +7,7 @@
             <div class="row mb-2">
                 <div>
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Quản lý tin tức</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin')}}">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active">Chỉnh sửa tin tức</li>
                     </ol>
                 </div><!-- /.col -->
@@ -17,8 +16,8 @@
     </div>
     <!-- /.content-header -->
     <form class="validation-form" novalidate="" method="post" action="{{route('news.update',['news'=>$news])}}" enctype="multipart/form-data">
-    @csrf
-    @method('PATCH')
+        @csrf
+        @method('PATCH')
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
@@ -41,10 +40,15 @@
                                         <div class="form-group">
                                             <label for="name">Tiêu đề:</label>
                                             <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="{{$news->name}}" required="">
+                                            @if($errors->has('name'))
+                                            <div class="alert alert-danger" style="margin-top:10px;">
+                                                {{$errors->first('name')}}
+                                            </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="describe">Mô tả:</label>
-                                            <textarea class="form-control for-seo text-sm "  name="describe" id="describe" rows="5" placeholder="Mô tả">{{$news->describe}}</textarea>
+                                            <textarea class="form-control for-seo text-sm " name="describe" id="describe" rows="5" placeholder="Mô tả">{{$news->describe}}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Nội dung:</label>
@@ -67,14 +71,12 @@
                     </div>
                     <div class="card-body">
                         <div class="photoUpload-zone">
-                            <div class="photoUpload-detail" id="photoUpload-preview">
-                                <img class="rounded" src="{{$news->image}}" alt="Alt Photo">
+                            <div class="photoUpload-detail">
+                                <img id="photoUpload-preview" src="{{$news->image}}" alt="Alt Photo">
                             </div>
-                            <label class="photoUpload-file" id="photo-zone" for="image">
-                                <input accept="*.jpg,*.png" type="file" name="image" id="image">
+                            <label class="photoUpload-file" id="photo-zone" for="file-zone">
+                                <input type="file" name="image" id="file-zone">
                                 <i class="fas fa-cloud-upload-alt"></i>
-                                <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
-                                <p class="photoUpload-or">hoặc</p>
                                 <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
                             </label>
                         </div>
@@ -93,16 +95,28 @@
                 <div class="form-group">
                     <div class="form-group d-inline-block mb-2 mr-2">
                         <label for="noibat-checkbox" class="d-inline-block align-middle mb-0 mr-2">Nổi bật:</label>
+                        @if(($news->outstanding)===1)
                         <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input noibat-checkbox" name="status[noibat]" id="noibat-checkbox" checked="" value="noibat">
-                            <label for="noibat-checkbox" class="custom-control-label"></label>
+                            <input type="checkbox" class="custom-control-input noibat-checkbox" name="outstanding" id="outstanding" value="1" checked>
+                            <label for="outstanding" class="custom-control-label"></label>
                         </div>
+                        @else
+                        <div class="custom-control custom-checkbox d-inline-block align-middle">
+                            <input type="checkbox" class="custom-control-input noibat-checkbox" name="outstanding" id="outstanding" value="1">
+                            <label for="outstanding" class="custom-control-label"></label>
+                        </div>
+                        @endif
                     </div>
                     <div class="form-group d-inline-block mb-2 mr-2">
                         <label for="hienthi-checkbox" class="d-inline-block align-middle mb-0 mr-2">Hiển thị:</label>
                         <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="status[hienthi]" id="hienthi-checkbox" checked="" value="hienthi">
-                            <label for="hienthi-checkbox" class="custom-control-label"></label>
+                            @if(($news->show)===1)
+                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="show" id="show" value="1" checked>
+                            <label for="show" class="custom-control-label"></label>
+                            @else
+                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="show" id="show" value="1">
+                            <label for="show" class="custom-control-label"></label>
+                            @endif
                         </div>
                     </div>
                 </div>

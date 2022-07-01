@@ -309,7 +309,7 @@ select.form-control option:disabled{color:#b8babb;font-style:italic;}
 .select2-container--default .select2-selection--single .select2-selection__arrow b{margin-top:3px!important;}
 
 /* Pagination */
-.pagination{flex-wrap:wrap;}
+.pagination{flex-wrap:wrap;margin-top: 0.5rem;}
 
 /* Responsive */
 @media(max-width:1201px){
@@ -341,7 +341,6 @@ select.form-control option:disabled{color:#b8babb;font-style:italic;}
 
 .modal {
 	position: fixed;
-	top: 30%;
 	right: 0;
 	bottom: 0;
 	left: 0;

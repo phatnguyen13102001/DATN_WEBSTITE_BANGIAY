@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\color;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+
 class ColorController extends Controller
 {
     /**
@@ -11,14 +13,29 @@ class ColorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $lstcolor = color::all();
-        return view('admin.color.index', [
-            'lstcolor' =>$lstcolor
-        ]);
+        $color = color::paginate(10);
+        if ($request->ajax()) {
+            return view('admin.color.pagination_data', ['lstcolor' => $color]);
+        }
+        return view('admin.color.index', ['lstcolor' => $color]);
     }
 
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $lstcolor = color::where('name', 'LIKE', '%' . $request->keyword . '%')->orwhere('code', 'LIKE', '%' . $request->keyword . '%')
+                ->paginate(10);
+            if ($lstcolor->count() >= 1) {
+                return view('admin.color.pagination_data', ['lstcolor' => $lstcolor]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -42,12 +59,15 @@ class ColorController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
-                'code'=> 'required',
+                'name' => 'required|unique:colors,name,NULL,id,deleted_at,NULL',
+                'code' => 'required|unique:colors,code,NULL,id,deleted_at,NULL',
             ],
             [
                 'name.required' => 'Tên Màu Không Được Bỏ Trống',
+                'name.unique' => 'Tên Màu Không Được Trùng',
                 'code.required' => 'Mã Màu Không Được Bỏ Trống',
+                'code.unique' => 'Mã Màu Không Được Trùng',
+
             ]
         );
         $color = new color;
@@ -57,7 +77,7 @@ class ColorController extends Controller
             'code' => $request->input('code'),
         ]);
         $color->save();
-        return Redirect::route('color.index', ['color' => $color]);
+        return Redirect::route('color.index');
     }
     /**
      * Display the specified resource.
@@ -95,12 +115,15 @@ class ColorController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
-                'code'=> 'required',
+                'name' => 'required|unique:colors,name,NULL,id,deleted_at,NULL',
+                'code' => 'required|unique:colors,code,NULL,id,deleted_at,NULL',
             ],
             [
                 'name.required' => 'Tên Màu Không Được Bỏ Trống',
+                'name.unique' => 'Tên Màu Không Được Trùng',
                 'code.required' => 'Mã Màu Không Được Bỏ Trống',
+                'code.unique' => 'Mã Màu Không Được Trùng',
+
             ]
         );
         $color->fill([
@@ -108,7 +131,7 @@ class ColorController extends Controller
             'code' => $request->input('code'),
         ]);
         $color->save();
-        return Redirect::route('color.index', ['color' => $color]);
+        return Redirect::route('color.index');
     }
 
     /**
@@ -117,8 +140,10 @@ class ColorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(color $color)
+    public function destroy(Request $request)
     {
+        $color_id = $request->input('deleteting_id');
+        $color = color::find($color_id);
         $color->delete();
         return Redirect::route('color.index');
     }

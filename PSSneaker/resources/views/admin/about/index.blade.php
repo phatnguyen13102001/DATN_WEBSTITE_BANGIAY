@@ -67,7 +67,7 @@
                     <div class="card-body">
                         <div class="photoUpload-zone">
                             <div class="photoUpload-detail">
-                                <img id="photoUpload-preview" src="{{$about->image}}">
+                                <img id="photoUpload-preview" src="{{$about->image}}" alt="Alt Photo">
                             </div>
                             <label class="photoUpload-file" id="photo-zone" for="file-zone">
                                 <input type="file" name="image" id="file-zone">

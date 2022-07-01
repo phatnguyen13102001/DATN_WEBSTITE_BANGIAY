@@ -1135,19 +1135,244 @@ function loadPermissions()
 }
 
 $(document).ready(function () {
-	
-	/* Modal */
-	$(document).on('click', '.deleteBtn', function() {
+	/* Modal Delete*/
+	$(document).on('click', '.deleteBtn', function () {
+		var id = $(this).val();
         $('#deleteModal').modal({
             show: true
-        });
-        var manu_id = $(this).val();
-        $('#deleteting_id').val(manu_id);
+		});
+		$('#deleteting_id').val(id);
 	});
 
+	/* Modal Insert*/
+	$(document).on('click', '.insertBtn', function () {
+        $('#insertModal').modal({
+            show: true
+		});
+	});
+
+	/* Modal Update*/
+	$(document).on('click', '.updateBtn', function () {
+		var id_update = $(this).val();
+        $('#updateModal').modal({
+            show: true
+		});
+		$.ajax({
+			type: "GET",
+			url: "/admin/product/stock/edit/" + id_update,
+			success: function (data) {
+				$('#id_size').html(data.size);
+				$('#id_color').html(data.color);
+				var soluong = parseInt(data.quantity);
+				$('#quantity').val(soluong);
+			}
+		});
+		$('#updateting_id').val(id_update);
+	});
+	
 	/* Img Preview */
 	const input = document.getElementById("file-zone");
-    const image = document.getElementById("photoUpload-preview");
+	const image = document.getElementById("photoUpload-preview");
+	
+	
+	/* Pagination */
+	$(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        getDataSize(page);
+	});
+	function getDataSize(page)
+	{
+		$.ajax({
+		url: location + "/?page=" + page,
+		success:function(data)
+		{
+			$('#table_data').html(data);
+		}
+		});
+	}
+
+	/*Search Ajax*/
+	$('#keywordsize').on('keyup', function () {
+                var keyword = $(this).val();
+                $.ajax({
+                    type: 'get',
+					url: "/searchsize",
+                    data: {
+                        keyword: keyword
+                    },
+                    success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+                    }
+                });
+            })
+	
+	$('#keywordcolor').on('keyup', function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'get',
+					url: "/searchsize",
+					data: {
+						keyword: keyword
+					},
+					success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+					}
+				});
+	})
+	$('#keywordmanufacturer').on('keyup', function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'get',
+					url: "/searchmanufacturer",
+					data: {
+						keyword: keyword
+					},
+					success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+					}
+				});
+	})
+	$('#keywordnews').on('keyup', function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'get',
+					url: "/searchnews",
+					data: {
+						keyword: keyword
+					},
+					success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+					}
+				});
+			})
+	$('#keywordpolicy').on('keyup', function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'get',
+					url: "/searchpolicy",
+					data: {
+						keyword: keyword
+					},
+					success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+					}
+				});
+	})
+	$('#keywordslideshow').on('keyup', function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'get',
+					url: "/searchslideshow",
+					data: {
+						keyword: keyword
+					},
+					success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+					}
+				});
+	})
+	$('#keywordsocial').on('keyup', function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'get',
+					url: "/searchsocial",
+					data: {
+						keyword: keyword
+					},
+					success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+					}
+				});
+	})
+	$('#keywordproduct').on('keyup', function () {
+				var keyword = $(this).val();
+				$.ajax({
+					type: 'get',
+					url: "/searchproduct",
+					data: {
+						keyword: keyword
+					},
+					success:function(data){
+						$('#table_data').html(data);
+						if (data.status == 'Không có dữ liệu') {
+							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+						}
+					}
+				});
+			})
+	
+	$.ajaxSetup({ headers: { 'csrftoken': '{{ csrf_token() }}' } });
+	
+	/* CKEditor */
+	CKEDITOR.replace('desc_cke');
+	CKEDITOR.replace('content');
+
+	/* Format Price */
+	$(".format-price").priceFormat({
+			limit: 13,
+			prefix: '',
+			centsLimit: 0
+	});
+	
+	$(".regular_price, .sale_price").keyup(function(){
+			var regular_price = $('.regular_price').val();
+			var sale_price = ($('.sale_price').length) ? $('.sale_price').val() : 0;
+			var discount = 0;
+
+			if(regular_price=='' || regular_price=='0' || sale_price=='' || sale_price=='0')
+			{
+				discount = 0;
+			}
+			else
+			{
+				regular_price = regular_price.replace(/,/g,"");
+				sale_price = (sale_price) ? sale_price.replace(/,/g,"") : 0;
+				regular_price = parseInt(regular_price);
+				sale_price = parseInt(sale_price);
+
+				if(sale_price < regular_price)
+				{
+					discount = 100-((sale_price * 100) / regular_price);
+					discount = roundNumber(discount,0);
+				}
+				else
+				{
+					$('.regular_price, .sale_price').val(0);
+					if($(".discount").length)
+					{
+						discount = 0;
+						$('.sale_price').val(0);
+					}
+				}
+			}
+
+			if($(".discount").length)
+			{
+				$('.discount').val(discount);
+			}
+		});
 
     input.addEventListener("change", (e) => {
         if (e.target.files.length) {
@@ -1162,57 +1387,6 @@ $(document).ready(function () {
 		setTimeout(function(){
 			$(".loader-wrapper").fadeOut("medium");
 		},300);
-	}
-
-	/* Login */
-	if(LOGIN_PAGE)
-	{
-		$("#username, #password").keypress(function(event){
-			if(event.keyCode == 13 || event.which == 13) login();
-		});
-
-		$(".btn-login").click(function(){
-			login();
-		});
-
-		$(".show-password").click(function(){
-			if($("#password").val())
-			{
-				if($(this).hasClass("active"))
-				{
-					$(this).removeClass("active");
-					$("#password").attr("type","password");
-				}
-				else
-				{
-					$(this).addClass("active");
-					$("#password").attr("type","text");
-				}
-				$(this).find("span").toggleClass("fas fa-eye fas fa-eye-slash");
-			}
-		});
-	}
-
-	/* Permission */
-	if(ADD_OR_EDIT_PERMISSIONS)
-	{
-		loadPermissions();
-
-		$("input#selectall-checkbox").click(function(){
-			$this = $(this);
-			if($this.prop('checked'))
-			{
-				$(".card-permission").find("input[type=checkbox]").prop("checked",true);
-			}
-			else
-			{
-				$(".card-permission").find("input[type=checkbox]").prop("checked",false);
-			}
-		});
-
-		$(".card-permission").change(function(){
-		    loadPermissions();
-		});
 	}
 
 	/* Menu */
@@ -1401,16 +1575,6 @@ $(document).ready(function () {
 	if($('.select2').length)
 	{
 		$('.select2').select2();
-	}
-
-	/* Format price */
-	if($(".format-price").length)
-	{
-		$(".format-price").priceFormat({
-			limit: 13,
-			prefix: '',
-			centsLimit: 0
-		});
 	}
 
 	/* PhotoZone */

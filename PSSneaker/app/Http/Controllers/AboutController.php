@@ -101,9 +101,15 @@ class AboutController extends Controller
         if (request()->hasFile('image')) {
             $imagePath = public_path('storage/' . $about->image);
             if (File::exists($imagePath)) {
-                unlink($imagePath);
+                if ($imagePath == (public_path('storage/'))) {
+                    $image = request()->file('image')->store('images/about/', 'public');
+                    $data['image'] = $image;
+                    $about->update($data);
+                } else {
+                    unlink($imagePath);
+                }
             }
-            $image = request()->file('image')->store('Images/About/', 'public');
+            $image = request()->file('image')->store('images/about/', 'public');
             $about['image'] = $image;
             $about->update($data);
         }
