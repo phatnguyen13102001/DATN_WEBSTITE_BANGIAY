@@ -4034,3 +4034,7 @@ ul.nav.navbar-nav {
 a {
     text-decoration: none !important;
 }
+.row_none {
+    display: flex;
+    justify-content: center;
+}

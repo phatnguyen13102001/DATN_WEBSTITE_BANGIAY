@@ -16,7 +16,7 @@
     </div>
     <!-- /.content-header -->
     <div class="card-footer text-sm sticky-top">
-        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('payment-add')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('payment.create')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
         <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="index.php?com=news&amp;act=delete&amp;type=hinh-thuc-thanh-toan" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
@@ -48,6 +48,7 @@
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
                 </thead>
+                @foreach($lstpayment as $payment)
                 <tbody>
                     <tr>
                         <td class="align-middle text-center">
@@ -57,7 +58,7 @@
                             </div>
                         </td>
                         <td class="align-middle text-center">
-                            <a class="text-dark text-break" href="index.php?com=news&amp;act=edit&amp;type=hinh-thuc-thanh-toan&amp;id=16" title="Thanh toán sau khi nhận hàng">Thanh toán sau khi nhận hàng</a>
+                            <a class="text-dark text-break" href="" title="">{{$payment->name}}</a>
                             <div class="tool-action mt-2 w-clear">
                                 <a class="text-info mr-3" href="index.php?com=news&amp;act=edit&amp;type=hinh-thuc-thanh-toan&amp;id=16" title="Thanh toán sau khi nhận hàng"><i class="far fa-edit mr-1"></i>Edit</a>
                                 <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=hinh-thuc-thanh-toan&amp;id=16" title="Thanh toán sau khi nhận hàng"><i class="far fa-trash-alt mr-1"></i>Delete</a>
@@ -70,12 +71,36 @@
                             </div>
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
-                            <a class="text-primary mr-2" href="{{route('payment-edit')}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=news&amp;act=delete&amp;type=hinh-thuc-thanh-toan&amp;id=16" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                <a class="text-primary mr-2" href="{{route('payment.edit',['payment'=>$payment])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
+                                <button style="border: none; background-color: transparent;" value="{{$payment->id}}" type="button" class="text-danger deleteBtn" title="Xóa"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
+            @foreach($lstpayment as $payment)
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-warning text-warning"></i> Thông Báo</h5>
+                        </div>
+                        <form class="validation-form" method="post" action="{{route('payment.destroy',['payment'=>$payment])}}">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body">
+                                Bạn có chắc muốn xóa mục này ?
+                            </div>
+                            <input type="hidden" id="deleteting_id" name="deleteting_id">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 </section>

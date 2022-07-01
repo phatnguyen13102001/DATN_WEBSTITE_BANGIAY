@@ -63,9 +63,8 @@
         </li>
         <li class="nav-item d-sm-inline-block">
 
-            <a href="" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i></a>
+            <a href="{{route('logout')}}" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i></a>
 
         </li>
     </ul>
 </nav>
-<!-- /.navbar -->
