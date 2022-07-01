@@ -63,7 +63,7 @@
         </li>
         <li class="nav-item d-sm-inline-block">
 
-            <a href="" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i></a>
+            <a href="{{route('logout')}}" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i></a>
 
         </li>
     </ul>
@@ -85,7 +85,7 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
-                    <a href="{{route('admin')}}" class="nav-link active">
+                    <a href="" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Bảng điều khiển
@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="{{route('account.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-user-circle"></i>
                         <p>
                             Quản lý tài khoản
@@ -206,7 +206,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{(route('payment.index'))}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Hình thức thanh toán</p>
                             </a>

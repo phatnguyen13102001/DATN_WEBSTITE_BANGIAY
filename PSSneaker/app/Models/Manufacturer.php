@@ -15,4 +15,8 @@ class Manufacturer extends Model
     protected $fillable = [
         'name',
     ];
+    public function Product()
+    {
+        return $this->hasMany('App\Models\Product', 'id_manufacturer', 'id');
+    }
 }

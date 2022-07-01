@@ -44,129 +44,26 @@
                         <th class="align-middle text-center">Khóa</th>
                     </tr>
                 </thead>
+                @foreach($lstuser as $user)
                 <tbody>
                     <tr>
                         <td class="align-middle text-center">
-                            <p>Phát Nguyễn</p>
+                            <p>{{$user->name}}</p>
                         </td>
                         <td class="align-middle text-center">
                             <img class="rounded img-preview" width="50" height="50" src="{{ asset('/admin/images/LogoShoes.png') }}" alt="">
                         </td>
                         <td class="align-middle text-center">
-                            <p>0378998673</p>
+                            <p>{{$user->phone}}</p>
                         </td>
                         <td class="align-middle text-center">
-                            <p>phatnguyen13102001@gmail.com</p>
+                            <p>{{$user->email}}</p>
                         </td>
                         <td class="align-middle text-center">
-                            <p>Thị Trấn Chợ Mới, Huyện Chợ Mới, Tỉnh An Giang</p>
+                            <p>{{$user->address}}</p>
                         </td>
                         <td class="align-middle text-center">
-                            <p>Admin</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-noibat-48" data-table="news" data-id="48" data-attr="noibat" checked="">
-                                <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                            <p>Phát Nguyễn</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <img class="rounded img-preview" width="50" height="50" src="{{ asset('/admin/images/LogoShoes.png') }}" alt="">
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>0378998673</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>phatnguyen13102001@gmail.com</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Thị Trấn Chợ Mới, Huyện Chợ Mới, Tỉnh An Giang</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Admin</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-noibat-48" data-table="news" data-id="48" data-attr="noibat" checked="">
-                                <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                            <p>Phát Nguyễn</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <img class="rounded img-preview" width="50" height="50" src="{{ asset('/admin/images/LogoShoes.png') }}" alt="">
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>0378998673</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>phatnguyen13102001@gmail.com</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Thị Trấn Chợ Mới, Huyện Chợ Mới, Tỉnh An Giang</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Admin</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-noibat-48" data-table="news" data-id="48" data-attr="noibat" checked="">
-                                <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                            <p>Phát Nguyễn</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <img class="rounded img-preview" width="50" height="50" src="{{ asset('/admin/images/LogoShoes.png') }}" alt="CÁCH NẤU MÓN GÀ ÁC SIÊU NGON TẠI NHÀ">
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>0378998673</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>phatnguyen13102001@gmail.com</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Thị Trấn Chợ Mới, Huyện Chợ Mới, Tỉnh An Giang</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Admin</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input show-checkbox" id="show-checkbox-noibat-48" data-table="news" data-id="48" data-attr="noibat" checked="">
-                                <label for="show-checkbox-noibat-48" class="custom-control-label"></label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle text-center">
-                            <p>Phát Nguyễn</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <img class="rounded img-preview" width="50" height="50" src="{{ asset('/admin/images/LogoShoes.png') }}" alt="">
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>0378998673</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>phatnguyen13102001@gmail.com</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Thị Trấn Chợ Mới, Huyện Chợ Mới, Tỉnh An Giang</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>Admin</p>
+                            <p>{{$user->permission}}</p>
                         </td>
                         <td class="align-middle text-center">
                             <div class="custom-control custom-checkbox my-checkbox">
@@ -176,6 +73,7 @@
                         </td>
                     </tr>
                 </tbody>
+                @endforeach
             </table>
         </div>
     </div>

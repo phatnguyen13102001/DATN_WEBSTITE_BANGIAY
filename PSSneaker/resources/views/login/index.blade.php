@@ -1,65 +1,66 @@
 @extends('user.index')
 @section('content')
 <section id="form">
-        <!--form-->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4 col-sm-offset-1">
-                    <div class="login-form">
-                        <!--login form-->
-                        <h2>Đăng nhập</h2>
-                        <form action="#">
-                            <input type="email" placeholder="Nhập Email" />
-                            <input type="password" placeholder="Nhập mật khẩu" />
-                            <button type="submit" class="btn btn-default">Login</button>
-                            <div class="title_login_quenml">
-                                <a href="">Quên mật khẩu</a>
+    <!--form-->
+    <div class="container">
+        <div class="row_none">
+            <div class="col-sm-4 col-sm-offset-1">
+                <div class="login-form">
+                    <!--login form-->
+                    <h2>Đăng nhập</h2>
+                    <form method="post" action="{{route('dangnhapweb')}}">
+                        @csrf
+                        <input type="email" name="email" placeholder="Nhập Email" />
+                        @if($errors->has('email'))
+                        <div class="alert alert-danger" style="margin-top:10px;">
+                            {{$errors->first('email')}}
+                        </div>
+                        @endif
+                        <input type="password" name="password" placeholder="Nhập mật khẩu" />
+                        @if($errors->has('password'))
+                        <div class="alert alert-danger" style="margin-top:10px;">
+                            {{$errors->first('password')}}
+                        </div>
+                        @endif
+                        <button type="submit" class="btn btn-default">Login</button>
+                        <div class="title_login_quenml">
+                            <a href="{{url('http://localhost:8000/api/sendPasswordResetLink')}}">Quên mật khẩu</a>
+                        </div>
+                        <div class="title_login_quenml">
+                            <a href="{{route('dangkiweb')}}">Đăng kí</a>
+                        </div>
+                        <div>
+                            <div class="login_thanh_title">
+                                <div class="line_login"></div>
+                                <span class="login_title_hoặc">Hoặc</span>
+                                <div class="line_login"></div>
                             </div>
-                            <div>
-                                <div class="login_thanh_title">
-                                    <div class="line_login"></div>
-                                    <span class="login_title_hoặc">Hoặc</span>
-                                    <div class="line_login"></div>
-                                </div>
-                                <div class="soial_login_0">
+                            <div class="soial_login_0">
+                                <a href="{{url('auth/redirect/facebook')}}">
                                     <button class="btn-ptdn">
-										<div class="icon_btn_ptdn">
-											<div class="png_ptdn"></div>
-										</div>
-										<div class="txt_ptdn">Face book</div>
-									</button>
-                                    <button class="btn-ptdn">
-										<div class="icon_btn_ptdn">
-											<div class="png_ptgg"></div>
-										</div>
-										<div class="txt_ptdn">Google</div>
-									</button>
 
-                                </div>
+                                        <div class="icon_btn_ptdn">
+                                            <div class="png_ptdn"></div>
+                                        </div>
+                                        <div class="txt_ptdn">Face book</div>
+
+                                    </button>
+                                </a>
+                                <a href="{{url('/google')}}">
+                                <button class="btn-ptdn">
+                                    <div class="icon_btn_ptdn">
+                                        <div class="png_ptgg"></div>
+                                    </div>
+                                    <div class="txt_ptdn">Google</div>
+                                </button>
+                                </a>
                             </div>
-                        </form>
-                    </div>
-                    <!--/login form-->
+                        </div>
+                    </form>
                 </div>
-                <div class="col-sm-1">
-                    <h2 class="or"></h2>
-                </div>
-                <div class="col-sm-4">
-                    <div class="signup-form">
-                        <!--sign up form-->
-                        <h2>Đăng kí</h2>
-                        <form action="#">
-                            <input type="text" placeholder="Họ và tên" />
-                            <input type="email" placeholder="Email" />
-                            <input type="number" placeholder="Số điện thoại" />
-                            <input type="text" placeholder="Địa chỉ" />
-                            <input type="password" placeholder="Mật khẩu" />
-                            <button type="submit" class="btn btn-default">Đăng kí</button>
-                        </form>
-                    </div>
-                    <!--/sign up form-->
-                </div>
+                <!--/login form-->
             </div>
         </div>
- </section>
- @endsection
+    </div>
+</section>
+@endsection

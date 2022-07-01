@@ -15,8 +15,9 @@
 <!-- Daterange picker -->
 <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/daterangepicker/daterangepicker.css')}}">
 <!-- summernote -->
+
+<!--  -->
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/bootstrap/bootstrap.min.css')}}">
-<link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/summernote/summernote-bs4.min.css')}}">
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/css/animate.min.css')}}">
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/css/adminlte.css')}}">
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/css/adminlte-style.css')}}">

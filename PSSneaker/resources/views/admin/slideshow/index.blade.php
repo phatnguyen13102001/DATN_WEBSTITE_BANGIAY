@@ -15,7 +15,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="card-footer text-sm sticky-top">
-        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('slideshow-add')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
+        <a class="btn btn-sm bg-gradient-primary text-white" href="{{route('slideshow.create')}}" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</a>
         <a class="btn btn-sm bg-gradient-danger text-white" id="delete-all" data-url="index.php?com=photo&amp;act=delete_photo&amp;type=slide" title="Xóa tất cả"><i class="far fa-trash-alt mr-2"></i>Xóa tất cả</a>
     </div>
     <div class="card card-primary card-outline text-sm mb-0">

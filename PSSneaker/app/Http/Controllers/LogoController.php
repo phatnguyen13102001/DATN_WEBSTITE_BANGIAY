@@ -18,6 +18,7 @@ class LogoController extends Controller
             $logo->image = '/admin_pssneaker/images/noimage.png';
         }
     }
+    
     /**
      * Display a listing of the resource.
      *

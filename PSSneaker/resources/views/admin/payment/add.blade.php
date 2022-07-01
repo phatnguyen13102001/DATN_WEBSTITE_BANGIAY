@@ -16,7 +16,8 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form class="validation-form" novalidate="" method="post" action="index.php?com=news&amp;act=save&amp;type=hinh-thuc-thanh-toan" enctype="multipart/form-data">
+    <form class="validation-form" novalidate="" method="post" action="{{route('payment.store')}}" enctype="multipart/form-data">
+        @csrf
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
@@ -37,12 +38,22 @@
                                 <div class="tab-content" id="custom-tabs-three-tabContent-lang">
                                     <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
                                         <div class="form-group">
-                                            <label for="namevi">Tiêu đề:</label>
+                                            <label for="name">Tiêu đề:</label>
                                             <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required="">
+                                            @if($errors->has('name'))
+                                            <div class="alert alert-danger" style="margin-top:10px;">
+                                                {{$errors->first('name')}}
+                                            </div>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="descvi">Mô tả:</label>
-                                            <textarea class="form-control for-seo text-sm " name="desc" id="desc" rows="5" placeholder="Mô tả"></textarea>
+                                            <textarea class="form-control for-seo text-sm " name="describe" id="desc" rows="5" placeholder="Mô tả"></textarea>
+                                            @if($errors->has('describe'))
+                                            <div class="alert alert-danger" style="margin-top:10px;">
+                                                {{$errors->first('describe')}}
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

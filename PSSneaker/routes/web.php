@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AboutController;
@@ -13,6 +12,12 @@ use App\Http\Controllers\SlideshowController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PoliciesController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\FacebookController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,26 +28,28 @@ use App\Http\Controllers\SocialController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware('admin')->group(function () {
+    Route::resource('/admin/account', AccountController::class);
+    Route::resource('/admin/manufacturer', ManufacturerController::class);
+    Route::resource('/admin/setting', SettingController::class);
+    Route::resource('/admin/about', AboutController::class);
+    Route::resource('/admin/logo', LogoController::class);
+    Route::resource('/admin/color', ColorController::class);
+    Route::resource('/admin/size', SizeController::class);
+    Route::resource('/admin/slideshow', SlideshowController::class);
+    Route::resource('/admin/news', NewsController::class);
+    Route::resource('/admin/policy', PoliciesController::class);
+    Route::resource('/admin/social', SocialController::class);
+    Route::resource('/admin/payment', PaymentController::class);
+    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('giohang', function () { return view('user.cart.index'); })->name('giohangweb');
+});
+// 
+Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
+Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
+Route::get('/auth/redirect/{provider}', [FacebookController::class, 'redirect']);
+Route::get('/auth/callback/{provider}', [FacebookController::class, 'callback']);
 
-Route::resource('/admin/manufacturer', ManufacturerController::class);
-Route::resource('/admin/setting', SettingController::class);
-Route::resource('/admin/about', AboutController::class);
-Route::resource('/admin/logo', LogoController::class);
-Route::resource('/admin/color', ColorController::class);
-Route::resource('/admin/size', SizeController::class);
-Route::resource('/admin/slideshow', SlideshowController::class);
-Route::resource('/admin/news', NewsController::class);
-Route::resource('/admin/policy', PoliciesController::class);
-Route::resource('/admin/social', SocialController::class);
-
-Route::get('admin', function () {
-    return view('admin.dashboard.index');
-})->name('admin');
-
-/*user*/
-Route::get('', function () {
-    return view('user.body.index');
-})->name('indexuser');
 // gioi thieu
 Route::get('gioithieu', function () {
     return view('user.introduce.index');
@@ -71,11 +78,17 @@ Route::get('thongtincanhan', function () {
 Route::get('chitietsanpham', function () {
     return view('user.product_detail.index');
 })->name('chitietsanphamweb');
-// gio hang
-Route::get('giohang', function () {
-    return view('user.cart.index');
-})->name('giohangweb');
-// login
-Route::get('dangnhap', function () {
-    return view('login.index');
-})->name('dangnhapweb');
+// index
+Route::get('index', function () {
+    return view('user.body.index');
+})->name('indexuser');
+
+Route::get('Forgotpassword', function () {
+    return view('Email.Forgotpassword');
+})->name('Forgotpassword');
+Route::get('dangnhap', [LoginController::class, 'index'])->name('dangnhapweb');
+Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnhapweb');
+Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
+Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
+Route::get('email', [LoginController::class, 'email'])->name('mail');
+
