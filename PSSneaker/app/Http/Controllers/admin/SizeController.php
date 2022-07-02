@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-use App\Models\Policies;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Size;
 
-class PoliciesController extends Controller
+class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +15,20 @@ class PoliciesController extends Controller
      */
     public function index(Request $request)
     {
-        $policies = Policies::paginate(10);
+        $size = Size::paginate(10);
         if ($request->ajax()) {
-            return view('admin.policy.pagination_data', ['lstpolicy' => $policies]);
+            return view('admin.size.pagination_data', ['lstsize' => $size]);
         }
-        return view('admin.policy.index', ['lstpolicy' => $policies]);
+        return view('admin.size.index', ['lstsize' => $size]);
     }
+
     public function search(Request $request)
     {
         if ($request->ajax()) {
-            $lstpolicy = Policies::where('name', 'LIKE', '%' . $request->keyword . '%')
+            $lstsize = Size::where('size', 'LIKE', '%' . $request->keyword . '%')
                 ->paginate(10);
-            if ($lstpolicy->count() >= 1) {
-                return view('admin.policy.pagination_data', ['lstpolicy' => $lstpolicy]);
+            if ($lstsize->count() >= 1) {
+                return view('admin.size.pagination_data', ['lstsize' => $lstsize]);
             } else {
                 return response()->json([
                     'status' => 'Không có dữ liệu',
@@ -42,12 +43,11 @@ class PoliciesController extends Controller
      */
     public function create()
     {
-        $lstpolicy = Policies::all();
-        return view('admin.policy.add', [
-            'lstpolicy' => $lstpolicy
+        $lstsize = Size::all();
+        return view('admin.size.add', [
+            'lstsize' => $lstsize
         ]);
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -58,21 +58,22 @@ class PoliciesController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'size' => 'required|numeric|min:1',
+
             ],
             [
-                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
+                'size.required' => 'Size Không Được Bỏ Trống',
+                'size.numeric' => 'Size Không Hợp Lệ',
+                'size.min' => 'Size Phải Lớn Hơn 1',
             ]
         );
-        $policy = new Policies;
-        $policy->fill([
-            'name' => $request->input('name'),
-            'content' => $request->input('content'),
-            'show' =>
-            $request->has('show') ? '1' : '0',
+        $size = new Size;
+        $size->fill([
+            'id' => $request->input('id'),
+            'size' => $request->input('size'),
         ]);
-        $policy->save();
-        return Redirect::route('policy.index');
+        $size->save();
+        return Redirect::route('size.index');
     }
 
     /**
@@ -92,11 +93,11 @@ class PoliciesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Policies $policy)
+    public function edit(Size $size)
     {
         return view(
-            'admin.policy.edit',
-            ['policy' => $policy,]
+            'admin.size.edit',
+            ['size' => $size,]
         );
     }
 
@@ -107,36 +108,37 @@ class PoliciesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Policies $policy)
+    public function update(Request $request, Size $size)
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'size' => 'required|numeric|min:1',
+
             ],
             [
-                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
+                'size.required' => 'Size Không Được Bỏ Trống',
+                'size.numeric' => 'Size Không Hợp Lệ',
+                'size.min' => 'Size Phải Lớn Hơn 1',
             ]
         );
-        $policy->fill([
-            'name' => $request->input('name'),
-            'content' => $request->input('content'),
-            'show' => $request->has('show') ? '1' : '0',
+        $size->fill([
+            'size' => $request->input('size'),
         ]);
-        $policy->save();
-        return Redirect::route('policy.index');
+        $size->save();
+        return Redirect::route('size.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Size
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
-        $policy_id = $request->input('deleteting_id');
-        $policy = Policies::find($policy_id);
-        $policy->delete();
-        return Redirect::route('policy.index');
+        $size_id = $request->input('deleteting_id');
+        $size = Size::find($size_id);
+        $size->delete();
+        return Redirect::route('size.index');
     }
 }

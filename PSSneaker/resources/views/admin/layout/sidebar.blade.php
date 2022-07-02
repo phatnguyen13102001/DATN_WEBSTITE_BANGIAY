@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/account')) ? 'active' : '' }}">
+                    <a href="{{route('account.index')}}" class="nav-link {{ (request()->is('admin/account')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-circle"></i>
                         <p>
                             Quản lý tài khoản
@@ -107,7 +107,7 @@
                     </ul>
                 </li>
                 <li class="nav-item {{ (request()->is('admin/news')) || (request()->is('admin/policy')) || (request()->is('admin/payment')) ? 'menu-open' : '' }}">
-                    <a href=" #" class="nav-link {{ (request()->is('admin/news')) || (request()->is('admin/policy')) || (request()->is('admin/payment')) ? 'active' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/news')) || (request()->is('admin/policy')) || (request()->is('admin/payment')) ? 'active' : '' }}">
                         <i class="nav-icon far fa-newspaper"></i>
                         <p>
                             Quản lý bài viết
@@ -128,7 +128,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link {{ (request()->is('admin/payment')) ? 'active' : '' }}">
+                            <a href="{{route('payment.index')}}" class="nav-link {{ (request()->is('admin/payment')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Hình thức thanh toán</p>
                             </a>

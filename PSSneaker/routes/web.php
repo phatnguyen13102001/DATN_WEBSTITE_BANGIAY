@@ -1,20 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\ManufacturerController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\LogoController;
-use App\Http\Controllers\ColorController;
-use App\Http\Controllers\SizeController;
-use App\Http\Controllers\SlideshowController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\PoliciesController;
-use App\Http\Controllers\SocialController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\FacebookController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\admin\AccountController;
+use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ManufacturerController;
+use App\Http\Controllers\admin\SettingController;
+use App\Http\Controllers\admin\AboutController;
+use App\Http\Controllers\admin\LogoController;
+use App\Http\Controllers\admin\ColorController;
+use App\Http\Controllers\admin\SizeController;
+use App\Http\Controllers\admin\SlideshowController;
+use App\Http\Controllers\admin\NewsController;
+use App\Http\Controllers\admin\PoliciesController;
+use App\Http\Controllers\admin\SocialController;
+use App\Http\Controllers\admin\PaymentController;
+use App\Http\Controllers\admin\FacebookController;
+use App\Http\Controllers\admin\LoginController;
+use App\Http\Controllers\admin\ProductController;
+/* Controller FrontEnd */
+use App\Http\Controllers\FrontendController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +35,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::middleware('admin')->group(function () {
     Route::resource('/admin/account', AccountController::class);
+    Route::resource('/admin/information', AdminController::class);
     Route::resource('/admin/payment', PaymentController::class);
     Route::resource('/admin/manufacturer', ManufacturerController::class);
     Route::resource('/admin/setting', SettingController::class);
@@ -43,6 +48,9 @@ Route::middleware('admin')->group(function () {
     Route::resource('/admin/policy', PoliciesController::class);
     Route::resource('/admin/social', SocialController::class);
     Route::resource('/admin/product', ProductController::class);
+    Route::get('admin', function () {
+        return view('admin.dashboard.index');
+    })->name('admin');
     /* Destroy */
     Route::get('/admin/size/destroy', [SizeController::class, 'destroy'])->name('size.destroy');
     Route::get('/admin/slideshow/destroy', [SlideshowController::class, 'destroy'])->name('slideshow.destroy');
@@ -52,6 +60,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/policy/destroy', [PoliciesController::class, 'destroy'])->name('policy.destroy');
     Route::get('/admin/social/destroy', [SocialController::class, 'destroy'])->name('social.destroy');
     Route::get('/admin/product/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::get('/admin/payment/destroy', [PaymentController::class, 'destroy'])->name('payment.destroy');
     /* Search */
     Route::get('/searchsize', [SizeController::class, 'search']);
     Route::get('/searchcolor', [ColorController::class, 'search']);
@@ -61,6 +70,12 @@ Route::middleware('admin')->group(function () {
     Route::get('/searchslideshow', [SlideshowController::class, 'search']);
     Route::get('/searchsocial', [SoicalController::class, 'search']);
     Route::get('/searchproduct', [ProductController::class, 'search']);
+    Route::get('/searchuser', [AccountController::class, 'search']);
+    Route::get('/searchpayment', [PaymentController::class, 'search']);
+
+    /* Block User */
+    Route::put('/admin/account/update', [AccountController::class, 'update'])->name('user.update');
+    Route::get('/admin/account/edit/{id}', [AccountController::class, 'edit']);
 
     /* Stock */
     Route::get('/admin/product/stock/{id}', [ProductController::class, 'stock'])->name('product.stock');
@@ -80,6 +95,9 @@ Route::middleware('admin')->group(function () {
         return view('user.cart.index');
     })->name('giohangweb');
 });
+/*Route Handle FrondEnd */
+
+Route::get('', [FrontendController::class, 'getindex']);
 // 
 Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
 Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
@@ -87,16 +105,7 @@ Route::get('/auth/redirect/{provider}', [FacebookController::class, 'redirect'])
 Route::get('/auth/callback/{provider}', [FacebookController::class, 'callback']);
 
 
-
-Route::get('admin', function () {
-    return view('admin.dashboard.index');
-})->name('admin');
-
 /*user*/
-Route::get('', function () {
-    return view('user.body.index');
-})->name('indexuser');
-// gioi thieu
 Route::get('gioithieu', function () {
     return view('user.introduce.index');
 })->name('gioithieuweb');

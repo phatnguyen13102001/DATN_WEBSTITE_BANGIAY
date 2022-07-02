@@ -13,7 +13,7 @@
                         <input type="text" name="name" placeholder="Họ và tên" />
                         @if($errors->has('name'))
                         <div class="alert alert-danger" style="margin-top:10px;">
-                        {{$errors->first('name')}}
+                            {{$errors->first('name')}}
                         </div>
                         @endif
                         <input type="email" name="email" placeholder="Email" />
@@ -37,7 +37,7 @@
                         <input type="password" name="password" placeholder="Mật khẩu" />
                         @if($errors->has('password'))
                         <div class="alert alert-danger" style="margin-top:10px;">
-                        {{$errors->first('password')}}
+                            {{$errors->first('password')}}
                         </div>
                         @endif
                         <button type="submit" class="btn btn-default">Đăng kí</button>

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+
 use Illuminate\Http\Request;
 use App\Models\payment;
 use Illuminate\Support\Facades\Redirect;
@@ -12,13 +13,27 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
-        $lstpayment = Payment::all();
-        return view('admin.payment.index', [
-            'lstpayment' =>$lstpayment
-        ]);
+        $lstpayment = Payment::paginate(10);
+        if ($request->ajax()) {
+            return view('admin.payment.pagination_data', ['lstpayment' => $lstpayment]);
+        }
+        return view('admin.payment.index', ['lstpayment' => $lstpayment]);
+    }
+    public function search(Request $request)
+    {
+        if ($request->ajax()) {
+            $lstpayment = Payment::where('name', 'LIKE', '%' . $request->keyword . '%')
+                ->paginate(10);
+            if ($lstpayment->count() >= 1) {
+                return view('admin.payment.pagination_data', ['lstpayment' => $lstpayment]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
     }
 
     /**
@@ -45,21 +60,19 @@ class PaymentController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'describe'=> 'required',
             ],
             [
                 'name.required' => 'Tên chính sách Không Được Bỏ Trống',
-                'describe.required' => 'Mô tả Không Được Bỏ Trống',
             ]
         );
-        $payment= new Payment;
+        $payment = new Payment;
         $payment->fill([
             'name' => $request->input('name'),
             'describe' => $request->input('describe'),
-            'show'=>'1'
+            'show' => $request->has('show') ? '1' : '0',
         ]);
         $payment->save();
-        return Redirect::route('payment.index', ['payment' => $payment]);
+        return Redirect::route('payment.index');
     }
 
     /**
@@ -99,20 +112,18 @@ class PaymentController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'describe'=> 'required',
             ],
             [
                 'name.required' => 'Tên chính sách Không Được Bỏ Trống',
-                'describe.required' => 'Mô tả Không Được Bỏ Trống',
             ]
         );
         $payment->fill([
             'name' => $request->input('name'),
             'describe' => $request->input('describe'),
-            'show'=>'1'
+            'show' => $request->has('show') ? '1' : '0',
         ]);
         $payment->save();
-        return Redirect::route('payment.index', ['payment' => $payment]);
+        return Redirect::route('payment.index');
     }
 
     /**
@@ -121,8 +132,10 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy(Request $request)
     {
+        $payment_id = $request->input('deleteting_id');
+        $payment = Payment::find($payment_id);
         $payment->delete();
         return Redirect::route('payment.index');
     }

@@ -18,6 +18,7 @@
     <!-- /.content-header -->
     <div class="card-footer text-sm sticky-top">
         <button class="btn btn-sm bg-gradient-primary text-white insertBtn" type="button" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</button>
+        <a class="btn btn-sm bg-gradient-danger" href="{{route('product.index')}}" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
     </div>
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">

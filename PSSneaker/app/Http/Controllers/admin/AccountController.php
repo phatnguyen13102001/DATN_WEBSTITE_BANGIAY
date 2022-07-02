@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
+
 class AccountController extends Controller
 {
     protected function fixImage(User $user)
@@ -15,13 +17,33 @@ class AccountController extends Controller
             $user->avatar = '/Images/NoImage.jpg';
         }
     }
-    public function index()
+    public function index(Request $request)
     {
-        $lstuser = User::all();
+        $lstuser = User::paginate(10);
         foreach ($lstuser as $user) {
             $this->fixImage($user);
         }
+        if ($request->ajax()) {
+            return view('admin.account.pagination_data', ['lstuser' => $lstuser]);
+        }
         return view('admin.account.index', ['lstuser' => $lstuser]);
+    }
+    public function search(Request $request)
+    {
+        $lstuser = User::where('name', 'LIKE', '%' . $request->keyword . '%')->orWhere('email', 'LIKE', '%' . $request->keyword . '%')->orWhere('phone', 'LIKE', '%' . $request->keyword . '%')
+            ->paginate(10);
+        foreach ($lstuser as $user) {
+            $this->fixImage($user);
+        }
+        if ($request->ajax()) {
+            if ($lstuser->count() >= 1) {
+                return view('admin.account.pagination_data', ['lstuser' => $lstuser]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -30,7 +52,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-      
+
         return view('login.register');
     }
     /**
@@ -41,14 +63,14 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validatedData = $request->validate(
             [
                 'name' => 'required',
                 'email' => 'required|unique:users|email',
                 'password' => 'required',
                 'phone' => 'required',
-                'address'=>'required',
+                'address' => 'required',
 
             ],
             [
@@ -68,7 +90,7 @@ class AccountController extends Controller
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
             'phone' => $request->input('phone'),
-            'address'=>$request->input('address'),
+            'address' => $request->input('address'),
         ]);
         $user->save();
         return Redirect::route('account.index', ['user' => $user]);
@@ -90,9 +112,13 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        
+        $user = User::find($id);
+        return response()->json([
+            'status' => 200,
+            'user' => $user,
+        ]);
     }
 
     /**
@@ -102,9 +128,13 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user_id = $request->input('updateting_id');
+        $user = User::findOrFail($user_id);
+        $user->block = $request->has('block') ? '1' : '0';
+        $user->save();
+        return Redirect::route('account.index');
     }
 
     /**

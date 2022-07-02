@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\Logo;
 use Illuminate\Support\Facades\File;
@@ -18,7 +18,7 @@ class LogoController extends Controller
             $logo->image = '/admin_pssneaker/images/noimage.png';
         }
     }
-    
+
     /**
      * Display a listing of the resource.
      *

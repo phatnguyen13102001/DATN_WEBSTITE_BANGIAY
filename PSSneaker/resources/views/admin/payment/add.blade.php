@@ -7,8 +7,7 @@
             <div class="row mb-2">
                 <div>
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Quản lý hình thức thanh toán</li>
+                        <li class="breadcrumb-item"><a href="{{route('admin')}}">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active">Thêm hình thức thanh toán</li>
                     </ol>
                 </div><!-- /.col -->
@@ -21,7 +20,7 @@
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
-            <a class="btn btn-sm bg-gradient-danger" href="index.php?com=news&amp;act=man&amp;type=hinh-thuc-thanh-toan" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
+            <a class="btn btn-sm bg-gradient-danger" href="{{route('payment.index')}}" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
         <div class="row">
             <div class="col-12">
@@ -39,7 +38,7 @@
                                     <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
                                         <div class="form-group">
                                             <label for="name">Tiêu đề:</label>
-                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required="">
+                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required>
                                             @if($errors->has('name'))
                                             <div class="alert alert-danger" style="margin-top:10px;">
                                                 {{$errors->first('name')}}
@@ -49,11 +48,6 @@
                                         <div class="form-group">
                                             <label for="descvi">Mô tả:</label>
                                             <textarea class="form-control for-seo text-sm " name="describe" id="desc" rows="5" placeholder="Mô tả"></textarea>
-                                            @if($errors->has('describe'))
-                                            <div class="alert alert-danger" style="margin-top:10px;">
-                                                {{$errors->first('describe')}}
-                                            </div>
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -75,8 +69,8 @@
                     <div class="form-group d-inline-block mb-2 mr-2">
                         <label for="hienthi-checkbox" class="d-inline-block align-middle mb-0 mr-2">Hiển thị:</label>
                         <div class="custom-control custom-checkbox d-inline-block align-middle">
-                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="hienthi" id="hienthi-checkbox" checked="" value="hienthi">
-                            <label for="hienthi-checkbox" class="custom-control-label"></label>
+                            <input type="checkbox" class="custom-control-input hienthi-checkbox" name="show" id="show" value="1" checked>
+                            <label for="show" class="custom-control-label"></label>
                         </div>
                     </div>
                 </div>

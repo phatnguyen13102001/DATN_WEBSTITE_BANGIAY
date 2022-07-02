@@ -1,5 +1,6 @@
 <?php
-namespace App\Http\Controllers;
+
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 
@@ -57,8 +58,8 @@ class PasswordResetRequestController extends Controller
     {
         return !!User::where('email', $email)->first();
     }
-	
-// frome here two Function to Success or Failed send Request 	
+
+    // frome here two Function to Success or Failed send Request 	
 
     public function failedResponse()
     {

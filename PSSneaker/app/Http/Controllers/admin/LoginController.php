@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
+
 class LoginController extends Controller
 {
     // 
@@ -36,11 +37,14 @@ class LoginController extends Controller
         );
         if (Auth::attempt($credentials) && Auth::user()->permission == 1  && Auth::user()->deleted_at == null) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin/account');
-        }
-       else if (Auth::attempt($credentials) && Auth::user()->permission == 0  && Auth::user()->deleted_at == null) {
+            return redirect()->intended('/admin');
+        } else if (Auth::attempt($credentials) && Auth::user()->permission == 0  && Auth::user()->deleted_at == null && Auth::user()->block == 0) {
             $request->session()->regenerate();
             return redirect()->intended('index');
+        } else if (Auth::attempt($credentials) && Auth::user()->block == 1  && Auth::user()->deleted_at == null) {
+            return back()->withErrors([
+                'password' => 'Tài khoản của bạn đã bị khóa',
+            ]);
         }
         return back()->withErrors([
             'password' => 'Tài khoản hoặc mật khẩu sai',
@@ -48,7 +52,7 @@ class LoginController extends Controller
     }
     public function logout(Request $request)
     {
-        Auth::logout(); 
+        Auth::logout();
         return redirect('dangnhap');
     }
     public function showFormRegister()
@@ -57,6 +61,19 @@ class LoginController extends Controller
     }
     public function Register(Request $request)
     {
+        $validatedData = $request->validate(
+            [
+                'email' => 'required|email|unique:colors,name,NULL,id,deleted_at,NULL',
+                'name' => 'required',
+            ],
+            [
+                'email.required' => 'Email Không Được Bỏ Trống',
+                'email.unique' => 'Email Đã Được Sử Dụng',
+                'email.email' => 'Email Không Đúng Định Dạng',
+                'name.required' => 'Tên Không Được Bỏ Trống',
+
+            ]
+        );
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -75,7 +92,8 @@ class LoginController extends Controller
             $email->to('minhsanh.doanlaravel0709@gmail.com', $name);
         });
     }
-    public function Quenmatkhau(){
+    public function Quenmatkhau()
+    {
         return view('login.forgetpassword');
     }
 }

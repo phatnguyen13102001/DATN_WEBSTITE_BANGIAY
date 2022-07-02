@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
+use App\Models\Policies;
 use Illuminate\Support\Facades\Redirect;
-use App\Models\Size;
 
-class SizeController extends Controller
+class PoliciesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,20 +15,19 @@ class SizeController extends Controller
      */
     public function index(Request $request)
     {
-        $size = Size::paginate(10);
+        $policies = Policies::paginate(10);
         if ($request->ajax()) {
-            return view('admin.size.pagination_data', ['lstsize' => $size]);
+            return view('admin.policy.pagination_data', ['lstpolicy' => $policies]);
         }
-        return view('admin.size.index', ['lstsize' => $size]);
+        return view('admin.policy.index', ['lstpolicy' => $policies]);
     }
-
     public function search(Request $request)
     {
         if ($request->ajax()) {
-            $lstsize = Size::where('size', 'LIKE', '%' . $request->keyword . '%')
+            $lstpolicy = Policies::where('name', 'LIKE', '%' . $request->keyword . '%')
                 ->paginate(10);
-            if ($lstsize->count() >= 1) {
-                return view('admin.size.pagination_data', ['lstsize' => $lstsize]);
+            if ($lstpolicy->count() >= 1) {
+                return view('admin.policy.pagination_data', ['lstpolicy' => $lstpolicy]);
             } else {
                 return response()->json([
                     'status' => 'Không có dữ liệu',
@@ -43,11 +42,12 @@ class SizeController extends Controller
      */
     public function create()
     {
-        $lstsize = Size::all();
-        return view('admin.size.add', [
-            'lstsize' => $lstsize
+        $lstpolicy = Policies::all();
+        return view('admin.policy.add', [
+            'lstpolicy' => $lstpolicy
         ]);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -58,19 +58,21 @@ class SizeController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'size' => 'required',
+                'name' => 'required',
             ],
             [
-                'size.required' => 'Tên Size Không Được Bỏ Trống',
+                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
             ]
         );
-        $size = new Size;
-        $size->fill([
-            'id' => $request->input('id'),
-            'size' => $request->input('size'),
+        $policy = new Policies;
+        $policy->fill([
+            'name' => $request->input('name'),
+            'content' => $request->input('content'),
+            'show' =>
+            $request->has('show') ? '1' : '0',
         ]);
-        $size->save();
-        return Redirect::route('size.index');
+        $policy->save();
+        return Redirect::route('policy.index');
     }
 
     /**
@@ -90,11 +92,11 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Size $size)
+    public function edit(Policies $policy)
     {
         return view(
-            'admin.size.edit',
-            ['size' => $size,]
+            'admin.policy.edit',
+            ['policy' => $policy,]
         );
     }
 
@@ -105,36 +107,36 @@ class SizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Size $size)
+    public function update(Request $request, Policies $policy)
     {
         $validatedData = $request->validate(
             [
-                'size' => 'required',
-
+                'name' => 'required',
             ],
             [
-                'size.required' => 'Số size Không Được Bỏ Trống',
-
+                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
             ]
         );
-        $size->fill([
-            'size' => $request->input('size'),
+        $policy->fill([
+            'name' => $request->input('name'),
+            'content' => $request->input('content'),
+            'show' => $request->has('show') ? '1' : '0',
         ]);
-        $size->save();
-        return Redirect::route('size.index');
+        $policy->save();
+        return Redirect::route('policy.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Size
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {
-        $size_id = $request->input('deleteting_id');
-        $size = Size::find($size_id);
-        $size->delete();
-        return Redirect::route('size.index');
+        $policy_id = $request->input('deleteting_id');
+        $policy = Policies::find($policy_id);
+        $policy->delete();
+        return Redirect::route('policy.index');
     }
 }

@@ -20,9 +20,8 @@
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu-info" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fas fa-cogs"></i></a>
             <ul aria-labelledby="dropdownSubMenu-info" class="dropdown-menu dropdown-menu-right border-0 shadow" style="left: inherit; right: 0px;">
-
                 <li>
-                    <a href="" class="dropdown-item">
+                    <a href="{{route('information.index')}}" class="dropdown-item">
                         <i class="fas fa-user-cog"></i>
                         <span>Thông tin admin</span>
                     </a>

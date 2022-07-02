@@ -15,7 +15,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form class="validation-form" novalidate="" method="post" action="{{route('logo.update',['logo'=>$logo])}}" enctype="multipart/form-data">
+    <form class="validation-form" method="post" action="{{route('logo.update',['logo'=>$logo])}}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <div class="card-footer text-sm sticky-top">

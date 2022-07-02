@@ -7,7 +7,7 @@
             <div class="row mb-2">
                 <div>
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin')}}">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active">Thêm Size</li>
                     </ol>
                 </div><!-- /.col -->
@@ -15,12 +15,12 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <form class="validation-form" novalidate="" method="post" action="{{route('size.store')}}">
+    <form class="validation-form" method="post" action="{{route('size.store')}}">
         @csrf
         <div class="card-footer text-sm sticky-top">
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
-            <a class="btn btn-sm bg-gradient-danger" href="" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
+            <a class="btn btn-sm bg-gradient-danger" href="{{route('size.index')}}" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
         <div class="row">
             <div class="col-xl-12">
@@ -38,7 +38,7 @@
                                     <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
                                         <div class="form-group">
                                             <label for="name">Số Size:</label>
-                                            <input type="text" class="form-control for-seo text-sm" name="size" id="size" placeholder="Số Size" required>
+                                            <input type="number" class="form-control align-middle text-sm" min="1" name="size" id="size" placeholder="Số size" value="1">
                                             @if($errors->has('size'))
                                             <div class="alert alert-danger" style="margin-top:10px;">
                                                 {{$errors->first('size')}}
