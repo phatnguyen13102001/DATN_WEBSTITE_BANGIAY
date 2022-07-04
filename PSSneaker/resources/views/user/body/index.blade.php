@@ -65,72 +65,33 @@
                                   <h4>Hãng</h4>
                                   <div class="row1 scroll-pane ">
                                       <div class="col col-4 ">
-                                          <label class="checkbox "><input type="checkbox " name="checkbox " checked=" "><i></i>ADIDAS</label>
-                                      </div>
-                                      <div class="col col-4 ">
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>VANS</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>NIKE</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>BITIS</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>PUMA</label>
+                                          @foreach($hangsx as $key)
+                                          <label class="checkbox "><input type="checkbox" value="{{$key->id}}" name="checkbox"><i></i>{{$key->name}}</label>
+                                          @endforeach
                                       </div>
                                   </div>
                               </section>
                               <section class="sky-form1 ">
                                   <h4>SIZE</h4>
                                   <div class="row1 scroll-pane ">
-                                      <div class="col col-4 ">
-                                          <label class="checkbox "><input type="checkbox " name="checkbox " checked=" "><i></i>37</label>
-                                      </div>
+
                                       <div class="col col-4">
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>38</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>39</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>40</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>41</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>42</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>43</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>44</label>
-                                          <label class="checkbox "><input type="checkbox " name="checkbox "><i></i>45</label>
+                                          @foreach($kichthuoc as $key)
+                                          <label class="checkbox "><input type="checkbox " value="{{$key->id}}" name="checkbox "><i></i>{{$key->size}}</label>
+                                          @endforeach
                                       </div>
                                   </div>
                               </section>
-                              <section class="sky-form1 ">
+                              <section class="sky-form1">
                                   <h4>MÀU SẮC</h4>
                                   <ul class="color-list1 ">
+                                      @foreach($mau as $key)
                                       <li>
-                                          <a href="# "> <span class="color1 "> </span>
-                                              <p class="red ">ĐỎ</p>
+                                          <a href="{{$key->id}}"> <span class="" style="background-color: {{$key->code}}!important; padding: 5px 14px;"></span>
+                                              <p class="red">{{$key->name}}</p>
                                           </a>
                                       </li>
-                                      <li>
-                                          <a href="# "> <span class="color2 "> </span>
-                                              <p class="red ">XANH LÁ CÂY</p>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="# "> <span class="color3 "> </span>
-                                              <p class="red ">XANH DƯƠNG</p>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="# "> <span class="color4 "> </span>
-                                              <p class="red ">VÀNG</p>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="# "> <span class="color5 "> </span>
-                                              <p class="red ">TÍM</p>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="# "> <span class="color6 "> </span>
-                                              <p class="red ">CAM</p>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="# "> <span class="color7 "> </span>
-                                              <p class="red ">BẠC</p>
-                                          </a>
-                                      </li>
+                                      @endforeach
                                   </ul>
                               </section>
                               <script src="js/jquery.easydropdown.js "></script>
@@ -142,15 +103,18 @@
 
               <div class="col-sm-9 padding-right">
                   <h2 class="title text-center">SẢN PHẨM</h2>
-                  <select name="xemay" id="xemay">
-                      <option value="jupiter">Tên: A-Z</option>
-                      <option value="wave">Giá: Tăng dần</option>
-                      <option value="exciter">Giá: giảm dần</option>
-                      <option value="suzuki">Tên: Z-A</option>
-                      <option value="suzuki">Cũ nhất</option>
-                      <option value="suzuki">Mới nhất</option>
-                      <option value="suzuki">Bán chạy nhất</option>
-                  </select>
+                  <form id="form_order" action="" method="get">
+                      <select id="orderby" class="orderby">
+                          <option value="1">Tên: A-Z</option>
+                          <option value="2">Giá: Tăng dần</option>
+                          <option value="3">Giá: giảm dần</option>
+                          <option value="4">Tên: Z-A</option>
+                          <option value="5">Cũ nhất</option>
+                          <option value="6">Mới nhất</option>
+                          <option value="7">Bán chạy nhất</option>
+                      </select>
+
+                  </form>
                   <div class="grid-container-sp">
                       @foreach($lstproduct as $product)
                       <div class="grid-item-sp">
@@ -175,9 +139,10 @@
                                   <div class="price-sp">
                                       @if(($product->discount)!=0)
                                       <span>Giá: </span>
-                                      <span class="sale_price_sp">{{$product->sale_price}}</span>
+                                      <span class="sale_price_sp">{{number_format($product->sale_price) }}VND</span>
+                                      <span class="regular_price_sp"><del>{{number_format($product->regular_price) }}VND</del></span>
                                       @else
-                                      <span class="price-new">{{$product->regular_price}}</span>
+                                      <span class="price-new">{{($product->regular_price)!=0 ? $product->regular_price : 'Liên Hệ'}}</span>
                                       @endif
                                   </div>
                               </a>
@@ -190,6 +155,7 @@
                       </div>
                       @endforeach
                   </div>
+
               </div>
           </div>
       </div>
@@ -200,105 +166,29 @@
           <div class="recommended_items">
               <!--recommended_items-->
               <h2 class="title text-center">tin tức</h2>
-
               <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                       <div class="item active">
+                          @foreach($lsttintuc as $key)
                           <div class="col-sm-4">
                               <div class="product-image-wrapper">
                                   <div class="single-products">
-                                      <a href="{{route('tintucweb')}}">
-                                          <div class="productinfo text-center">
-                                              <img src="images/home/poduct-4-1646-2779.jpg" alt="" />
-                                              <div class="title_tintuc">
-                                                  <div class="title_tintuc_txt_01 text-split-2">Các mẫu mới 2022</div>
-                                                  <div class="title_tintuc_txt_02 text-split-1">Ngày đăng: 13/05/2022</div>
-                                                  <div class="title_tintuc_txt_03 text-split-3">Shopee - ứng dụng mua sắm trực tuyến thú vị, tin cậy, an toàn và miễn phí! Shopee là nền tảng giao dịch trực tuyến hàng đầu ở Đông Nam Á, Việt Nam,Singapore,Malaysia,Indonesia,Thái Lan, Philipin, Đài
-                                                      Loan và Brazil. Với sự đảm bảo của Shopee, bạn sẽ mua hàng trực tuyến an tâm và nhanh chóng hơn bao giờ hết!</div>
-                                              </div>
-                                          </div>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-sm-4">
-                              <div class="product-image-wrapper">
-                                  <div class="single-products">
-                                      <div class="productinfo text-center">
-                                          <img src="images/home/poduct-3-5224-6755.jpg" alt="" />
+                                      <div class="productinfo text-center scale-img img_hover">
+                                          <img src="{{$key->image}}" alt="" />
                                           <div class="title_tintuc">
-                                              <div class="title_tintuc_txt_01">Các mẫu mới 2022</div>
-                                              <div class="title_tintuc_txt_01">Ngày đăng: 13/05/2022</div>
-                                              <div class="title_tintuc_txt_01">......................................................</div>
+                                              <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
+                                              <div class="title_tintuc_txt_02">Ngày Đăng: {{$key->created_at}}</div>
+                                              <div class="title_tintuc_txt_03 text-split-2">{{$key->describe}}</div>
                                           </div>
                                       </div>
-
                                   </div>
                               </div>
                           </div>
-                          <div class="col-sm-4">
-                              <div class="product-image-wrapper">
-                                  <div class="single-products">
-                                      <div class="productinfo text-center">
-                                          <img src="images/home/brand-3-1828-5079.jpg" alt="" />
-                                          <div class="title_tintuc">
-                                              <div class="title_tintuc_txt_01">Các mẫu mới 2022</div>
-                                              <div class="title_tintuc_txt_01">Ngày đăng: 13/05/2022</div>
-                                              <div class="title_tintuc_txt_01">......................................................</div>
-                                          </div>
-                                      </div>
-
-                                  </div>
-                              </div>
-                          </div>
+                          @endforeach
                       </div>
-                      <div class="item">
-                          <div class="col-sm-4">
-                              <div class="product-image-wrapper">
-                                  <div class="single-products">
-                                      <div class="productinfo text-center">
-                                          <img src="images/home/brand-4-3020-1744.jpg" alt="" />
-                                          <div class="title_tintuc">
-                                              <div class="title_tintuc_txt_01">Các mẫu mới 2022</div>
-                                              <div class="title_tintuc_txt_01">Ngày đăng: 13/05/2022</div>
-                                              <div class="title_tintuc_txt_01">......................................................</div>
-                                          </div>
-                                      </div>
-
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-sm-4">
-                              <div class="product-image-wrapper">
-                                  <div class="single-products">
-                                      <div class="productinfo text-center">
-                                          <img src="images/home/poduct-6-4025-8782.jpg" alt="" />
-                                          <div class="title_tintuc">
-                                              <div class="title_tintuc_txt_01">Các mẫu mới 2022</div>
-                                              <div class="title_tintuc_txt_01">Ngày đăng: 13/05/2022</div>
-                                              <div class="title_tintuc_txt_01">......................................................</div>
-                                          </div>
-                                      </div>
-
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-sm-4">
-                              <div class="product-image-wrapper">
-                                  <div class="single-products">
-                                      <div class="productinfo text-center">
-                                          <img src="images/home/poduct-11-1612-3215.jpg" alt="" />
-                                          <div class="title_tintuc">
-                                              <div class="title_tintuc_txt_01">Các mẫu mới 2022</div>
-                                              <div class="title_tintuc_txt_01">Ngày đăng: 13/05/2022</div>
-                                              <div class="title_tintuc_txt_01">......................................................</div>
-                                          </div>
-                                      </div>
-
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
+                      <!-- <div class="item">
+                          
+                      </div> -->
                   </div>
                   <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
                       <i class="fa fa-angle-left"></i>
@@ -311,5 +201,14 @@
           <!--/recommended_items-->
       </div>
   </div>
-
   @endsection
+  <script type="text/javascript">
+    $(function() {
+        $("#orderby").on('change', function(e) {
+              console.log(e);
+              var status_id = e.target.value;
+              alert(status_id)
+          })
+    });
+  </script>
+

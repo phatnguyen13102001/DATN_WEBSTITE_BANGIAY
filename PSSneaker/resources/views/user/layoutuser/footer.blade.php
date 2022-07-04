@@ -9,10 +9,10 @@
                             </div>
                             <div class="title_footer_01">PS SNEAKEr</div>
                             <div class="title_footer_02">
-                                <p>Địa chỉ: Huỳnh Thúc Kháng, P. Bến Nghé, Quận 1, TP HCM</p>
-                                <p>Số điện thoại: 0387418648</p>
-                                <p>Email: 0306191069@caothang.edu.vn</p>
-                                <p>Fanpage: 123/profile.com</p>
+                                <p>Địa chỉ: {{$setting->address}}</p>
+                                <p>Số điện thoại: {{$setting->phone}}</p>
+                                <p>Email: {{$setting->email}}</p>
+                                <p>Fanpage: {{$setting->fanpage}}</p>
                             </div>
                         </div>
                     </div>
@@ -20,11 +20,9 @@
                         <div class="single-widget">
                             <h2>Chính sách</h2>
                             <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#">Chính sách đổi trả</a></li>
-                                <li><a href="#">Chính sách mua góp</a></li>
-                                <li><a href="#">Hướng dẫn mua hàng</a></li>
-                                <li><a href="#">Thanh toán qua ngân hàng</a></li>
-                                <li><a href="#">Điều khoản & điều kiện</a></li>
+                              @foreach($chinhsach as $key)
+                                <li><a href="{{$key->id}}">{{$key->name}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

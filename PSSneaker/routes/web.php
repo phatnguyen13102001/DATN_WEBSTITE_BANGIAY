@@ -96,8 +96,8 @@ Route::middleware('admin')->group(function () {
     })->name('giohangweb');
 });
 /*Route Handle FrondEnd */
-
-Route::get('', [FrontendController::class, 'getindex']);
+Route::get('/index', [FrontendController::class, 'getindex'])->name('index');
+Route::get('/index/{id}', [FrontendController::class, 'getindex']);
 // 
 Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
 Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
@@ -133,12 +133,6 @@ Route::get('thongtincanhan', function () {
 Route::get('chitietsanpham', function () {
     return view('user.product_detail.index');
 })->name('chitietsanphamweb');
-
-// index
-Route::get('index', function () {
-    return view('user.body.index');
-})->name('indexuser');
-
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');
 })->name('Forgotpassword');
@@ -147,3 +141,4 @@ Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnha
 Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
 Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
 Route::get('email', [LoginController::class, 'email'])->name('mail');
+Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');
