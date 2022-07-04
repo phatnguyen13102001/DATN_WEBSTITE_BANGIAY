@@ -66,11 +66,19 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group-category row">
-                            <div class="form-group col-xl-12 col-sm-4">
+                            <div class="form-group col-xl-6 col-sm-4">
                                 <label class="d-block" for="lstmanufacturer">Danh mục hãng:</label>
                                 <select class="form-select" aria-label="Default select example" name="lstmanufacturer" id="lstmanufacturer">
                                     @foreach($lstmanufacturer as $manufacturer)
                                     <option value="{{$manufacturer->id}}">{{$manufacturer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-xl-6 col-sm-4">
+                                <label class="d-block" for="lstcolor">Danh mục màu:</label>
+                                <select class="form-select" aria-label="Default select example" name="lstcolor" id="lstcolor">
+                                    @foreach($lstcolor as $color)
+                                    <option value="{{$color->id}}">{{$color->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -130,7 +138,7 @@
                     <div class="form-group col-md-4">
                         <label class="d-block" for="regular_price">Giá bán:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control format-price regular_price text-sm" name="regular_price" id="regular_price" placeholder="Giá bán">
+                            <input type="text" class="form-control format-price regular_price text-sm" name="regular_price" id="regular_price" value="0" placeholder="Giá bán">
                             <div class="input-group-append">
                                 <div class="input-group-text"><strong>VNĐ</strong></div>
                             </div>
@@ -139,7 +147,7 @@
                     <div class="form-group col-md-4">
                         <label class="d-block" for="sale_price">Giá mới:</label>
                         <div class="input-group">
-                            <input type="text" class="form-control format-price sale_price text-sm" name="sale_price" id="sale_price" placeholder="Giá mới">
+                            <input type="text" class="form-control format-price sale_price text-sm" name="sale_price" id="sale_price" value="0" placeholder="Giá mới">
                             <div class=" input-group-append">
                                 <div class="input-group-text"><strong>VNĐ</strong></div>
                             </div>

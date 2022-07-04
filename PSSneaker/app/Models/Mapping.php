@@ -13,15 +13,10 @@ class Mapping extends Model
     protected $table = "mappings";
 
     protected $fillable = [
-        'id_color',
         'id_size',
         'id_product',
         'quantity',
     ];
-    public function color()
-    {
-        return $this->belongsTo('App\Models\color', 'id_color', 'id');
-    }
     public function size()
     {
         return $this->belongsTo('App\Models\Size', 'id_size', 'id');

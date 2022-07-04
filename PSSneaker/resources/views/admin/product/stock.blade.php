@@ -30,7 +30,6 @@
                     <tr>
                         <th class="align-middle text-center">Tên sản phẩm</th>
                         <th class="align-middle text-center">Size</th>
-                        <th class="align-middle text-center">Màu</th>
                         <th class="align-middle text-center">Số Lượng</th>
                         <th class="align-middle text-center">Thao tác</th>
                     </tr>
@@ -50,9 +49,6 @@
                         </td>
                         <td class="align-middle text-center">
                             <p>{{$stock->size->size}}</p>
-                        </td>
-                        <td class="align-middle text-center">
-                            <p>{{$stock->color->name}}</p>
                         </td>
                         <td class="align-middle text-center">
                             <p>{{$stock->quantity}}</p>
@@ -106,14 +102,6 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-xl-12 col-sm-4">
-                                    <label class="d-block" for="lstcolor">Danh mục màu:</label>
-                                    <select class="form-select" aria-label="Default select example" name="lstcolor" id="lstcolor">
-                                        @foreach($lstcolor as $color)
-                                        <option value="{{$color->id}}">{{$color->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-xl-12 col-sm-4">
                                     <label for="quantity" class="d-inline-block align-middle">Số lượng:</label>
                                     <input type="number" class="form-control d-inline-block align-middle text-sm" min="1" name="quantity" id="quantity" placeholder="Số lượng" value="1">
                                 </div>
@@ -142,14 +130,6 @@
                                     <select class="form-select" aria-label="Default select example" name="lstsize" id="lstsize">
                                         @foreach($lstsize as $size)
                                         <option value="{{$size->id}}">{{$size->size}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group col-xl-12 col-sm-4">
-                                    <label class="d-block" for="lstcolor">Danh mục màu:</label>
-                                    <select class="form-select" aria-label="Default select example" name="lstcolor" id="lstcolor">
-                                        @foreach($lstcolor as $color)
-                                        <option value="{{$color->id}}">{{$color->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

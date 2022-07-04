@@ -115,14 +115,12 @@ class ColorController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required|unique:colors,name,NULL,id,deleted_at,NULL',
-                'code' => 'required|unique:colors,code,NULL,id,deleted_at,NULL',
+                'name' => 'required',
+                'code' => 'required',
             ],
             [
                 'name.required' => 'Tên Màu Không Được Bỏ Trống',
-                'name.unique' => 'Tên Màu Không Được Trùng',
                 'code.required' => 'Mã Màu Không Được Bỏ Trống',
-                'code.unique' => 'Mã Màu Không Được Trùng',
 
             ]
         );

@@ -14,32 +14,26 @@
                       </ol>
 
                       <div class="carousel-inner">
+                          @foreach($lstslideshow as $key => $slideshow)
+                          @if($key === 0 )
                           <div class="item active">
-                              <div class="col-sm-6">
-                                  <h1><span>E</span>-SHOPPER</h1>
-                                  <h2>Free E-Commerce Template</h2>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                  <button type="button" class="btn btn-default get">Get it now</button>
-                              </div>
-                              <div class="col-sm-6">
-                                  <img src="images/home/giay1.png" class="girl img-responsive" alt="" />
-                                  <img src="images/home/pricing.png" class="pricing" alt="" />
+                              <div class="col-sm-12">
+                                  <a href="{{$slideshow->link}}" target="_blank">
+                                      <img src="{{$slideshow->image}}" alt="Slideshow" />
+                                  </a>
                               </div>
                           </div>
+                          @else
                           <div class="item">
-                              <div class="col-sm-6">
-                                  <h1><span>E</span>-SHOPPER</h1>
-                                  <h2>100% Responsive Design</h2>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                  <button type="button" class="btn btn-default get">Get it now</button>
-                              </div>
-                              <div class="col-sm-6">
-                                  <img src="images/home/poduct-8-5296-7311.png" class="girl img-responsive" alt="" />
-                                  <img src="images/home/pricing.png" class="pricing" alt="" />
+                              <div class="col-sm-12">
+                                  <a href="{{$slideshow->link}}" target="_blank">
+                                      <img src="{{$slideshow->image}}" alt="Slideshow" />
+                                  </a>
                               </div>
                           </div>
+                          @endif
+                          @endforeach
                       </div>
-
                       <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
                           <i class="fa fa-angle-left"></i>
                       </a>
@@ -47,7 +41,6 @@
                           <i class="fa fa-angle-right"></i>
                       </a>
                   </div>
-
               </div>
           </div>
       </div>
@@ -154,7 +147,7 @@
                   <div class="grid-container-sp">
                       @foreach($lstproduct as $product)
                       <div class="grid-item-sp">
-                          <a href="" title="">
+                          <a href="{{route('productdetail',$product->id)}}" title="{{$product->name}}">
                               <div class="img-sp">
                                   <p class="scale-img img_hover"><img src="{{$product->image}}" alt="{{$product->name}}"></p>
                                   @if(($product->discount)!=0)
@@ -175,9 +168,10 @@
                                   <div class="price-sp">
                                       @if(($product->discount)!=0)
                                       <span>Giá: </span>
-                                      <span class="sale_price_sp">{{$product->sale_price}}</span>
+                                      <span class="sale_price_sp">{{number_format($product->sale_price)}}</span>
+                                      <span class="regular_price_sp"><del>{{number_format($product->regular_price)}}</del></span>
                                       @else
-                                      <span class="price-new">{{$product->regular_price}}</span>
+                                      <span class="price-new">{{($product->regular_price)!=0 ? number_format($product->regular_price) : 'Liên Hệ'}}</span>
                                       @endif
                                   </div>
                               </a>
@@ -189,6 +183,9 @@
                           </div>
                       </div>
                       @endforeach
+                  </div>
+                  <div class="pagination flex-wrap justify-content-center">
+                      {!! $lstproduct->links() !!}
                   </div>
               </div>
           </div>

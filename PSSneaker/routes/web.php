@@ -97,7 +97,8 @@ Route::middleware('admin')->group(function () {
 });
 /*Route Handle FrondEnd */
 
-Route::get('', [FrontendController::class, 'getindex']);
+Route::get('/index', [FrontendController::class, 'getindex'])->name('index');
+Route::get('/productdetail/{id}', [FrontendController::class, 'getproductdetail'])->name('productdetail');
 // 
 Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
 Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
@@ -134,10 +135,6 @@ Route::get('chitietsanpham', function () {
     return view('user.product_detail.index');
 })->name('chitietsanphamweb');
 
-// index
-Route::get('index', function () {
-    return view('user.body.index');
-})->name('indexuser');
 
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');

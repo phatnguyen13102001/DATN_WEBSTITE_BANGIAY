@@ -68,7 +68,8 @@ class ProductController extends Controller
     {
         $lstproduct = Product::all();
         $lstmanufacturer = Manufacturer::all();
-        return view('admin.product.add', compact(['lstproduct', 'lstmanufacturer']));
+        $lstcolor = color::all();
+        return view('admin.product.add', compact(['lstproduct', 'lstmanufacturer', 'lstcolor']));
     }
 
     /**
@@ -101,6 +102,7 @@ class ProductController extends Controller
             'sale_price' => $sale_price,
             'discount' => $request->input('discount'),
             'id_manufacturer' => $request->get('lstmanufacturer'),
+            'id_color' => $request->get('lstcolor'),
             'outstanding' => $request->has('outstanding') ? '1' : '0',
             'image' => '',
         ]);
@@ -133,9 +135,10 @@ class ProductController extends Controller
     {
         $this->fixImage($product);
         $lstmanufacturer = Manufacturer::all();
+        $lstcolor = color::all();
         return view(
             'admin.product.edit',
-            ['product' => $product, 'lstmanufacturer' => $lstmanufacturer]
+            compact('product', 'lstmanufacturer', 'lstcolor')
         );
     }
 
@@ -168,6 +171,7 @@ class ProductController extends Controller
             'sale_price' => $sale_price,
             'discount' => $request->input('discount'),
             'id_manufacturer' => $request->get('lstmanufacturer'),
+            'id_color' => $request->get('lstcolor'),
             'outstanding' => $request->has('outstanding') ? '1' : '0',
         ];
         if (request()->hasFile('image')) {
@@ -215,9 +219,8 @@ class ProductController extends Controller
     {
         $lststock = Mapping::where('id_product', $id)->get();
         $lstsize = Size::all();
-        $lstcolor = color::all();
         $id_product = $id;
-        return view('admin.product.stock', compact(['lststock', 'lstsize', 'lstcolor', 'id_product']));
+        return view('admin.product.stock', compact(['lststock', 'lstsize', 'id_product']));
     }
 
     public function insert(Request $request)
@@ -226,7 +229,6 @@ class ProductController extends Controller
         $stock->fill([
             'id_product' => $request->input('idproduct'),
             'id_size' => $request->get('lstsize'),
-            'id_color' => $request->get('lstcolor'),
             'quantity' => $request->input('quantity'),
         ]);
         $stock->save();
@@ -247,7 +249,6 @@ class ProductController extends Controller
         return response()->json([
             'status' => 200,
             'size' => $stock->size->size,
-            'color' => $stock->color->name,
             'quantity' => $stock->quantity,
         ]);
     }
@@ -258,7 +259,6 @@ class ProductController extends Controller
         $stock->fill([
             'id_product' => $request->input('idproduct'),
             'id_size' => $request->get('lstsize'),
-            'id_color' => $request->get('lstcolor'),
             'quantity' => $request->input('quantity'),
         ]);
         $stock->save();

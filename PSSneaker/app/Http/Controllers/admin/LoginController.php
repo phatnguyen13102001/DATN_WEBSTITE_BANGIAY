@@ -5,6 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Setting;
+
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,7 +15,10 @@ class LoginController extends Controller
     // 
     public function index()
     {
-        return view('login.index');
+        $lstsetting = Setting::all();
+        foreach ($lstsetting as $setting) {
+        }
+        return view('login.index', compact('setting'));
     }
     /**
      * Handle an authentication attempt.

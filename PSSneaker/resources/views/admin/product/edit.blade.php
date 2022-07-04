@@ -67,12 +67,19 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group-category row">
-                            <div class="form-group col-xl-12 col-sm-4">
+                            <div class="form-group col-xl-6 col-sm-4">
                                 <label class="d-block" for="lstmanufacturer">Danh mục hãng:</label>
                                 <select class="form-select" aria-label="Default select example" name="lstmanufacturer" id="lstmanufacturer">
-                                    <option value="{{$product->id_manufacturer}}">{{$product->manufacturer->name}}</option>
                                     @foreach($lstmanufacturer as $manufacturer)
-                                    <option value="{{$manufacturer->id}}">{{$manufacturer->name}}</option>
+                                    <option {{ $manufacturer->id == $product->id_manufacturer ? "selected" : "" }} value="{{$manufacturer->id}}">{{$manufacturer->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col-xl-6 col-sm-4">
+                                <label class="d-block" for="lstcolor">Danh mục màu:</label>
+                                <select class="form-select" aria-label="Default select example" name="lstcolor" id="lstcolor">
+                                    @foreach($lstcolor as $color)
+                                    <option {{ $color->id == $product->id_color ? "selected" : "" }} value="{{$color->id}}">{{$color->name}}</option>
                                     @endforeach
                                 </select>
                             </div>

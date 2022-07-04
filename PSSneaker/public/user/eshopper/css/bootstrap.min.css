@@ -4975,8 +4975,8 @@ textarea.input-group-sm>.input-group-btn>.btn {
     z-index: 2;
     color: #fff;
     cursor: default;
-    background-color: #428bca;
-    border-color: #428bca
+    background-color: black;
+    border-color: black
 }
 
 .pagination>.disabled>span,

@@ -6,7 +6,7 @@
             <div class="rowheader">
                 <div class="col-sm-6">
                     <div class="sloganinfo">
-                        <marquee class="slogan" behavior="" direction="">slogan</marquee>
+                        <marquee class="slogan" behavior="" direction="">{{$setting->slogan}}</marquee>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -28,11 +28,11 @@
                 <div class="clearfix">
                     <div class="flex_logo_title">
                         <div class="logo pull-left">
-                            <a href="{{route('indexuser')}}"><img src="{{ asset('user/eshopper/images/home/logodoan.png')}}" alt="" /></a>
+                            <a href="{{route('index')}}"><img src="{{ asset('user/eshopper/images/home/logodoan.png')}}" alt="" /></a>
                         </div>
                         <div class="btn-group  clearfix">
-                            <a class="title_backarrow" href="{{route('indexuser')}}">
-                                <div class="title_header_middle">PS SNEAKEr</div>
+                            <a href="{{route('index')}}">
+                                <img src="{{ asset('user/eshopper/images/home/banner.png')}}" alt="" />
                             </a>
                         </div>
                         <div class="shop-menu clearfix pull-right">
@@ -67,7 +67,7 @@
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="{{route('indexuser')}}" class="active">TRANG CHỦ</a></li>
+                            <li><a href="{{route('index')}}" class="active">TRANG CHỦ</a></li>
                             <li><a href="{{route('gioithieuweb')}}">GIỚI THIỆU</a></li>
                             <li class="dropdown"><a href="{{route('sanphamweb')}}">SẢN PHẨM<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">

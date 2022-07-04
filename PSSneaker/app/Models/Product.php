@@ -13,6 +13,7 @@ class Product extends Model
 
     protected $fillable = [
         'id_manufacturer',
+        'id_color',
         'name',
         'image',
         'SKU',
@@ -25,6 +26,10 @@ class Product extends Model
     public function manufacturer()
     {
         return $this->belongsTo('App\Models\Manufacturer', 'id_manufacturer', 'id');
+    }
+    public function color()
+    {
+        return $this->belongsTo('App\Models\color', 'id_color', 'id');
     }
     public function mapping()
     {

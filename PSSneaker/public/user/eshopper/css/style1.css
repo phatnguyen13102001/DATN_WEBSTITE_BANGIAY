@@ -1244,10 +1244,12 @@ img:not([src]) {
 
 .quantity-pro-detail span.quantity-plus-pro-detail {
     border-left: 0px;
+    background-color: #edebeb;
 }
 
 .quantity-pro-detail span.quantity-minus-pro-detail {
     border-right: 0px;
+    background-color: #edebeb;
 }
 
 .quantity-pro-detail input {

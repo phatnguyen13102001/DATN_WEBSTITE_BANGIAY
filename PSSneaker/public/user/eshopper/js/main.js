@@ -29,6 +29,25 @@ $(document).ready(function() {
             zIndex: 2147483647 // Z-Index for the overlay
         });
     });
+    $('.quantity-plus-pro-detail').click(function (e) {
+            e.preventDefault();
+            var incre_value = $(this).parents('.quantity-pro-detail').find('.qty-pro').val();
+            var value = parseInt(incre_value);
+            value = isNaN(value) ? 0 : value;
+                value++;
+                $(this).parents('.quantity-pro-detail').find('.qty-pro').val(value);
+        });
+
+    $('.quantity-minus-pro-detail').click(function (e) {
+        e.preventDefault();
+        var decre_value = $(this).parents('.quantity-pro-detail').find('.qty-pro').val();
+        var value = parseInt(decre_value, 10);
+        value = isNaN(value) ? 0 : value;
+        if(value>1){
+            value--;
+            $(this).parents('.quantity-pro-detail').find('.qty-pro').val(value);
+        }
+    });
 
 });
 $(document).ready(function() {

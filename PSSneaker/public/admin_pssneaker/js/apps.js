@@ -1036,7 +1036,6 @@ $(document).ready(function () {
 			url: "/admin/product/stock/edit/" + id_update,
 			success: function (data) {
 				$('#id_size').html(data.size);
-				$('#id_color').html(data.color);
 				var soluong = parseInt(data.quantity);
 				$('#quantity').val(soluong);
 			}
