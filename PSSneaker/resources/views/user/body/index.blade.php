@@ -132,17 +132,11 @@
                                   <div class="price-sp">
                                       @if(($product->discount)!=0)
                                       <span>Giá: </span>
-                                      <<<<<<< HEAD <span class="sale_price_sp">{{number_format($product->sale_price)}}</span>
-                                          <span class="regular_price_sp"><del>{{number_format($product->regular_price)}}</del></span>
-                                          @else
-                                          <span class="price-new">{{($product->regular_price)!=0 ? number_format($product->regular_price) : 'Liên Hệ'}}</span>
-                                          =======
-                                          <span class="sale_price_sp">{{number_format($product->sale_price) }}VND</span>
-                                          <span class="regular_price_sp"><del>{{number_format($product->regular_price) }}VND</del></span>
-                                          @else
-                                          <span class="price-new">{{($product->regular_price)!=0 ? $product->regular_price : 'Liên Hệ'}}</span>
-                                          >>>>>>> 4d0c4580c3d0bcbb48adbd7f7cf7e0d9c5ad0df2
-                                          @endif
+                                      <span class="sale_price_sp">{{number_format($product->sale_price)}}₫</span>
+                                      <span class="regular_price_sp"><del>{{number_format($product->regular_price)}}₫</del></span>
+                                      @else
+                                      <span class="price-new">{{($product->regular_price)!=0 ? number_format($product->regular_price) : 'Liên Hệ'}}</span>
+                                      @endif
                                   </div>
                               </a>
                               <div class="box-cart">
@@ -174,8 +168,8 @@
                           <div class="col-sm-4">
                               <div class="product-image-wrapper">
                                   <div class="single-products">
-                                      <div class="productinfo text-center scale-img img_hover">
-                                          <img src="{{$key->image}}" alt="" />
+                                      <div class="productinfo text-center">
+                                          <p class="scale-img img_hover"><img src="{{$key->image}}" alt="{{$key->name}}" /></p>
                                           <div class="title_tintuc">
                                               <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
                                               <div class="title_tintuc_txt_02">Ngày Đăng: {{$key->created_at}}</div>

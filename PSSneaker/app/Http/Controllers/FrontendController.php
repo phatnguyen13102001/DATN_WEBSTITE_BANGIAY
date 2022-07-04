@@ -56,7 +56,7 @@ class FrontendController extends Controller
         foreach ($lstslideshow as $slideshow) {
             $this->fixImage($slideshow);
         }
-        $lstproduct = Product::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->get();
+        $lstproduct = Product::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->paginate(10);
         foreach ($lstproduct as $product) {
             $this->fixImage($product);
         }
@@ -66,6 +66,8 @@ class FrontendController extends Controller
     }
     public function getproductdetail($id)
     {
+        $hangsx = Manufacturer::all();
+        $chinhsach = Policies::all();
         $lstsetting = Setting::all();
         $lstproduct = Product::find($id);
         $lstlibrary = Library::where('id_product', '=', $id)->orWhere('deleted_at', '=', 'NULL')->get();
@@ -78,7 +80,7 @@ class FrontendController extends Controller
         }
         foreach ($lststock as $stock) {
         }
-        return view('user.product_detail.index', compact('lstproduct', 'setting', 'lstlibrary', 'lststock'));
+        return view('user.product_detail.index', compact('lstproduct', 'setting', 'lstlibrary', 'lststock', 'hangsx', 'chinhsach'));
     }
     /**
      * Show the form for creating a new resource.

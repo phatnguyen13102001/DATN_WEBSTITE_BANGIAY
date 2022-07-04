@@ -32,7 +32,7 @@
                         </div>
                         <div class="btn-group  clearfix">
                             <a class="title_backarrow" href="{{route('index')}}">
-                                <div class="title_header_middle">PS SNEAKEr</div>
+                                <img src="{{ asset('user/eshopper/images/home/banner.png')}}" alt="" />
                             </a>
                         </div>
                         <div class="shop-menu clearfix pull-right">
@@ -40,9 +40,7 @@
                                 <p>{{session('user')}}</p>
                                 <li><a href="{{route('thongtincanhanweb')}}"><i class="fa fa-user"></i></a></li>
                                 <li><a id="test1"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-
                                 <li><a href="{{route('dangnhapweb')}}"><i class="fa fa-lock"></i> Login</a></li>
-
                             </ul>
                         </div>
                     </div>

@@ -44,7 +44,7 @@
                                     @else
                                     @endif
                                     <div class="formmoneyproductdetail">
-                                        @if(($lstproduct->discount)!=0)
+                                        @if(($lstproduct->sale_price)!=0)
                                         <span class="moneynew">{{number_format($lstproduct->sale_price)}}₫</span>
                                         <span class="moneyold"><del>{{number_format($lstproduct->regular_price)}}₫</del></span>
                                         @else
