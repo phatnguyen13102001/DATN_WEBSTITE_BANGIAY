@@ -8,11 +8,17 @@ use App\Models\Product;
 use App\Models\Slideshow;
 use App\Models\Mapping;
 use App\Models\Setting;
+use App\Models\User;
+use App\Models\News;
+use App\Models\Size;
+use App\Models\color;
+use App\Models\Policies;
+use App\Models\Manufacturer;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\DB;
+use  Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
@@ -32,20 +38,31 @@ class FrontendController extends Controller
             $slideshow->image = '/admin_pssneaker/images/noimage.png';
         }
     }
+
     public function getindex()
     {
+
+        $locspax = Product::where('outstanding', '1')->orderBy('name', 'ASC')->get();
+        $chinhsach = Policies::all();
+        $mau = color::all();
+        $kichthuoc = Size::all();
+        $hangsx = Manufacturer::all();
         $lstsetting = Setting::all();
-        $lstproduct = Product::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->paginate(9);
         $lstslideshow = Slideshow::where('show', '1')->orWhere('deleted_at', '=', 'NULL')->get();
-        foreach ($lstproduct as $product) {
-            $this->fixImage($product);
+        $lsttintuc = News::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->get();
+        foreach ($lsttintuc as $tintuc) {
+            $this->fixImage($tintuc);
         }
         foreach ($lstslideshow as $slideshow) {
             $this->fixImage($slideshow);
         }
+        $lstproduct = Product::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->get();
+        foreach ($lstproduct as $product) {
+            $this->fixImage($product);
+        }
         foreach ($lstsetting as $setting) {
         }
-        return View::make('user.body.index', compact('lstproduct', 'lstslideshow', 'setting'))->nest('user.layoutuser.header', 'user.body.index', compact('lstslideshow', 'lstproduct', 'setting'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstslideshow', 'lstproduct', 'setting'));
+        return View::make('user.body.index', compact('lstproduct', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
     }
     public function getproductdetail($id)
     {

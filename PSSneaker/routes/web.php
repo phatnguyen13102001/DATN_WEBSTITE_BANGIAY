@@ -99,6 +99,7 @@ Route::middleware('admin')->group(function () {
 
 Route::get('/index', [FrontendController::class, 'getindex'])->name('index');
 Route::get('/productdetail/{id}', [FrontendController::class, 'getproductdetail'])->name('productdetail');
+Route::get('/index/{id}', [FrontendController::class, 'getindex']);
 // 
 Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
 Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
@@ -134,8 +135,6 @@ Route::get('thongtincanhan', function () {
 Route::get('chitietsanpham', function () {
     return view('user.product_detail.index');
 })->name('chitietsanphamweb');
-
-
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');
 })->name('Forgotpassword');
@@ -144,3 +143,4 @@ Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnha
 Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
 Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
 Route::get('email', [LoginController::class, 'email'])->name('mail');
+Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');

@@ -32,6 +32,15 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Robotomedium';
+    src: url('../fonts/transfonter.org-20220422-041142/Roboto-Medium.eot');
+    src: url('../fonts/transfonter.org-20220422-041142/Roboto-Medium.eot?#iefix') format('embedded-opentype'), url('../fonts/transfonter.org-20220422-041142/Roboto-Medium.woff2') format('woff2'), url('../fonts/transfonter.org-20220422-041142/Roboto-Medium.woff') format('woff'), url('../fonts/transfonter.org-20220422-041142/Roboto-Medium.ttf') format('truetype'), url('../fonts/transfonter.org-20220422-041142/Roboto-Medium.svg#Roboto-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
 
 /*  */
 
@@ -650,8 +659,9 @@ a.btn_xemthem_gioithieu:hover {
 
 .title_tintuc_txt_01 {
     color: black;
-    font-size: 17px;
+    font-size: 15px;
     font-family: 'Roboto', sans-serif;
+    font-weight: bold;
 }
 
 .title_tintuc_txt_02 {
@@ -659,7 +669,7 @@ a.btn_xemthem_gioithieu:hover {
 }
 
 .title_tintuc_txt_03 {
-    font-size: 13px;
+    font-size: 12px;
     color: black;
 }
 
@@ -678,15 +688,19 @@ section.wrapsanpham {
     grid-template-columns: repeat(3, 1fr);
     width: 100%;
 }
+
 .grid-item-sp {
+    position: relative;
     box-shadow: 1px 1px 3px 1px #dadada;
     border-radius: 10px;
     border: 3px solid transparent;
-    position: relative;
+    transition: all 0.4s ease 0s;
 }
+
 .info-product {
     margin: 15px;
 }
+
 .discount-sp {
     position: absolute;
     top: 2%;
@@ -721,13 +735,15 @@ section.wrapsanpham {
 }
 
 .box-cart>a:hover {
-    background-color: #e00303;
+    background-color: #47802b;
     color: white;
 }
 
 .img-sp>p {
     border-radius: 10px;
+    border-radius: 10px 10px 0px 0px;
 }
+
 .grid-item-sp:hover {
     border: 3px solid black;
 }
@@ -735,6 +751,7 @@ section.wrapsanpham {
 .price-new {
     color: #e00303;
 }
+
 
 /* dropdown danh muc hang */
 
@@ -876,6 +893,7 @@ p.red {
     display: inline-block;
     margin: 0 10px;
     font-size: 0.85em;
+    color: black;
 }
 
 span.color2 {
@@ -904,7 +922,6 @@ span.color6 {
 }
 
 span.color7 {
-    background: grey;
     padding: 5px 14px;
 }
 
@@ -1092,7 +1109,7 @@ ul.sub-menu {
     position: absolute;
     top: 30px;
     left: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgb(18 17 17);
     list-style: none;
     padding: 0;
     margin: 0;
@@ -3926,6 +3943,7 @@ ul.nav.navbar-nav {
 a {
     text-decoration: none !important;
 }
+
 .row_none {
     display: flex;
     justify-content: center;
@@ -3967,4 +3985,22 @@ a {
     text-align: center;
     font-size: 14px;
     padding: 5px;
+}
+
+p.text-split-1 {
+    font-family: 'Robotomedium';
+    color: black;
+}
+
+.price-sp {
+    font-family: 'Robotomedium';
+    color: black;
+}
+
+i.fa.fa-phone {
+    margin: 5px;
+}
+
+i.fa.fa-envelope {
+    margin: 5px;
 }
