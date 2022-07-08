@@ -42,7 +42,7 @@
                         <td class="align-middle text-center">
                             <p>{{$product->name}}</p>
                             <div class="tool-action mt-2 w-clear">
-                                <a class="text-primary mr-3" href="" target="_blank" title="View"><i class="far fa-eye mr-1"></i>View</a>
+                                <a class="text-primary mr-3" href="{{route('productdetail',$product->id)}}" target="_blank" title="View"><i class="far fa-eye mr-1"></i>View</a>
                                 <a class="text-info mr-3" href="{{route('product.edit',['product'=>$product])}}" title="Chỉnh sửa"><i class="far fa-edit mr-1"></i>Edit</a>
                                 <a class="text-danger deleteBtn" value="{{'$product->id'}}" id="delete-item" title="Xóa"><i class="far fa-trash-alt mr-1"></i>Delete</a>
                             </div>

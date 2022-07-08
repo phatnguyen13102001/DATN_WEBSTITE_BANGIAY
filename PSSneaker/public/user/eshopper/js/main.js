@@ -11,24 +11,7 @@ var RGBChange = function() {
 /*scroll to top*/
 
 $(document).ready(function() {
-    $(function() {
-        $.scrollUp({
-            scrollName: 'scrollUp', // Element ID
-            scrollDistance: 300, // Distance from top/bottom before showing element (px)
-            scrollFrom: 'top', // 'top' or 'bottom'
-            scrollSpeed: 300, // Speed back to top (ms)
-            easingType: 'linear', // Scroll to top easing (see http://easings.net/)
-            animation: 'fade', // Fade, slide, none
-            animationSpeed: 200, // Animation in speed (ms)
-            scrollTrigger: false, // Set a custom triggering element. Can be an HTML string or jQuery object
-            //scrollTarget: false, // Set a custom target element for scrolling to the top
-            scrollText: '<i class="fa fa-angle-up"></i>', // Text for element, can contain HTML
-            scrollTitle: false, // Set a custom <a> title if required.
-            scrollImg: false, // Set true to use image
-            activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
-            zIndex: 2147483647 // Z-Index for the overlay
-        });
-    });
+    /* Quantity */
     $('.quantity-plus-pro-detail').click(function (e) {
             e.preventDefault();
             var incre_value = $(this).parents('.quantity-pro-detail').find('.qty-pro').val();
@@ -49,14 +32,84 @@ $(document).ready(function() {
         }
     });
 
-});
-$(document).ready(function() {
-    $(function() {
-        const slideOutPanel = $('#slide-out-panel').SlideOutPanel({});
-        $('body').on('click', '#test1', () => {
-            slideOutPanel.open();
+    /* Dynamic Address */
+
+    $('#city').change(function() {
+        var cityID = $(this).val();
+            if (cityID) {
+                $.ajax({
+                    type: "get",
+                    url: "getdistrict?id_city=" + cityID,
+                    success: function(res) {
+                        if (res) {
+                            $("#district").empty();
+                            $("#district").append('<option>Quận/huyện</option>');
+                            $.each(res, function(key, value) {
+                                $("#district").append('<option value="' + key + '">' + value +
+                                    '</option>');
+                            });
+                        } else {
+                            $("#district").empty();
+                        }
+                    }
+                });
+            } else {
+                $("#district").empty();
+                $("#ward").empty();
+            }
         });
-    });
+
+        // when state dropdown changes
+        $('#district').on('change', function() {
+            var districtID = $(this).val();
+            if (districtID) {
+                $.ajax({
+                    type: "get",
+                    url: "getward?id_district=" + districtID,
+                    success: function(res) {
+                        if (res) {
+                            $("#ward").empty();
+                            $("#ward").append('<option>Phường/xã</option>');
+                            $.each(res, function(key, value) {
+                                $("#ward").append('<option value="' + key + '">' + value +
+                                    '</option>');
+                            });
+                        } else {
+                            $("#ward").empty();
+                        }
+                    }
+                });
+            } else {
+                $("#ward").empty();
+            }
+        });
+
+        // Delete Item Cart Ajax
+        $('.del-procart').click(function (e) {
+
+        var $removeBtn = $(this);
+        var id = $removeBtn.data('id');
+
+        $.ajax({
+            type: "get",
+            url: "/delete-to-cart/"+id,
+            success: function (data) {
+                location.reload();
+            }               
+        });
+
+        return false;
+        });
+    
+        // Update Item Cart Ajax
+    
+    $(".payments-label").click(function(){
+            var payments = $(this).data("payments");
+            $(".payments-cart .payments-label, .payments-info").removeClass("active");
+            $(this).addClass("active");
+            $(".payments-info-"+payments).addClass("active");
+        });
+
 });
 
 jQuery(document).ready(function($) {

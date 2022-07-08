@@ -47,7 +47,7 @@
                 <div class="dropdown-divider"></div>
                 <a href="" class="dropdown-item"><i class="fas fa-envelope mr-2"></i><span class="badge badge-danger mr-1">0</span> Liên hệ</a>
                 <div class="dropdown-divider"></div>
-                <a href="index.php?com=order&amp;act=man" class="dropdown-item"><i class="fas fa-shopping-bag mr-2"></i><span class="badge badge-danger mr-1">7</span> Đơn hàng</a>
+                <a href="{{route('order.index')}}" class="dropdown-item"><i class="fas fa-shopping-bag mr-2"></i><span class="badge badge-danger mr-1">7</span> Đơn hàng</a>
             </div>
         </li>
         <li class="nav-item">
@@ -61,9 +61,7 @@
             </a>
         </li>
         <li class="nav-item d-sm-inline-block">
-
             <a href="{{route('logout')}}" class="nav-link"><i class="fas fa-sign-out-alt mr-1"></i></a>
-
         </li>
     </ul>
 </nav>

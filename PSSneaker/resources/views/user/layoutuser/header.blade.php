@@ -6,7 +6,7 @@
             <div class="rowheader">
                 <div class="col-sm-6">
                     <div class="sloganinfo">
-                        <marquee class="slogan" behavior="" direction="">{{$setting->slogan}}</marquee>
+                        <marquee class="slogan">{{$setting->slogan}}</marquee>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -27,8 +27,8 @@
             <div class="row">
                 <div class="clearfix">
                     <div class="flex_logo_title">
-                        <div class="logo pull-left">
-                            <a href="{{route('index')}}"><img src="{{ asset('user/eshopper/images/home/logodoan.png')}}" alt="" /></a>
+                        <div class="logo">
+                            <a href="{{route('index')}}"><img src="{{$lstlogo->image}}" alt="" /></a>
                         </div>
                         <div class="btn-group  clearfix">
                             <a class="title_backarrow" href="{{route('index')}}">
@@ -38,9 +38,13 @@
                         <div class="shop-menu clearfix pull-right">
                             <ul class="nav navbar-nav">
                                 <p>{{session('user')}}</p>
-                                <li><a href="{{route('thongtincanhanweb')}}"><i class="fa fa-user"></i></a></li>
-                                <li><a id="test1"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="{{route('dangnhapweb')}}"><i class="fa fa-lock"></i> Login</a></li>
+                                <li><a href="{{route('thongtincanhanweb')}}"><i class="fa fa-user"></i> Account</a></li>
+                                <li><a href="{{Illuminate\Support\Facades\Auth::check() ? route('showcart') : route('dangnhapweb')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                @if(Illuminate\Support\Facades\Auth::check())
+                                <li><a href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                                @else
+                                <li><a href="{{route('dangnhapweb')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -70,14 +74,14 @@
                         <ul class="nav navbar-nav collapse navbar-collapse">
                             <li><a href="{{route('index')}}" class="active">TRANG CHỦ</a></li>
                             <li><a href="{{route('gioithieuweb')}}">GIỚI THIỆU</a></li>
-                            <li class="dropdown"><a href="{{route('sanphamweb')}}">SẢN PHẨM<i class="fa fa-angle-down"></i></a>
+                            <li class="dropdown"><a href="{{route('product')}}">SẢN PHẨM<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
-                                    @foreach($hangsx as $key)
-                                    <li><a href="{{$key->id}}">{{$key->name}}</a></li>
+                                    @foreach($hangsx as $manu)
+                                    <li><a href="{{route('productbymanu',$manu->id)}}">{{$manu->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
-                            <li><a href="{{route('tintucweb')}}">TIN TỨC</a>
+                            <li><a href="{{route('news')}}">TIN TỨC</a>
 
                             </li>
                             <li><a href="{{route('lienheweb')}}">LIÊN HỆ</a></li>

@@ -17,8 +17,11 @@ use App\Http\Controllers\admin\PaymentController;
 use App\Http\Controllers\admin\FacebookController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\OrderAdminController;
 /* Controller FrontEnd */
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +51,7 @@ Route::middleware('admin')->group(function () {
     Route::resource('/admin/policy', PoliciesController::class);
     Route::resource('/admin/social', SocialController::class);
     Route::resource('/admin/product', ProductController::class);
+    Route::resource('/admin/order', OrderAdminController::class);
     Route::get('admin', function () {
         return view('admin.dashboard.index');
     })->name('admin');
@@ -98,8 +102,22 @@ Route::middleware('admin')->group(function () {
 /*Route Handle FrondEnd */
 
 Route::get('/index', [FrontendController::class, 'getindex'])->name('index');
+Route::get('/product', [FrontendController::class, 'getproduct'])->name('product');
+Route::get('/news', [FrontendController::class, 'getnews'])->name('news');
 Route::get('/productdetail/{id}', [FrontendController::class, 'getproductdetail'])->name('productdetail');
+Route::get('/product_by_manufacturer/{id}', [FrontendController::class, 'getproductbymanu'])->name('productbymanu');
+Route::get('/newsdetail/{id}', [FrontendController::class, 'getnewsdetail'])->name('newsdetail');
 Route::get('/index/{id}', [FrontendController::class, 'getindex']);
+
+/* Add To Cart */
+Route::post('/add-to-cart', [CartController::class, 'addtocart'])->name('addtocart');
+Route::get('/show-cart', [CartController::class, 'show_cart'])->name('showcart');
+Route::get('/delete-to-cart/{rowId}', [CartController::class, 'delete_to_cart']);
+Route::get('getdistrict', [CartController::class, 'getDistrict'])->name('getdistrict');
+Route::get('getward', [CartController::class, 'getWard'])->name('getward');
+
+/* Add Order OrderDetail */
+Route::post('/order', [OrderController::class, 'insertOrder'])->name('order');
 // 
 Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
 Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
@@ -111,30 +129,14 @@ Route::get('/auth/callback/{provider}', [FacebookController::class, 'callback'])
 Route::get('gioithieu', function () {
     return view('user.introduce.index');
 })->name('gioithieuweb');
-// tin tuc
-Route::get('tintuc', function () {
-    return view('user.news.index');
-})->name('tintucweb');
-// chi tiet tin tuc
-Route::get('chitiettintuc', function () {
-    return view('user.news_detail.index');
-})->name('chitiettintucweb');
-// lien he
 Route::get('lienhe', function () {
     return view('user.contact.index');
 })->name('lienheweb');
-// sanpham
-Route::get('sanpham', function () {
-    return view('user.product.index');
-})->name('sanphamweb');
 // thong tin ca nhan
 Route::get('thongtincanhan', function () {
     return view('user.account.index');
 })->name('thongtincanhanweb');
-// chi tiet san pham
-Route::get('chitietsanpham', function () {
-    return view('user.product_detail.index');
-})->name('chitietsanphamweb');
+
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');
 })->name('Forgotpassword');
@@ -142,5 +144,6 @@ Route::get('dangnhap', [LoginController::class, 'index'])->name('dangnhapweb');
 Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnhapweb');
 Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
 Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('email', [LoginController::class, 'email'])->name('mail');
 Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');

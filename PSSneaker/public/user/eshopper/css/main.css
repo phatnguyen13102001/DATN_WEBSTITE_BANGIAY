@@ -326,7 +326,9 @@ a#scrollUp i {
     background-color: #000000d1;
 }
 
-
+.logo{
+    width: 160px;
+}
 /* .contactinfo ul li:first-child {
     margin-left: -15px;
 } */
@@ -667,11 +669,12 @@ a.btn_xemthem_gioithieu:hover {
 }
 
 .title_tintuc_txt_02 {
-    font-size: 10px;
+    font-size: 13px;
+    color: #999999;
 }
 
 .title_tintuc_txt_03 {
-    font-size: 12px;
+    font-size: 13px;
     color: black;
 }
 
@@ -688,6 +691,15 @@ section.wrapsanpham {
     grid-gap: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+}
+
+.grid-container-sp-index {
+    padding: 10px 0;
+    margin-bottom: 10px;
+    grid-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     width: 100%;
 }
 
@@ -722,6 +734,12 @@ section.wrapsanpham {
 
 .sale_price_sp {
     color: #e00303;
+    font-size: 17px;
+    margin-right: 5px;
+}
+.regular_price_sp{
+    color: gray;
+    font-size: 14px;
 }
 .box-cart{
     text-align: center;
@@ -2270,22 +2288,36 @@ h2.title {
 
 #form {
     display: block;
-    margin-bottom: 185px;
-    margin-top: 185px;
+    margin-bottom: 70px;
+    margin-top: 70px;
     overflow: hidden;
 }
 
-.login-form {}
+.login-form {
+    background: #ffffff;
+    border: 1px solid #d8d8d8;
+    padding: 10px;
+    box-shadow: 0px 0px 6px 0px #888888;
+    margin: 5px;
+}
 
-.signup-form {}
+.signup-form {
+    background: #ffffff;
+        border: 1px solid #d8d8d8;
+        padding: 10px;
+        box-shadow: 0px 0px 6px 0px #888888;
+        margin: 5px;
+}
 
 .login-form h2,
 .signup-form h2 {
-    color: #696763;
+    color: #000000;
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: 300;
     margin-bottom: 30px;
+    text-align: center;
+    /* font-weight: bold; */
 }
 
 .login-form form input,
@@ -2322,7 +2354,7 @@ h2.title {
 
 .login-form form button,
 .signup-form form button {
-    background: #FE980F;
+    background: black;
     border: medium none;
     border-radius: 0;
     color: #FFFFFF;
@@ -2814,7 +2846,6 @@ textarea {
 **************************/
 
 .blog-post-area .single-blog-post h3 {
-    color: #696763;
     font-size: 16px;
     font-family: 'Roboto', sans-serif;
     text-transform: uppercase;
@@ -2822,16 +2853,21 @@ textarea {
     margin-bottom: 17px;
 }
 
-.single-blog-post>a {}
-
 .blog-post-area .single-blog-post a img {
     border: 1px solid #F7F7F0;
-    width: 100%;
+    width: 300px;
     margin-bottom: 30px
 }
 
 .blog-post-area .single-blog-post p {
-    color: #363432
+    margin-bottom: 5px;
+}
+.describe_news {
+    font-size: 13px;
+}
+.created_at_news{
+    font-size: 13px;
+    color: rgb(150, 150, 150);
 }
 
 .blog-post-area .post-meta {
@@ -2855,66 +2891,20 @@ textarea {
     position: relative;
 }
 
-.blog-post-area .post-meta ul li i {
-    background: #FE980F;
-    color: #FFFFFF;
-    margin-left: -4px;
-    margin-right: 7px;
-    padding: 4px 7px;
-}
 
-.sinlge-post-meta li i:after,
-.blog-post-area .post-meta ul li i:after {
-    content: "";
-    position: absolute;
-    width: auto;
-    height: auto;
-    border-color: transparent transparent transparent #FE980F;
-    border-width: 4px;
-    border-style: solid;
-    top: 6px;
-    left: 24px
-}
-
-.blog-post-area .post-meta ul span {
-    float: right;
-    color: #FE980F
-}
-
-.post-meta span {
-    float: right;
-}
-
-.post-meta span i {
-    color: #FE980F
-}
 
 .blog-post-area .single-blog-post .btn-primary {
-    background: #FE980F;
+    background: black;
+    font-size: 12px;
     border: medium none;
     border-radius: 0;
-    color: #FFFFFF;
+    color: white;
+    text-transform: uppercase;
     margin-top: 17px;
 }
 
-.pagination-area {
-    margin-bottom: 45px;
-    margin-top: 45px
-}
-
-.pagination-area .pagination li a {
-    background: #F0F0E9;
-    border: 0 none;
-    border-radius: 0;
-    color: #696763;
-    margin-right: 5px;
-    padding: 4px 12px;
-}
-
-.pagination-area .pagination li a:hover,
-.pagination-area .pagination li .active {
-    background: #FE980F;
-    color: #fff
+.blog-post-area .single-blog-post .btn-primary:hover{
+    background-color:rgb(217, 0, 0);
 }
 
 
@@ -2922,295 +2912,12 @@ textarea {
 *******Blog Single CSS******
 **************************/
 
-.pager-area {
-    overflow: hidden;
+.content_news{
+    margin-bottom: 50px;
 }
-
-.pager-area .pager li a {
-    background: #F0F0E9;
-    border: 0 none;
-    border-radius: 0;
-    color: #696763;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 4px;
-    text-transform: uppercase;
-    width: 57px;
-}
-
-.pager-area .pager li a:hover {
-    background: #FE980F;
-    color: #fff
-}
-
-.rating-area {
-    border: 1px solid #F7F7F0;
-    direction: block;
-    overflow: hidden;
-}
-
-.rating-area ul li {
-    float: left;
-    padding: 5px;
-    font-size: 12px
-}
-
-.rating-area .ratings {
-    float: left;
-    padding-left: 0;
-    margin-bottom: 0
-}
-
-.rating-area .ratings li i {
-    color: #CCCCCC
-}
-
-.rating-area .rate-this {
-    color: #363432;
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.rating-area .ratings .color,
-.rating-area .color {
-    color: #FE980F
-}
-
-.rating-area .tag {
-    float: right;
-    margin-bottom: 0;
-    margin-right: 10px;
-}
-
-.rating-area .tag li {
-    padding: 5px 2px;
-}
-
-.rating-area .tag li span {
-    color: #363432;
-}
-
-.socials-share {
-    margin-bottom: 30px;
-    margin-top: 18px;
-}
-
-.commnets .media-object {
-    margin-right: 15px;
-    width: 100%;
-}
-
-.commnets {
-    border: 1px solid #F7F7F0;
-    padding: 18px 18px 18px 0;
-    margin-bottom: 50px
-}
-
-.commnets .pull-left {
-    margin-right: 22px
-}
-
-.commnets p,
-.response-area p,
-.replay-box p {
-    font-size: 12px
-}
-
-.media-heading {
-    color: #363432;
-    font-size: 14px;
-    font-weight: 700;
-    font-family: 'Roboto', sans-serif;
-    margin-bottom: 15px
-}
-
-.blog-socials {
-    margin-bottom: -9px;
-    margin-top: 14px;
-}
-
-.blog-socials ul {
-    padding-left: 0;
-    overflow: hidden;
-    float: left;
-}
-
-.blog-socials .btn.btn-primary {
-    margin-top: 0;
-}
-
-.blog-socials ul li {
-    float: left;
-    height: 17px;
-    margin-right: 5px;
-    text-align: center;
-    width: 17px;
-}
-
-.blog-socials ul li a {
-    color: #393B3B;
-    display: block;
-    font-size: 10px;
-    padding: 1px;
-    background: #F0F0E9;
-}
-
-.blog-socials ul li a:hover {
-    color: #fff;
-    background: #FE980F
-}
-
-.media-list .btn-primary,
-.commnets .btn-primary {
-    background: #FC9A11;
-    border: 0 none;
-    border-radius: 0;
-    color: #FFFFFF;
-    float: left;
-    font-size: 10px;
-    padding: 1px 7px;
-    text-transform: uppercase;
-}
-
-.response-area h2 {
-    color: #363432;
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.response-area .media {
-    border: 1px solid #F7F7F0;
-    padding: 18px 18px 18px 0;
-    margin-bottom: 27px
-}
-
-.response-area .media img {
-    height: 102px;
-    width: 100%;
-}
-
-.response-area .media .pull-left {
-    margin-right: 25px
-}
-
-.response-area .second-media {
-    margin-left: 5%;
-    width: 95%;
-}
-
-.sinlge-post-meta {
-    overflow: hidden;
-    padding-left: 0;
-    margin-bottom: 15px
-}
-
-.sinlge-post-meta li {
-    background: #F0F0E9;
-    color: #363432;
-    float: left;
-    font-size: 10px;
-    font-weight: 700;
-    margin-right: 10px;
-    padding: 0 10px 0 0;
-    position: relative;
-    text-transform: uppercase;
-}
-
-.sinlge-post-meta li i {
-    background: #FE980F;
-    color: #FFFFFF;
-    margin-right: 10px;
-    padding: 8px 10px;
-}
-
-.sinlge-post-meta li i:after {
-    top: 7px;
-    border-width: 6px;
-    left: 27px;
-}
-
-.replay-box {
-    margin-bottom: 107px;
-    margin-top: 55px;
-}
-
-.replay-box h2 {
-    font-weight: 700;
-    font-size: 20px;
-    color: #363432;
-    margin-top: 0;
-    margin-bottom: 45px
-}
-
-.replay-box label {
-    background: #FE980F;
-    color: #FFFFFF;
-    margin-bottom: 15px;
-    padding: 3px 15px;
-    float: left;
-    font-weight: 400;
-}
-
-.replay-box span {
-    color: #FE980F;
-    float: right;
-    font-weight: 700;
-    margin-top: 21px;
-}
-
-.replay-box form input {
-    border: 1px solid #F7F7F0;
-    color: #ADB2B2;
-    font-size: 12px;
-    margin-bottom: 22px;
-    padding: 8px;
-    width: 100%;
-}
-
-.replay-box form input:hover,
-.text-area textarea:hover {
-    border: 1px solid #FE980F;
-}
-
-.text-area {
-    margin-top: 66px
-}
-
-.text-area textarea {
-    background: transparent;
-    border: 1px solid#F7F7F0
-}
-
-.btn.btn-primary {
-    background: #FE980F;
-    border: 0 none;
-    border-radius: 0;
-    margin-top: 16px;
-}
-
-.btn.btn-primary1 {
-    color: white;
-    background: #000000ad;
-    border: 0 none;
-    border-radius: 0;
-    margin-top: 16px;
-}
-
-.blank-arrow {
-    position: relative;
-}
-
-.blank-arrow label:after {
-    content: "";
-    position: absolute;
-    width: auto;
-    height: auto;
-    border-style: solid;
-    border-width: 8px;
-    border-color: #FE980F transparent transparent transparent;
-    top: 25px;
-    left: 5px
+.time-main {
+    margin-bottom: 0.75rem;
+    color: #999999;
 }
 
 
@@ -3852,10 +3559,6 @@ p.title_inf_account span {
     display: inline-block;
     margin-right: 8px;
     vertical-align: 2px;
-}
-
-form.form-cart.validation-cart {
-    margin: 10px 0;
 }
 
 

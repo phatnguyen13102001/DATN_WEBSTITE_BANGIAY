@@ -6,23 +6,35 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Setting;
+use App\Models\Logo;
 use App\Models\Policies;
 use App\Models\Manufacturer;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Storage;
 
 class LoginController extends Controller
 {
+    protected function fixImage($logo)
+    {
+        if (Storage::disk('public')->exists($logo->image)) {
+            $logo->image = Storage::url($logo->image);
+        } else {
+            $logo->image = '/admin_pssneaker/images/noimage.png';
+        }
+    }
     // 
     public function index()
     {
+        $lstlogo = Logo::first();
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
         $lstsetting = Setting::all();
         foreach ($lstsetting as $setting) {
         }
-        return View::make('login.index', compact('setting', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.index', compact('setting', 'hangsx', 'chinhsach'));
+        $this->fixImage($lstlogo);
+        return View::make('login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'));
     }
     /**
      * Handle an authentication attempt.
@@ -66,12 +78,14 @@ class LoginController extends Controller
     }
     public function showFormRegister()
     {
+        $lstlogo = Logo::first();
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
         $lstsetting = Setting::all();
         foreach ($lstsetting as $setting) {
         }
-        return View::make('login.register', compact('setting', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.register', compact('setting', 'hangsx', 'chinhsach'));
+        $this->fixImage($lstlogo);
+        return View::make('login.register', compact('setting', 'hangsx', 'lstlogo', 'chinhsach'))->nest('user.layoutuser.footer', 'login.register', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'));
     }
     public function Register(Request $request)
     {

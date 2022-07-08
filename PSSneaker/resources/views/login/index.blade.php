@@ -7,7 +7,7 @@
             <div class="col-sm-4 col-sm-offset-1">
                 <div class="login-form">
                     <!--login form-->
-                    <h2>Đăng nhập</h2>
+                    <h2>Đăng Nhập</h2>
                     <form method="post" action="{{route('dangnhapweb')}}">
                         @csrf
                         <input type="email" name="email" placeholder="Nhập Email" />
@@ -22,7 +22,7 @@
                             {{$errors->first('password')}}
                         </div>
                         @endif
-                        <button type="submit" class="btn btn-default">Login</button>
+                        <button type="submit" class="btn btn-default">Đăng Nhập</button>
                         <div class="title_login_quenml">
                             <a href="{{url('http://localhost:8000/api/sendPasswordResetLink')}}">Quên mật khẩu</a>
                         </div>
@@ -47,12 +47,12 @@
                                     </button>
                                 </a>
                                 <a href="{{url('/google')}}">
-                                <button class="btn-ptdn">
-                                    <div class="icon_btn_ptdn">
-                                        <div class="png_ptgg"></div>
-                                    </div>
-                                    <div class="txt_ptdn">Google</div>
-                                </button>
+                                    <button class="btn-ptdn">
+                                        <div class="icon_btn_ptdn">
+                                            <div class="png_ptgg"></div>
+                                        </div>
+                                        <div class="txt_ptdn">Google</div>
+                                    </button>
                                 </a>
                             </div>
                         </div>

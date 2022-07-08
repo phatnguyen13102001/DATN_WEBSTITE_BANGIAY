@@ -30,7 +30,7 @@
                       <!-- ./col -->
                       <div class="col-lg-3 col-6">
                           <!-- small box -->
-                          <a class="my-info-box info-box" href="#" title="Tài khoản">
+                          <a class="my-info-box info-box" href="{{route('information.index')}}" title="Tài khoản">
                               <span class="my-info-box-icon info-box-icon bg-danger"><i class="fas fa-user-cog"></i></span>
                               <div class="info-box-content text-dark">
                                   <span class="info-box-text text-capitalize">Tài khoản</span>

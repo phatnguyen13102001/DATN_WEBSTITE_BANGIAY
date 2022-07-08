@@ -93,7 +93,6 @@
                       <!--/category-products-->
                   </div>
               </div>
-
               <div class="col-sm-9 padding-right">
                   <h2 class="title text-center">SẢN PHẨM</h2>
                   <form id="form_order" action="" method="get">
@@ -106,7 +105,6 @@
                           <option value="6">Mới nhất</option>
                           <option value="7">Bán chạy nhất</option>
                       </select>
-
                   </form>
                   <div class="grid-container-sp">
                       @foreach($lstproduct as $product)
@@ -135,7 +133,8 @@
                                       <span class="sale_price_sp">{{number_format($product->sale_price)}}₫</span>
                                       <span class="regular_price_sp"><del>{{number_format($product->regular_price)}}₫</del></span>
                                       @else
-                                      <span class="price-new">{{($product->regular_price)!=0 ? number_format($product->regular_price) : 'Liên Hệ'}}</span>
+                                      <span>Giá: </span>
+                                      <span class="price-new">{{($product->regular_price)!=0 ? number_format($product->regular_price) : 'Liên Hệ'}}{{($product->regular_price)!=0 ? '₫' : ''}}</span>
                                       @endif
                                   </div>
                               </a>
@@ -165,20 +164,22 @@
                   <div class="carousel-inner">
                       <div class="item active">
                           @foreach($lsttintuc as $key)
-                          <div class="col-sm-4">
-                              <div class="product-image-wrapper">
-                                  <div class="single-products">
-                                      <div class="productinfo text-center">
-                                          <p class="scale-img img_hover"><img src="{{$key->image}}" alt="{{$key->name}}" /></p>
-                                          <div class="title_tintuc">
-                                              <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
-                                              <div class="title_tintuc_txt_02">Ngày Đăng: {{$key->created_at}}</div>
-                                              <div class="title_tintuc_txt_03 text-split-2">{{$key->describe}}</div>
+                          <a href="{{route('newsdetail',$key->id)}}">
+                              <div class="col-sm-4">
+                                  <div class="product-image-wrapper">
+                                      <div class="single-products">
+                                          <div class="productinfo text-center">
+                                              <p class="scale-img img_hover"><img src="{{$key->image}}" alt="{{$key->name}}" /></p>
+                                              <div class="title_tintuc">
+                                                  <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
+                                                  <div class="title_tintuc_txt_02">Ngày Đăng: {{$key->created_at}}</div>
+                                                  <div class="title_tintuc_txt_03 text-split-2">{{$key->describe}}</div>
+                                              </div>
                                           </div>
                                       </div>
                                   </div>
                               </div>
-                          </div>
+                          </a>
                           @endforeach
                       </div>
                       <!-- <div class="item">

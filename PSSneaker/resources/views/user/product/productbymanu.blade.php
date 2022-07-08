@@ -5,7 +5,6 @@
         <img src="images/shop/advertisement.jpg" alt="" />
     </div>
 </section>
-
 <section>
     <div class="container">
         <div class="row">
@@ -14,7 +13,7 @@
                 <div class="features_items">
                     <!--features_items-->
                     <div class="grid-container-sp-index">
-                        @foreach($lstproduct as $product)
+                        @foreach($lstproductbymanu as $product)
                         <div class="grid-item-sp">
                             <a href="{{route('productdetail',$product->id)}}" title="{{$product->name}}">
                                 <div class="img-sp">

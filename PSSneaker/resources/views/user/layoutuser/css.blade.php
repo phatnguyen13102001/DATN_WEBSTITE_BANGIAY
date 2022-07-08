@@ -8,8 +8,4 @@
 <link href="{{ asset('user/eshopper/css/cart.css')}}" rel="stylesheet">
 <link href="{{ asset('user/eshopper/css/etalage.css')}}" rel="stylesheet">
 <link href="{{ asset('user/eshopper/css/style1.css')}}" rel="stylesheet">
-<link href="{{ asset('user/eshopper/dist/css/slide-out-panel.css')}}" rel="stylesheet">
 <link href="{{ asset('user/eshopper/bootstrap/bootstrap1.css')}}" rel="stylesheet">
-<!--  -->
-<link href="{{ asset('user/eshopper/dist/css/slide-out-panel.css')}}" rel="stylesheet">
-<link href="{{ asset('user/eshopper/dist/css/slide-out-panel.min.css')}}" rel="stylesheet">

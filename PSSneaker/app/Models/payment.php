@@ -15,4 +15,8 @@ class payment extends Model
         'describe',
         'show'
     ];
+    public function order()
+    {
+        return $this->hasMany('App\Models\Order', 'id_payment', 'id');
+    }
 }

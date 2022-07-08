@@ -42,7 +42,7 @@
                         <td class="align-middle text-center">
                             <a class="text-dark text-break" href="" title="title">{{$news->name}}</a>
                             <div class="tool-action mt-2 w-clear">
-                                <a class="text-primary mr-3" href="" target="_blank" title=""><i class="far fa-eye mr-1"></i>View</a>
+                                <a class="text-primary mr-3" href="{{route('newsdetail',$news->id)}}" target="_blank" title=""><i class="far fa-eye mr-1"></i>View</a>
                                 <a class="text-info mr-3" href="{{route('news.edit',['news'=>$news])}}" title=""><i class="far fa-edit mr-1"></i>Edit</a>
                                 <button class="text-danger deleteBtn border-0 bg-transparent" type="button" value="{{$news->id}}"><i class="far fa-trash-alt mr-1"></i>Delete</button>
                             </div>

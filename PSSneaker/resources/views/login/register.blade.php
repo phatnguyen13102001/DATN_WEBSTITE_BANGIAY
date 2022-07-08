@@ -7,7 +7,7 @@
             <div class="col-sm-4">
                 <div class="signup-form">
                     <!--sign up form-->
-                    <h2>Đăng kí</h2>
+                    <h2>Đăng Kí</h2>
                     <form method="post" action="{{route('dangkiweb')}}" enctype="multipart/form-data">
                         @csrf
                         <input type="text" name="name" placeholder="Họ và tên" />
@@ -40,7 +40,7 @@
                             {{$errors->first('password')}}
                         </div>
                         @endif
-                        <button type="submit" class="btn btn-default">Đăng kí</button>
+                        <button type="submit" class="btn btn-default">Đăng Kí</button>
                     </form>
                 </div>
                 <!--/sign up form-->

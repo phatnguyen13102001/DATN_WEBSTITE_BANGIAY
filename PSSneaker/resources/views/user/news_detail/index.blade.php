@@ -1,39 +1,37 @@
 @extends('user.index')
 @section('content')
-
 <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="bg">
-                        <h2 class="title text-center">Girls Pink T Shirt arrived in store</h2>
-                    </div>
-                    <div class="blog-post-area">
-
-                        <div class="single-blog-post">
-
-                            <a href="">
-                                <img src="images/blog/blog-one.jpg" alt="">
-                            </a>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                                in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> <br>
-
-                            <p>
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
-                                inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p> <br>
-
-                            <p>
-                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p> <br>
-
-                            <p>
-                                Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                            </p>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="bg">
+                    <h2 class="title text-center">{{$lstnews->name}}</h2>
+                </div>
+                <div class="time-main"><i class="fas fa-calendar-week"></i><span>{{$lstnews->created_at}}</span></div>
+                @if(($lstnews->content)===NULL)
+                <div class="alert alert-warning w-100" role="alert">
+                    <p>Nội dung đang cập nhật</p>
+                </div>
+                @else
+                <div class="blog-post-area">
+                    <div class="single-blog-post">
+                        <div class="content_news">
+                            {!! htmlspecialchars_decode(nl2br($lstnews->content)) !!}
                         </div>
                     </div>
                 </div>
+                @endif
+                <div class="share othernews mb-3">
+                    <b>Bài viết khác:</b>
+                    <ul class="list-news-other">
+                        @foreach($lstnewssame as $newssame)
+                        <li><a class="text-decoration-none" href="{{route('newsdetail',$newssame->id)}}" title="{{$newssame->name}}">{{$newssame->name}} || {{$newssame->created_at}}</a></li>
+                        @endforeach
+                    </ul>
+                    <div class="pagination-home w-100"></div>
+                </div>
             </div>
         </div>
-    </section>
-    @endsection
+    </div>
+</section>
+@endsection

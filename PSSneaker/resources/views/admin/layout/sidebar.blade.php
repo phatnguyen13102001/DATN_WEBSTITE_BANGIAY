@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a class="brand-link" href="index.php">
+    <a class="brand-link" href="{{route('admin')}}">
         <img class="brand-image" src="{{asset('admin_pssneaker/images/LogoShoes.png')}}" alt="PSSneaker">
     </a>
 
@@ -136,7 +136,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link {{ (request()->is('admin/order')) ? 'active' : '' }}">
+                    <a href="{{route('order.index')}}" class="nav-link {{ (request()->is('admin/order')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-shopping-bag"></i>
                         <p>
                             Quản lý đơn hàng
