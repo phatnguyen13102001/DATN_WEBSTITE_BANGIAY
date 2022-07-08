@@ -14,12 +14,9 @@ use App\Models\Size;
 use App\Models\color;
 use App\Models\Policies;
 use App\Models\Manufacturer;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\About;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-use  Illuminate\Support\Facades\Session;
-
 class FrontendController extends Controller
 {
     protected function fixImage($product)
@@ -38,10 +35,8 @@ class FrontendController extends Controller
             $slideshow->image = '/admin_pssneaker/images/noimage.png';
         }
     }
-
     public function getindex()
     {
-
         $locspax = Product::where('outstanding', '1')->orderBy('name', 'ASC')->get();
         $chinhsach = Policies::all();
         $mau = color::all();
@@ -50,13 +45,13 @@ class FrontendController extends Controller
         $lstsetting = Setting::all();
         $lstslideshow = Slideshow::where('show', '1')->orWhere('deleted_at', '=', 'NULL')->get();
         $lsttintuc = News::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->get();
+        $lstproduct = Product::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->paginate(10);
         foreach ($lsttintuc as $tintuc) {
             $this->fixImage($tintuc);
         }
         foreach ($lstslideshow as $slideshow) {
             $this->fixImage($slideshow);
         }
-        $lstproduct = Product::where('outstanding', '1')->orWhere('deleted_at', '=', 'NULL')->paginate(10);
         foreach ($lstproduct as $product) {
             $this->fixImage($product);
         }
@@ -64,7 +59,7 @@ class FrontendController extends Controller
         }
         return View::make('user.body.index', compact('lstproduct', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
     }
-    public function getproductdetail($id)
+        public function getproductdetail($id)
     {
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -82,69 +77,44 @@ class FrontendController extends Controller
         }
         return view('user.product_detail.index', compact('lstproduct', 'setting', 'lstlibrary', 'lststock', 'hangsx', 'chinhsach'));
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function getabout(){
+        $gioithieus= About::all();
+        $hangsx = Manufacturer::all();
+        $chinhsach = Policies::all();
+        $lstsetting = Setting::all();
+        foreach($gioithieus as $gioithieu){
+        }
+        foreach($lstsetting as $setting){
+        }
+        return view('user.introduce.index', compact('gioithieu','setting','hangsx','chinhsach'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function sapxephang($id){
+        $hangsxid = Manufacturer::find($id);
+        $chinhsach = Policies::all();
+        $lstsetting = Setting::all();
+        $lstproduct = Product::where('id','=',$hangsxid);
+      
+        $this->fixImage($lstproduct);
+        return view('user.body.index', compact('lstproduct', 'setting','hangsx', 'chinhsach'));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function getpolicesdetail($id)
     {
-        //
+        $hangsx = Manufacturer::all();
+        $chinhsach= Policies::all();
+        $listchinhsach = Policies::find($id);
+        $lstsetting = Setting::all();
+        foreach($lstsetting as $setting){
+        }
+        return View::make('user.policies.index', compact('hangsx','listchinhsach','setting','chinhsach'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    // 
+    public function getprofile($id){
+        $chinhsach= Policies::all();
+        $hangsx = Manufacturer::all();
+        $taikhoan= User::find($id);
+        $lstsetting = Setting::all();
+        foreach($lstsetting as $setting){
+        }
+        return View::make('user.account.index', compact('taikhoan','setting','hangsx','chinhsach'));
     }
 }

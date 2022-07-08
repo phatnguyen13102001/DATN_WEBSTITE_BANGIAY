@@ -5,9 +5,9 @@
             <div class="bg">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 class="title text-center">{{$gioithieu->title}}</h2>
+                        <h2 class="title text-center">{{$listchinhsach->name}}</h2>
                         <div class="content_wrapgioithieu">
-                            {!! htmlspecialchars_decode(nl2br($gioithieu->content)) !!}
+                        {!! htmlspecialchars_decode(nl2br($listchinhsach->content)) !!}
                         </div>
                     </div>
                 </div>

@@ -20,8 +20,8 @@
                     <div class="single-widget">
                         <h2>Chính sách</h2>
                         <ul class="nav nav-pills nav-stacked">
-                            @foreach($chinhsach as $key)
-                            <li><a href="{{$key->id}}">{{$key->name}}</a></li>
+                            @foreach($chinhsach as $cs)
+                            <li><a href="{{route('chinhsach',$cs->id)}}">{{$cs->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>

@@ -66,21 +66,20 @@ class AccountController extends Controller
 
         $validatedData = $request->validate(
             [
+                'email' => 'required|email|unique:colors,name,NULL,id,deleted_at,NULL',
                 'name' => 'required',
-                'email' => 'required|unique:users|email',
-                'password' => 'required',
                 'phone' => 'required',
-                'address' => 'required',
-
+                'gender' => 'required',
+                'birthday' => 'required',
             ],
             [
-                'name.required' => 'Họ Tên Không Được Bỏ Trống',
                 'email.required' => 'Email Không Được Bỏ Trống',
+                'email.unique' => 'Email Đã Được Sử Dụng',
                 'email.email' => 'Email Không Đúng Định Dạng',
-                'email.unique' => 'Email Đã Tồn Tại',
-                'password.required' => 'Mật Khẩu Không Được Bỏ Trống',
-                'phone.required' => 'Số Điện Thoại Không Được Bỏ Trống',
-                'address.required' => 'Địa chỉ Không Được Bỏ Trống',
+                'name.required' => 'Tên Không Được Bỏ Trống',
+                'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
+                'gender.required' => 'Giới tính Không Được Bỏ Trống',
+                'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
             ]
         );
 
@@ -88,6 +87,9 @@ class AccountController extends Controller
         $user->fill([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'gender' => $request->input('gender'),
+            'birthday' => $request->input('birthday'),
             'password' => bcrypt($request->input('password')),
             'phone' => $request->input('phone'),
             'address' => $request->input('address'),

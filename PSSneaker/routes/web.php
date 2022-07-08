@@ -32,7 +32,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::middleware('admin')->group(function () {
     Route::resource('/admin/account', AccountController::class);
     Route::resource('/admin/information', AdminController::class);
@@ -96,22 +95,19 @@ Route::middleware('admin')->group(function () {
     })->name('giohangweb');
 });
 /*Route Handle FrondEnd */
-
+Route::get('/gioithieu', [FrontendController::class, 'getabout'])->name('gioithieuweb');
 Route::get('/index', [FrontendController::class, 'getindex'])->name('index');
 Route::get('/productdetail/{id}', [FrontendController::class, 'getproductdetail'])->name('productdetail');
 Route::get('/index/{id}', [FrontendController::class, 'getindex']);
+Route::get('/chinhsach/{id}', [FrontendController::class,'getpolicesdetail'])->name('chinhsach');
+Route::get('/thongtincanhan/{id}', [FrontendController::class,'getprofile'])->name('thongtincanhanweb');
 // 
+
 Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
-Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
+Route::get('google/callback','App\Http\Controllers\GoogleController@handleGoogleCallback');
 Route::get('/auth/redirect/{provider}', [FacebookController::class, 'redirect']);
 Route::get('/auth/callback/{provider}', [FacebookController::class, 'callback']);
-
-
 /*user*/
-Route::get('gioithieu', function () {
-    return view('user.introduce.index');
-})->name('gioithieuweb');
-// tin tuc
 Route::get('tintuc', function () {
     return view('user.news.index');
 })->name('tintucweb');
@@ -127,10 +123,6 @@ Route::get('lienhe', function () {
 Route::get('sanpham', function () {
     return view('user.product.index');
 })->name('sanphamweb');
-// thong tin ca nhan
-Route::get('thongtincanhan', function () {
-    return view('user.account.index');
-})->name('thongtincanhanweb');
 // chi tiet san pham
 Route::get('chitietsanpham', function () {
     return view('user.product_detail.index');
@@ -138,9 +130,12 @@ Route::get('chitietsanpham', function () {
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');
 })->name('Forgotpassword');
+// tin tuc
 Route::get('dangnhap', [LoginController::class, 'index'])->name('dangnhapweb');
 Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnhapweb');
 Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
 Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
 Route::get('email', [LoginController::class, 'email'])->name('mail');
 Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');
+Route::get('edit/thongtincanhan', [LoginController::class, 'editprofile'])->name('chinhsuatthongtin');
+Route::post('edit/thongtincanhan', [LoginController::class,'Updateprofile'])->name('capnhatthongtin');

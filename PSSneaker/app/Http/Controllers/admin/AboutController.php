@@ -25,6 +25,7 @@ class AboutController extends Controller
      */
     public function index()
     {
+        
         $lstAbout = About::all();
         foreach ($lstAbout as $about) {
             $this->fixImage($about);
