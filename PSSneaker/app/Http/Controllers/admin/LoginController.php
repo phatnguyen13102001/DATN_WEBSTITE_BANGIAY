@@ -16,12 +16,20 @@ use Illuminate\Support\Facades\Storage;
 
 class LoginController extends Controller
 {
-    protected function fixImage($logo)
+    protected function fixImagelogo($logo)
     {
         if (Storage::disk('public')->exists($logo->image)) {
             $logo->image = Storage::url($logo->image);
         } else {
             $logo->image = '/admin_pssneaker/images/noimage.png';
+        }
+    }
+    protected function fixImage(User $user)
+    {
+        if (Storage::disk('public')->exists($user->avatar)) {
+            $user->avatar = Storage::url($user->avatar);
+        } else {
+            $user->avatar = '/Images/NoImage.jpg';
         }
     }
     // 
@@ -33,7 +41,7 @@ class LoginController extends Controller
         $lstsetting = Setting::all();
         foreach ($lstsetting as $setting) {
         }
-        $this->fixImage($lstlogo);
+        $this->fixImagelogo($lstlogo);
         return View::make('login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'));
     }
     /**
@@ -74,6 +82,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('dangnhap');
     }
     public function showFormRegister()
@@ -84,7 +94,7 @@ class LoginController extends Controller
         $lstsetting = Setting::all();
         foreach ($lstsetting as $setting) {
         }
-        $this->fixImage($lstlogo);
+        $this->fixImagelogo($lstlogo);
         return View::make('login.register', compact('setting', 'hangsx', 'lstlogo', 'chinhsach'))->nest('user.layoutuser.footer', 'login.register', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'));
     }
     public function Register(Request $request)
@@ -93,24 +103,37 @@ class LoginController extends Controller
             [
                 'email' => 'required|email|unique:colors,name,NULL,id,deleted_at,NULL',
                 'name' => 'required',
+                'phone' => 'required',
+                'gender' => 'required',
+                'birthday' => 'required',
             ],
             [
                 'email.required' => 'Email Không Được Bỏ Trống',
                 'email.unique' => 'Email Đã Được Sử Dụng',
                 'email.email' => 'Email Không Đúng Định Dạng',
                 'name.required' => 'Tên Không Được Bỏ Trống',
-
+                'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
+                'gender.required' => 'Giới tính Không Được Bỏ Trống',
+                'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
             ]
         );
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->gender = $request->gender;
+        $user->birthday = $request->birthday;
+        $user->avatar = '';
         $user->address = $request->address;
         $user->password = bcrypt($request->password);
         $user->permission = '0';
+
         $user->save();
-        return redirect()->route('dangnhapweb', compact(['lstsetting', 'lstmanufacturer']))->with('Đăng kí thành công');
+        if ($request->hasFile('avatar')) {
+            $user->avatar = $request->file('avatar')->store('images/user/', 'public');
+        }
+        $user->save();
+        return redirect()->route('dangnhapweb')->with('Đăng kí thành công');
     }
     public function email()
     {
@@ -136,6 +159,37 @@ class LoginController extends Controller
             }
         } else {
             echo "email not exsỉt";
+        }
+    }
+    public function editprofile()
+    {
+        return view('user.account.index')->with('user', auth()->user());
+    }
+    public function Updateprofile(Request $request, User $user)
+    {
+        $validatedData = $request->validate(
+            [
+                'name' => 'required',
+                'phone' => 'required',
+                'birthday' => 'required',
+            ],
+            [
+                'name.required' => 'Tên Không Được Bỏ Trống',
+                'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
+                'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
+            ]
+        );
+        $user = User::find(Auth::user()->id);
+        if ($user) {
+            $user->name = $request['name'];
+            $user->phone = $request['phone'];
+            $user->birthday = $request['birthday'];
+            $user->address = $request['address'];
+            $user->save();
+            $request->session()->flash('success', 'cập nhật thành công');
+            return redirect()->back();
+        } else {
+            return redirect()->back();
         }
     }
 }

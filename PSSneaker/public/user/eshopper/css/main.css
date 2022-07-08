@@ -534,7 +534,8 @@ input[type="text"] {
     text-indent: 10px;
     font-size: 12px;
 }
-.fa-search{
+
+.fa-search {
     margin-top: 10px;
 }
 
@@ -741,9 +742,11 @@ section.wrapsanpham {
     color: gray;
     font-size: 14px;
 }
-.box-cart{
+
+.box-cart {
     text-align: center;
 }
+
 .box-cart>a {
     background-color: black;
     padding: 7px 20px;
@@ -958,7 +961,7 @@ td.label_size {
     line-height: 39px;
 }
 
-.label_size label{
+.label_size label {
     font-weight: normal;
 }
 
@@ -1072,10 +1075,12 @@ select#pa_size {
     font-size: 12px;
     color: white;
 }
-.name_brand{
+
+.name_brand {
     color: #0089ff;
 }
-.border_giaandtien{
+
+.border_giaandtien {
     margin: 15px 0;
 }
 
@@ -1433,7 +1438,6 @@ a.title_backarrow {
 /*************************
 ******* Home ******
 **************************/
-
 
 .get {
     background: black;
@@ -2066,7 +2070,7 @@ h2.title {
 
 .product-information {
     overflow: hidden;
-    padding:20px 10px 10px 10px;
+    padding: 20px 10px 10px 10px;
     position: relative;
 }
 
@@ -3204,7 +3208,6 @@ button.btn.btn-fefault.cart:hover::before {
 
 /*  */
 
-
 span.moneynew {
     display: inline !important;
 }
@@ -3216,6 +3219,7 @@ span.moneyold {
 .swatch .swatch-element {
     position: relative;
 }
+
 .swatch .swatch-element {
     float: left;
     -webkit-transform: translateZ(0);
@@ -3223,6 +3227,7 @@ span.moneyold {
     margin: 0 0 10px 10px;
     position: relative;
 }
+
 .swatch .swatch-element input {
     width: 100%;
     height: 100%;
@@ -3232,6 +3237,7 @@ span.moneyold {
     top: 0;
     left: 0;
 }
+
 .swatch label {
     float: left;
     min-width: 40px !important;
@@ -3247,14 +3253,17 @@ span.moneyold {
     border-radius: 0px;
     font-weight: normal;
 }
+
 .swatch input:checked+label {
     background: black;
     border-color: black;
     color: #fff;
 }
-.box-size{
+
+.box-size {
     margin: 10px 0;
 }
+
 
 /*  */
 
@@ -3653,7 +3662,10 @@ a {
     display: flex;
     justify-content: center;
 }
+
+
 /* Quantity */
+
 .quantity-pro-detail {
     width: 100%;
     max-width: 110px;
@@ -3708,4 +3720,66 @@ i.fa.fa-phone {
 
 i.fa.fa-envelope {
     margin: 5px;
+}
+
+.content_wrapgioithieu {
+    padding: 50px 0;
+}
+
+form#form_order {
+    float: right;
+}
+
+select#gender {
+    background: #F0F0E9;
+    border: medium none;
+    color: #696763;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    height: 40px;
+    margin-bottom: 10px;
+    outline: medium none;
+    padding-left: 10px;
+    width: 100%;
+    text-indent: 0px !important;
+}
+
+input.form-control.text-sm {
+    text-indent: 0px !important;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem !important;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+p.txt_name_profile {
+    margin-bottom: 10px;
+    font-weight: bold;
+    /* margin: 10px 0; */
+}
+
+.btn_profile_update {
+    width: 30%;
+    /* left: 50%; */
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+.ngaysinh.col-sm-6 {
+    padding: 0px;
+}
+
+.ngaysinh.col-sm-5 {
+    transform: translateY(40px);
 }

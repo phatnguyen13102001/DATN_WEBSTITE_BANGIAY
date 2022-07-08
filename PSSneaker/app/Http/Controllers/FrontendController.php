@@ -15,11 +15,9 @@ use App\Models\color;
 use App\Models\Logo;
 use App\Models\Policies;
 use App\Models\Manufacturer;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Redirect;
+use App\Models\About;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-use  Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
@@ -39,7 +37,6 @@ class FrontendController extends Controller
             $slideshow->image = '/admin_pssneaker/images/noimage.png';
         }
     }
-
     public function getindex()
     {
         $locspax = Product::where('outstanding', '1')->orderBy('name', 'ASC')->get();
@@ -152,5 +149,52 @@ class FrontendController extends Controller
         }
         $this->fixImage($lstlogo);
         return view('user.news_detail.index', compact('setting', 'hangsx', 'lstlogo', 'chinhsach', 'lstnews', 'lstnewssame'));
+    }
+    public function getabout()
+    {
+        $lstlogo = Logo::first();
+        $gioithieu = About::first();
+        $hangsx = Manufacturer::all();
+        $chinhsach = Policies::all();
+        $lstsetting = Setting::all();
+        $this->fixImage($lstlogo);
+        foreach ($lstsetting as $setting) {
+        }
+        return view('user.introduce.index', compact('gioithieu', 'lstlogo', 'setting', 'hangsx', 'chinhsach'));
+    }
+    public function sapxephang($id)
+    {
+        $hangsxid = Manufacturer::find($id);
+        $chinhsach = Policies::all();
+        $lstsetting = Setting::all();
+        $lstproduct = Product::where('id', '=', $hangsxid);
+
+        $this->fixImage($lstproduct);
+        return view('user.body.index', compact('lstproduct', 'setting', 'hangsx', 'chinhsach'));
+    }
+    public function getpolicesdetail($id)
+    {
+        $lstlogo = Logo::first();
+        $hangsx = Manufacturer::all();
+        $chinhsach = Policies::all();
+        $listchinhsach = Policies::find($id);
+        $lstsetting = Setting::all();
+        $this->fixImage($lstlogo);
+        foreach ($lstsetting as $setting) {
+        }
+        return View::make('user.policies.index', compact('hangsx', 'lstlogo', 'listchinhsach', 'setting', 'chinhsach'));
+    }
+    // 
+    public function getprofile($id)
+    {
+        $lstlogo = Logo::first();
+        $chinhsach = Policies::all();
+        $hangsx = Manufacturer::all();
+        $taikhoan = User::find($id);
+        $lstsetting = Setting::all();
+        $this->fixImage($lstlogo);
+        foreach ($lstsetting as $setting) {
+        }
+        return View::make('user.account.index', compact('taikhoan', 'lstlogo', 'setting', 'hangsx', 'chinhsach'));
     }
 }

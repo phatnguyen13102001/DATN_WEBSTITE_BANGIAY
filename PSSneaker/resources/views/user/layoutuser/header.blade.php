@@ -14,6 +14,7 @@
                         <ul class="nav0 nav-pills">
                             <li><a href="#"><i class="fa fa-phone"></i>{{$setting->phone}}</a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i>{{$setting->email}}</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -38,7 +39,10 @@
                         <div class="shop-menu clearfix pull-right">
                             <ul class="nav navbar-nav">
                                 <p>{{session('user')}}</p>
-                                <li><a href="{{route('thongtincanhanweb')}}"><i class="fa fa-user"></i> Account</a></li>
+                                @if(Auth::user()==true)
+                                @auth <li><a href="{{route('thongtincanhanweb',Auth::user()->id)}}"><i class="fa fa-user"></i>{{Auth::user()->name}}</a></li> @endauth
+                                @else
+                                @endif
                                 <li><a href="{{Illuminate\Support\Facades\Auth::check() ? route('showcart') : route('dangnhapweb')}}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                 @if(Illuminate\Support\Facades\Auth::check())
                                 <li><a href="{{route('logout')}}"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>

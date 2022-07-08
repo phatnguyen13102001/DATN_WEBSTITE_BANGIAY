@@ -95,12 +95,9 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/product/library/edit/{id}', [ProductController::class, 'editlib']);
     Route::delete('/admin/product/library/deletelib', [ProductController::class, 'deletelib'])->name('library.deletelib');
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-    Route::get('giohang', function () {
-        return view('user.cart.index');
-    })->name('giohangweb');
 });
 /*Route Handle FrondEnd */
-
+Route::get('/gioithieu', [FrontendController::class, 'getabout'])->name('gioithieuweb');
 Route::get('/index', [FrontendController::class, 'getindex'])->name('index');
 Route::get('/product', [FrontendController::class, 'getproduct'])->name('product');
 Route::get('/news', [FrontendController::class, 'getnews'])->name('news');
@@ -118,28 +115,23 @@ Route::get('getward', [CartController::class, 'getWard'])->name('getward');
 
 /* Add Order OrderDetail */
 Route::post('/order', [OrderController::class, 'insertOrder'])->name('order');
+Route::get('/chinhsach/{id}', [FrontendController::class, 'getpolicesdetail'])->name('chinhsach');
+Route::get('/thongtincanhan/{id}', [FrontendController::class, 'getprofile'])->name('thongtincanhanweb');
 // 
+
 Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
 Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
 Route::get('/auth/redirect/{provider}', [FacebookController::class, 'redirect']);
 Route::get('/auth/callback/{provider}', [FacebookController::class, 'callback']);
-
-
 /*user*/
-Route::get('gioithieu', function () {
-    return view('user.introduce.index');
-})->name('gioithieuweb');
 Route::get('lienhe', function () {
     return view('user.contact.index');
 })->name('lienheweb');
-// thong tin ca nhan
-Route::get('thongtincanhan', function () {
-    return view('user.account.index');
-})->name('thongtincanhanweb');
 
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');
 })->name('Forgotpassword');
+// tin tuc
 Route::get('dangnhap', [LoginController::class, 'index'])->name('dangnhapweb');
 Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnhapweb');
 Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
@@ -147,3 +139,5 @@ Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('email', [LoginController::class, 'email'])->name('mail');
 Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');
+Route::get('edit/thongtincanhan', [LoginController::class, 'editprofile'])->name('chinhsuatthongtin');
+Route::post('edit/thongtincanhan', [LoginController::class, 'Updateprofile'])->name('capnhatthongtin');
