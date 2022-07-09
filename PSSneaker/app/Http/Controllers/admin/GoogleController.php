@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use App\Models\User;
-
+use Laravel\Socialite\Facades\Socialite;
 class GoogleController extends Controller
 {
     /**

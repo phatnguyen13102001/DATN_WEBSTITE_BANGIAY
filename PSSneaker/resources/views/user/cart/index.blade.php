@@ -49,10 +49,10 @@
                                         <p class="color-procart">{{$v_content->options->color}}</p>
                                     </div>
                                     <div class="quantity-procart col-2 col-md-2">
-                                        <div class="quantity-pro-detail">
-                                            <span class="quantity-minus-pro-detail">-</span>
+                                        <div class="quantity-pro-detail update_procart" data-id="{{$v_content->rowId}}">
+                                            <span class="quantity-minus-pro-detail update_minus">-</span>
                                             <input type="number" class="qty-pro input-quantity" name="quantity" id="quantity" min="1" value="{{$v_content->qty}}" readonly>
-                                            <span class="quantity-plus-pro-detail">+</span>
+                                            <span class="quantity-plus-pro-detail update_plus">+</span>
                                         </div>
                                     </div>
                                     <div class="price-procart col-2 col-md-2">

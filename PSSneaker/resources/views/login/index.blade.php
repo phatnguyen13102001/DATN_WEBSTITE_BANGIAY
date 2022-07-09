@@ -23,40 +23,41 @@
                         </div>
                         @endif
                         <button type="submit" class="btn btn-default">Đăng Nhập</button>
-                        <div class="title_login_quenml">
-                            <a href="{{url('http://localhost:8000/api/sendPasswordResetLink')}}">Quên mật khẩu</a>
-                        </div>
-                        <div class="title_login_quenml">
-                            <a href="{{route('dangkiweb')}}">Đăng kí</a>
-                        </div>
-                        <div>
-                            <div class="login_thanh_title">
-                                <div class="line_login"></div>
-                                <span class="login_title_hoặc">Hoặc</span>
-                                <div class="line_login"></div>
-                            </div>
-                            <div class="soial_login_0">
-                                <a href="{{url('auth/redirect/facebook')}}">
-                                    <button class="btn-ptdn">
-
-                                        <div class="icon_btn_ptdn">
-                                            <div class="png_ptdn"></div>
-                                        </div>
-                                        <div class="txt_ptdn">Face book</div>
-
-                                    </button>
-                                </a>
-                                <a href="{{url('/google')}}">
-                                    <button class="btn-ptdn">
-                                        <div class="icon_btn_ptdn">
-                                            <div class="png_ptgg"></div>
-                                        </div>
-                                        <div class="txt_ptdn">Google</div>
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
                     </form>
+                    <div class="title_login_quenml">
+                        <a href="{{url('http://localhost:8000/api/sendPasswordResetLink')}}">Quên mật khẩu</a>
+                    </div>
+                    <div class="title_login_quenml">
+                        <a href="{{route('dangkiweb')}}">Đăng kí</a>
+                    </div>
+                    <div>
+                        <div class="login_thanh_title">
+                            <div class="line_login"></div>
+                            <span class="login_title_hoặc">Hoặc</span>
+                            <div class="line_login"></div>
+                        </div>
+                        <div class="soial_login_0">
+                            <a href="{{url('auth/redirect/facebook')}}">
+                                <button class="btn-ptdn">
+
+                                    <div class="icon_btn_ptdn">
+                                        <div class="png_ptdn"></div>
+                                    </div>
+                                    <div class="txt_ptdn">Face book</div>
+
+                                </button>
+                            </a>
+                            <a href="{{url('/google')}}">
+                                <button class="btn-ptdn">
+                                    <div class="icon_btn_ptdn">
+                                        <div class="png_ptgg"></div>
+                                    </div>
+                                    <div class="txt_ptdn">Google</div>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
                 <!--/login form-->
             </div>

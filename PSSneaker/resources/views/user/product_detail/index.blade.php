@@ -128,71 +128,70 @@
                                     </div>
                                     @endif
                                 </div>
-                                <form action="#">
-                                    <textarea name=""></textarea>
-                                    <button type="button" class="btn btn-default pull-right">
-                                        Gửi
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>
-                    <!--/category-tab-->
-                    @if(count($lstproductsame)===0)
-                    <div class="alert alert-warning w-100" role="alert">
-                        <p>Không có sản phẩm cùng loại nào</p>
-                    </div>
-                    @else
-                    <div class="recommended_items">
-                        <!--recommended_items-->
-                        <h2 class="title text-center">SẢN PHẨM CÙNG LOẠI</h2>
-                        <div class="grid-container-sp-index">
-                            @foreach($lstproductsame as $productsame)
-                            <div class="grid-item-sp">
-                                <a href="{{route('productdetail',$productsame->id)}}" title="{{$productsame->name}}">
-                                    <div class="img-sp">
-                                        <p class="scale-img img_hover"><img src="{{$productsame->image}}" alt="{{$productsame->name}}"></p>
-                                        @if(($productsame->discount)!=0)
-                                        <div class="discount-sp">
-                                            <p>{{$productsame->discount}}%</p>
-                                        </div>
-                                        @else
-                                        @endif
-                                    </div>
-                                </a>
-                                <div class="info-product">
-                                    <a href="" title="{{$productsame->name}}">
-                                        <div class="name-sp">
-                                            <p class="text-split-1">{{$productsame->name}}</p>
-                                        </div>
-                                    </a>
-                                    <a href="" title="{{$productsame->name}}">
-                                        <div class="price-sp">
-                                            @if(($productsame->discount)!=0)
-                                            <span>Giá: </span>
-                                            <span class="sale_price_sp">{{number_format($productsame->sale_price)}}₫</span>
-                                            <span class="regular_price_sp"><del>{{number_format($productsame->regular_price)}}₫</del></span>
-                                            @else
-                                            <span>Giá: </span>
-                                            <span class="price-new">{{($productsame->regular_price)!=0 ? number_format($productsame->regular_price) : 'Liên Hệ'}}{{($productsame->regular_price)!=0 ? '₫' : ''}}</span>
-                                            @endif
-                                        </div>
-                                    </a>
-                                    <div class="box-cart">
-                                        <a href="">
-                                            THÊM VÀO GIỎ HÀNG <i class="fas fa-shopping-cart"></i>
-                                        </a>
-                                    </div>
+                    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1619936111724930&autoLogAppEvents=1" nonce="lMAIxCGt"></script>
+<div class="fb-comments" data-href="{{route('productdetail',$lstproduct->id)}}" data-width="" data-numposts="5"></div>
+</div>
+            </div>
+            <!--/category-tab-->
+            @if(count($lstproductsame)===0)
+            <div class="alert alert-warning w-100" role="alert">
+                <p>Không có sản phẩm cùng loại nào</p>
+            </div>
+            @else
+            <div class="recommended_items">
+                <!--recommended_items-->
+                <h2 class="title text-center">SẢN PHẨM CÙNG LOẠI</h2>
+                <div class="grid-container-sp-index">
+                    @foreach($lstproductsame as $productsame)
+                    <div class="grid-item-sp">
+                        <a href="{{route('productdetail',$productsame->id)}}" title="{{$productsame->name}}">
+                            <div class="img-sp">
+                                <p class="scale-img img_hover"><img src="{{$productsame->image}}" alt="{{$productsame->name}}"></p>
+                                @if(($productsame->discount)!=0)
+                                <div class="discount-sp">
+                                    <p>{{$productsame->discount}}%</p>
                                 </div>
+                                @else
+                                @endif
                             </div>
-                            @endforeach
+                        </a>
+                        <div class="info-product">
+                            <a href="" title="{{$productsame->name}}">
+                                <div class="name-sp">
+                                    <p class="text-split-1">{{$productsame->name}}</p>
+                                </div>
+                            </a>
+                            <a href="" title="{{$productsame->name}}">
+                                <div class="price-sp">
+                                    @if(($productsame->discount)!=0)
+                                    <span>Giá: </span>
+                                    <span class="sale_price_sp">{{number_format($productsame->sale_price)}}₫</span>
+                                    <span class="regular_price_sp"><del>{{number_format($productsame->regular_price)}}₫</del></span>
+                                    @else
+                                    <span>Giá: </span>
+                                    <span class="price-new">{{($productsame->regular_price)!=0 ? number_format($productsame->regular_price) : 'Liên Hệ'}}{{($productsame->regular_price)!=0 ? '₫' : ''}}</span>
+                                    @endif
+                                </div>
+                            </a>
+                            <div class="box-cart">
+                                <a href="">
+                                    THÊM VÀO GIỎ HÀNG <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    @endif
-                    <!--/recommended_items-->
+                    @endforeach
                 </div>
             </div>
+            @endif
+            <!--/recommended_items-->
         </div>
+    </div>
+    </div>
     </div>
 </section>
 @endsection

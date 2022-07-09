@@ -99,4 +99,8 @@ class CartController extends Controller
     {
         Cart::instance(Auth::user())->update($rowId, 0);
     }
+    public function update_to_cart($rowId, $qty)
+    {
+        Cart::instance(Auth::user())->update($rowId, $qty);
+    }
 }

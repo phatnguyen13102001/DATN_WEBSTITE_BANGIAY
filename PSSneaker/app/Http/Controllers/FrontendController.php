@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Mail\ContactMail;
 use App\Models\Library;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -12,13 +12,14 @@ use App\Models\User;
 use App\Models\News;
 use App\Models\Size;
 use App\Models\color;
+use App\Models\Social;
 use App\Models\Logo;
 use App\Models\Policies;
 use App\Models\Manufacturer;
 use App\Models\About;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
-
+use Illuminate\Support\Facades\Mail;
 class FrontendController extends Controller
 {
     protected function fixImage($product)
@@ -37,8 +38,8 @@ class FrontendController extends Controller
             $slideshow->image = '/admin_pssneaker/images/noimage.png';
         }
     }
-    public function getindex()
-    {
+    public function getindex(Request $request)
+    { 
         $locspax = Product::where('outstanding', '1')->orderBy('name', 'ASC')->get();
         $chinhsach = Policies::all();
         $mau = color::all();
@@ -48,7 +49,7 @@ class FrontendController extends Controller
         $lstlogo = Logo::first();
         $lstslideshow = Slideshow::where('show', '1')->get();
         $lsttintuc = News::where('outstanding', '1')->orWhere('show', '=', '1')->get();
-        $lstproduct = Product::where('outstanding', '1')->paginate(10);
+        $lstproduct = Product::where('outstanding', '1')->paginate(9);
         foreach ($lsttintuc as $tintuc) {
             $this->fixImage($tintuc);
         }
@@ -61,6 +62,9 @@ class FrontendController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImage($lstlogo);
+        if ($request->ajax()) {
+            return View::make('user.body.pagination_data', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
+        }
         return View::make('user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
     }
     public function getproductdetail($id)
@@ -197,4 +201,5 @@ class FrontendController extends Controller
         }
         return View::make('user.account.index', compact('taikhoan', 'lstlogo', 'setting', 'hangsx', 'chinhsach'));
     }
+
 }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Setting;
+use App\Models\Social;
 use App\Models\Logo;
 use App\Models\Policies;
 use App\Models\Manufacturer;
@@ -35,6 +36,7 @@ class LoginController extends Controller
     // 
     public function index()
     {
+        $mangxh=Social::all();
         $lstlogo = Logo::first();
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
@@ -42,7 +44,7 @@ class LoginController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImagelogo($lstlogo);
-        return View::make('login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'));
+        return View::make('login.index', compact('mangxh','setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.index', compact('mangxh','setting', 'lstlogo', 'hangsx', 'chinhsach'));
     }
     /**
      * Handle an authentication attempt.

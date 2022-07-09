@@ -35,8 +35,8 @@ return [
         'redirect' => 'http://localhost/callback/dangnhap',
     ],
     'google' => [
-        'client_id'     => '53072127314-1hootag9t72e7pbob04tbueuuqpfga5j.apps.googleusercontent.com',
-        'client_secret' => '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',
+        'client_id'     => '53072127314-g2s9fhansebsu2rub003m88o2eflkalc.apps.googleusercontent.com',
+        'client_secret' => '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',
         'redirect'      => 'http://localhost:8000/google/callback',
     ],
 ];

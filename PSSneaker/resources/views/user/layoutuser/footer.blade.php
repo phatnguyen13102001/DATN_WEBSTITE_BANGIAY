@@ -14,6 +14,19 @@
                             <p>Email: {{$setting->email}}</p>
                             <p>Fanpage: {{$setting->fanpage}}</p>
                         </div>
+                        <div class="flex_mangxh">
+                            <div class="title_footer_mangxh">Mạng xã hội</div>
+                            <div class="soial_footer_mangxh">
+                              
+                                <li class="d-inline-block align-top mr-1">
+                                    <a href="" target="_blank">
+                                        <img class="thumb_social" src="" alt="" />
+                                    </a>
+                                </li>
+                            
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -29,11 +42,13 @@
                 <div class="col-sm-4 col-sm-offset-0">
                     <div class="single-widget">
                         <h2>face book</h2>
-                        <form action="#" class="searchform">
-                            <input type="text" placeholder="Your email address" />
-                            <button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-                            <p>Get the most recent updates from <br />our site and be updated your self...</p>
-                        </form>
+                        <div class="pluginfacebook">
+                            <div id="fb-root"></div>
+                            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1619936111724930&autoLogAppEvents=1" nonce="7necH2eG"></script>
+                            <div class="fb-page" data-href="https://www.facebook.com/hurazon" data-tabs="timeline" data-width="" data-height="250" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                                <blockquote cite="https://www.facebook.com/hurazon" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/hurazon">Giày Sneaker</a></blockquote>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

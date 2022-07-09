@@ -11,6 +11,21 @@ var RGBChange = function() {
 /*scroll to top*/
 
 $(document).ready(function() {
+    /* Pagination */
+    $(document).on('click', '.pagination a', function(event) {
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        getDataSize(page);
+    });
+
+    function getDataSize(page) {
+        $.ajax({
+            url: location + "/?page=" + page,
+            success: function(data) {
+                $('#table_data').html(data);
+            }
+        });
+    }
     /* Quantity */
     $('.quantity-plus-pro-detail').click(function(e) {
         e.preventDefault();
@@ -36,79 +51,96 @@ $(document).ready(function() {
 
     $('#city').change(function() {
         var cityID = $(this).val();
-            if (cityID) {
-                $.ajax({
-                    type: "get",
-                    url: "getdistrict?id_city=" + cityID,
-                    success: function(res) {
-                        if (res) {
-                            $("#district").empty();
-                            $("#district").append('<option>Quận/huyện</option>');
-                            $.each(res, function(key, value) {
-                                $("#district").append('<option value="' + key + '">' + value +
-                                    '</option>');
-                            });
-                        } else {
-                            $("#district").empty();
-                        }
+        if (cityID) {
+            $.ajax({
+                type: "get",
+                url: "getdistrict?id_city=" + cityID,
+                success: function(res) {
+                    if (res) {
+                        $("#district").empty();
+                        $("#district").append('<option>Quận/huyện</option>');
+                        $.each(res, function(key, value) {
+                            $("#district").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+                    } else {
+                        $("#district").empty();
                     }
-                });
-            } else {
-                $("#district").empty();
-                $("#ward").empty();
-            }
-        });
+                }
+            });
+        } else {
+            $("#district").empty();
+            $("#ward").empty();
+        }
+    });
 
-        // when state dropdown changes
-        $('#district').on('change', function() {
-            var districtID = $(this).val();
-            if (districtID) {
-                $.ajax({
-                    type: "get",
-                    url: "getward?id_district=" + districtID,
-                    success: function(res) {
-                        if (res) {
-                            $("#ward").empty();
-                            $("#ward").append('<option>Phường/xã</option>');
-                            $.each(res, function(key, value) {
-                                $("#ward").append('<option value="' + key + '">' + value +
-                                    '</option>');
-                            });
-                        } else {
-                            $("#ward").empty();
-                        }
+    // when state dropdown changes
+    $('#district').on('change', function() {
+        var districtID = $(this).val();
+        if (districtID) {
+            $.ajax({
+                type: "get",
+                url: "getward?id_district=" + districtID,
+                success: function(res) {
+                    if (res) {
+                        $("#ward").empty();
+                        $("#ward").append('<option>Phường/xã</option>');
+                        $.each(res, function(key, value) {
+                            $("#ward").append('<option value="' + key + '">' + value +
+                                '</option>');
+                        });
+                    } else {
+                        $("#ward").empty();
                     }
-                });
-            } else {
-                $("#ward").empty();
-            }
-        });
+                }
+            });
+        } else {
+            $("#ward").empty();
+        }
+    });
 
-        // Delete Item Cart Ajax
-        $('.del-procart').click(function (e) {
+    // Delete Item Cart Ajax
+    $('.del-procart').click(function(e) {
 
         var $removeBtn = $(this);
         var id = $removeBtn.data('id');
 
         $.ajax({
             type: "get",
-            url: "/delete-to-cart/"+id,
-            success: function (data) {
+            url: "/delete-to-cart/" + id,
+            success: function(data) {
                 location.reload();
-            }               
+            }
         });
 
         return false;
+    });
+
+    // Update Quantity Cart
+    $('.update_procart').click(function(e) {
+
+        var $updateBtn = $(this);
+        var id = $updateBtn.data('id');
+        var qty = $('#quantity').val();
+
+        $.ajax({
+            type: "get",
+            url: "/update-to-cart/" + id + "/" + qty,
+            success: function(data) {
+                location.reload();
+            }
         });
-    
-        // Update Item Cart Ajax
-    
-    $(".payments-label").click(function(){
-            var payments = $(this).data("payments");
-            $(".payments-cart .payments-label, .payments-info").removeClass("active");
-            $(this).addClass("active");
-            $(".payments-info-"+payments).addClass("active");
-        });
+
+        return false;
+    });
+
+
+    $(".payments-label").click(function() {
+        var payments = $(this).data("payments");
+        $(".payments-cart .payments-label, .payments-info").removeClass("active");
+        $(this).addClass("active");
+        $(".payments-info-" + payments).addClass("active");
+    });
 
 });
 
@@ -130,3 +162,11 @@ jQuery(document).ready(function($) {
 /* Img Preview */
 const input = document.getElementById("file-zone");
 const image = document.getElementById("photoUpload-preview");
+window.fbAsyncInit = function() {
+    FB.init({
+        appId: '1619936111724930',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v14.0'
+    });
+};
