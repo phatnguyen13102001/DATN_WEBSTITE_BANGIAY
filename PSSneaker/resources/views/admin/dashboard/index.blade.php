@@ -17,7 +17,7 @@
               <div class="container-fluid">
                   <!-- Small boxes (Stat box) -->
                   <div class="row">
-                      <div class="col-lg-3 col-6">
+                      <div class="col-lg-4 col-6">
                           <!-- small box -->
                           <a class="my-info-box info-box" href="{{route('setting.index')}}" title="Cấu hình website">
                               <span class="my-info-box-icon info-box-icon bg-primary"><i class="fas fa-cogs"></i></span>
@@ -28,7 +28,7 @@
                           </a>
                       </div>
                       <!-- ./col -->
-                      <div class="col-lg-3 col-6">
+                      <div class="col-lg-4 col-6">
                           <!-- small box -->
                           <a class="my-info-box info-box" href="{{route('information.index')}}" title="Tài khoản">
                               <span class="my-info-box-icon info-box-icon bg-danger"><i class="fas fa-user-cog"></i></span>
@@ -39,7 +39,7 @@
                           </a>
                       </div>
                       <!-- ./col -->
-                      <div class="col-lg-3 col-6">
+                      <div class="col-lg-4 col-6">
                           <!-- small box -->
                           <a class="my-info-box info-box" href="#" title="Đổi mật khẩu">
                               <span class="my-info-box-icon info-box-icon bg-success"><i class="fas fa-key"></i></span>
@@ -49,18 +49,6 @@
                               </div>
                           </a>
                       </div>
-                      <!-- ./col -->
-                      <div class="col-lg-3 col-6">
-                          <!-- small box -->
-                          <a class="my-info-box info-box" href="#" title="Thư liên hệ">
-                              <span class="my-info-box-icon info-box-icon bg-info"><i class="fas fa-address-book"></i></span>
-                              <div class="info-box-content text-dark">
-                                  <span class="info-box-text text-capitalize">Thư liên hệ</span>
-                                  <span class="info-box-number">View more</span>
-                              </div>
-                          </a>
-                      </div>
-                      <!-- ./col -->
                   </div>
                   <!-- /.row -->
                   <!-- Main row -->

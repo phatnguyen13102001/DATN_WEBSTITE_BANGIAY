@@ -110,6 +110,7 @@ Route::get('/index/{id}', [FrontendController::class, 'getindex']);
 Route::post('/add-to-cart', [CartController::class, 'addtocart'])->name('addtocart');
 Route::get('/show-cart', [CartController::class, 'show_cart'])->name('showcart');
 Route::get('/delete-to-cart/{rowId}', [CartController::class, 'delete_to_cart']);
+Route::get('/update-to-cart/{rowId}/{qty}', [CartController::class, 'update_to_cart']);
 Route::get('getdistrict', [CartController::class, 'getDistrict'])->name('getdistrict');
 Route::get('getward', [CartController::class, 'getWard'])->name('getward');
 

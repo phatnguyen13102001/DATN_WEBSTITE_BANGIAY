@@ -3,8 +3,10 @@
 <div class="wrap_cart_main">
     <div class="container">
         <form class="form-cart validation-cart" method="post" action="{{route('order')}}" enctype="multipart/form-data">
-            <div class="wrap-cart">
+            <div class=" wrap-cart">
                 @if((Cart::instance(Auth::user())->count())!=0)
+                <a href="{{route('index')}}" class="btn btn-dark">
+                    <i class="fas fa-backward"></i> Tiếp tục mua hàng</a>
                 <div class="row">
                     <?php $content = Cart::instance(Auth::user())->content();
                     // echo '<pre>';
@@ -50,9 +52,9 @@
                                     </div>
                                     <div class="quantity-procart col-2 col-md-2">
                                         <div class="quantity-pro-detail">
-                                            <span class="quantity-minus-pro-detail">-</span>
-                                            <input type="number" class="qty-pro input-quantity" name="quantity" id="quantity" min="1" value="{{$v_content->qty}}" readonly>
-                                            <span class="quantity-plus-pro-detail">+</span>
+                                            <span class=" quantity-minus-pro-detail update_procart" data-id="{{$v_content->rowId}}">-</span>
+                                            <input type=" number" class="qty-pro input-quantity" name="quantity" id="quantity_{{$v_content->rowId}}" min="1" value="{{$v_content->qty}}" autocomplete="off" readonly>
+                                            <span class="quantity-plus-pro-detail update_procart" data-id="{{$v_content->rowId}}">+</span>
                                         </div>
                                     </div>
                                     <div class="price-procart col-2 col-md-2">

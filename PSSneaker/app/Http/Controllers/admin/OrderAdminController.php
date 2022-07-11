@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Models\Order;
 use App\Models\Orderdetail;
 use App\Models\Orderstatus;
-use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
@@ -47,7 +46,7 @@ class OrderAdminController extends Controller
         if ($request->ajax()) {
             return view('admin.order.pagination_data', ['lstorder' => $lstorder]);
         }
-        return View::make('admin.order.index', compact('lstorder', 'lstorder1', 'lstordertotal1', 'lstordertotal2', 'lstordertotal3', 'lstordertotal4', 'lstorder2', 'lstorder3', 'lstorder4'))->nest('admin.layout.nav', 'admin.order.index', compact('lstorder', 'lstorder1', 'lstordertotal1', 'lstordertotal2', 'lstordertotal3', 'lstordertotal4', 'lstorder2', 'lstorder3', 'lstorder4'));
+        return View::make('admin.order.index', compact('lstorder', 'lstorder1', 'lstordertotal1', 'lstordertotal2', 'lstordertotal3', 'lstordertotal4', 'lstorder2', 'lstorder3', 'lstorder4'));
     }
     public function edit(Order $order)
     {

@@ -92,7 +92,7 @@
                                             </div>
                                             <div class="btn-add-cart">
                                                 @if(Illuminate\Support\Facades\Auth::check())
-                                                <button id="test1" type="submit" class="btn btn-fefault cart">
+                                                <button id="test1" type="submit" class="btn btn-fefault cart BtnAddToCart">
                                                     <i class="fa fa-shopping-cart"></i>
                                                     Thêm Vào Giỏ Hàng
                                                 </button>
@@ -161,12 +161,12 @@
                                     </div>
                                 </a>
                                 <div class="info-product">
-                                    <a href="" title="{{$productsame->name}}">
+                                    <a href="{{route('productdetail',$productsame->id)}}" title="{{$productsame->name}}">
                                         <div class="name-sp">
                                             <p class="text-split-1">{{$productsame->name}}</p>
                                         </div>
                                     </a>
-                                    <a href="" title="{{$productsame->name}}">
+                                    <a href="{{route('productdetail',$productsame->id)}}" title="{{$productsame->name}}">
                                         <div class="price-sp">
                                             @if(($productsame->discount)!=0)
                                             <span>Giá: </span>
@@ -179,8 +179,8 @@
                                         </div>
                                     </a>
                                     <div class="box-cart">
-                                        <a href="">
-                                            THÊM VÀO GIỎ HÀNG <i class="fas fa-shopping-cart"></i>
+                                        <a href="{{route('productdetail',$productsame->id)}}">
+                                            XEM CHI TIẾT
                                         </a>
                                     </div>
                                 </div>
@@ -190,6 +190,18 @@
                     </div>
                     @endif
                     <!--/recommended_items-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="AddCartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-check-circle text-success"></i> Thông Báo</h5>
+                </div>
+                <div class="modal-body">
+                    Thêm vào giỏ hàng thành công...
                 </div>
             </div>
         </div>

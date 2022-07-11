@@ -10,7 +10,30 @@ var RGBChange = function() {
 
 /*scroll to top*/
 
-$(document).ready(function() {
+$(document).ready(function () {
+    /* Modal Add To Cart*/
+	$(document).on('click', '.BtnAddToCart', function () {
+        $('#AddCartModal').modal({
+            show: true
+		});
+    });
+    
+    /* Pagination */
+	$(document).on('click','.pagination a',function(event){
+        event.preventDefault();
+        var page = $(this).attr('href').split('page=')[1];
+        getDataSize(page);
+	});
+	function getDataSize(page)
+	{
+		$.ajax({
+		url: location + "/?page=" + page,
+		success:function(data)
+		{
+			$('#table_data').html(data);
+		}
+		});
+	}
     /* Quantity */
     $('.quantity-plus-pro-detail').click(function(e) {
         e.preventDefault();
@@ -101,7 +124,23 @@ $(document).ready(function() {
         return false;
         });
     
-        // Update Item Cart Ajax
+    // Update Quantity Cart
+    $('.update_procart').click(function (e) {
+
+        var $updateBtn = $(this);
+        var id = $updateBtn.data('id');
+        var qty = $('#quantity_'+id).val();
+        $.ajax({
+            type: "get",
+            url: "/update-to-cart/"+id+"/"+qty,
+            success: function (data) {
+                location.reload();
+            }               
+        });
+
+        return false;
+        });
+    
     
     $(".payments-label").click(function(){
             var payments = $(this).data("payments");

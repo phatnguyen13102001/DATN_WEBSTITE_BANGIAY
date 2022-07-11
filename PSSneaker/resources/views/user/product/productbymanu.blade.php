@@ -27,12 +27,12 @@
                                 </div>
                             </a>
                             <div class="info-product">
-                                <a href="" title="{{$product->name}}">
+                                <a href="{{route('productdetail',$product->id)}}" title="{{$product->name}}">
                                     <div class="name-sp">
                                         <p class="text-split-1">{{$product->name}}</p>
                                     </div>
                                 </a>
-                                <a href="" title="{{$product->name}}">
+                                <a href="{{route('productdetail',$product->id)}}" title="{{$product->name}}">
                                     <div class="price-sp">
                                         @if(($product->discount)!=0)
                                         <span>Giá: </span>
@@ -45,8 +45,8 @@
                                     </div>
                                 </a>
                                 <div class="box-cart">
-                                    <a href="">
-                                        THÊM VÀO GIỎ HÀNG <i class="fas fa-shopping-cart"></i>
+                                    <a href="{{route('productdetail',$product->id)}}">
+                                        XEM CHI TIẾT
                                     </a>
                                 </div>
                             </div>

@@ -37,7 +37,7 @@ class FrontendController extends Controller
             $slideshow->image = '/admin_pssneaker/images/noimage.png';
         }
     }
-    public function getindex()
+    public function getindex(Request $request)
     {
         $locspax = Product::where('outstanding', '1')->orderBy('name', 'ASC')->get();
         $chinhsach = Policies::all();
@@ -48,7 +48,7 @@ class FrontendController extends Controller
         $lstlogo = Logo::first();
         $lstslideshow = Slideshow::where('show', '1')->get();
         $lsttintuc = News::where('outstanding', '1')->orWhere('show', '=', '1')->get();
-        $lstproduct = Product::where('outstanding', '1')->paginate(10);
+        $lstproduct = Product::where('outstanding', '1')->paginate(9);
         foreach ($lsttintuc as $tintuc) {
             $this->fixImage($tintuc);
         }
@@ -61,6 +61,9 @@ class FrontendController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImage($lstlogo);
+        if ($request->ajax()) {
+            return View::make('user.body.pagination_data', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
+        }
         return View::make('user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
     }
     public function getproductdetail($id)

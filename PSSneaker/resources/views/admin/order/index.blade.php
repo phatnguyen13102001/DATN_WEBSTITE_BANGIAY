@@ -108,13 +108,13 @@
                 <label>Quận huyện:</label>
                 <select id="id_district" name="data[id_district]" data-level="1" data-table="#_ward" data-child="id_ward" class="form-control select2 select-place select2-hidden-accessible" data-select2-id="id_district" tabindex="-1" aria-hidden="true">
                     <option value="0" data-select2-id="4">Chọn danh mục</option>
-                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="3" style="width: 292px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_district-container"><span class="select2-selection__rendered" id="select2-id_district-container" role="textbox" aria-readonly="true" title="Chọn danh mục">Chọn danh mục</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                </select>
             </div>
             <div class="form-group col-md-3 col-sm-3">
                 <label>Phường xã:</label>
                 <select id="id_ward" name="data[id_ward]" class="form-control select2 select-place select2-hidden-accessible" data-select2-id="id_ward" tabindex="-1" aria-hidden="true">
                     <option value="0" data-select2-id="6">Chọn danh mục</option>
-                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="5" style="width: 292px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-id_ward-container"><span class="select2-selection__rendered" id="select2-id_ward-container" role="textbox" aria-readonly="true" title="Chọn danh mục">Chọn danh mục</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                </select>
             </div>
             <div class="form-group text-center mt-2 mb-0 col-12">
                 <a class="btn btn-sm bg-gradient-success text-white" onclick="actionOrder('index.php?com=order&amp;act=man')" title="Tìm kiếm"><i class="fas fa-search mr-1"></i>Tìm kiếm</a>

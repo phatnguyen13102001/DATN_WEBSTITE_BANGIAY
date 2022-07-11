@@ -59,7 +59,7 @@ class CartController extends Controller
             Cart::instance(Auth::user());
             Cart::instance(Auth::user())->add($data);
 
-            return Redirect::to('/show-cart');
+            return back();
         } else {
         }
     }
@@ -98,5 +98,9 @@ class CartController extends Controller
     public function delete_to_cart($rowId)
     {
         Cart::instance(Auth::user())->update($rowId, 0);
+    }
+    public function update_to_cart($rowId, $qty)
+    {
+        Cart::instance(Auth::user())->update($rowId, $qty);
     }
 }

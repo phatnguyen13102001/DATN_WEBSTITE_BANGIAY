@@ -85,10 +85,10 @@ class SettingController extends Controller
             ],
             [
                 'address.required' => 'Địa Chỉ Không Được Bỏ Trống',
-                'phone.required' => 'Số Điện Thoại Sản Xuất Không Được Bỏ Trống',
-                'hotline.required' => 'Hotline Sản Xuất Không Được Bỏ Trống',
-                'email.required' => 'Email Sản Xuất Không Được Bỏ Trống',
-                'slogan.required' => 'Slogan Hãng Sản Xuất Không Được Bỏ Trống',
+                'phone.required' => 'Số Điện Thoại Không Được Bỏ Trống',
+                'hotline.required' => 'Hotline Không Được Bỏ Trống',
+                'email.required' => 'Email Không Được Bỏ Trống',
+                'slogan.required' => 'Slogan Không Được Bỏ Trống',
             ]
         );
 

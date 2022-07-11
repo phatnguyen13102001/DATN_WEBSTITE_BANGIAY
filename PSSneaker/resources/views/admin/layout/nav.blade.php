@@ -40,14 +40,12 @@
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                 <i class="fas fa-bell"></i>
-                <span class="badge badge-danger">7</span>
+                <span class="badge badge-danger">{{$lstorder1}}</span>
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow" style="left: inherit; right: 0px;">
                 <span class="dropdown-item dropdown-header p-0">Thông báo</span>
                 <div class="dropdown-divider"></div>
-                <a href="" class="dropdown-item"><i class="fas fa-envelope mr-2"></i><span class="badge badge-danger mr-1">0</span> Liên hệ</a>
-                <div class="dropdown-divider"></div>
-                <a href="{{route('order.index')}}" class="dropdown-item"><i class="fas fa-shopping-bag mr-2"></i><span class="badge badge-danger mr-1">7</span> Đơn hàng</a>
+                <a href="{{route('order.index')}}" class="dropdown-item"><i class="fas fa-shopping-bag mr-2"></i><span class="badge badge-danger mr-1">{{$lstorder1}}</span> Đơn hàng</a>
             </div>
         </li>
         <li class="nav-item">
