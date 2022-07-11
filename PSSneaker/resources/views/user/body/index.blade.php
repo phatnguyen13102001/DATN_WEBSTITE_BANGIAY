@@ -95,6 +95,11 @@
               </div>
               <div class="col-sm-9 padding-right">
                   <h2 class="title text-center">SẢN PHẨM</h2>
+                  <div class="input-group input-group-sm">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar text-sm" type="search" id="keywordproductindex" name="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+                </div>
+            </div>
                   <form id="form_order" action="" method="get">
                       <select id="orderby" class="orderby">
                           <option value="1">Tên: A-Z</option>

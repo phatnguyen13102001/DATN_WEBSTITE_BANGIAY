@@ -7,7 +7,7 @@
             <div class="row mb-2">
                 <div>
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin)}}">Bảng điều khiển</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin')}}">Bảng điều khiển</a></li>
                         <li class="breadcrumb-item active">Quản lý bài viết</li>
                     </ol>
                 </div><!-- /.col -->
@@ -20,7 +20,7 @@
         <div class="form-inline form-search d-inline-block align-middle ml-3">
             <div class="input-group input-group-sm">
                 <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar text-sm" type="search" id="keywordnews" name="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+                    <input class="form-control form-control-navbar text-sm" type="search" id="keywordproductindex" name="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
                 </div>
             </div>
         </div>

@@ -58,6 +58,14 @@
                             <p class="txt_name_profile">Email:</p>
                             <input type="email" class="form-control text-sm" placeholder="" value="{{$taikhoan->email}}" disabled />
                         </div>
+                        <div class="contact-input col-sm-12">
+                            <p class="txt_name_profile">Giới tính:</p>
+                            <select class="custom-select text-sm" name="gender" id="gender">
+                                <option value="">Chọn giới tính</option>
+                                <option {{ $taikhoan->gender == 1 ? "selected" : "" }} value="1">Nam</option>
+                                <option {{ $taikhoan->gender == 0 ? "selected" : "" }} value="0">Nữ</option>
+                            </select>
+                        </div>
                         <!--  -->
                         <div class="contact-input col-sm-12">
                             <div class="ngaysinh col-sm-6">
@@ -83,7 +91,66 @@
                     </div>
                 </form>
             </div>
-
+            <div >
+                <table class="tablehistory">
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                        <th>Points</th>
+                    </tr>
+                    <tr>
+                        <td>Jill</td>
+                        <td>Smith</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                        <td>50</td>
+                    </tr>
+                    <tr>
+                        <td>Eve</td>
+                        <td>Jackson</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                        <td>94</td>
+                    </tr>
+                    <tr>
+                        <td>Adam</td>
+                        <td>Johnson</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                        <td>67</td>
+                    </tr>
+                </table>
+            </div>
             <!-- End Grid -->
         </div>
 

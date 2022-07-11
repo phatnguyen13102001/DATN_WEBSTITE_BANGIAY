@@ -133,7 +133,7 @@
                     </div>
                     <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1619936111724930&autoLogAppEvents=1" nonce="lMAIxCGt"></script>
-<div class="fb-comments" data-href="{{route('productdetail',$lstproduct->id)}}" data-width="" data-numposts="5"></div>
+<div class="fb-comments" data-href="{{url($lstproduct->id)}}" data-width="" data-numposts="5"></div>
 </div>
             </div>
             <!--/category-tab-->

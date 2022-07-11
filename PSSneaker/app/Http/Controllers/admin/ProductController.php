@@ -43,7 +43,6 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-
         $lstproduct = Product::where('SKU', 'LIKE', '%' . $request->keyword . '%')->orWhere('name', 'LIKE', '%' . $request->keyword . '%')
             ->paginate(10);
         foreach ($lstproduct as $product) {

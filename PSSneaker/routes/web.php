@@ -37,6 +37,9 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// 
+// Route::get('/lienhe', [EmailController::class,'create'])->name('lienheweb');
+// Route::post('/lienhe', [EmailController::class,'sendEmail1'])->name('lienhewweb.submit');
 
 Route::middleware('admin')->group(function () {
     Route::resource('/admin/account', AccountController::class);
@@ -78,7 +81,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/searchproduct', [ProductController::class, 'search']);
     Route::get('/searchuser', [AccountController::class, 'search']);
     Route::get('/searchpayment', [PaymentController::class, 'search']);
-
+    Route::get('/searchproductindex', [FrontendController::class, 'search']);
     /* Block User */
     Route::put('/admin/account/update', [AccountController::class, 'update'])->name('user.update');
     Route::get('/admin/account/edit/{id}', [AccountController::class, 'edit']);
@@ -137,6 +140,8 @@ Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');
 Route::get('edit/thongtincanhan', [LoginController::class, 'editprofile'])->name('chinhsuatthongtin');
 Route::post('edit/thongtincanhan', [LoginController::class, 'Updateprofile'])->name('capnhatthongtin');
-// 
-Route::get('/email', [EmailController::class,'create'])->name('lienheweb');
-Route::post('/email', [EmailController::class,'sendEmail'])->name('send.email');
+//
+
+Route::get('/lienhe', [EmailController::class,'create'])->name('lienheweb');
+Route::post('/lienhepost', [EmailController::class,'sendEmail'])->name('lienheweb.post');
+

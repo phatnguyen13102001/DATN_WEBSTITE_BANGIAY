@@ -201,5 +201,23 @@ class FrontendController extends Controller
         }
         return View::make('user.account.index', compact('taikhoan', 'lstlogo', 'setting', 'hangsx', 'chinhsach'));
     }
+   
+    public function search(Request $request)
+    {
 
+        $lstproduct = Product::where('SKU', 'LIKE', '%' . $request->keyword . '%')->orWhere('name', 'LIKE', '%' . $request->keyword . '%')
+            ->paginate(10);
+        foreach ($lstproduct as $product) {
+            $this->fixImage($product);
+        }
+        if ($request->ajax()) {
+            if ($lstproduct->count() >= 1) {
+                return view('user.body.pagination_data', ['lstproduct' => $lstproduct]);
+            } else {
+                return response()->json([
+                    'status' => 'Không có dữ liệu',
+                ]);
+            }
+        }
+    }
 }

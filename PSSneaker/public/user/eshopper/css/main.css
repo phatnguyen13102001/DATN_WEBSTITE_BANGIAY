@@ -3825,12 +3825,18 @@ p.txt_name_profile {
     margin-right: 10px;
 }
 
-margin-right: 10px;
-
+table.tablehistory {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
 }
-margin-right: 10px;
 
+table.tablehistory tbody tr td {
+    text-align: left;
+    padding: 8px
 }
-margin-right: 10px;
 
+table.tablehistory tbody tr {
+    background-color: #f2f2f2;
 }

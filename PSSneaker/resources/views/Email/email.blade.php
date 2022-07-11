@@ -4,12 +4,12 @@
              <div class="card">
                  <div class="card-header">Welcome!</div>
                    <div class="card-body">
-                    @if (session('resent'))
-                         <div class="alert alert-success" role="alert">
-                            {{ __('A fresh mail has been sent to your email address.') }}
-                        </div>
-                    @endif
-                    {!! $content !!}
+                    <div class="col-6">{{$name}}</div>
+                    <div class="col-6">{{$email}}</div>
+                    <div class="col-6">{{$phone}}</div>
+                    <div class="col-6">{{$address}}</div>
+                    <div class="col-12">{{$topic}}</div>
+                    <div class="col-12">{{$content}}</div>
                 </div>
             </div>
         </div>

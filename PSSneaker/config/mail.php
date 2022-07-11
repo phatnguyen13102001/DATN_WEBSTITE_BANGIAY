@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mail.com'),
-            'port' => env('MAIL_PORT', 587),
-            'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-            'username' => env('minhsanh.doanlaravel0709@gmail.com'),
-            'password' => null,
+            'host' => 'smtp.gmail.com',
+            'port' => 587,
+            'encryption' => 'tls',
+            'username' =>'minhsanh.doanlaravel0709@gmail.com',
+            'password' => 'rpauqwytlpzoutuh',
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -92,8 +92,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'minhsanh.doanlaravel0709@gmail.com',
+        'name' => 'PSSNEAKER',
     ],
 
     /*

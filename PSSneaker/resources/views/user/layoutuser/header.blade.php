@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
-                        <input type="text" placeholder="Search" />
+                        <input type="text" name="keyword" id="keywordproductindex" placeholder="Search"/>
                         <p onclick="onSearch('keyword');"><i class="fas fa-search"></i></p>
                     </div>
                 </div>

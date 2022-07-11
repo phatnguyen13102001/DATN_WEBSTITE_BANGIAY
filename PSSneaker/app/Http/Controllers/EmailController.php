@@ -5,10 +5,13 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 use App\Models\Social;
 use App\Models\logo;
+use App\Models\Contact;
 use App\Models\Policies;
 use App\Models\Manufacturer;
 use App\Models\Setting;
+use App\Mail\ContactMail;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Session;
 class EmailController extends Controller
 {
     public function create()
@@ -24,30 +27,19 @@ class EmailController extends Controller
     }
 
     public function sendEmail(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-          'email' => 'required|email',
-          'phone' => 'required',
-          'address' => 'required',
-          'topic' => 'required',
-          'content' => 'required',
-        ]);
-
-        $data = [
-          'name' => $request->name,
-          'email' => $request->email,
-          'phone' => $request->phone,
-          'address' => $request->address,
-          'topic' => $request->topic,
-          'content' => $request->content,
-        ];
-
-        Mail::send('email-template', $data, function($message) use ($data) {
-          $message->to($data['email'])
-          ->subject($data['subject']);
-        });
-
-        return back()->with(['message' => 'Email successfully sent!']);
+    { 
+      Mail::send('Email.email',[
+        'name'=> $request->name,
+        'email'=> $request->email,
+        'phone'=> $request->phone,
+        'address'=>$request->address,
+        'topic'=>$request->topic,
+        'content'=>$request->content,
+      ], function($mail) use($request){
+        $mail->to('minhsanh.doanlaravel0709@gmail.com');
+        $mail->from($request->email, $request->name);
+        $mail->subject('Liên hệ');
+      });
+      return redirect()->guest('lienhe');
     }
 }

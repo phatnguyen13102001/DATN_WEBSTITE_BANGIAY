@@ -7,7 +7,7 @@
             <div class="col-sm-4">
                 <div class="signup-form">
                     <!--sign up form-->
-                    <h2>Đăng Kí</h2>
+                    <h2>Đăng Ký</h2>
                     <form method="post" action="{{route('dangkiweb')}}" enctype="multipart/form-data">
                         @csrf
                         <input type="text" name="name" placeholder="Họ và tên" />
@@ -72,8 +72,11 @@
                             {{$errors->first('password')}}
                         </div>
                         @endif
-                        <button type="submit" class="btn btn-default">Đăng Kí</button>
+                        <button type="submit" class="btn btn-default">Đăng Ký</button>
                     </form>
+                    <div class="title_login_quenml">
+                        <a href="{{route('dangnhapweb')}}">Quay lại Đăng nhập</a>
+                    </div>
                 </div>
                 <!--/sign up form-->
             </div>

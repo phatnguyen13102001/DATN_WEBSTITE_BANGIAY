@@ -1008,303 +1008,310 @@ function loadPermissions() {
     }
 }
 
-$(document).ready(function () {
-	/* Modal Delete*/
-	$(document).on('click', '.deleteBtn', function () {
-		var id = $(this).val();
+$(document).ready(function() {
+    /* Modal Delete*/
+    $(document).on('click', '.deleteBtn', function() {
+        var id = $(this).val();
         $('#deleteModal').modal({
             show: true
-		});
-		$('#deleteting_id').val(id);
-	});
+        });
+        $('#deleteting_id').val(id);
+    });
 
-	/* Modal Insert*/
-	$(document).on('click', '.insertBtn', function () {
+    /* Modal Insert*/
+    $(document).on('click', '.insertBtn', function() {
         $('#insertModal').modal({
             show: true
-		});
-	});
+        });
+    });
 
-	/* Modal Update*/
-	$(document).on('click', '.updateBtn', function () {
-		var id_update = $(this).val();
+    /* Modal Update*/
+    $(document).on('click', '.updateBtn', function() {
+        var id_update = $(this).val();
         $('#updateModal').modal({
             show: true
-		});
-		$.ajax({
-			type: "GET",
-			url: "/admin/product/stock/edit/" + id_update,
-			success: function (data) {
-				$('#id_size').html(data.size);
-				var soluong = parseInt(data.quantity);
-				$('#quantity').val(soluong);
-			}
-		});
-		$('#updateting_id').val(id_update);
+        });
+        $.ajax({
+            type: "GET",
+            url: "/admin/product/stock/edit/" + id_update,
+            success: function(data) {
+                $('#id_size').html(data.size);
+                var soluong = parseInt(data.quantity);
+                $('#quantity').val(soluong);
+            }
+        });
+        $('#updateting_id').val(id_update);
     });
-    
+
     /* Modal View*/
-	$(document).on('click', '.viewBtn', function () {
-		var id_user = $(this).val();
+    $(document).on('click', '.viewBtn', function() {
+        var id_user = $(this).val();
         $('#ViewModal').modal({
             show: true
         });
         $.ajax({
-			type: "GET",
-			url: "/admin/account/edit/" + id_user,
-			success: function (data) {
-				$('#name').html(data.user.name);
-				$('#birthday').html(data.user.birthday);
-				$('#phone').html(data.user.phone);
-				$('#email').html(data.user.email);
-				$('#gender').html(data.user.gender);
+            type: "GET",
+            url: "/admin/account/edit/" + id_user,
+            success: function(data) {
+                $('#name').html(data.user.name);
+                $('#birthday').html(data.user.birthday);
+                $('#phone').html(data.user.phone);
+                $('#email').html(data.user.email);
+                $('#gender').html(data.user.gender);
                 $('#address').html(data.user.address);
                 if ((data.user.block) == 1) {
-                    $('#block').attr('checked',true);
+                    $('#block').attr('checked', true);
+                } else if ((data.user.block) == 0) {
+                    $('#block').removeAttr('checked', false);
                 }
-                else if((data.user.block)==0) {
-                    $('#block').removeAttr('checked',false);
-                }
-			}
-		});
-		$('#updateting_id').val(id_user);
+            }
+        });
+        $('#updateting_id').val(id_user);
     });
 
-	
-	/* Img Preview */
-	const input = document.getElementById("file-zone");
-	const image = document.getElementById("photoUpload-preview");
-	
-	
-	/* Pagination */
-	$(document).on('click','.pagination a',function(event){
+
+    /* Img Preview */
+    const input = document.getElementById("file-zone");
+    const image = document.getElementById("photoUpload-preview");
+
+
+    /* Pagination */
+    $(document).on('click', '.pagination a', function(event) {
         event.preventDefault();
         var page = $(this).attr('href').split('page=')[1];
         getDataSize(page);
-	});
-	function getDataSize(page)
-	{
-		$.ajax({
-		url: location + "/?page=" + page,
-		success:function(data)
-		{
-			$('#table_data').html(data);
-		}
-		});
-	}
+    });
 
-	/*Search Ajax*/
-	$('#keywordsize').on('keyup', function () {
-                var keyword = $(this).val();
-                $.ajax({
-                    type: 'get',
-					url: "/searchsize",
-                    data: {
-                        keyword: keyword
-                    },
-                    success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-                    }
-                });
-            })
-	
-	$('#keywordcolor').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchsize",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
-	})
-	$('#keywordmanufacturer').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchmanufacturer",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
-	})
-	$('#keywordnews').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchnews",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
-			})
-	$('#keywordpolicy').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchpolicy",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
-	})
-	$('#keywordslideshow').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchslideshow",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
-	})
-	$('#keywordsocial').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchsocial",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
-	})
-	$('#keywordproduct').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchproduct",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
+    function getDataSize(page) {
+        $.ajax({
+            url: location + "/?page=" + page,
+            success: function(data) {
+                $('#table_data').html(data);
+            }
+        });
+    }
+
+    /*Search Ajax*/
+    $('#keywordsize').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchsize",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
     })
-    $('#keyworduser').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchuser",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
+
+    $('#keywordcolor').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchsize",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
     })
-    $('#keywordpayment').on('keyup', function () {
-				var keyword = $(this).val();
-				$.ajax({
-					type: 'get',
-					url: "/searchpayment",
-					data: {
-						keyword: keyword
-					},
-					success:function(data){
-						$('#table_data').html(data);
-						if (data.status == 'Không có dữ liệu') {
-							$('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
-						}
-					}
-				});
-			})
-	
-	$.ajaxSetup({ headers: { 'csrftoken': '{{ csrf_token() }}' } });
-	
-	/* CKEditor */
-	CKEDITOR.replace('desc_cke');
-	CKEDITOR.replace('content');
+    $('#keywordmanufacturer').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchmanufacturer",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
+    $('#keywordnews').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchnews",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
 
-	/* Format Price */
-	$(".format-price").priceFormat({
-			limit: 13,
-			prefix: '',
-			centsLimit: 0
-	});
-	
-	$(".regular_price, .sale_price").keyup(function(){
-			var regular_price = $('.regular_price').val();
-			var sale_price = ($('.sale_price').length) ? $('.sale_price').val() : 0;
-			var discount = 0;
+    $('#keywordpolicy').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchpolicy",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
+    $('#keywordslideshow').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchslideshow",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
+    $('#keywordsocial').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchsocial",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
+    $('#keywordproduct').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchproduct",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
+    $('#keywordproductindex').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchproductindex",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
+    $('#keyworduser').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchuser",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
+    $('#keywordpayment').on('keyup', function() {
+        var keyword = $(this).val();
+        $.ajax({
+            type: 'get',
+            url: "/searchpayment",
+            data: {
+                keyword: keyword
+            },
+            success: function(data) {
+                $('#table_data').html(data);
+                if (data.status == 'Không có dữ liệu') {
+                    $('#table_data').html(' <div class="card card-primary card-outline text-sm mb-0"><div class="card-body table-responsive p-0"><table class="table table-hover"><tbody><tr><td colspan="100" class="text-center">Không có dữ liệu</td></tr></tbody></table></div></div>');
+                }
+            }
+        });
+    })
 
-			if(regular_price=='' || regular_price=='0' || sale_price=='' || sale_price=='0')
-			{
-				discount = 0;
-			}
-			else
-			{
-				regular_price = regular_price.replace(/,/g,"");
-				sale_price = (sale_price) ? sale_price.replace(/,/g,"") : 0;
-				regular_price = parseInt(regular_price);
-				sale_price = parseInt(sale_price);
+    $.ajaxSetup({ headers: { 'csrftoken': '{{ csrf_token() }}' } });
 
-				if(sale_price < regular_price)
-				{
-					discount = 100-((sale_price * 100) / regular_price);
-					discount = roundNumber(discount,0);
-				}
-				else
-				{
-					$('.regular_price, .sale_price').val(0);
-					if($(".discount").length)
-					{
-						discount = 0;
-						$('.sale_price').val(0);
-					}
-				}
-			}
+    /* CKEditor */
+    CKEDITOR.replace('desc_cke');
+    CKEDITOR.replace('content');
 
-			if($(".discount").length)
-			{
-				$('.discount').val(discount);
-			}
+    /* Format Price */
+    $(".format-price").priceFormat({
+        limit: 13,
+        prefix: '',
+        centsLimit: 0
+    });
+
+    $(".regular_price, .sale_price").keyup(function() {
+        var regular_price = $('.regular_price').val();
+        var sale_price = ($('.sale_price').length) ? $('.sale_price').val() : 0;
+        var discount = 0;
+
+        if (regular_price == '' || regular_price == '0' || sale_price == '' || sale_price == '0') {
+            discount = 0;
+        } else {
+            regular_price = regular_price.replace(/,/g, "");
+            sale_price = (sale_price) ? sale_price.replace(/,/g, "") : 0;
+            regular_price = parseInt(regular_price);
+            sale_price = parseInt(sale_price);
+
+            if (sale_price < regular_price) {
+                discount = 100 - ((sale_price * 100) / regular_price);
+                discount = roundNumber(discount, 0);
+            } else {
+                $('.regular_price, .sale_price').val(0);
+                if ($(".discount").length) {
+                    discount = 0;
+                    $('.sale_price').val(0);
+                }
+            }
+        }
+
+        if ($(".discount").length) {
+            $('.discount').val(discount);
+        }
     });
 
     /* Datetimepicker */
@@ -1316,51 +1323,40 @@ $(document).ready(function () {
             image.src = src;
         }
     });
-    
-	/* Menu */
-	if($(".sidebar").length)
-	{
-		if($(".menu-group").length)
-		{
-			var navlink = $(".menu-group").find(".nav-link.active").first();
-			if(navlink.length)
-			{
-				var menugroup = navlink.parents(".menu-group");
-				menugroup.addClass("menu-open");
-				menugroup.find(">.nav-link").addClass("active");
-			}
-		}
 
-		if($(".nav-sidebar").find(">li.nav-item").not('.menu-group, .d-none').length)
-		{
-			var navitem = $(".nav-sidebar").find(">li.nav-item").not('.menu-group, .d-none');
-			navitem.each(function(index){
-				var navtreeview = $(this).find(">ul.nav-treeview");
-				if(navtreeview.length)
-				{
-					var navitemchild = $(this).find(">ul.nav-treeview").find(">li.nav-item");
-					var navitemchildnone = $(this).find(">ul.nav-treeview").find(">li.nav-item.d-none");
-					if(navitemchild.length)
-					{
-						if(navitemchild.length == navitemchildnone.length)
-						{
-							if(!$(this).hasClass("d-none"))
-							{
-								$(this).addClass("d-none");
-							}
-						}
-					}
-					else if(navitemchild.length == 0 && navitemchildnone.length == 0)
-					{
-						if(!$(this).hasClass("d-none"))
-						{
-							$(this).addClass("d-none");
-						}
-					}
-				}
-			});
-		}
-	}
+    /* Menu */
+    if ($(".sidebar").length) {
+        if ($(".menu-group").length) {
+            var navlink = $(".menu-group").find(".nav-link.active").first();
+            if (navlink.length) {
+                var menugroup = navlink.parents(".menu-group");
+                menugroup.addClass("menu-open");
+                menugroup.find(">.nav-link").addClass("active");
+            }
+        }
+
+        if ($(".nav-sidebar").find(">li.nav-item").not('.menu-group, .d-none').length) {
+            var navitem = $(".nav-sidebar").find(">li.nav-item").not('.menu-group, .d-none');
+            navitem.each(function(index) {
+                var navtreeview = $(this).find(">ul.nav-treeview");
+                if (navtreeview.length) {
+                    var navitemchild = $(this).find(">ul.nav-treeview").find(">li.nav-item");
+                    var navitemchildnone = $(this).find(">ul.nav-treeview").find(">li.nav-item.d-none");
+                    if (navitemchild.length) {
+                        if (navitemchild.length == navitemchildnone.length) {
+                            if (!$(this).hasClass("d-none")) {
+                                $(this).addClass("d-none");
+                            }
+                        }
+                    } else if (navitemchild.length == 0 && navitemchildnone.length == 0) {
+                        if (!$(this).hasClass("d-none")) {
+                            $(this).addClass("d-none");
+                        }
+                    }
+                }
+            });
+        }
+    }
 
     /* Menu */
     if ($(".sidebar").length) {
@@ -1434,11 +1430,10 @@ $(document).ready(function () {
         });
     }
 
-	/* PhotoZone */
-	if($("#photo-zone").length)
-	{
-		photoZone("#photo-zone","#file-zone","#photoUpload-preview img");
-	}
+    /* PhotoZone */
+    if ($("#photo-zone").length) {
+        photoZone("#photo-zone", "#file-zone", "#photoUpload-preview img");
+    }
 
     /* Setting */
     if ($(".mailertype").length) {
