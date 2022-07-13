@@ -7,7 +7,7 @@
             <div class="col-sm-4">
                 <div class="signup-form">
                     <!--sign up form-->
-                    <h2>Đăng Kí</h2>
+                    <h2>Đăng Ký</h2>
                     <form method="post" action="{{route('dangkiweb')}}" enctype="multipart/form-data">
                         @csrf
                         <input type="text" name="name" placeholder="Họ và tên" />
@@ -29,8 +29,8 @@
                         </div>
                         @endif
                         <select id="gender" name="gender">
-                            <option value="0">Nam</option>
-                            <option value="1">Nữ</option>
+                            <option value="1">Nam</option>
+                            <option value="0">Nữ</option>
                         </select>
                         @if($errors->has('gender'))
                         <div class="alert alert-danger" style="margin-top:10px;">
@@ -51,20 +51,20 @@
                         @endif
                         <!--  -->
                         <div class="card card-primary card-outline text-sm" id="card_image">
-                    
-                    <div class="card-body">
-                        <div class="photoUpload-zone">
-                            <div class="photoUpload-detail">
-                                <img id="photoUpload-preview" src="{{asset('admin_pssneaker/images/noimage.png')}}" alt="Alt Photo">
+
+                            <div class="card-body">
+                                <div class="photoUpload-zone">
+                                    <div class="photoUpload-detail">
+                                        <img id="photoUpload-preview" src="{{asset('admin_pssneaker/images/noimage.png')}}" alt="Alt Photo">
+                                    </div>
+                                    <label class="photoUpload-file" id="photo-zone" for="file-zone">
+                                        <input type="file" name="avatar" id="file-zone">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
+                                    </label>
+                                </div>
                             </div>
-                            <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                <input type="file" name="avatar" id="file-zone">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
-                            </label>
                         </div>
-                    </div>
-                </div>
                         <!--  -->
                         <input type="password" name="password" placeholder="Mật khẩu" />
                         @if($errors->has('password'))
@@ -72,8 +72,11 @@
                             {{$errors->first('password')}}
                         </div>
                         @endif
-                        <button type="submit" class="btn btn-default">Đăng Kí</button>
+                        <button type="submit" class="btn btn-default">Đăng Ký</button>
                     </form>
+                    <div class="title_login_quenml">
+                        <a href="{{route('dangnhapweb')}}">Quay lại Đăng nhập</a>
+                    </div>
                 </div>
                 <!--/sign up form-->
             </div>

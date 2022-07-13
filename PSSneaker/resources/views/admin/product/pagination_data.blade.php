@@ -6,12 +6,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center">SKU</th>
                         <th class="align-middle text-center">Tên sản phẩm</th>
                         <th class="align-middle text-center">Hình</th>
@@ -30,12 +24,6 @@
                 <tbody>
                     @foreach($lstproduct as $product)
                     <tr>
-                        <td class="align-middle">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-83" value="83">
-                                <label for="select-checkbox-83" class="custom-control-label"></label>
-                            </div>
-                        </td>
                         <td class="align-middle text-center">
                             <p>{{$product->SKU}}</p>
                         </td>

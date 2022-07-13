@@ -118,22 +118,21 @@
                             <div class="col-sm-12">
                                 <div class="title_gioithieu_product_detail">THÔNG TIN SẢN PHẨM</div>
                                 <div class="content-container">
-                                    @if(($lstproduct->content)===NULL)
-                                    <div class="alert alert-warning w-100" role="alert">
-                                        <p>Nội dung đang được cập nhập</p>
-                                    </div>
-                                    @else
+                                    @if(($lstproduct->describe)!=NULL)
                                     <div id="editor">
                                         {!! htmlspecialchars_decode(nl2br($lstproduct->describe)) !!}
                                     </div>
+                                    @else
+                                    <div class="alert alert-warning w-100" role="alert">
+                                        <p>Nội dung đang được cập nhập</p>
+                                    </div>
                                     @endif
                                 </div>
-                                <form action="#">
-                                    <textarea name=""></textarea>
-                                    <button type="button" class="btn btn-default pull-right">
-                                        Gửi
-                                    </button>
-                                </form>
+                            </div>
+                            <div class="col-sm-12">
+                                <div id="fb-root"></div>
+                                <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1619936111724930&autoLogAppEvents=1" nonce="lMAIxCGt"></script>
+                                <div class="fb-comments" data-href="{{url($lstproduct->id)}}" data-width="1000" data-numposts="5"></div>
                             </div>
                         </div>
                     </div>

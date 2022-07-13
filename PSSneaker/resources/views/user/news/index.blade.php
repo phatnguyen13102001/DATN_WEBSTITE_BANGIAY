@@ -14,7 +14,7 @@
                         <a href="{{route('newsdetail',$news->id)}}">
                             <img src="{{$news->image}}" alt="{{$news->name}}">
                         </a>
-                        <p class="created_at_news">Ngày đăng: {{$news->created_at}}</p>
+                        <p class="created_at_news">Ngày đăng: {{ date("h:i:s A - d/m/Y", strtotime($news->created_at)) }}</p>
                         <p class="describe_news">{{$news->describe}}</p>
                         <a class="btn btn-primary" href="{{route('newsdetail',$news->id)}}">Xem chi tiết</a>
                     </div>

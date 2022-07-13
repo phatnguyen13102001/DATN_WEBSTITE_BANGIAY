@@ -87,7 +87,6 @@
                                       @endforeach
                                   </ul>
                               </section>
-                              <script src="js/jquery.easydropdown.js "></script>
                           </div>
                       </div>
                       <!--/category-products-->
@@ -95,21 +94,69 @@
               </div>
               <div class="col-sm-9 padding-right">
                   <h2 class="title text-center">SẢN PHẨM</h2>
-                  <form id="form_order" action="" method="get">
-                      <select id="orderby" class="orderby">
-                          <option value="1">Tên: A-Z</option>
-                          <option value="2">Giá: Tăng dần</option>
-                          <option value="3">Giá: giảm dần</option>
-                          <option value="4">Tên: Z-A</option>
-                          <option value="5">Cũ nhất</option>
-                          <option value="6">Mới nhất</option>
-                          <option value="7">Bán chạy nhất</option>
-                      </select>
-                  </form>
-                  <div id="table_data">
-                      @include('user.body.pagination_data');
+                  <div class="w-25 float-right">
+                      <form>
+                          @csrf
+                          <select name="sort" id="sort" class="form-select" aria-label="Default select example">
+                              <option value="">-- Thứ tự --</option>
+                              <option value="{{Request::url()}}?sort_by=default">-- Mặc định --</option>
+                              <option value="{{Request::url()}}?sort_by=tang_dan">-- Giá tăng dần --</option>
+                              <option value="{{Request::url()}}?sort_by=giam_dan">-- Giá giảm dần --</option>
+                              <option value="{{Request::url()}}?sort_by=kytu_az">A đến Z</option>
+                              <option value="{{Request::url()}}?sort_by=kytu_za">Z đến A</option>
+                          </select>
+                      </form>
+                  </div>
+                  <div class="grid-container-sp">
+                      @foreach($lstproduct as $product)
+                      <div class="grid-item-sp">
+                          <a href="{{route('productdetail',$product->id)}}" title="{{$product->name}}">
+                              <div class="img-sp">
+                                  <p class="scale-img img_hover"><img src="{{$product->image}}" alt="{{$product->name}}"></p>
+                                  @if(($product->discount)!=0)
+                                  <div class="discount-sp">
+                                      <p>{{$product->discount}}%</p>
+                                  </div>
+                                  @else
+                                  @endif
+                              </div>
+                          </a>
+                          <div class="info-product">
+                              <a href="{{route('productdetail',$product->id)}}" title="{{$product->name}}">
+                                  <div class="name-sp">
+                                      <p class="text-split-1">{{$product->name}}</p>
+                                  </div>
+                              </a>
+                              <a href="{{route('productdetail',$product->id)}}" title="{{$product->name}}">
+                                  <div class="price-sp">
+                                      @if(($product->discount)!=0)
+                                      <span>Giá: </span>
+                                      <span class="sale_price_sp">{{number_format($product->sale_price)}}₫</span>
+                                      <span class="regular_price_sp"><del>{{number_format($product->regular_price)}}₫</del></span>
+                                      @else
+                                      <span>Giá: </span>
+                                      <span class="price-new">{{($product->regular_price)!=0 ? number_format($product->regular_price) : 'Liên Hệ'}}{{($product->regular_price)!=0 ? '₫' : ''}}</span>
+                                      @endif
+                                  </div>
+                              </a>
+                              <div class="box-cart">
+                                  <a href="{{route('productdetail',$product->id)}}">
+                                      XEM CHI TIẾT
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                      @endforeach
+                  </div>
+                  <div class="pagination flex-wrap justify-content-center">
+                      {!! $lstproduct->links() !!}
                   </div>
               </div>
+          </div>
+      </div>
+      <div class="modalloading fade" tabindex="-1" role="dialog" id="spinnerModal">
+          <div class="modal-dialog modal-dialog-centered text-center" role="document">
+              <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
           </div>
       </div>
   </section>
@@ -119,50 +166,26 @@
           <div class="recommended_items">
               <!--recommended_items-->
               <h2 class="title text-center">tin tức</h2>
-              <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                      <div class="item active">
-                          @foreach($lsttintuc as $key)
-                          <a href="{{route('newsdetail',$key->id)}}">
-                              <div class="col-sm-4">
-                                  <div class="product-image-wrapper">
-                                      <div class="single-products">
-                                          <div class="productinfo text-center">
-                                              <p class="scale-img img_hover"><img src="{{$key->image}}" alt="{{$key->name}}" /></p>
-                                              <div class="title_tintuc">
-                                                  <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
-                                                  <div class="title_tintuc_txt_02">Ngày Đăng: {{$key->created_at}}</div>
-                                                  <div class="title_tintuc_txt_03 text-split-2">{{$key->describe}}</div>
-                                              </div>
-                                          </div>
-                                      </div>
+              <div class="owl-carousel">
+                  @foreach($lsttintuc as $key)
+                  <a href="{{route('newsdetail',$key->id)}}">
+                      <div class="product-image-wrapper">
+                          <div class="single-products">
+                              <div class="productinfo text-center">
+                                  <p class="scale-img img_hover"><img src="{{$key->image}}" alt="{{$key->name}}" /></p>
+                                  <div class="title_tintuc">
+                                      <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
+                                      <div class="title_tintuc_txt_02">Ngày Đăng: {{ date("h:i:s A - d/m/Y", strtotime($key->created_at)) }}</div>
+                                      <div class="title_tintuc_txt_03 text-split-2">{{$key->describe}}</div>
                                   </div>
                               </div>
-                          </a>
-                          @endforeach
+                          </div>
                       </div>
-                      <!-- <div class="item">
-                          
-                      </div> -->
-                  </div>
-                  <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                      <i class="fa fa-angle-left"></i>
                   </a>
-                  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-                      <i class="fa fa-angle-right"></i>
-                  </a>
+                  @endforeach
               </div>
           </div>
           <!--/recommended_items-->
       </div>
   </div>
   @endsection
-  <script type="text/javascript">
-      $(function() {
-          $("#orderby").on('change', function(e) {
-              console.log(e);
-              var status_id = e.target.value;
-              alert(status_id)
-          })
-      });
-  </script>

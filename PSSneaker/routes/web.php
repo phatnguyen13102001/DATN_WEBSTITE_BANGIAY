@@ -15,11 +15,13 @@ use App\Http\Controllers\admin\PoliciesController;
 use App\Http\Controllers\admin\SocialController;
 use App\Http\Controllers\admin\PaymentController;
 use App\Http\Controllers\admin\FacebookController;
+use App\Http\Controllers\admin\GoogleController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\OrderAdminController;
 /* Controller FrontEnd */
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -35,6 +37,9 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// 
+// Route::get('/lienhe', [EmailController::class,'create'])->name('lienheweb');
+// Route::post('/lienhe', [EmailController::class,'sendEmail1'])->name('lienhewweb.submit');
 
 Route::middleware('admin')->group(function () {
     Route::resource('/admin/account', AccountController::class);
@@ -76,7 +81,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/searchproduct', [ProductController::class, 'search']);
     Route::get('/searchuser', [AccountController::class, 'search']);
     Route::get('/searchpayment', [PaymentController::class, 'search']);
-
+    Route::get('/searchproductindex', [FrontendController::class, 'search']);
     /* Block User */
     Route::put('/admin/account/update', [AccountController::class, 'update'])->name('user.update');
     Route::get('/admin/account/edit/{id}', [AccountController::class, 'edit']);
@@ -105,6 +110,8 @@ Route::get('/productdetail/{id}', [FrontendController::class, 'getproductdetail'
 Route::get('/product_by_manufacturer/{id}', [FrontendController::class, 'getproductbymanu'])->name('productbymanu');
 Route::get('/newsdetail/{id}', [FrontendController::class, 'getnewsdetail'])->name('newsdetail');
 Route::get('/index/{id}', [FrontendController::class, 'getindex']);
+Route::post('/autocomplete-ajax', [FrontendController::class, 'autocomplete_ajax']);
+Route::post('/tim-kiem', [FrontendController::class, 'search'])->name('timkiem');
 
 /* Add To Cart */
 Route::post('/add-to-cart', [CartController::class, 'addtocart'])->name('addtocart');
@@ -119,16 +126,10 @@ Route::post('/order', [OrderController::class, 'insertOrder'])->name('order');
 Route::get('/chinhsach/{id}', [FrontendController::class, 'getpolicesdetail'])->name('chinhsach');
 Route::get('/thongtincanhan/{id}', [FrontendController::class, 'getprofile'])->name('thongtincanhanweb');
 // 
-
-Route::get('google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
-Route::get('google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
+Route::get('google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
 Route::get('/auth/redirect/{provider}', [FacebookController::class, 'redirect']);
 Route::get('/auth/callback/{provider}', [FacebookController::class, 'callback']);
-/*user*/
-Route::get('lienhe', function () {
-    return view('user.contact.index');
-})->name('lienheweb');
-
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');
 })->name('Forgotpassword');
@@ -138,7 +139,10 @@ Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnha
 Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
 Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('email', [LoginController::class, 'email'])->name('mail');
 Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');
 Route::get('edit/thongtincanhan', [LoginController::class, 'editprofile'])->name('chinhsuatthongtin');
 Route::post('edit/thongtincanhan', [LoginController::class, 'Updateprofile'])->name('capnhatthongtin');
+//
+
+Route::get('/lienhe', [EmailController::class, 'create'])->name('lienheweb');
+Route::post('/lienhepost', [EmailController::class, 'sendEmail'])->name('lienheweb.post');

@@ -29,7 +29,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('product.index')}}" class="nav-link {{ (request()->is('admin/product')) || (request()->is('admin/product/create')) ? 'active' : '' }}">
+                    <a href="{{route('product.index')}}" class="nav-link {{ (request()->is('admin/product')) || (request()->is('admin/product/create')) || (request()->is('admin/product/*/edit')) || (request()->is('admin/product/library/*')) || (request()->is('admin/product/stock/*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-boxes"></i>
                         <p>
                             Quản lý sản phẩm
@@ -37,7 +37,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('manufacturer.index')}}" class="nav-link {{ (request()->is('admin/manufacturer')) || (request()->is('admin/manufacturer/edit')) || (request()->is('admin/manufacturer/create')) ? 'active' : '' }}">
+                    <a href="{{route('manufacturer.index')}}" class="nav-link {{ (request()->is('admin/manufacturer')) || (request()->is('admin/manufacturer/*/edit')) || (request()->is('admin/manufacturer/create')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Quản lý hãng sản xuất
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('size.index')}}" class="nav-link {{ (request()->is('admin/size')) || (request()->is('admin/size/edit')) || (request()->is('admin/size/create')) ? 'active' : '' }}">
+                    <a href="{{route('size.index')}}" class="nav-link {{ (request()->is('admin/size')) || (request()->is('admin/size/*/edit')) || (request()->is('admin/size/create')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-box"></i>
                         <p>
                             Quản lý size
@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('color.index')}}" class="nav-link {{ (request()->is('admin/color')) || (request()->is('admin/color/edit')) || (request()->is('admin/color/create')) ? 'active' : '' }}">
+                    <a href="{{route('color.index')}}" class="nav-link {{ (request()->is('admin/color')) || (request()->is('admin/color/*/edit')) || (request()->is('admin/color/create')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-palette"></i>
                         <p>
                             Quản lý màu
@@ -77,8 +77,8 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item {{ (request()->is('admin/logo')) || (request()->is('admin/slideshow')) || (request()->is('admin/social')) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ (request()->is('admin/logo')) || (request()->is('admin/slideshow')) || (request()->is('admin/social')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('admin/logo')) || (request()->is('admin/slideshow')) || (request()->is('admin/social')) || (request()->is('admin/slideshow/*/edit')) || (request()->is('admin/slideshow/create')) || (request()->is('admin/social/create')) || (request()->is('admin/social/*/edit')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/logo')) || (request()->is('admin/slideshow')) || (request()->is('admin/social')) || (request()->is('admin/slideshow/*/edit')) || (request()->is('admin/slideshow/create')) || (request()->is('admin/social/create')) || (request()->is('admin/social/*/edit')) ? 'active' : '' }}">
                         <i class=" nav-icon fas fa-images"></i>
                         <p>
                             Quản lý hình ảnh
@@ -93,21 +93,21 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('slideshow.index'))}}" class="nav-link {{ (request()->is('admin/slideshow')) ? 'active' : '' }}">
+                            <a href="{{(route('slideshow.index'))}}" class="nav-link {{ (request()->is('admin/slideshow')) || (request()->is('admin/slideshow/*/edit')) || (request()->is('admin/slideshow/create')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Slideshow</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('social.index'))}}" class="nav-link {{ (request()->is('admin/social')) ? 'active' : '' }}">
+                            <a href="{{(route('social.index'))}}" class="nav-link {{ (request()->is('admin/social')) || (request()->is('admin/social/create')) || (request()->is('admin/social/*/edit')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Social</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item {{ (request()->is('admin/news')) || (request()->is('admin/policy')) || (request()->is('admin/payment')) ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ (request()->is('admin/news')) || (request()->is('admin/policy')) || (request()->is('admin/payment')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('admin/news')) || (request()->is('admin/policy')) || (request()->is('admin/payment')) || (request()->is('admin/news/create')) || (request()->is('admin/policy/create')) || (request()->is('admin/payment/create')) || (request()->is('admin/news/*/edit')) || (request()->is('admin/policy/*/edit')) || (request()->is('admin/payment/*/edit')) ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ (request()->is('admin/news')) || (request()->is('admin/policy')) || (request()->is('admin/payment')) || (request()->is('admin/news/create')) || (request()->is('admin/policy/create')) || (request()->is('admin/payment/create')) || (request()->is('admin/news/*/edit')) || (request()->is('admin/policy/*/edit')) || (request()->is('admin/payment/*/edit')) ? 'active' : '' }}">
                         <i class="nav-icon far fa-newspaper"></i>
                         <p>
                             Quản lý bài viết
@@ -116,19 +116,19 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{(route('news.index'))}}" class="nav-link {{ (request()->is('admin/news')) ? 'active' : '' }}">
+                            <a href="{{(route('news.index'))}}" class="nav-link {{ (request()->is('admin/news')) || (request()->is('admin/news/*/edit')) || (request()->is('admin/news/create')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Tin tức</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{(route('policy.index'))}}" class="nav-link {{ (request()->is('admin/policy')) ? 'active' : '' }}">
+                            <a href="{{(route('policy.index'))}}" class="nav-link {{ (request()->is('admin/policy')) || (request()->is('admin/policy/*/edit')) || (request()->is('admin/policy/create')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Chính sách</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('payment.index')}}" class="nav-link {{ (request()->is('admin/payment')) ? 'active' : '' }}">
+                            <a href="{{route('payment.index')}}" class="nav-link {{ (request()->is('admin/payment')) || (request()->is('admin/payment/*/edit')) || (request()->is('admin/payment/create')) ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Hình thức thanh toán</p>
                             </a>
@@ -136,7 +136,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('order.index')}}" class="nav-link {{ (request()->is('admin/order')) ? 'active' : '' }}">
+                    <a href="{{route('order.index')}}" class="nav-link {{ (request()->is('admin/order')) || (request()->is('admin/order/*/edit')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-shopping-bag"></i>
                         <p>
                             Quản lý đơn hàng

@@ -7,7 +7,7 @@
                 <div class="bg">
                     <h2 class="title text-center">{{$lstnews->name}}</h2>
                 </div>
-                <div class="time-main"><i class="fas fa-calendar-week"></i><span>{{$lstnews->created_at}}</span></div>
+                <div class="time-main"><i class="fas fa-calendar-week"></i><span>{{ date("h:i:s A - d/m/Y", strtotime($lstnews->created_at)) }}</span></div>
                 @if(($lstnews->content)===NULL)
                 <div class="alert alert-warning w-100" role="alert">
                     <p>Nội dung đang cập nhật</p>

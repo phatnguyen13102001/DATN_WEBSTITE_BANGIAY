@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Setting;
+use App\Models\Orderdetail;
+use App\Models\Order;
+use App\Models\Social;
 use App\Models\Logo;
 use App\Models\Policies;
 use App\Models\Manufacturer;
@@ -35,6 +38,7 @@ class LoginController extends Controller
     // 
     public function index()
     {
+        $mangxh=Social::all();
         $lstlogo = Logo::first();
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
@@ -42,7 +46,7 @@ class LoginController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImagelogo($lstlogo);
-        return View::make('login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.index', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'));
+        return View::make('login.index', compact('mangxh','setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.index', compact('mangxh','setting', 'lstlogo', 'hangsx', 'chinhsach'));
     }
     /**
      * Handle an authentication attempt.
@@ -56,7 +60,7 @@ class LoginController extends Controller
         $credentials = $request->validate(
             [
                 'email' => 'required|email',
-                'password' => 'required',
+                'password' => 'required|min:8',
             ],
             [
                 'email.required' => 'Email Không Được Bỏ Trống',
@@ -106,6 +110,7 @@ class LoginController extends Controller
                 'phone' => 'required',
                 'gender' => 'required',
                 'birthday' => 'required',
+                'password' =>'required|min:8',
             ],
             [
                 'email.required' => 'Email Không Được Bỏ Trống',
@@ -115,6 +120,7 @@ class LoginController extends Controller
                 'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
                 'gender.required' => 'Giới tính Không Được Bỏ Trống',
                 'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
+                'password.required' => 'Mật khẩu Không Được Bỏ Trống',
             ]
         );
         $user = new User();
@@ -172,11 +178,13 @@ class LoginController extends Controller
                 'name' => 'required',
                 'phone' => 'required',
                 'birthday' => 'required',
+                'gender' => 'required'
             ],
             [
                 'name.required' => 'Tên Không Được Bỏ Trống',
                 'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
                 'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
+                'gender.required' => 'Giới tính Không Được Bỏ Trống',
             ]
         );
         $user = User::find(Auth::user()->id);
@@ -184,6 +192,7 @@ class LoginController extends Controller
             $user->name = $request['name'];
             $user->phone = $request['phone'];
             $user->birthday = $request['birthday'];
+            $user->gender = $request['gender'];
             $user->address = $request['address'];
             $user->save();
             $request->session()->flash('success', 'cập nhật thành công');
@@ -191,5 +200,9 @@ class LoginController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+    public function loadcthd(){
+        $ctdh = Order::where('id_user',Auth::user()->id);
+        return view('user.account.history')->with(compact('ctdh'));
     }
 }

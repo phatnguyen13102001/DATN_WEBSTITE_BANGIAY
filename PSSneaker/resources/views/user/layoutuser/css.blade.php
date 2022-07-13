@@ -8,4 +8,6 @@
 <link href="{{ asset('user/eshopper/css/cart.css')}}" rel="stylesheet">
 <link href="{{ asset('user/eshopper/css/etalage.css')}}" rel="stylesheet">
 <link href="{{ asset('user/eshopper/css/style1.css')}}" rel="stylesheet">
+<link href="{{ asset('user/eshopper/css/owl.carousel.min.css')}}" rel="stylesheet">
+<link href="{{ asset('user/eshopper/css/owl.theme.default.min.css')}}" rel="stylesheet">
 <link href="{{ asset('user/eshopper/bootstrap/bootstrap1.css')}}" rel="stylesheet">

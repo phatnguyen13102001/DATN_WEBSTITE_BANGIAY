@@ -6,42 +6,46 @@ const file = document.querySelector('#file');
 const uploadBtn = document.querySelector('#uploadBtn');
 
 //if user hover on img div 
-
-imgDiv.addEventListener('mouseenter', function(){
-    uploadBtn.style.display = "block";
-});
+if (imgDiv) {
+    imgDiv.addEventListener('mouseenter', function () {
+        uploadBtn.style.display = "block";
+    });
+}
 
 //if we hover out from img div
 
-imgDiv.addEventListener('mouseleave', function(){
-    uploadBtn.style.display = "none";
-});
+if (imgDiv) {
+    imgDiv.addEventListener('mouseleave', function () {
+        uploadBtn.style.display = "none";
+    });
+}
 
 //lets work for image showing functionality when we choose an image to upload
 
 //when we choose a foto to upload
+if (file) {
+    file.addEventListener('change', function () {
+        //this refers to file
+        const choosedFile = this.files[0];
 
-file.addEventListener('change', function(){
-    //this refers to file
-    const choosedFile = this.files[0];
+        if (choosedFile) {
 
-    if (choosedFile) {
+            const reader = new FileReader(); //FileReader is a predefined function of JS
 
-        const reader = new FileReader(); //FileReader is a predefined function of JS
+            reader.addEventListener('load', function () {
+                img.setAttribute('src', reader.result);
+            });
 
-        reader.addEventListener('load', function(){
-            img.setAttribute('src', reader.result);
-        });
+            reader.readAsDataURL(choosedFile);
 
-        reader.readAsDataURL(choosedFile);
+            //Allright is done
 
-        //Allright is done
+            //please like the video
+            //comment if have any issue related to vide & also rate my work in comment section
 
-        //please like the video
-        //comment if have any issue related to vide & also rate my work in comment section
+            //And aslo please subscribe for more tutorial like this
 
-        //And aslo please subscribe for more tutorial like this
-
-        //thanks for watching
-    }
-});
+            //thanks for watching
+        }
+    });
+}

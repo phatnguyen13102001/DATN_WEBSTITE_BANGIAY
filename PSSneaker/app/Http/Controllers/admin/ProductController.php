@@ -43,7 +43,6 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-
         $lstproduct = Product::where('SKU', 'LIKE', '%' . $request->keyword . '%')->orWhere('name', 'LIKE', '%' . $request->keyword . '%')
             ->paginate(10);
         foreach ($lstproduct as $product) {
@@ -82,13 +81,16 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required|regex:/^[a-zA-Z]+$/u',
                 'SKU' => 'required|unique:products,SKU,NULL,id,deleted_at,NULL',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
-                'name.required' => 'Tên Sản Phẩm Không Được Bỏ Trống',
-                'SKU.required' => 'Mã Sản Phẩm Không Được Bỏ Trống',
-                'SKU.unique' => 'Mã Sản Phẩm Không Được Trùng',
+                'name.required' => 'Tên sản phẩm không được bỏ trống',
+                'name.regex' => 'Tên sản phẩm không được chứa kí tự đặt biệt',
+                'SKU.required' => 'Mã sản phẩm không được bỏ trống',
+                'SKU.unique' => 'Mã sản phẩm không được trùng',
+                'image.image' => 'Hình ảnh không đúng định dạng',
             ]
         );
         $product = new product;

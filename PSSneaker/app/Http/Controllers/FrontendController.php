@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Library;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -12,12 +13,14 @@ use App\Models\User;
 use App\Models\News;
 use App\Models\Size;
 use App\Models\color;
+use App\Models\Social;
 use App\Models\Logo;
 use App\Models\Policies;
 use App\Models\Manufacturer;
 use App\Models\About;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -39,7 +42,6 @@ class FrontendController extends Controller
     }
     public function getindex(Request $request)
     {
-        $locspax = Product::where('outstanding', '1')->orderBy('name', 'ASC')->get();
         $chinhsach = Policies::all();
         $mau = color::all();
         $kichthuoc = Size::all();
@@ -48,23 +50,52 @@ class FrontendController extends Controller
         $lstlogo = Logo::first();
         $lstslideshow = Slideshow::where('show', '1')->get();
         $lsttintuc = News::where('outstanding', '1')->orWhere('show', '=', '1')->get();
-        $lstproduct = Product::where('outstanding', '1')->paginate(9);
         foreach ($lsttintuc as $tintuc) {
             $this->fixImage($tintuc);
         }
         foreach ($lstslideshow as $slideshow) {
             $this->fixImage($slideshow);
         }
-        foreach ($lstproduct as $product) {
-            $this->fixImage($product);
-        }
         foreach ($lstsetting as $setting) {
         }
         $this->fixImage($lstlogo);
-        if ($request->ajax()) {
-            return View::make('user.body.pagination_data', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
+
+        if (isset($_GET['sort_by'])) {
+            $sort_by = $_GET['sort_by'];
+
+            if ($sort_by == 'tang_dan') {
+                $lstproduct = Product::where('outstanding', '1')->orderBy('sale_price', 'ASC')->paginate(9)->appends(request()->query());
+                foreach ($lstproduct as $product) {
+                    $this->fixImage($product);
+                }
+            } else if ($sort_by == 'giam_dan') {
+                $lstproduct = Product::where('outstanding', '1')->orderBy('sale_price', 'DESC')->paginate(9)->appends(request()->query());
+                foreach ($lstproduct as $product) {
+                    $this->fixImage($product);
+                }
+            } else if ($sort_by == 'kytu_az') {
+                $lstproduct = Product::where('outstanding', '1')->orderBy('name', 'ASC')->paginate(9)->appends(request()->query());
+                foreach ($lstproduct as $product) {
+                    $this->fixImage($product);
+                }
+            } else if ($sort_by == 'kytu_za') {
+                $lstproduct = Product::where('outstanding', '1')->orderBy('name', 'DESC')->paginate(9)->appends(request()->query());
+                foreach ($lstproduct as $product) {
+                    $this->fixImage($product);
+                }
+            } else if ($sort_by == "default") {
+                $lstproduct = Product::where('outstanding', '1')->orderBy('id', 'DESC')->paginate(9);
+                foreach ($lstproduct as $product) {
+                    $this->fixImage($product);
+                }
+            }
+        } else {
+            $lstproduct = Product::where('outstanding', '1')->orderBy('id', 'DESC')->paginate(9);
+            foreach ($lstproduct as $product) {
+                $this->fixImage($product);
+            }
         }
-        return View::make('user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'locspax'));
+        return View::make('user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach'));
     }
     public function getproductdetail($id)
     {
@@ -96,7 +127,7 @@ class FrontendController extends Controller
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
         $lstsetting = Setting::all();
-        $lstproduct = Product::where('outstanding', '1')->get();
+        $lstproduct = Product::all();
         foreach ($lstproduct as $product) {
             $this->fixImage($product);
         }
@@ -199,5 +230,37 @@ class FrontendController extends Controller
         foreach ($lstsetting as $setting) {
         }
         return View::make('user.account.index', compact('taikhoan', 'lstlogo', 'setting', 'hangsx', 'chinhsach'));
+    }
+
+    public function search(Request $request)
+    {
+        $lstlogo = Logo::first();
+        $hangsx = Manufacturer::all();
+        $chinhsach = Policies::all();
+        $lstsetting = Setting::all();
+        foreach ($lstsetting as $setting) {
+        }
+        $this->fixImage($lstlogo);
+        $keywords = $request->keywords_submit;
+        $search_product = Product::where('name', 'LIKE', '%' . $keywords . '%')->get();
+        foreach ($search_product as $product) {
+            $this->fixImage($product);
+        }
+        return View::make('user.product.search', compact('search_product', 'lstlogo', 'hangsx', 'chinhsach', 'setting'));
+    }
+
+    public function autocomplete_ajax(Request $request)
+    {
+        $data = $request->all();
+
+        if ($data['query']) {
+            $product = Product::where('name', 'LIKE', '%' . $data['query'] . '%')->get();
+            $output = '<ul class="dropdown-menu" style="display:block; margin-left:49px;">';
+            foreach ($product as $key => $val) {
+                $output .= '<li class="li_search_ajax"><a href="#">' . $val->name . '</a></li>';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
     }
 }
