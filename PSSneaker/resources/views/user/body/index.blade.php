@@ -5,41 +5,13 @@
       <!--slider-->
       <div class="container">
           <div class="row">
-              <div class="col-sm-12">
-                  <div id="slider-carousel" class="carousel slide" data-ride="carousel">
-                      <ol class="carousel-indicators">
-                          <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-                          <li data-target="#slider-carousel" data-slide-to="1"></li>
-                          <li data-target="#slider-carousel" data-slide-to="2"></li>
-                      </ol>
-
-                      <div class="carousel-inner">
-                          @foreach($lstslideshow as $key => $slideshow)
-                          @if($key === 0 )
-                          <div class="item active">
-                              <div class="col-sm-12">
-                                  <a href="{{$slideshow->link}}" target="_blank">
-                                      <img src="{{$slideshow->image}}" alt="Slideshow" />
-                                  </a>
-                              </div>
-                          </div>
-                          @else
-                          <div class="item">
-                              <div class="col-sm-12">
-                                  <a href="{{$slideshow->link}}" target="_blank">
-                                      <img src="{{$slideshow->image}}" alt="Slideshow" />
-                                  </a>
-                              </div>
-                          </div>
-                          @endif
-                          @endforeach
-                      </div>
-                      <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-                          <i class="fa fa-angle-left"></i>
+              <div id="slider" class="col-12">
+                  <div class="owl-carousel">
+                      @foreach($lstslideshow as $slideshow)
+                      <a href="{{$slideshow->link}}" target="_blank">
+                          <img src="{{$slideshow->image}}" alt="slideshow">
                       </a>
-                      <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-                          <i class="fa fa-angle-right"></i>
-                      </a>
+                      @endforeach
                   </div>
               </div>
           </div>
@@ -166,23 +138,25 @@
           <div class="recommended_items">
               <!--recommended_items-->
               <h2 class="title text-center">tin tức</h2>
-              <div class="owl-carousel">
-                  @foreach($lsttintuc as $key)
-                  <a href="{{route('newsdetail',$key->id)}}">
-                      <div class="product-image-wrapper">
-                          <div class="single-products">
-                              <div class="productinfo text-center">
-                                  <p class="scale-img img_hover"><img src="{{$key->image}}" alt="{{$key->name}}" /></p>
-                                  <div class="title_tintuc">
-                                      <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
-                                      <div class="title_tintuc_txt_02">Ngày Đăng: {{ date("h:i:s A - d/m/Y", strtotime($key->created_at)) }}</div>
-                                      <div class="title_tintuc_txt_03 text-split-2">{{$key->describe}}</div>
+              <div id="news">
+                  <div class="owl-carousel">
+                      @foreach($lsttintuc as $key)
+                      <a href="{{route('newsdetail',$key->id)}}">
+                          <div class="product-image-wrapper">
+                              <div class="single-products">
+                                  <div class="productinfo text-center">
+                                      <p class="scale-img img_hover"><img src="{{$key->image}}" alt="{{$key->name}}" /></p>
+                                      <div class="title_tintuc">
+                                          <div class="title_tintuc_txt_01 text-split-1">{{$key->name}}</div>
+                                          <div class="title_tintuc_txt_02">Ngày Đăng: {{ date("h:i:s A - d/m/Y", strtotime($key->created_at)) }}</div>
+                                          <div class="title_tintuc_txt_03 text-split-2">{{$key->describe}}</div>
+                                      </div>
                                   </div>
                               </div>
                           </div>
-                      </div>
-                  </a>
-                  @endforeach
+                      </a>
+                      @endforeach
+                  </div>
               </div>
           </div>
           <!--/recommended_items-->

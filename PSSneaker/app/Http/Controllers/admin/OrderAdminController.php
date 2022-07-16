@@ -66,4 +66,13 @@ class OrderAdminController extends Controller
         $order->save();
         return Redirect::route('order.index');
     }
+    public function destroy(Request $request)
+    {
+        $order_id = $request->input('deleteting_id');
+        $order = Order::find($order_id);
+        $order->delete();
+        $order_detail = OrderDetail::where('id_order', '=', $order_id);
+        $order_detail->delete();
+        return Redirect::route('order.index');
+    }
 }

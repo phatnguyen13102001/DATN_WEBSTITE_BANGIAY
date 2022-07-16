@@ -58,10 +58,11 @@ class PoliciesController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required|unique:policies,name,NULL,id,deleted_at,NULL',
             ],
             [
-                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
+                'name.required' => 'Tên chính sách không được bỏ trống',
+                'name.unique' => 'Tên chính sách không được bỏ trống',
             ]
         );
         $policy = new Policies;
@@ -111,10 +112,11 @@ class PoliciesController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required|unique:policies,name,' . $policy->id . ',id,deleted_at,NULL',
             ],
             [
-                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
+                'name.required' => 'Tên chính sách không được bỏ trống',
+                'name.unique' => 'Tên chính sách không được bỏ trống',
             ]
         );
         $policy->fill([

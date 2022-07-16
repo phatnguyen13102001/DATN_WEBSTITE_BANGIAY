@@ -41,13 +41,38 @@
                         </td>
                         <td class="align-middle text-center text-md text-nowrap">
                             <a class="text-primary mr-2" href="{{route('order.edit',['order'=>$order])}}" title="Chỉnh sửa"><i class="fas fa-edit"></i></a>
-                            <a class="text-danger" id="delete-item" data-url="index.php?com=order&amp;act=delete&amp;id=6" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                            @if(($order->id_orderstatus) ===1 || ($order->id_orderstatus) ===2)
+                            <button type="button" class="text-dark border-0 bg-transparent" title="khóa"><i class="fas fa-lock"></i></button>
+                            @else
+                            <button type="button" value="{{$order->id}}" class="text-danger deleteBtn border-0 bg-transparent" title="Xóa"><i class="fas fa-trash-alt"></i></button>
+                            @endif
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
                 @endif
             </table>
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"><i class="fa fa-warning text-warning"></i> Thông Báo</h5>
+                        </div>
+                        <form action="{{route('order.destroy')}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body">
+                                Bạn có chắc muốn xóa hóa đơn này nếu xóa hóa đơn chi tiết hóa đơn sẽ bị mất ?
+                            </div>
+                            <input type="hidden" id="deleteting_id" name="deleteting_id">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-primary">Đồng ý</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="pagination flex-wrap justify-content-center">

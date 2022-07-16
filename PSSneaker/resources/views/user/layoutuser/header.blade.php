@@ -61,7 +61,7 @@
         <!--header-bottom-->
         <div class="container">
             <div class="row">
-                <div class="col-sm-9">
+                <div class="col-sm-7">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -88,12 +88,12 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-5">
                     <form action="{{route('timkiem')}}" method="POST" autocomplete="off">
                         @csrf
                         <div class="search_box pull-right">
-                            <input type="text" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm..." />
-                            <input type="submit" name="search_item" class="btn btn-success btn-sm" value="Tìm kiếm">
+                            <input type="text" name="keywords_submit" id="keywords" placeholder="Tìm kiếm sản phẩm..." required />
+                            <input type="submit" name="search_item" class="btn btn-success btn-sm" style="border-top-left-radius:0px;border-bottom-left-radius:0px;" value="Tìm kiếm">
                             <div id="search_ajax"></div>
                         </div>
                     </form>

@@ -6,12 +6,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle text-center" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center">Tiêu đề</th>
                         <th class="align-middle text-center">Hiển thị</th>
                         <th class="align-middle text-center">Thao tác</th>
@@ -27,12 +21,6 @@
                 <tbody>
                     @foreach($lstpayment as $payment)
                     <tr>
-                        <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-16" value="16">
-                                <label for="select-checkbox-16" class="custom-control-label"></label>
-                            </div>
-                        </td>
                         <td class="align-middle text-center">
                             <a class="text-dark text-break" href="{{route('payment.edit',['payment'=>$payment])}}" title="{{$payment->name}}">{{$payment->name}}</a>
                             <div class="tool-action mt-2 w-clear">

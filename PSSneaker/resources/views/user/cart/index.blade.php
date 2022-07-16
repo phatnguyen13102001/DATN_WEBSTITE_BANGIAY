@@ -4,6 +4,15 @@
     <div class="container">
         <form class="form-cart validation-cart" method="post" action="{{route('order')}}" enctype="multipart/form-data">
             <div class=" wrap-cart">
+                @if(session()->has('message'))
+                <div class="alert alert-danger">
+                    {!! session()->get('message')!!}
+                </div>
+                @elseif(session()->has('error'))
+                <div class="alert alert-danger">
+                    {!! session()->get('error')!!}
+                </div>
+                @endif
                 @if((Cart::instance(Auth::user())->count())!=0)
                 <a href="{{route('index')}}" class="btn btn-dark">
                     <i class="fas fa-backward"></i> Tiếp tục mua hàng</a>
@@ -52,8 +61,8 @@
                                     </div>
                                     <div class="quantity-procart col-2 col-md-2">
                                         <div class="quantity-pro-detail">
-                                            <span class=" quantity-minus-pro-detail update_procart" data-id="{{$v_content->rowId}}">-</span>
-                                            <input type=" number" class="qty-pro input-quantity" name="quantity" id="quantity_{{$v_content->rowId}}" min="1" value="{{$v_content->qty}}" autocomplete="off" readonly>
+                                            <span class="quantity-minus-pro-detail update_procart" data-id="{{$v_content->rowId}}">-</span>
+                                            <input type="number" class="qty-pro input-quantity" name="quantity" id="quantity_{{$v_content->rowId}}" min="1" value="{{$v_content->qty}}" autocomplete="off" readonly>
                                             <span class="quantity-plus-pro-detail update_procart" data-id="{{$v_content->rowId}}">+</span>
                                         </div>
                                     </div>

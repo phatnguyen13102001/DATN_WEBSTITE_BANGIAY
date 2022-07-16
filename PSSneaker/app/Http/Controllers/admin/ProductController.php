@@ -81,16 +81,17 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required|regex:/^[a-zA-Z]+$/u',
+                'name' => 'required',
                 'SKU' => 'required|unique:products,SKU,NULL,id,deleted_at,NULL',
                 'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
                 'name.required' => 'Tên sản phẩm không được bỏ trống',
-                'name.regex' => 'Tên sản phẩm không được chứa kí tự đặt biệt',
                 'SKU.required' => 'Mã sản phẩm không được bỏ trống',
                 'SKU.unique' => 'Mã sản phẩm không được trùng',
                 'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
             ]
         );
         $product = new product;
@@ -156,11 +157,16 @@ class ProductController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'SKU' => 'required',
+                'SKU' => 'required|unique:products,SKU,' . $product->id . ',id,deleted_at,NULL',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
-                'name.required' => 'Tên Sản Phẩm Không Được Bỏ Trống',
-                'SKU.required' => 'Mã Sản Phẩm Không Được Bỏ Trống',
+                'name.required' => 'Tên sản phẩm không được bỏ trống',
+                'SKU.required' => 'Mã sản phẩm không được bỏ trống',
+                'SKU.unique' => 'Mã sản phẩm không được trùng',
+                'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
             ]
         );
         $regular_price = str_replace(",", "", $request->input('regular_price'));

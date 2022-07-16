@@ -14,8 +14,9 @@ use App\Models\Setting;
 use App\Models\Policies;
 use App\Models\Logo;
 use App\Models\Payment;
+use App\Models\Mapping;
+use App\Models\Size;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,9 +38,23 @@ class CartController extends Controller
             $product_id = $request->input('productid_hidden');
             $quantity = $request->input('quantity');
             $size = $request->input('option-size');
+            $size_name = Size::select('size')->where('id', "=", $size)->first();
             $manufacturer = $request->input('name_manu');
             $SKU = $request->input('SKU');
             $product_info = Product::where('id', $product_id)->first();
+
+            $stock = Mapping::select('quantity')->where('id_product', '=', $product_id)->where('id_size', '=', $size)->first();
+
+            if ($quantity > $stock->quantity) {
+                return back()->with('message', 'Size ' . $size_name->size . ' bạn vừa chọn đã vượt quá tồn kho, chỉ còn ' . $stock->quantity . ' sản phẩm');
+            }
+            $content = Cart::instance(Auth::user())->content();
+
+            foreach ($content as $v_content) {
+                if (($v_content->qty) >= ($stock->quantity) && ($v_content->options->size_id == $size) && ($v_content->id == $product_id)) {
+                    return back()->with('message', 'Size ' . $size_name->size . ' bạn vừa chọn đã vượt quá tồn kho, chỉ còn ' . $stock->quantity . ' sản phẩm');
+                }
+            }
 
             $data['id'] = $product_info->id;
             $data['qty'] = $quantity;
@@ -52,7 +67,8 @@ class CartController extends Controller
             $data['weight'] = '0';
             $data['options']['image'] = $product_info->image;
             $data['options']['regular_price'] = $product_info->regular_price;
-            $data['options']['size'] = $size;
+            $data['options']['size'] = $size_name->size;
+            $data['options']['size_id'] = $size;
             $data['options']['color'] = $product_info->color->name;
             $data['options']['manufacturer'] = $manufacturer;
             $data['options']['SKU'] = $SKU;

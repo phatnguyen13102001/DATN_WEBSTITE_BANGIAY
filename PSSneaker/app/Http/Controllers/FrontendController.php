@@ -64,12 +64,12 @@ class FrontendController extends Controller
             $sort_by = $_GET['sort_by'];
 
             if ($sort_by == 'tang_dan') {
-                $lstproduct = Product::where('outstanding', '1')->orderBy('sale_price', 'ASC')->paginate(9)->appends(request()->query());
+                $lstproduct = Product::where('outstanding', '1')->orderBy('sale_price', 'ASC')->orderBy('regular_price', 'ASC')->paginate(9)->appends(request()->query());
                 foreach ($lstproduct as $product) {
                     $this->fixImage($product);
                 }
             } else if ($sort_by == 'giam_dan') {
-                $lstproduct = Product::where('outstanding', '1')->orderBy('sale_price', 'DESC')->paginate(9)->appends(request()->query());
+                $lstproduct = Product::where('outstanding', '1')->orderBy('sale_price', 'DESC')->orderBy('regular_price', 'DESC')->paginate(9)->appends(request()->query());
                 foreach ($lstproduct as $product) {
                     $this->fixImage($product);
                 }
@@ -107,6 +107,11 @@ class FrontendController extends Controller
         $lstproductsame = Product::where('id_manufacturer', '=', $lstproduct->id_manufacturer)->whereNotIn('id', [$id])->get();
         $lstlibrary = Library::where('id_product', '=', $id)->orWhere('deleted_at', '=', 'NULL')->get();
         $lststock = Mapping::where('id_product', '=', $id)->orWhere('deleted_at', '=', 'NULL')->get();
+        $qtystock =
+            Mapping::Where('id_product', '=', $id)
+            ->selectRaw("SUM(quantity) as quantity")
+            ->groupBy('id_product')
+            ->first();
         $this->fixImage($lstproduct);
         foreach ($lstsetting as $setting) {
         }
@@ -119,7 +124,7 @@ class FrontendController extends Controller
         foreach ($lststock as $stock) {
         }
         $this->fixImage($lstlogo);
-        return view('user.product_detail.index', compact('lstproduct', 'lstproductsame', 'lstlogo', 'setting', 'lstlibrary', 'lststock', 'hangsx', 'chinhsach'));
+        return view('user.product_detail.index', compact('lstproduct', 'lstproductsame', 'lstlogo', 'setting', 'lstlibrary', 'lststock', 'hangsx', 'chinhsach', 'qtystock'));
     }
     public function getproduct()
     {

@@ -11,6 +11,7 @@ use App\Models\Policies;
 use App\Models\Logo;
 use App\Models\Payment;
 use App\Models\City;
+use App\Models\Mapping;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -64,6 +65,14 @@ class OrderController extends Controller
                 'email.email' => 'Email Không Hợp Lệ',
             ]
         );
+        $content1 = Cart::instance(Auth::user())->content();
+        foreach ($content1 as $v_content1) {
+            $stock = Mapping::select('quantity')->where('id_product', '=', $v_content1->id)->where('id_size', '=', $v_content1->options->size_id)->first();
+            if (($v_content1->qty) > ($stock->quantity)) {
+                return view('user.cart.stock_problem', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'v_content1', 'stock'));
+                // return back()->with('message', 'Sản phẩm ' . ($v_content1->name) . ' Size ' . ($v_content1->options->size) . ' đã vượt quá tồn kho chỉ còn ' . ($stock->quantity) . ' sản phẩm');
+            }
+        }
         $order = new Order;
         $order->fill([
             'name_customer' => $request->input('name'),
@@ -97,8 +106,12 @@ class OrderController extends Controller
                 'name_manufacturer' => $v_content->options->manufacturer,
                 'SKU' => $v_content->options->SKU,
             ];
+            $stock = Mapping::where('id_product', '=', $v_content->id)->where('id_size', '=', $v_content->options->size_id)->first();
+            $stock->quantity -= $v_content->qty;
+            $stock->save();
         }
         Orderdetail::insert($orderdetail);
+
         Cart::instance(Auth::user())->destroy();
         return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment'));
     }

@@ -8,6 +8,22 @@
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
         </div>
+        @if($errors->has('name') || $errors->has('phone'))
+        <div class="card bg-gradient-danger">
+            <div class="card-header">
+                <h3 class="card-title">Thông báo</h3>
+                <div class="card-tools"><button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button><button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button></div>
+            </div>
+            <div class="card-body" style="display: block;">
+                @if($errors->has('name'))
+                <p class="mb-1">- {{$errors->first('name')}}</p>
+                @endif
+                @if($errors->has('phone'))
+                <p class="mb-1">- {{$errors->first('phone')}}</p>
+                @endif
+            </div>
+        </div>
+        @endif
         <div class="card card-primary card-outline text-sm">
             <div class="card-header">
                 <h3 class="card-title">Thông tin admin</h3>
@@ -24,29 +40,14 @@
                     <div class="form-group col-xl-4 col-lg-6 col-md-6">
                         <label for="name">Họ tên: <span class="text-danger">*</span></label>
                         <input type="text" class="form-control text-sm" name="name" id="name" placeholder="Họ tên" value="{{$user->name}}" required>
-                        @if($errors->has('name'))
-                        <div class="alert alert-danger" style="margin-top:10px;">
-                            {{$errors->first('name')}}
-                        </div>
-                        @endif
                     </div>
                     <div class="form-group col-xl-4 col-lg-6 col-md-6">
                         <label for="email">Email:</label>
-                        <input type="email" class="form-control text-sm" name="email" id="email" placeholder="Email" value="{{$user->email}}" required>
-                        @if($errors->has('email'))
-                        <div class="alert alert-danger" style="margin-top:10px;">
-                            {{$errors->first('email')}}
-                        </div>
-                        @endif
+                        <input type="email" class="form-control text-sm" name="email" id="email" placeholder="Email" value="{{$user->email}}" disabled>
                     </div>
                     <div class="form-group col-xl-4 col-lg-6 col-md-6">
                         <label for="phone">Điện thoại:</label>
                         <input type="text" class="form-control text-sm" name="phone" id="phone" placeholder="Điện thoại" value="{{$user->phone}}" require>
-                        @if($errors->has('phone'))
-                        <div class="alert alert-danger" style="margin-top:10px;">
-                            {{$errors->first('phone')}}
-                        </div>
-                        @endif
                     </div>
                     <div class="form-group col-xl-4 col-lg-6 col-md-6">
                         <label for="gender">Giới tính:</label>

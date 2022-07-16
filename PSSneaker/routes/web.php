@@ -70,6 +70,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/social/destroy', [SocialController::class, 'destroy'])->name('social.destroy');
     Route::get('/admin/product/destroy', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('/admin/payment/destroy', [PaymentController::class, 'destroy'])->name('payment.destroy');
+    Route::get('/admin/order/destroy', [OrderController::class, 'destroy'])->name('order.destroy');
     /* Search */
     Route::get('/searchsize', [SizeController::class, 'search']);
     Route::get('/searchcolor', [ColorController::class, 'search']);

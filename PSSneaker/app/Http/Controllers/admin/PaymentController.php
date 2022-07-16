@@ -59,10 +59,11 @@ class PaymentController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required|unique:payments,name,NULL,id,deleted_at,NULL',
             ],
             [
-                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
+                'name.required' => 'Tên chính sách không được bỏ trống',
+                'name.unique' => 'Tên chính sách không được trùng',
             ]
         );
         $payment = new Payment;
@@ -111,10 +112,11 @@ class PaymentController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
+                'name' => 'required|unique:payments,name,' . $payment->id . ',id,deleted_at,NULL',
             ],
             [
-                'name.required' => 'Tên chính sách Không Được Bỏ Trống',
+                'name.required' => 'Tên chính sách không được bỏ trống',
+                'name.unique' => 'Tên chính sách không được trùng',
             ]
         );
         $payment->fill([

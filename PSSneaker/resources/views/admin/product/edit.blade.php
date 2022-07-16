@@ -23,6 +23,25 @@
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="{{route('product.index')}}" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
+        @if($errors->has('name') || $errors->has('SKU') || $errors->has('image'))
+        <div class="card bg-gradient-danger">
+            <div class="card-header">
+                <h3 class="card-title">Thông báo</h3>
+                <div class="card-tools"><button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button><button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button></div>
+            </div>
+            <div class="card-body" style="display: block;">
+                @if($errors->has('name'))
+                <p class="mb-1">- {{$errors->first('name')}}</p>
+                @endif
+                @if($errors->has('SKU'))
+                <p class="mb-1">- {{$errors->first('SKU')}}</p>
+                @endif
+                @if($errors->has('image'))
+                <p class="mb-1">- {{$errors->first('image')}}</p>
+                @endif
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-xl-8">
                 <div class="card card-primary card-outline text-sm">
@@ -40,11 +59,6 @@
                                         <div class="form-group">
                                             <label for="namevi">Tiêu đề:</label>
                                             <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="{{$product->name}}" required>
-                                            @if($errors->has('name'))
-                                            <div class="alert alert-danger" style="margin-top:10px;">
-                                                {{$errors->first('name')}}
-                                            </div>
-                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="descvi">Mô tả:</label>
@@ -103,6 +117,7 @@
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
                             </label>
+                            <strong class="d-block text-sm">Width: 600 px - Height: 600 px (.jpg|.gif|.png|.jpeg|.gif)</strong>
                         </div>
                     </div>
                 </div>
@@ -134,11 +149,6 @@
                     <div class="form-group col-md-4">
                         <label class="d-block" for="SKU">Mã sản phẩm:</label>
                         <input type="text" class="form-control text-sm" name="SKU" id="SKU" placeholder="Mã sản phẩm" value="{{$product->SKU}}">
-                        @if($errors->has('SKU'))
-                        <div class="alert alert-danger" style="margin-top:10px;">
-                            {{$errors->first('SKU')}}
-                        </div>
-                        @endif
                     </div>
                     <div class="form-group col-md-4">
                         <label class="d-block" for="regular_price">Giá bán:</label>

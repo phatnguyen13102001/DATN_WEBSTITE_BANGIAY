@@ -22,8 +22,21 @@
             <button type="submit" class="btn btn-sm bg-gradient-primary submit-check"><i class="far fa-save mr-2"></i>Lưu</button>
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
         </div>
+        @if($errors->has('title'))
+        <div class="card bg-gradient-danger">
+            <div class="card-header">
+                <h3 class="card-title">Thông báo</h3>
+                <div class="card-tools"><button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button><button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button></div>
+            </div>
+            <div class="card-body" style="display: block;">
+                @if($errors->has('title'))
+                <p class="mb-1">- {{$errors->first('title')}}</p>
+                @endif
+            </div>
+        </div>
+        @endif
         <div class="row">
-            <div class="col-xl-8">
+            <div class="col-xl-12">
                 <div class="card card-primary card-outline text-sm">
                     <div class="card-header">
                         <h3 class="card-title">Nội dung Giới thiệu</h3>
@@ -39,11 +52,6 @@
                                         <div class="form-group">
                                             <label for="title">Tiêu đề:</label>
                                             <input type="text" class="form-control for-seo text-sm" name="title" id="title" placeholder="Tiêu đề" value="{{$about->title}}" required>
-                                            @if($errors->has('title'))
-                                            <div class="alert alert-danger" style="margin-top:10px;">
-                                                {{$errors->first('title')}}
-                                            </div>
-                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Nội dung:</label>
@@ -52,28 +60,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4">
-                <div class="card card-primary card-outline text-sm">
-                    <div class="card-header">
-                        <h3 class="card-title">Hình ảnh Giới thiệu</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="photoUpload-zone">
-                            <div class="photoUpload-detail">
-                                <img id="photoUpload-preview" src="{{$about->image}}" alt="Alt Photo">
-                            </div>
-                            <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                <input type="file" name="image" id="file-zone">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
-                            </label>
                         </div>
                     </div>
                 </div>

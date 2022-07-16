@@ -88,18 +88,17 @@ class AdminController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'phone' => 'required',
-                'email' => 'required',
+                'phone' => 'required|numeric|min:10',
             ],
             [
-                'name.required' => 'Tên Không Được Bỏ Trống',
-                'phone.required' => 'Số Điện Thoại Sản Xuất Không Được Bỏ Trống',
-                'email.required' => 'Email Sản Xuất Không Được Bỏ Trống',
+                'name.required' => 'Tên không được bỏ trống',
+                'phone.required' => 'Số điện thoại không được bỏ trống',
+                'phone.numeric' => 'Số điện thoại phải là số',
+                'phone.min' => 'Số điện thoại không hợp lệ',
             ]
         );
         $user->name = $request->input('name');
         $user->phone = $request->input('phone');
-        $user->email = $request->input('email');
         $user->address = $request->input('address');
         $user->gender = $request->get('gender');
         $user->birthday = date('Y-m-d H:i:s', strtotime($request->input('birthday')));

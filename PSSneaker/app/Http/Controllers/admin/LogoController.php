@@ -89,10 +89,13 @@ class LogoController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'image' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
-                'image.required' => 'Logo Không Được Bỏ Trống',
+                'image.required' => 'Logo không được bỏ trống',
+                'image.image' => 'Logo không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
             ]
         );
         if (request()->hasFile('image')) {

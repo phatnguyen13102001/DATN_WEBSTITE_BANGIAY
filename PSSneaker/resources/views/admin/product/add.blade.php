@@ -117,6 +117,7 @@
                                 <i class="fas fa-cloud-upload-alt"></i>
                                 <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
                             </label>
+                            <strong class="d-block text-sm">Width: 600 px - Height: 600 px (.jpg|.gif|.png|.jpeg|.gif)</strong>
                         </div>
                     </div>
                 </div>
@@ -142,7 +143,7 @@
                 <div class="row" id="row_price">
                     <div class="form-group col-md-4">
                         <label class="d-block" for="code">Mã sản phẩm:</label>
-                        <input type="text" class="form-control text-sm" name="SKU" id="SKU" placeholder="Mã sản phẩm">
+                        <input type="text" class="form-control text-sm" name="SKU" id="SKU" placeholder="Mã sản phẩm" required>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="d-block" for="regular_price">Giá bán:</label>

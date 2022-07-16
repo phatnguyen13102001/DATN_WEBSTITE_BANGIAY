@@ -6,12 +6,6 @@
          <table class="table table-hover">
              <thead>
                  <tr>
-                     <th class="align-middle" width="5%">
-                         <div class="custom-control custom-checkbox my-checkbox">
-                             <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                             <label for="selectall-checkbox" class="custom-control-label"></label>
-                         </div>
-                     </th>
                      <th class="align-middle text-center">ID</th>
                      <th class="align-middle text-center">Tên Size</th>
                      <th class="align-middle text-center">Thao tác</th>
@@ -27,12 +21,6 @@
              <tbody>
                  @foreach($lstsize as $size)
                  <tr>
-                     <td class="align-middle">
-                         <div class="custom-control custom-checkbox my-checkbox">
-                             <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-83" value="83">
-                             <label for="select-checkbox-83" class="custom-control-label"></label>
-                         </div>
-                     </td>
                      <td class="align-middle text-center">
                          <p>{{$size->id}}</p>
                      </td>

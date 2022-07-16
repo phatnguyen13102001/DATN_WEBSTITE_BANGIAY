@@ -22,6 +22,19 @@
             <button type="reset" class="btn btn-sm bg-gradient-secondary"><i class="fas fa-redo mr-2"></i>Làm lại</button>
             <a class="btn btn-sm bg-gradient-danger" href="{{route('policy.index')}}" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
         </div>
+        @if($errors->has('name'))
+        <div class="card bg-gradient-danger">
+            <div class="card-header">
+                <h3 class="card-title">Thông báo</h3>
+                <div class="card-tools"><button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button><button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button></div>
+            </div>
+            <div class="card-body" style="display: block;">
+                @if($errors->has('name'))
+                <p class="mb-1">- {{$errors->first('name')}}</p>
+                @endif
+            </div>
+        </div>
+        @endif
         <div class="row">
             <div class="col-12">
                 <div class="card card-primary card-outline text-sm">
@@ -38,12 +51,7 @@
                                     <div class="tab-pane fade show active" id="tabs-lang-vi" role="tabpanel" aria-labelledby="tabs-lang">
                                         <div class="form-group">
                                             <label for="name">Tiêu đề:</label>
-                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required="">
-                                            @if($errors->has('name'))
-                                            <div class="alert alert-danger" style="margin-top:10px;">
-                                                {{$errors->first('name')}}
-                                            </div>
-                                            @endif
+                                            <input type="text" class="form-control for-seo text-sm" name="name" id="name" placeholder="Tiêu đề" value="" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="content">Nội dung:</label>

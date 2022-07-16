@@ -6,12 +6,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center">Hình</th>
                         <th class="align-middle text-center">Link</th>
                         <th class="align-middle text-center">Hiển thị</th>
@@ -28,12 +22,6 @@
                 <tbody>
                     @foreach($lstslideshow as $slideshow)
                     <tr>
-                        <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-96" value="96">
-                                <label for="select-checkbox-96" class="custom-control-label"></label>
-                            </div>
-                        </td>
                         <td class="align-middle text-center">
                             <a href="" title="Slider">
                                 <img class="rounded" style="width:100px; max-height:100px; object-fit:contain" src="{{$slideshow->image}}">

@@ -78,12 +78,15 @@ class SlideshowController extends Controller
         $validatedData = $request->validate(
             [
                 'link' => 'required|regex:' . $url,
-                'image' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
-                'link.regex' => 'Link Không Hợp Lệ',
-                'link.required' => 'Link Không Được Bỏ Trống',
-                'image.required' => 'Hình Ảnh Không Được Bỏ Trống',
+                'link.regex' => 'Link không hợp lệ',
+                'link.required' => 'Link không được bỏ trống',
+                'image.required' => 'Hình ảnh không được bỏ trống',
+                'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
             ]
         );
 
@@ -141,10 +144,14 @@ class SlideshowController extends Controller
         $validatedData = $request->validate(
             [
                 'link' => 'required|regex:' . $url,
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
-                'link.regex' => 'Link Không Hợp Lệ',
-                'link.required' => 'Link Không Được Bỏ Trống',
+                'link.regex' => 'Link không hợp lệ',
+                'link.required' => 'Link không được bỏ trống',
+                'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
             ]
         );
         $data = [

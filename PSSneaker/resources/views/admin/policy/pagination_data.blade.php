@@ -6,12 +6,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle text-center" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center">Tiêu đề</th>
                         <th class="align-middle text-center">Hiển thị</th>
                         <th class="align-middle text-center">Thao tác</th>
@@ -28,17 +22,11 @@
                     @foreach($lstpolicy as $policy)
                     <tr>
                         <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-56" value="56">
-                                <label for="select-checkbox-56" class="custom-control-label"></label>
-                            </div>
-                        </td>
-                        <td class="align-middle text-center">
-                            <a class="text-dark text-break" href="" title="">{{$policy->name}}</a>
+                            <a class="text-dark text-break" href="{{route('policy.edit',['policy'=>$policy])}}" title="{{$policy->name}}">{{$policy->name}}</a>
                             <div class="tool-action mt-2 w-clear">
-                                <a class="text-primary mr-3" href="" target="_blank" title="Phương Thức Thanh Toán"><i class="far fa-eye mr-1"></i>View</a>
-                                <a class="text-info mr-3" href="{{route('policy.edit',['policy'=>$policy])}}" title=""><i class="far fa-edit mr-1"></i>Edit</a>
-                                <button class="text-danger deleteBtn border-0 bg-transparent" type="button" value="{{$policy->id}}"><i class="far fa-trash-alt mr-1"></i>Delete</button>
+                                <a class="text-primary mr-3" href="{{route('chinhsach',$policy->id)}}" target="_blank" title="Phương Thức Thanh Toán" title="Xem"><i class="far fa-eye mr-1"></i>View</a>
+                                <a class="text-info mr-3" href="{{route('policy.edit',['policy'=>$policy])}}" title="Chỉnh sửa"><i class="far fa-edit mr-1"></i>Edit</a>
+                                <button class="text-danger deleteBtn border-0 bg-transparent" type="button" value="{{$policy->id}}" title="Xóa"><i class="far fa-trash-alt mr-1"></i>Delete</button>
                             </div>
                         </td>
                         <td class="align-middle text-center">

@@ -6,6 +6,15 @@
             <div class="padding_category">
                 <div class="col-sm-12 padding-right">
                     <div class="product-details">
+                        @if(session()->has('message'))
+                        <div class="alert alert-danger">
+                            {!! session()->get('message')!!}
+                        </div>
+                        @elseif(session()->has('error'))
+                        <div class="alert alert-danger">
+                            {!! session()->get('error')!!}
+                        </div>
+                        @endif
                         <!--product-details-->
                         <div class="col-sm-5">
                             <div class="grid images_3_of_2">
@@ -64,22 +73,37 @@
                                         <table class="variations" cellspacing="0">
                                             <tbody>
                                                 <tr>
+                                                    @if(($qtystock->quantity)!=0)
                                                     <td class="label_size"><label>Kích thước:</label></td>
                                                     <td class="value">
                                                         <div class="swatch clearfix" data-option-index="0">
                                                             @foreach($lststock as $key => $stock)
+                                                            @if(($stock->quantity)===0)
                                                             <div data-value="{{$stock->size->size}}" class="swatch-element">
-                                                                <input id="swatch-0-{{$stock->size->size}}" type="radio" name="option-size" {{($key==0) ?'checked' :''}} value="{{$stock->size->size}}">
+                                                                <input id="swatch-0-{{$stock->size->size}}" type="radio" name="option-size" value="{{$stock->id_size}}" disabled>
+                                                                <img class="crossed-out" src="https://file.hstatic.net/1000344185/file/864393_3ad46eb34cd84d379f431e2f4db16556.png">
                                                                 <label for="swatch-0-{{$stock->size->size}}">{{$stock->size->size}}</label>
                                                             </div>
+                                                            @else
+                                                            <div data-value="{{$stock->size->size}}" class="swatch-element">
+                                                                <input id="swatch-0-{{$stock->size->size}}" type="radio" name="option-size" checked value="{{$stock->id_size}}">
+                                                                <label for="swatch-0-{{$stock->size->size}}">{{$stock->size->size}}</label>
+                                                            </div>
+                                                            @endif
                                                             @endforeach
                                                         </div>
                                                     </td>
+                                                    @else
+                                                    <div class="pro-soldout">
+                                                        <p>Hết hàng</p>
+                                                    </div>
+                                                    @endif
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
                                     <div>
+                                        @if(($qtystock->quantity)!=0)
                                         <div class="form_soluong">
                                             <div class="attr-content-pro-detail d-block">
                                                 <label>Số lượng:</label>
@@ -106,6 +130,8 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        @else
+                                        @endif
                                     </div>
                                 </div>
                             </form>
@@ -189,18 +215,6 @@
                     </div>
                     @endif
                     <!--/recommended_items-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="AddCartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-check-circle text-success"></i> Thông Báo</h5>
-                </div>
-                <div class="modal-body">
-                    Thêm vào giỏ hàng thành công...
                 </div>
             </div>
         </div>

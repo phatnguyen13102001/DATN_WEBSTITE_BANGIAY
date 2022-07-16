@@ -6,12 +6,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center">Hình</th>
                         <th class="align-middle text-center">Link</th>
                         <th class="align-middle text-center">Hiển thị</th>
@@ -29,14 +23,7 @@
                     @foreach($lstsocial as $social)
                     <tr>
                         <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-90" value="90">
-                                <label for="select-checkbox-90" class="custom-control-label"></label>
-                            </div>
-                        </td>
-                        <td class="align-middle text-center">
-                            <a href="" title="">
-                                <img class="rounded img-preview" src="{{$social->image}}" alt=""> </a>
+                            <img class="rounded img-preview" src="{{$social->image}}" alt="">
                         </td>
                         <td class="align-middle text-center">{{$social->link}}</td>
                         <td class="align-middle text-center">

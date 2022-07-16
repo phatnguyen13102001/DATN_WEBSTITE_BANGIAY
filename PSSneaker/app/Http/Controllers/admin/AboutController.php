@@ -25,7 +25,7 @@ class AboutController extends Controller
      */
     public function index()
     {
-        
+
         $lstAbout = About::all();
         foreach ($lstAbout as $about) {
             $this->fixImage($about);
@@ -92,28 +92,13 @@ class AboutController extends Controller
                 'title' => 'required',
             ],
             [
-                'title.required' => 'Tiêu Đề Không Được Bỏ Trống',
+                'title.required' => 'Tiêu đề không được bỏ trống',
             ]
         );
         $data = [
             'title' => $request->input('title'),
             'content' => $request->input('content'),
         ];
-        if (request()->hasFile('image')) {
-            $imagePath = public_path('storage/' . $about->image);
-            if (File::exists($imagePath)) {
-                if ($imagePath == (public_path('storage/'))) {
-                    $image = request()->file('image')->store('images/about/', 'public');
-                    $data['image'] = $image;
-                    $about->update($data);
-                } else {
-                    unlink($imagePath);
-                }
-            }
-            $image = request()->file('image')->store('images/about/', 'public');
-            $about['image'] = $image;
-            $about->update($data);
-        }
         $about->update($data);
         return Redirect::route('about.index', ['about' => $about]);
     }

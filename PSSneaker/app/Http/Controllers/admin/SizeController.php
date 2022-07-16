@@ -58,13 +58,14 @@ class SizeController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'size' => 'required|numeric|min:1',
+                'size' => 'required|numeric|min:1|unique:sizes,size,NULL,id,deleted_at,NULL',
 
             ],
             [
-                'size.required' => 'Size Không Được Bỏ Trống',
-                'size.numeric' => 'Size Không Hợp Lệ',
-                'size.min' => 'Size Phải Lớn Hơn 1',
+                'size.required' => 'Size không được bỏ trống',
+                'size.unique' => 'Size không được trùng',
+                'size.numeric' => 'Size không hợp lệ',
+                'size.min' => 'Size phải lớn hơn 1',
             ]
         );
         $size = new Size;
@@ -112,13 +113,14 @@ class SizeController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'size' => 'required|numeric|min:1',
+                'size' => 'required|numeric|min:1|unique:sizes,size,' . $size->id . ',id,deleted_at,NULL',
 
             ],
             [
-                'size.required' => 'Size Không Được Bỏ Trống',
-                'size.numeric' => 'Size Không Hợp Lệ',
-                'size.min' => 'Size Phải Lớn Hơn 1',
+                'size.required' => 'Size không được bỏ trống',
+                'size.unique' => 'Size không được trùng',
+                'size.numeric' => 'Size không hợp lệ',
+                'size.min' => 'Size phải lớn hơn 1',
             ]
         );
         $size->fill([

@@ -276,14 +276,12 @@ form.form-cart.validation-cart {
 input#name {
     width: 100% !important;
     height: calc(1em + 1.25rem + 8px) !important;
-    padding: 0px !important;
     border: 1px solid #ccc !important;
 }
 
 input#address {
     width: 99% !important;
     height: calc(1em + 1.25rem + 8px) !important;
-    padding: 0px !important;
     border: 1px solid #ccc !important;
     margin-bottom: 8px !important;
 }

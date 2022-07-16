@@ -6,12 +6,6 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="align-middle text-center" width="5%">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="selectall-checkbox">
-                                <label for="selectall-checkbox" class="custom-control-label"></label>
-                            </div>
-                        </th>
                         <th class="align-middle text-center">Hình</th>
                         <th class="align-middle text-center">Tiêu đề</th>
                         <th class="align-middle text-center">Nổi bật</th>
@@ -30,20 +24,13 @@
                     @foreach($lstnews as $news)
                     <tr>
                         <td class="align-middle text-center">
-                            <div class="custom-control custom-checkbox my-checkbox">
-                                <input type="checkbox" class="custom-control-input select-checkbox" id="select-checkbox-48" value="48">
-                                <label for="select-checkbox-48" class="custom-control-label"></label>
-                            </div>
+                            <img class="rounded img-preview" src="{{$news->image}}" alt="{{$news->title}}">
                         </td>
                         <td class="align-middle text-center">
-                            <a href="" title="image">
-                                <img class="rounded img-preview" src="{{$news->image}}" alt="{{$news->title}}"> </a>
-                        </td>
-                        <td class="align-middle text-center">
-                            <a class="text-dark text-break" href="" title="title">{{$news->name}}</a>
+                            <a class="text-dark text-break" href="{{route('news.edit',['news'=>$news])}}" title="{{$news->name}}">{{$news->name}}</a>
                             <div class="tool-action mt-2 w-clear">
-                                <a class="text-primary mr-3" href="{{route('newsdetail',$news->id)}}" target="_blank" title=""><i class="far fa-eye mr-1"></i>View</a>
-                                <a class="text-info mr-3" href="{{route('news.edit',['news'=>$news])}}" title=""><i class="far fa-edit mr-1"></i>Edit</a>
+                                <a class="text-primary mr-3" href="{{route('newsdetail',$news->id)}}" target="_blank" title="View"><i class="far fa-eye mr-1"></i>View</a>
+                                <a class="text-info mr-3" href="{{route('news.edit',['news'=>$news])}}" title="Edit"><i class="far fa-edit mr-1"></i>Edit</a>
                                 <button class="text-danger deleteBtn border-0 bg-transparent" type="button" value="{{$news->id}}"><i class="far fa-trash-alt mr-1"></i>Delete</button>
                             </div>
                         </td>

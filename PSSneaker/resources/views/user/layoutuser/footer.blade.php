@@ -56,13 +56,13 @@
                 <div class="col-sm-4 col-sm-offset-0">
                     <div class="single-widget">
                         <h2>face book</h2>
-                        <div class="pluginfacebook">
+                        <!-- <div class="pluginfacebook">
                             <div id="fb-root"></div>
                             <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1619936111724930&autoLogAppEvents=1" nonce="7necH2eG"></script>
                             <div class="fb-page" data-href="{{$setting->fanpage}}" data-tabs="timeline" data-width="400" data-height="200" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
                                 <blockquote cite="{{$setting->fanpage}}" class="fb-xfbml-parse-ignore"><a href="{{$setting->fanpage}}">Giày Sneaker</a></blockquote>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

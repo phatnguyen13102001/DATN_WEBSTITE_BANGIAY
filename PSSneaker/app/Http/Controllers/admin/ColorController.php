@@ -60,14 +60,14 @@ class ColorController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required|unique:colors,name,NULL,id,deleted_at,NULL',
-                'code' => 'required|unique:colors,code,NULL,id,deleted_at,NULL',
+                'code' => 'required|unique:colors,code,NULL,id,deleted_at,NULL|max:7',
             ],
             [
-                'name.required' => 'Tên Màu Không Được Bỏ Trống',
-                'name.unique' => 'Tên Màu Không Được Trùng',
-                'code.required' => 'Mã Màu Không Được Bỏ Trống',
-                'code.unique' => 'Mã Màu Không Được Trùng',
-
+                'name.required' => 'Tên màu không được bỏ trống',
+                'name.unique' => 'Tên màu không được trùng',
+                'code.required' => 'Mã màu không được bỏ trống',
+                'code.unique' => 'Mã màu không được trùng',
+                'code.max' => 'Mã màu không vượt quá 7 ký tự',
             ]
         );
         $color = new color;
@@ -115,13 +115,15 @@ class ColorController extends Controller
     {
         $validatedData = $request->validate(
             [
-                'name' => 'required',
-                'code' => 'required',
+                'name' => 'required|unique:colors,name,' . $color->id . ',id,deleted_at,NULL',
+                'code' => 'required|max:7|unique:colors,code,' . $color->id . ',id,deleted_at,NULL',
             ],
             [
-                'name.required' => 'Tên Màu Không Được Bỏ Trống',
-                'code.required' => 'Mã Màu Không Được Bỏ Trống',
-
+                'name.required' => 'Tên màu không được bỏ trống',
+                'name.unique' => 'Tên màu không được trùng',
+                'code.unique' => 'Mã màu không được trùng',
+                'code.required' => 'Mã màu không được bỏ trống',
+                'code.max' => 'Mã màu không vượt quá 7 ký tự',
             ]
         );
         $color->fill([

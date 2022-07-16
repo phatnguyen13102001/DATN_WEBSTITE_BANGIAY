@@ -15,17 +15,6 @@ jQuery(document).ready(function($) {
 
 });
 
-$(document).ready(function() {
-        var api = $(".sss").peShiner({
-            api: true,
-            paused: true,
-            reverse: true,
-            repeat: 1,
-            color: 'fireHL'
-        }); //mã màu đặc biệt: monoHL, oceanHL, fireHL
-        api.resume();
-    });
-
 $(document).ready(function () {
     /* Modal Add To Cart*/
     $(document).on('click', '.BtnAddToCart', function () {
@@ -174,7 +163,7 @@ $(document).ready(function () {
     });
 
     /*Owl Carousel*/
-    $('.owl-carousel').owlCarousel({
+    $('#news .owl-carousel').owlCarousel({
         loop:true,
         margin:20,
         nav: false,
@@ -193,6 +182,13 @@ $(document).ready(function () {
         }
     })
 
+    $('#slider .owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:false,
+        items: 1,
+    })
+
     //Sort
     $('#sort').on('change', function () {
         
@@ -203,5 +199,14 @@ $(document).ready(function () {
         $('.modalloading').modal('show');
         return false;
     });
+
+    var api = $(".sss").peShiner({
+        api: true,
+        paused: true,
+        reverse: true,
+        repeat: 1,
+        color: 'fireHL'
+    }); //mã màu đặc biệt: monoHL, oceanHL, fireHL
+    api.resume();
 
 });

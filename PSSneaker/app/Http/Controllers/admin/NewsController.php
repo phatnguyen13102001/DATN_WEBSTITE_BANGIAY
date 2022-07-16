@@ -78,9 +78,13 @@ class NewsController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
-                'name.required' => 'name Không Được Bỏ Trống',
+                'name.required' => 'Tên tin tức không được bỏ trống',
+                'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB'
             ]
         );
         $news = new News;
@@ -138,9 +142,13 @@ class NewsController extends Controller
         $validatedData = $request->validate(
             [
                 'name' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ],
             [
-                'name.required' => 'name Không Được Bỏ Trống',
+                'name.required' => 'Tên tin tức không được bỏ trống',
+                'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
             ]
         );
         $data = [
