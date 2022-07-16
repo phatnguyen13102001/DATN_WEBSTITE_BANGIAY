@@ -23,6 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'name',
         'email',
+        'email_verified_at',
+        'email_verification_code',
         'password',
         'avatar',
         'gender',
@@ -34,7 +36,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'remember_token',
         'provider_id',
         'provider',
-        'facebook_id',
+        'status',
+        'token',
 
     ];
 

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Hash;
 class LoginController extends Controller
 {
     protected function fixImagelogo($logo)
@@ -79,7 +79,7 @@ class LoginController extends Controller
                 'password' => 'Tài khoản của bạn đã bị khóa',
             ]);
         }
-        return back()->withErrors([
+return back()->withErrors([
             'password' => 'Tài khoản hoặc mật khẩu sai',
         ]);
     }
@@ -92,6 +92,7 @@ class LoginController extends Controller
     }
     public function showFormRegister()
     {
+        $mangxh=Social::all();
         $lstlogo = Logo::first();
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
@@ -99,7 +100,7 @@ class LoginController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImagelogo($lstlogo);
-        return View::make('login.register', compact('setting', 'hangsx', 'lstlogo', 'chinhsach'))->nest('user.layoutuser.footer', 'login.register', compact('setting', 'lstlogo', 'hangsx', 'chinhsach'));
+        return View::make('login.register', compact('mangxh','setting', 'hangsx', 'lstlogo', 'chinhsach'))->nest('user.layoutuser.footer', 'login.register', compact('mangxh','setting', 'lstlogo', 'hangsx', 'chinhsach'));
     }
     public function Register(Request $request)
     {
@@ -155,7 +156,7 @@ class LoginController extends Controller
     }
     public function getsecsion(Request $request, $req)
     {
-        $r = User::where('email', '=', $req->email)->first();
+$r = User::where('email', '=', $req->email)->first();
         if ($r) {
             if (Hash::check($req->password, $r->password)) {
                 $req->session()->put('User', $r);

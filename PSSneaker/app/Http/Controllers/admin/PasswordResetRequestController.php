@@ -1,9 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
 use Illuminate\Http\Request;
-
 use Symfony\Component\HttpFoundation\Response;
 use App\Models\User;
 use App\Mail\ResetPasswordMailable;
@@ -22,27 +20,21 @@ class PasswordResetRequestController extends Controller
         $this->send($request->email);  //this is a function to send mail 
         return $this->successResponse();
     }
-
     public function send($email)  //this is a function to send mail 
     {
         $token = $this->createToken($email);
         Mail::to($email)->send(new ResetPasswordMailable($token, $email));  // token is important in send mail 
     }
-
     public function createToken($email)  // this is a function to get your request email that there are or not to send mail
     {
         $oldToken = DB::table('password_resets')->where('email', $email)->first();
-
         if ($oldToken) {
             return $oldToken->token;
         }
-
         $token = Str::random(40);     // create a random to send 
         $this->saveToken($token, $email);   // Save token and email 
         return $token;
     }
-
-
     public function saveToken($token, $email)  // this function save new password in password_resets of table
     {
         DB::table('password_resets')->insert([
@@ -51,23 +43,17 @@ class PasswordResetRequestController extends Controller
             'created_at' => Carbon::now()
         ]);
     }
-
-
-
     public function validateEmail($email)  //this is a function to get your email from database
     {
         return !!User::where('email', $email)->first();
     }
-
     // frome here two Function to Success or Failed send Request 	
-
     public function failedResponse()
     {
         return response()->json([
             'error' => 'Email does\'t found on our database'
         ], Response::HTTP_NOT_FOUND);
     }
-
     public function successResponse()
     {
         return response()->json([

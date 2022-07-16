@@ -40,7 +40,6 @@ use Illuminate\Support\Facades\Auth;
 // 
 // Route::get('/lienhe', [EmailController::class,'create'])->name('lienheweb');
 // Route::post('/lienhe', [EmailController::class,'sendEmail1'])->name('lienhewweb.submit');
-
 Route::middleware('admin')->group(function () {
     Route::resource('/admin/account', AccountController::class);
     Route::resource('/admin/information', AdminController::class);
@@ -122,9 +121,13 @@ Route::get('getdistrict', [CartController::class, 'getDistrict'])->name('getdist
 Route::get('getward', [CartController::class, 'getWard'])->name('getward');
 
 /* Add Order OrderDetail */
+
 Route::post('/order', [OrderController::class, 'insertOrder'])->name('order');
 Route::get('/chinhsach/{id}', [FrontendController::class, 'getpolicesdetail'])->name('chinhsach');
 Route::get('/thongtincanhan/{id}', [FrontendController::class, 'getprofile'])->name('thongtincanhanweb');
+Route::get('/lichsu/{id}', [FrontendController::class, 'showhistory'])->name('lichsudonhang'); 
+Route::get('/chitietdonhang/{id}', [FrontendController::class, 'showhistorydetail'])->name('chitietdonhang'); 
+ 
 // 
 Route::get('google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
@@ -133,16 +136,28 @@ Route::get('/auth/callback/{provider}', [FacebookController::class, 'callback'])
 Route::get('Forgotpassword', function () {
     return view('Email.Forgotpassword');
 })->name('Forgotpassword');
-// tin tuc
+
+// dang nhap
 Route::get('dangnhap', [LoginController::class, 'index'])->name('dangnhapweb');
 Route::post('dangnhap', [LoginController::class, 'authenticate'])->name('dangnhapweb');
 Route::get('dangki', [LoginController::class, 'showFormRegister'])->name('showdangkiweb');
 Route::post('dangki', [LoginController::class, 'Register'])->name('dangkiweb');
+// 
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section');
 Route::get('edit/thongtincanhan', [LoginController::class, 'editprofile'])->name('chinhsuatthongtin');
 Route::post('edit/thongtincanhan', [LoginController::class, 'Updateprofile'])->name('capnhatthongtin');
+// đổi mật khẩu
+Route::get('/doimatkhau', [LoginController::class, 'changepassword'])->name('doimatkhau'); 
+Route::post('/capnhatmatkhau', [LoginController::class, 'updatepassword'])->name('capnhatmatkhau');
 //
 
 Route::get('/lienhe', [EmailController::class, 'create'])->name('lienheweb');
 Route::post('/lienhepost', [EmailController::class, 'sendEmail'])->name('lienheweb.post');
+
+// 
+Route::get('/quen-mat-khau', [EmailController::class, 'quenmatkhau']);
+Route::get('/update-new-pass', [EmailController::class, 'update_new_pass']);
+Route::post('/recover-pass', [EmailController::class, 'recover_pass']);
+Route::post('/reset-new-pass', [EmailController::class, 'reset_new_pass']);
+// composer require laravel/ui

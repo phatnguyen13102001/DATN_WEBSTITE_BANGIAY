@@ -59,7 +59,7 @@
                                   <div class="row1 scroll-pane ">
                                       <div class="col col-4 ">
                                           @foreach($hangsx as $key)
-                                          <label class="checkbox "><input type="checkbox" value="{{$key->id}}" name="checkbox"><i></i>{{$key->name}}</label>
+                                          <label class="checkbox"><input type="checkbox" value="{{$key->id}} {{Request::url()}}?sort_byhang=lochang" name="checkbox"><i></i>{{$key->name}}</label>
                                           @endforeach
                                       </div>
                                   </div>
