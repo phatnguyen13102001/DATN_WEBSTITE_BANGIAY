@@ -1,110 +1,62 @@
 @extends('user.index')
 @section('content')
+<div class="container">
 <div class="wrap_acount">
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
 
         <!-- The Grid -->
         <div class="w3-row-padding">
-
-            <!-- Left Column -->
-            <div class="w3-third">
-
-                <div class="w3-white w3-text-grey w3-card-4">
-                    <div class="w3-display-container">
-                        <img src="/storage/{{$taikhoan->avatar}}" style="width:100%" alt="Avatar">
-                    </div>
-                    <div class="w3-container">
-                        <div class="accountcontent">
-                            <div class="accountlist">
-                                <ul class="list-unstyled">
-                                    <li class="current">
-                                        <a href="">Đơn hàng của bạn</a>
-                                    </li>
-                                    <li class="current">
-                                        <a href="{{route('logout')}}">Đăng xuất</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div><br>
-
-                <!-- End Left Column -->
-            </div>
-
             <!-- Right Column -->
-            <div class="w3-twothird">
+            <div class="col-md-12">
 
                 <div class="w3-container w3-card w3-white w3-margin-bottom">
                     <h2 class="w3-twothird_title_main">Đơn hàng của bạn</h2>
                     <div style="overflow-x:auto;">
-  <table class="tablehistory">
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-      <th>Points</th>
-    </tr>
-    <tr>
-      <td>Jill</td>
-      <td>Smith</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-      <td>50</td>
-    </tr>
-    <tr>
-      <td>Eve</td>
-      <td>Jackson</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-      <td>94</td>
-    </tr>
-    <tr>
-      <td>Adam</td>
-      <td>Johnson</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-      <td>67</td>
-    </tr>
-  </table>
-</div>
+                    </div>
                 </div>
             </div>
 
             <!-- End Grid -->
         </div>
+        <table class="tablehistory">
+    <thead>
+    <tr class="trhistory">
+      <th>Mã Đơn hàng</th>
+      <th>Ngày đặt</th>
+      <th>Khách hàng</th>
+      <th>Số điện thoại</th>
+      <th>Email</th>
+      <th>Địa chỉ</th>
+      <th>Thanh toán</th>
+      <th>Giao hàng</th>
+      <th>Tổng tiền</th>
+      <th>Xem chi tiết</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($lichsu as $key)
+    <tr class="trtdhistory">
+      <td>{{$key->code}}</td>
+      <td>{{$key->created_at}}</td>
+      <td>{{$key->name_customer}}</td>
+      <td>{{$key->phone}}</td>
+      <td>{{$key->email}}</td>
+      <td>{{$key->address}}</td>
+      <td>{{$key->payment->name}}</td>
+      <td>{{$key->orderdetail->name}}</td>
+      <td>{{number_format($key->total)}}₫</td>
+      
+      <td>
+        <a href="{{route('chitietdonhang',$key->id)}}">Xem chi tiết</a>
+      </td>
+    </tr>
+    @endforeach
+    </tbody>
+  </table>
 
         <!-- End Page Container -->
     </div>
 
+</div>
 </div>
 @endsection

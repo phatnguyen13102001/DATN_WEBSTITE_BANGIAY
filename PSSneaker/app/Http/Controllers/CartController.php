@@ -11,6 +11,7 @@ use App\Models\District;
 use App\Models\Ward;
 use App\Models\Manufacturer;
 use App\Models\Setting;
+use App\Models\Social;
 use App\Models\Policies;
 use App\Models\Logo;
 use App\Models\Payment;
@@ -81,6 +82,8 @@ class CartController extends Controller
     }
     public function show_cart()
     {
+        
+        $mangxh= Social::all();
         $lstcity = City::pluck("name", "id");
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
@@ -93,9 +96,9 @@ class CartController extends Controller
         foreach ($lstpayment as $payment) {
         }
         if (Auth::check()) {
-            return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment'));
+            return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment','mangxh'));
         } else {
-            return View::make('login.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach'));
+            return View::make('login.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach','mangxh'));
         }
     }
 

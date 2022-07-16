@@ -46,6 +46,11 @@ const config = {
         method: 'GET',
         enabled: true,
         interval: 30
+    },
+    sendPassword: {
+        url: 'auth/ResetPasswordForm',
+        method: 'POST',
+        redirect: '/login'
     }
 }
 export default config

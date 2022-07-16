@@ -17,10 +17,13 @@ use App\Models\Social;
 use App\Models\Logo;
 use App\Models\Policies;
 use App\Models\Manufacturer;
+use App\Models\Orderdetail;
 use App\Models\About;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -42,6 +45,7 @@ class FrontendController extends Controller
     }
     public function getindex(Request $request)
     {
+        $mangxh = Social::all();
         $chinhsach = Policies::all();
         $mau = color::all();
         $kichthuoc = Size::all();
@@ -62,7 +66,6 @@ class FrontendController extends Controller
 
         if (isset($_GET['sort_by'])) {
             $sort_by = $_GET['sort_by'];
-
             if ($sort_by == 'tang_dan') {
                 $lstproduct = Product::where('outstanding', '1')->orderBy('sale_price', 'ASC')->orderBy('regular_price', 'ASC')->paginate(9)->appends(request()->query());
                 foreach ($lstproduct as $product) {
@@ -95,10 +98,11 @@ class FrontendController extends Controller
                 $this->fixImage($product);
             }
         }
-        return View::make('user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach'));
+        return View::make('user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'mangxh'))->nest('user.layoutuser.footer', 'user.body.index', compact('lstproduct', 'lstlogo', 'lstslideshow', 'lsttintuc', 'setting', 'hangsx', 'kichthuoc', 'mau', 'chinhsach', 'mangxh'));
     }
     public function getproductdetail($id)
     {
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -124,10 +128,11 @@ class FrontendController extends Controller
         foreach ($lststock as $stock) {
         }
         $this->fixImage($lstlogo);
-        return view('user.product_detail.index', compact('lstproduct', 'lstproductsame', 'lstlogo', 'setting', 'lstlibrary', 'lststock', 'hangsx', 'chinhsach', 'qtystock'));
+        return view('user.product_detail.index', compact('lstproduct', 'lstproductsame', 'lstlogo', 'setting', 'lstlibrary', 'lststock', 'hangsx', 'chinhsach', 'qtystock', 'mangxh'));
     }
     public function getproduct()
     {
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -139,10 +144,11 @@ class FrontendController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImage($lstlogo);
-        return View::make('user.product.index', compact('lstproduct', 'lstlogo', 'setting', 'chinhsach', 'hangsx'));
+        return View::make('user.product.index', compact('lstproduct', 'lstlogo', 'setting', 'chinhsach', 'hangsx', 'mangxh'));
     }
     public function getproductbymanu($id)
     {
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -154,11 +160,13 @@ class FrontendController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImage($lstlogo);
-        return View::make('user.product.productbymanu', compact('lstproductbymanu', 'lstlogo', 'setting', 'chinhsach', 'hangsx'));
+        return View::make('user.product.productbymanu', compact('lstproductbymanu', 'lstlogo', 'setting', 'chinhsach', 'hangsx', 'mangxh'));
     }
 
     public function getnews()
     {
+
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -170,10 +178,11 @@ class FrontendController extends Controller
         foreach ($lstsetting as $setting) {
         }
         $this->fixImage($lstlogo);
-        return View::make('user.news.index', compact('setting', 'chinhsach', 'lstlogo', 'lstnews', 'hangsx'));
+        return View::make('user.news.index', compact('setting', 'chinhsach', 'lstlogo', 'lstnews', 'hangsx', 'mangxh'));
     }
     public function getnewsdetail($id)
     {
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -187,10 +196,12 @@ class FrontendController extends Controller
             $this->fixImage($newssame);
         }
         $this->fixImage($lstlogo);
-        return view('user.news_detail.index', compact('setting', 'hangsx', 'lstlogo', 'chinhsach', 'lstnews', 'lstnewssame'));
+        return view('user.news_detail.index', compact('setting', 'hangsx', 'lstlogo', 'chinhsach', 'lstnews', 'lstnewssame', 'mangxh'));
     }
     public function getabout()
     {
+
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $gioithieu = About::first();
         $hangsx = Manufacturer::all();
@@ -199,20 +210,24 @@ class FrontendController extends Controller
         $this->fixImage($lstlogo);
         foreach ($lstsetting as $setting) {
         }
-        return view('user.introduce.index', compact('gioithieu', 'lstlogo', 'setting', 'hangsx', 'chinhsach'));
+        return view('user.introduce.index', compact('gioithieu', 'lstlogo', 'setting', 'hangsx', 'chinhsach', 'mangxh'));
     }
     public function sapxephang($id)
     {
+
+        $mangxh = Social::all();
         $hangsxid = Manufacturer::find($id);
         $chinhsach = Policies::all();
         $lstsetting = Setting::all();
         $lstproduct = Product::where('id', '=', $hangsxid);
 
         $this->fixImage($lstproduct);
-        return view('user.body.index', compact('lstproduct', 'setting', 'hangsx', 'chinhsach'));
+        return view('user.body.index', compact('lstproduct', 'setting', 'hangsx', 'chinhsach', 'mangxh'));
     }
     public function getpolicesdetail($id)
     {
+
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -221,11 +236,12 @@ class FrontendController extends Controller
         $this->fixImage($lstlogo);
         foreach ($lstsetting as $setting) {
         }
-        return View::make('user.policies.index', compact('hangsx', 'lstlogo', 'listchinhsach', 'setting', 'chinhsach'));
+        return View::make('user.policies.index', compact('hangsx', 'lstlogo', 'listchinhsach', 'setting', 'chinhsach', 'mangxh'));
     }
     // 
     public function getprofile($id)
     {
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
@@ -234,11 +250,12 @@ class FrontendController extends Controller
         $this->fixImage($lstlogo);
         foreach ($lstsetting as $setting) {
         }
-        return View::make('user.account.index', compact('taikhoan', 'lstlogo', 'setting', 'hangsx', 'chinhsach'));
+        return View::make('user.account.index', compact('taikhoan', 'lstlogo', 'setting', 'hangsx', 'chinhsach', 'mangxh'));
     }
 
     public function search(Request $request)
     {
+        $mangxh = Social::all();
         $lstlogo = Logo::first();
         $hangsx = Manufacturer::all();
         $chinhsach = Policies::all();
@@ -251,13 +268,12 @@ class FrontendController extends Controller
         foreach ($search_product as $product) {
             $this->fixImage($product);
         }
-        return View::make('user.product.search', compact('search_product', 'lstlogo', 'hangsx', 'chinhsach', 'setting'));
+        return View::make('user.product.search', compact('search_product', 'lstlogo', 'hangsx', 'chinhsach', 'setting', 'mangxh'));
     }
 
     public function autocomplete_ajax(Request $request)
     {
         $data = $request->all();
-
         if ($data['query']) {
             $product = Product::where('name', 'LIKE', '%' . $data['query'] . '%')->get();
             $output = '<ul class="dropdown-menu" style="display:block; margin-left:49px;">';
@@ -267,5 +283,31 @@ class FrontendController extends Controller
             $output .= '</ul>';
             echo $output;
         }
+    }
+    public function showhistory($id)
+    {
+        $lichsu = Order::where('id_user', '=', $id)->get();
+        $mangxh = Social::all();
+        $lstlogo = Logo::first();
+        $hangsx = Manufacturer::all();
+        $chinhsach = Policies::all();
+        $lstsetting = Setting::all();
+        foreach ($lstsetting as $setting) {
+        }
+        $this->fixImage($lstlogo);
+        return View::make('user.account.history', compact('lichsu', 'lstlogo', 'setting', 'chinhsach', 'hangsx', 'mangxh'));
+    }
+    public function showhistorydetail($id)
+    {
+        $chitietdonhang = Orderdetail::where('id_order', '=', $id)->get();
+        $mangxh = Social::all();
+        $lstlogo = Logo::first();
+        $hangsx = Manufacturer::all();
+        $chinhsach = Policies::all();
+        $lstsetting = Setting::all();
+        foreach ($lstsetting as $setting) {
+        }
+        $this->fixImage($lstlogo);
+        return View::make('user.account.historydetail', compact('chitietdonhang', 'lstlogo', 'setting', 'chinhsach', 'hangsx', 'mangxh'));
     }
 }

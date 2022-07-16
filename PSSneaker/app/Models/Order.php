@@ -46,4 +46,8 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Ward', 'id_ward', 'id');
     }
+    public function cthd()
+    {
+        return $this->hasOne(Orderdetail::class);
+    }
 }

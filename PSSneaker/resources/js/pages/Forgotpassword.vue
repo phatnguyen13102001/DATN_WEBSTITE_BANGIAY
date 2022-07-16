@@ -31,7 +31,7 @@ export default {
     methods: {
         requestResetPassword() {
           let currentObj = this;
-            this.$http.post("/auth/Forgotpassword/", {email: this.email}).then(result => {
+            this.$http.post("/Forgotpassword/", {email: this.email}).then(result => {
               
                 this.response = result.data;
                 console.log(result.data);

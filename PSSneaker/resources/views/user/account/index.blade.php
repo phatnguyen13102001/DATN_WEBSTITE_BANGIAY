@@ -18,7 +18,10 @@
                             <div class="accountlist">
                                 <ul class="list-unstyled">
                                     <li class="current">
-                                        <a href="">Đơn hàng của bạn</a>
+                                        <a href="{{route('lichsudonhang',Auth::user()->id)}}">Đơn hàng của bạn</a>
+                                    </li>
+                                    <li class="current">
+                                        <a href="{{route('doimatkhau')}}">Đổi mật khẩu</a>
                                     </li>
                                     <li class="current">
                                         <a href="{{route('logout')}}">Đăng xuất</a>
@@ -28,10 +31,8 @@
                         </div>
                     </div>
                 </div><br>
-
                 <!-- End Left Column -->
             </div>
-
             <!-- Right Column -->
             <div class="w3-twothird">
 
@@ -90,66 +91,6 @@
                         <button class="btn btn-fefault cart_view01" type="submit">Cập nhật</button>
                     </div>
                 </form>
-            </div>
-            <div >
-                <table class="tablehistory">
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                        <th>Points</th>
-                    </tr>
-                    <tr>
-                        <td>Jill</td>
-                        <td>Smith</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td>50</td>
-                    </tr>
-                    <tr>
-                        <td>Eve</td>
-                        <td>Jackson</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                        <td>94</td>
-                    </tr>
-                    <tr>
-                        <td>Adam</td>
-                        <td>Johnson</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                        <td>67</td>
-                    </tr>
-                </table>
             </div>
             <!-- End Grid -->
         </div>

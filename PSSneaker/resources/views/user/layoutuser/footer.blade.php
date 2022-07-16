@@ -31,15 +31,14 @@
                         <div class="flex_mangxh">
                             <div class="title_footer_mangxh">Mạng xã hội</div>
                             <div class="soial_footer_mangxh">
-
+                            @foreach($mangxh as $key)
                                 <li class="d-inline-block align-top mr-1">
-                                    <a href="" target="_blank">
-                                        <img class="thumb_social" src="" alt="" />
+                                    <a href="{{$key->link}}" target="_blank">
+                                        <img src="storage/{{$key->image}}" alt="" />
                                     </a>
                                 </li>
-
+                            @endforeach
                             </div>
-
                         </div>
                     </div>
                 </div>

@@ -10,6 +10,7 @@ use App\Models\Setting;
 use App\Models\Policies;
 use App\Models\Logo;
 use App\Models\Payment;
+use App\Models\Social;
 use App\Models\City;
 use App\Models\Mapping;
 use Illuminate\Support\Facades\View;
@@ -30,6 +31,7 @@ class OrderController extends Controller
     }
     public function insertOrder(Request $request)
     {
+        $mangxh= Social::all();
         $lstcity = City::pluck("name", "id");
         $lstpayment = Payment::where('show', '=', '1')->get();
         $chinhsach = Policies::all();
@@ -89,7 +91,7 @@ class OrderController extends Controller
             'code' => Str::random(6),
             'id_user' => Auth::user()->id,
         ]);
-        $order->save();
+        $order->save(); 
         $content = Cart::instance(Auth::user())->content();
         $orderdetail = [];
         foreach ($content as $v_content) {
@@ -113,6 +115,6 @@ class OrderController extends Controller
         Orderdetail::insert($orderdetail);
 
         Cart::instance(Auth::user())->destroy();
-        return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment'));
+        return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment','mangxh'));
     }
 }

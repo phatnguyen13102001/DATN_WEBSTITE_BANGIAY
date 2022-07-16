@@ -25,7 +25,7 @@
                         <button type="submit" class="btn btn-default">Đăng Nhập</button>
                     </form>
                     <div class="title_login_quenml">
-                        <a href="{{url('http://localhost:8000/api/sendPasswordResetLink')}}">Quên mật khẩu</a>
+                        <a href="{{url('/quen-mat-khau')}}">Quên mật khẩu</a>
                     </div>
                     <div class="title_login_quenml">
                         <a href="{{route('dangkiweb')}}">Đăng kí</a>

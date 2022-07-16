@@ -8,6 +8,7 @@ import Login from './pages/Login'
 import Dashboard from './pages/user/Dashboard'
 import AdminDashboard from './pages/admin/Dashboard'
 import ForgotPassword from './pages/ForgotPassword'
+import ResetPasswordForm from './pages/ResetPasswordForm'
 // Routes
 const routes = [{
         path: '/',
@@ -58,7 +59,14 @@ const routes = [{
             auth: true
         }
     },
-
+    {
+        path: '/ResetPasswordForm/:token',
+        name: 'ResetPasswordForm',
+        component: ResetPasswordForm,
+        meta: {
+            auth: false
+        }
+    },
     // ADMIN ROUTES
     {
         path: '/admin',
