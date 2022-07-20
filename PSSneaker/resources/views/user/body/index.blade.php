@@ -20,51 +20,7 @@
   <section class="wrapsanpham">
       <div class="container">
           <div class="row">
-              <div class=" stickymenu col-sm-3">
-                  <div class="left-sidebar">
-                      <h2>Sắp xếp & phân loại</h2>
-                      <div class="panel-group category-products" id="accordian">
-                          <!--category-productsr-->
-                          <div class="rsingle1 span_1_of_single ">
-                              <section class="sky-form1 ">
-                                  <h4>Hãng</h4>
-                                  <div class="row1 scroll-pane ">
-                                      <div class="col col-4 ">
-                                          @foreach($hangsx as $key)
-                                          <label class="checkbox"><input type="checkbox" value="{{$key->id}} {{Request::url()}}?sort_byhang=lochang" name="checkbox"><i></i>{{$key->name}}</label>
-                                          @endforeach
-                                      </div>
-                                  </div>
-                              </section>
-                              <section class="sky-form1 ">
-                                  <h4>SIZE</h4>
-                                  <div class="row1 scroll-pane ">
-
-                                      <div class="col col-4">
-                                          @foreach($kichthuoc as $key)
-                                          <label class="checkbox "><input type="checkbox " value="{{$key->id}}" name="checkbox "><i></i>{{$key->size}}</label>
-                                          @endforeach
-                                      </div>
-                                  </div>
-                              </section>
-                              <section class="sky-form1">
-                                  <h4>MÀU SẮC</h4>
-                                  <ul class="color-list1 ">
-                                      @foreach($mau as $key)
-                                      <li>
-                                          <a href="{{$key->id}}"> <span class="" style="background-color: {{$key->code}}!important; padding: 5px 14px;"></span>
-                                              <p class="red">{{$key->name}}</p>
-                                          </a>
-                                      </li>
-                                      @endforeach
-                                  </ul>
-                              </section>
-                          </div>
-                      </div>
-                      <!--/category-products-->
-                  </div>
-              </div>
-              <div class="col-sm-9 padding-right">
+              <div class="col-sm-12">
                   <h2 class="title text-center">SẢN PHẨM</h2>
                   <div class="w-25 float-right">
                       <form>
@@ -124,11 +80,6 @@
                       {!! $lstproduct->links() !!}
                   </div>
               </div>
-          </div>
-      </div>
-      <div class="modalloading fade" tabindex="-1" role="dialog" id="spinnerModal">
-          <div class="modal-dialog modal-dialog-centered text-center" role="document">
-              <span class="fa fa-spinner fa-spin fa-3x w-100"></span>
           </div>
       </div>
   </section>

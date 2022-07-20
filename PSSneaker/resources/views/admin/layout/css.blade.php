@@ -15,14 +15,11 @@
 <!-- Daterange picker -->
 <link rel="stylesheet" href="{{ asset('AdminLTE-master/plugins/daterangepicker/daterangepicker.css')}}">
 <!-- summernote -->
-
 <!--  -->
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/bootstrap/bootstrap.min.css')}}">
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/css/animate.min.css')}}">
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/css/adminlte.css')}}">
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/css/adminlte-style.css')}}">
-<link rel="stylesheet" href="{{ asset('admin_pssneaker/filer/jquery.filer-dragdropbox-theme.css')}}">
-<link rel="stylesheet" href="{{ asset('admin_pssneaker/filer/jquery.filer.css')}}">
 <link rel="stylesheet" href="{{ asset('admin_pssneaker/rangeSlider/ion.rangeSlider.css')}}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">

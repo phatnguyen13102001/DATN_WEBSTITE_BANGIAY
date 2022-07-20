@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -15,6 +16,7 @@ use App\Mail\ContactMail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+
 class EmailController extends Controller
 {
   protected function fixImage($product)
@@ -27,13 +29,15 @@ class EmailController extends Controller
   }
   public function create()
   {
-    
-    $mangxh = Social::all();
+    $mangxh = Social::where('show', 1)->get();
     $lstlogo = Logo::first();
     $chinhsach = Policies::all();
     $hangsx = Manufacturer::all();
     $lstsetting = Setting::all();
     foreach ($lstsetting as $setting) {
+    }
+    foreach ($mangxh as $social) {
+      $this->fixImage($social);
     }
     $this->fixImage($lstlogo);
     return View::make('user.contact.index', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'user.contact.index', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'));
@@ -55,73 +59,81 @@ class EmailController extends Controller
     });
     return redirect()->guest('lienhe');
   }
-  public function quenmatkhau(){
-     
-    $mangxh = Social::all();
+  public function quenmatkhau()
+  {
+    $mangxh = Social::where('show', 1)->get();
     $lstlogo = Logo::first();
     $chinhsach = Policies::all();
     $hangsx = Manufacturer::all();
     $lstsetting = Setting::all();
     foreach ($lstsetting as $setting) {
+    }
+    foreach ($mangxh as $social) {
+      $this->fixImage($social);
     }
     $this->fixImage($lstlogo);
     return View::make('login.forgetpassword', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.forgetpassword', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'));
-
   }
-  public function recover_pass(Request $request){
-    $data= $request->all();
-    $title_mail="Lấy lại mật khẩu";
-    $user= User::where('email','=',$data['email'])->get();
-    foreach($user as $key => $value){
-      $id= $value->id;
+  public function recover_pass(Request $request)
+  {
+    $data = $request->all();
+    $title_mail = "Lấy lại mật khẩu";
+    $user = User::where('email', '=', $data['email'])->get();
+    foreach ($user as $key => $value) {
+      $id = $value->id;
     }
-    if($user){
-      $count_user= $user->count();
-      if($count_user==0){
-        return redirect()->back()->with('error','Email chưa được đăng kí để khôi phục mật khẩu');
-      } else
-      {
+    if ($user) {
+      $count_user = $user->count();
+      if ($count_user == 0) {
+        return redirect()->back()->with('error', 'Email chưa được đăng kí để khôi phục mật khẩu');
+      } else {
         $token_random = Str::random();
-        $user= User::find($id);
-        $user->provider=$token_random;
+        $user = User::find($id);
+        $user->provider = $token_random;
         $user->save();
         // 
-        $to_email= $data['email'];
-        $link_reset_pass = url('/update-new-pass?email='.$to_email.'&token='.$token_random);
-        $data = array("name"=>$title_mail,"body"=>$link_reset_pass,'email'=>$data['email']);
-        Mail::send('login.reset_pass_motify',['data'=>$data],function($message) use ($title_mail,$data){
+        $to_email = $data['email'];
+        $link_reset_pass = url('/update-new-pass?email=' . $to_email . '&token=' . $token_random);
+        $data = array("name" => $title_mail, "body" => $link_reset_pass, 'email' => $data['email']);
+        Mail::send('login.reset_pass_motify', ['data' => $data], function ($message) use ($title_mail, $data) {
           $message->to($data['email'])->subject($title_mail);
-          $message->from($data['email'],$title_mail);
+          $message->from($data['email'], $title_mail);
         });
-        return redirect()->back()->with('message','Gửi mail thành công, vui lòng vào mail để reserpassword');
+        return redirect()->back()->with('message', 'Gửi mail thành công, vui lòng vào mail để reserpassword');
       }
     }
   }
-  public function reset_new_pass(Request $request){
-    $data= $request->all();
-    $token_random= Str::random();
-    $user= User::where('email','=',$data['email'])->where('provider','=',$data['token'])->get();
-    $count= $user->count();
-    if($count>0){
-      foreach($user as $key =>$us){
-        $id =$us->id;
+  public function reset_new_pass(Request $request)
+  {
+    $data = $request->all();
+    $token_random = Str::random();
+    $user = User::where('email', '=', $data['email'])->where('provider', '=', $data['token'])->get();
+    $count = $user->count();
+    if ($count > 0) {
+      foreach ($user as $key => $us) {
+        $id = $us->id;
       }
-      $reset= User::find($id);
-      $reset ->password=bcrypt($data['password']);
+      $reset = User::find($id);
+      $reset->password = bcrypt($data['password']);
       $reset->provider =  $token_random;
       $reset->save();
-      return redirect('dangnhap')->with('success','Mật khẩu đã được cập nhật mới. Quay lại đăng nhập');
-    } else{
-      return redirect('recover-password')->with('error','Vui lòng nhập lại email vì linh quá hạng');
+      return redirect('dangnhap')->with('success', 'Mật khẩu đã được cập nhật mới. Quay lại đăng nhập');
+    } else {
+      return redirect('recover-password')->with('error', 'Vui lòng nhập lại email vì linh quá hạng');
     }
   }
-  public function update_new_pass(Request $request){
-    $mangxh = Social::all();
+  public function update_new_pass(Request $request)
+  {
+
+    $mangxh = Social::where('show', 1);
     $lstlogo = Logo::first();
     $chinhsach = Policies::all();
     $hangsx = Manufacturer::all();
     $lstsetting = Setting::all();
     foreach ($lstsetting as $setting) {
+    }
+    foreach ($mangxh as $social) {
+      $this->fixImage($social);
     }
     $this->fixImage($lstlogo);
     return View::make('login.new_pass', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.new_pass', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'));

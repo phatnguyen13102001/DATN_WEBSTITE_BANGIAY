@@ -40,7 +40,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'token',
 
     ];
-
+    public function rating()
+    {
+        return $this->hasMany('App\Models\Rating', 'id_user', 'id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

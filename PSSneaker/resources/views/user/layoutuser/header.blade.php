@@ -12,8 +12,8 @@
                 <div class="col-sm-6">
                     <div class="contactinfo">
                         <ul class="nav0 nav-pills">
-                            <li><a href="#"><i class="fa fa-phone"></i>{{$setting->phone}}</a></li>
-                            <li><a href="#"><i class="fa fa-envelope"></i>{{$setting->email}}</a></li>
+                            <li><a href="tel:{{$setting->hotline}}"><i class="fa fa-phone"></i>{{$setting->phone}}</a></li>
+                            <li><a href=""><i class="fa fa-envelope"></i>{{$setting->email}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +77,10 @@
                             <li class="dropdown"><a href="{{route('product')}}" class="{{ (request()->is('product')) || (request()->is('product_by_manufacturer/*')) || (request()->is('productdetail/*')) ? 'active' : '' }}">SẢN PHẨM<i class="fa fa-angle-down"></i></a>
                                 <ul role="menu" class="sub-menu">
                                     @foreach($hangsx as $manu)
-                                    <li><a href="{{route('productbymanu',$manu->id)}}">{{$manu->name}}</a></li>
+                                    <a href="{{route('productbymanu',$manu->id)}}">
+                                        <li>{{$manu->name}}
+                                        </li>
+                                    </a>
                                     @endforeach
                                 </ul>
                             </li>

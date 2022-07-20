@@ -196,7 +196,6 @@ $(document).ready(function () {
         if (url) {
             window.location = url;
         }
-        $('.modalloading').modal('show');
         return false;
     });
 
@@ -208,5 +207,85 @@ $(document).ready(function () {
         color: 'fireHL'
     }); //mã màu đặc biệt: monoHL, oceanHL, fireHL
     api.resume();
+
+    //Rating
+    function remove_background(product_id)
+    {
+        for (var count = 1; count <= 5; count++)
+        {
+            $('#' + product_id + '-' + count).css('color', '#ccc');
+        }
+    }
+
+    $(document).on('mouseenter', '.rating', function () {
+        var index = $(this).data("index");
+        var product_id = $(this).data('product-id');
+
+        remove_background(product_id);
+
+        for (var count = 1; count <= index; count++)
+        {
+            $('#' + product_id + '-' + count).css('color', '#ffcc00');
+        }
+    });
+
+    $(document).on('mouseleave', '.rating', function () {
+        var index = $(this).data("index");
+        var product_id = $(this).data('product-id');
+        var rating = $(this).data("rating");
+        remove_background(product_id);
+
+        for (var count = 1; count <= rating; count++) {
+            $('#' + product_id + '-' + count).css('color', '#ffcc00');
+        }
+    });
+
+    $(document).on('click', '.rating', function () {
+        var index = $(this).data("index");
+        var product_id = $(this).data('product-id');
+        var _token = $('input[name="_token"]').val();
+        $.ajax({
+            url: "/insert-rating",
+            method: "POST",
+            data: { index: index, product_id: product_id, _token: _token },
+            success: function (data) {
+                if (data == 'done') {
+                    alert("Bạn đã đánh giá " + index + " trên 5 sao");
+                    location.reload();
+                }
+                else {
+                    alert("Lỗi đánh giá");
+                }
+            }
+        })
+    });
+
+    /* Scroll top top */
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 40) {
+            $('#topBtn').fadeIn();
+        }
+        else {
+            $('#topBtn').fadeOut();
+        }
+    });
+
+    $("#topBtn").click(function () {
+        $('html,body').animate({ scrollTop: 0 }, 800);
+    });
+
+    $('.BtnAddToCart').click(function () {
+        $('.alert_success').removeClass("hiden");
+        $('.alert_success').addClass("show");
+        $('.alert_success').addClass("showAlert");
+        // setTimeout(function () {
+        //     $('.alert').addClass("hiden");
+        //     $('.alert').removeClass("show");
+        // },5000)
+    });
+    $('.close-btn').click(function () {
+        $('.alert_success').addClass("hiden");
+        $('.alert_success').removeClass("show");
+    });
 
 });

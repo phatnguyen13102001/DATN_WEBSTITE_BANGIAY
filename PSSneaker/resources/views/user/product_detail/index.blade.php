@@ -2,19 +2,27 @@
 @section('content')
 <section>
     <div class="container">
+        @if(session('fail'))
+        <div class="alert alert-danger">
+            {{session('fail')}}
+        </div>
+        @endif
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{session('success')}}
+        </div>
+        <!-- <div class="alert_success hiden">
+            <span class="fas fa-check-circle"></span>
+            <span class="msg">Thông báo: Thêm vào giỏ hàng thành công</span>
+            <span class="close-btn">
+                <span class="fas fa-times"></span>
+            </span>
+        </div> -->
+        @endif
         <div>
             <div class="padding_category">
                 <div class="col-sm-12 padding-right">
                     <div class="product-details">
-                        @if(session()->has('message'))
-                        <div class="alert alert-danger">
-                            {!! session()->get('message')!!}
-                        </div>
-                        @elseif(session()->has('error'))
-                        <div class="alert alert-danger">
-                            {!! session()->get('error')!!}
-                        </div>
-                        @endif
                         <!--product-details-->
                         <div class="col-sm-5">
                             <div class="grid images_3_of_2">
@@ -46,9 +54,10 @@
                                 <div class="product-information">
                                     <!--/product-information-->
                                     <h2 class="title_categoridetail_txt">{{$lstproduct->name}}</h2>
+                                    <p class="qty_rating">Đánh giá: <span class="number_rating">{{number_format($rating ,1)}}/5 <i class="fas fa-star"></i></span></p>
                                     <p>Thương hiệu: <span class="name_brand">PS SNEAKER®</span></p>
                                     <span class="title_hang_sx">Hãng sản xuất:</span>
-                                    <span>{{$lstproduct->manufacturer->name}}</span>
+                                    <span class="name_manufacturer">{{$lstproduct->manufacturer->name}}</span>
                                     <input type="hidden" name="name_manu" value="{{$lstproduct->manufacturer->name}}">
                                     <input type="hidden" name="SKU" value="{{$lstproduct->SKU}}">
                                     <div class="border_giaandtien">
@@ -67,7 +76,7 @@
                                     </div>
                                     <div>
                                         <span>Màu:</span>
-                                        <span>{{$lstproduct->color->name}}</span>
+                                        <span style="color:{{$lstproduct->color->code}}">{{$lstproduct->color->name}}</span>
                                     </div>
                                     <div class="box-size">
                                         <table class="variations" cellspacing="0">
@@ -139,26 +148,126 @@
                         </div>
                     </div>
                     <!--/product-details-->
-                    <div class="category-tab shop-details-tab">
-                        <div class="tab-pane fade active in" id="reviews">
-                            <div class="col-sm-12">
-                                <div class="title_gioithieu_product_detail">THÔNG TIN SẢN PHẨM</div>
-                                <div class="content-container">
-                                    @if(($lstproduct->describe)!=NULL)
-                                    <div id="editor">
-                                        {!! htmlspecialchars_decode(nl2br($lstproduct->describe)) !!}
-                                    </div>
-                                    @else
-                                    <div class="alert alert-warning w-100" role="alert">
-                                        <p>Nội dung đang được cập nhập</p>
-                                    </div>
-                                    @endif
+                    <div class="tabs-pro-detail">
+                        <ul class="nav nav-tabs" id="tabsProDetail" role="tablist">
+                            <li class="nav-link active">
+                                <a class="nav-item" id="info-pro-detail-tab" data-toggle="tab" href="#info-pro-detail" role="tab">Thông tin sản phẩm</a>
+                            </li>
+                            <li class="nav-link">
+                                <a class="nav-item" id="commentfb-pro-detail-tab" data-toggle="tab" href="#commentfb-pro-detail" role="tab">Bình luận</a>
+                            </li>
+                            <li class="nav-link">
+                                <a class="nav-item" id="rating-pro-detail-tab" data-toggle="tab" href="#rating-pro-detail" role="tab">Đánh giá</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content pt-4 pb-4" id="tabsProDetailContent">
+                            <div class="tab-pane fade show active" id="info-pro-detail" role="tabpanel">
+                                @if(($lstproduct->describe)!=NULL)
+                                <div id="editor">
+                                    {!! htmlspecialchars_decode(nl2br($lstproduct->describe)) !!}
                                 </div>
+                                @else
+                                <div class="alert alert-warning w-100" role="alert">
+                                    <p>Nội dung đang được cập nhập</p>
+                                </div>
+                                @endif
                             </div>
-                            <div class="col-sm-12">
+                            <div class="tab-pane fade" id="commentfb-pro-detail" role="tabpanel">
                                 <div id="fb-root"></div>
                                 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v14.0&appId=1619936111724930&autoLogAppEvents=1" nonce="lMAIxCGt"></script>
-                                <div class="fb-comments" data-href="{{url($lstproduct->id)}}" data-width="1000" data-numposts="5"></div>
+                                <div class="fb-comments" data-href="{{url($lstproduct->id)}}" data-width="1080" data-numposts="5"></div>
+                            </div>
+                            <div class="tab-pane fade" id="rating-pro-detail" role="tabpanel">
+                                @if(Illuminate\Support\Facades\Auth::check())
+                                @if($checkrating != 0)
+                                <ul class="list-inline rating" title="Average Rating">
+                                    @for($count=1; $count<=5; $count++) @php if($count <=$rating){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp <li title="star_rating" id="{{$lstproduct->id}}-{{$count}}" data-index="{{$count}}" data-product-id="{{$lstproduct->id}}" data-rating="{{$rating}}" class="rating" style="cursor:pointer;{{$color}} font-size:30px;"><i class="fas fa-star"></i></li>
+                                        @endfor
+                                </ul>
+                                @endif
+                                @endif
+                                <p>{{number_format($rating ,1)}} sao trên {{$lstrating->count()}} người đánh giá.</p>
+                                <hr style="border:3px solid #f1f1f1">
+                                <div class="row">
+                                    <div class="side">
+                                        <div>5 sao</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-5" style="width: {{$avg5star}}%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>{{$rating5star}}</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>4 sao</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-4" style="width: {{$avg4star}}%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>{{$rating4star}}</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>3 sao</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-3" style="width: {{$avg3star}}%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>{{$rating3star}}</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>2 sao</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-2" style="width: {{$avg2star}}%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>{{$rating2star}}</div>
+                                    </div>
+                                    <div class="side">
+                                        <div>1 sao</div>
+                                    </div>
+                                    <div class="middle">
+                                        <div class="bar-container">
+                                            <div class="bar-1" style="width: {{$avg1star}}%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="side right">
+                                        <div>{{$rating1star}}</div>
+                                    </div>
+                                </div>
+                                <hr style="border:3px solid #f1f1f1">
+                                @foreach($lstrating as $v_rate)
+                                <div class="lst-user-rate">
+                                    <div class="box-user-rate">
+                                        @if($v_rate->user->avatar != NULL)
+                                        <img class="avatar_user" src="/storage/{{$v_rate->user->avatar}}">
+                                        @else
+                                        <img class="avatar_user" src="{{asset('Images/NoImage.jpg')}}">
+                                        @endif
+                                        <div class="box-name-rate">
+                                            <p>{{$v_rate->user->name}}</p>
+                                            <ul class="list-inline">
+                                                @for($count=1 ; $count<=5; $count++) @php if($count <=$v_rate->rate){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp <li style="{{$color}}; font-size:15px;"><i class="fas fa-star"></i></li>
+                                                    @endfor
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="box-date-rate">
+                                        {{ date("h:i:s A - d/m/Y", strtotime($v_rate->created_at)) }}
+                                    </div>
+                                </div>
+                                <hr>
+                                @endforeach
                             </div>
                         </div>
                     </div>

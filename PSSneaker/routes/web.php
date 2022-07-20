@@ -112,6 +112,7 @@ Route::get('/newsdetail/{id}', [FrontendController::class, 'getnewsdetail'])->na
 Route::get('/index/{id}', [FrontendController::class, 'getindex']);
 Route::post('/autocomplete-ajax', [FrontendController::class, 'autocomplete_ajax']);
 Route::post('/tim-kiem', [FrontendController::class, 'search'])->name('timkiem');
+Route::post('/insert-rating', [FrontendController::class, 'insert_rating']);
 
 /* Add To Cart */
 Route::post('/add-to-cart', [CartController::class, 'addtocart'])->name('addtocart');
@@ -126,9 +127,9 @@ Route::get('getward', [CartController::class, 'getWard'])->name('getward');
 Route::post('/order', [OrderController::class, 'insertOrder'])->name('order');
 Route::get('/chinhsach/{id}', [FrontendController::class, 'getpolicesdetail'])->name('chinhsach');
 Route::get('/thongtincanhan/{id}', [FrontendController::class, 'getprofile'])->name('thongtincanhanweb');
-Route::get('/lichsu/{id}', [FrontendController::class, 'showhistory'])->name('lichsudonhang'); 
-Route::get('/chitietdonhang/{id}', [FrontendController::class, 'showhistorydetail'])->name('chitietdonhang'); 
- 
+Route::get('/lichsu/{id}', [FrontendController::class, 'showhistory'])->name('lichsudonhang');
+Route::get('/chitietdonhang/{id}', [FrontendController::class, 'showhistorydetail'])->name('chitietdonhang');
+
 // 
 Route::get('google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
@@ -149,7 +150,7 @@ Route::get('/getsection', [LoginController::class, 'getsecsion'])->name('section
 Route::get('edit/thongtincanhan', [LoginController::class, 'editprofile'])->name('chinhsuatthongtin');
 Route::post('edit/thongtincanhan', [LoginController::class, 'Updateprofile'])->name('capnhatthongtin');
 // đổi mật khẩu
-Route::get('/doimatkhau', [LoginController::class, 'changepassword'])->name('doimatkhau'); 
+Route::get('/doimatkhau', [LoginController::class, 'changepassword'])->name('doimatkhau');
 Route::post('/capnhatmatkhau', [LoginController::class, 'updatepassword'])->name('capnhatmatkhau');
 //
 

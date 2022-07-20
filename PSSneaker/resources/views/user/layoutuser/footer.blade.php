@@ -31,13 +31,13 @@
                         <div class="flex_mangxh">
                             <div class="title_footer_mangxh">Mạng xã hội</div>
                             <div class="soial_footer_mangxh">
-                            @foreach($mangxh as $key)
+                                @foreach($mangxh as $key)
                                 <li class="d-inline-block align-top mr-1">
                                     <a href="{{$key->link}}" target="_blank">
-                                        <img src="storage/{{$key->image}}" alt="" />
+                                        <img src="{{$key->image}}" alt="social" />
                                     </a>
                                 </li>
-                            @endforeach
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -76,4 +76,17 @@
             </div>
         </div>
     </div>
+    <button id="topBtn"><i class="fas fa-arrow-up"></i></button>
+    <a class="btn-zalo btn-frame text-decoration-none" target="_blank" href="https://zalo.me/{{$setting->zalo}}">
+        <div class="animated infinite zoomIn kenit-alo-circle"></div>
+        <div class="animated infinite pulse kenit-alo-circle-fill"></div>
+        <i><img class="lazy loaded" alt="Zalo" src="{{asset('Images/zl.png')}}" data-was-processed="true"></i>
+    </a>
+    <a class="btn-phone btn-frame text-decoration-none" href="tel:{{$setting->hotline}}">
+        <div class="box-btn-phone">
+            <div class="animated infinite zoomIn kenit-alo-circle"></div>
+            <div class="animated infinite pulse kenit-alo-circle-fill"></div>
+            <i><img class="lazy loaded" alt="Hotline" src="{{asset('Images/hl.png')}}" data-was-processed="true"></i>
+        </div>
+    </a>
 </footer>

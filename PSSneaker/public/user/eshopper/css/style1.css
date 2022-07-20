@@ -1769,7 +1769,7 @@ coccocgrammar {
     width: 50px;
     height: 50px;
     position: fixed;
-    right: 20px;
+    right: 35px;
     z-index: 10;
     cursor: pointer;
 }
@@ -1783,7 +1783,7 @@ coccocgrammar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: #14903f;
+    background: rgb(231, 0, 0);
     position: relative;
     z-index: 1;
 }
@@ -1807,9 +1807,9 @@ coccocgrammar {
     -webkit-border-radius: 100%;
     -moz-border-radius: 100%;
     border-radius: 100%;
-    border: 2px solid #14903f;
+    border: 2px solid rgb(221, 49, 49);
     opacity: 0.1;
-    border-color: #14903f;
+    border-color: rgb(227, 48, 48);
     opacity: 0.5;
 }
 
@@ -1841,7 +1841,7 @@ coccocgrammar {
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
     transition: all 0.5s;
-    background-color: #14903f;
+    background-color: rgb(244, 44, 44);
     opacity: 0.4;
 }
 
@@ -1853,14 +1853,14 @@ coccocgrammar {
 /* Zalo */
 
 .btn-zalo {
-    bottom: 315px;
+    bottom: 240px;
 }
 
 
 /* Phone */
 
 .btn-phone {
-    bottom: 230px;
+    bottom: 160px;
 }
 
 

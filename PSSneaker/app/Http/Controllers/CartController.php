@@ -47,13 +47,13 @@ class CartController extends Controller
             $stock = Mapping::select('quantity')->where('id_product', '=', $product_id)->where('id_size', '=', $size)->first();
 
             if ($quantity > $stock->quantity) {
-                return back()->with('message', 'Size ' . $size_name->size . ' bạn vừa chọn đã vượt quá tồn kho, chỉ còn ' . $stock->quantity . ' sản phẩm');
+                return back()->with('fail', 'Size ' . $size_name->size . ' bạn vừa chọn đã vượt quá tồn kho, chỉ còn ' . $stock->quantity . ' sản phẩm');
             }
             $content = Cart::instance(Auth::user())->content();
 
             foreach ($content as $v_content) {
                 if (($v_content->qty) >= ($stock->quantity) && ($v_content->options->size_id == $size) && ($v_content->id == $product_id)) {
-                    return back()->with('message', 'Size ' . $size_name->size . ' bạn vừa chọn đã vượt quá tồn kho, chỉ còn ' . $stock->quantity . ' sản phẩm');
+                    return back()->with('fail', 'Size ' . $size_name->size . ' bạn vừa chọn đã vượt quá tồn kho, chỉ còn ' . $stock->quantity . ' sản phẩm');
                 }
             }
 
@@ -76,14 +76,13 @@ class CartController extends Controller
             Cart::instance(Auth::user());
             Cart::instance(Auth::user())->add($data);
 
-            return back();
+            return back()->with('success', 'Thêm vào giỏ hàng thành công');
         } else {
         }
     }
     public function show_cart()
     {
-        
-        $mangxh= Social::all();
+        $mangxh = Social::where('show', 1)->get();
         $lstcity = City::pluck("name", "id");
         $chinhsach = Policies::all();
         $hangsx = Manufacturer::all();
@@ -95,10 +94,13 @@ class CartController extends Controller
         $this->fixImage($lstlogo);
         foreach ($lstpayment as $payment) {
         }
+        foreach ($mangxh as $social) {
+            $this->fixImage($social);
+        }
         if (Auth::check()) {
-            return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment','mangxh'));
+            return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment', 'mangxh'));
         } else {
-            return View::make('login.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach','mangxh'));
+            return View::make('login.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'mangxh'));
         }
     }
 

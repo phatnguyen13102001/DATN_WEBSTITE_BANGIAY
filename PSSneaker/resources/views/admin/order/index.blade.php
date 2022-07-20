@@ -57,18 +57,6 @@
             </div>
         </div>
     </div>
-    <div class="card-footer text-sm sticky-top">
-        <div class="form-inline form-search d-inline-block align-middle ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar text-sm" type="search" id="keyword" placeholder="Tìm kiếm" aria-label="Tìm kiếm" value="" onkeypress="doEnter(event,'keyword','index.php?com=order&amp;act=man')">
-                <div class="input-group-append bg-primary rounded-right">
-                    <button class="btn btn-navbar text-white" type="button" onclick="onSearch('keyword','index.php?com=order&amp;act=man')">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="card card-primary card-outline text-sm">
         <div class="card-header">
             <h3 class="card-title">Tìm kiếm đơn hàng</h3>

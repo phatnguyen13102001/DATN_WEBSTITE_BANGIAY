@@ -608,8 +608,6 @@ ol ol {
 
 .list-inline>li {
     display: inline-block;
-    padding-right: 5px;
-    padding-left: 5px
 }
 
 .list-inline>li:first-child {
@@ -4185,7 +4183,6 @@ textarea.input-group-sm>.input-group-btn>.btn {
     color: #555;
     cursor: default;
     background-color: #fff;
-    border: 1px solid #ddd;
     border-bottom-color: transparent
 }
 
@@ -6577,10 +6574,6 @@ button.close {
 
 .hide {
     display: none!important
-}
-
-.show {
-    display: block!important
 }
 
 .invisible {

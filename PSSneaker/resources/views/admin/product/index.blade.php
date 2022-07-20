@@ -25,17 +25,6 @@
             </div>
         </div>
     </div>
-    <div class="card-footer form-group-category text-sm bg-light row">
-        <div class="form-group col-xl-2 col-sm-4">
-            <select class="form-select" aria-label="Default select example">
-                <option selected>Chọn hãng sản xuất</option>
-                <option value="1">Nike</option>
-                <option value="2">Adidas</option>
-                <option value="3">Converse</option>
-                <option value="4">Vans</option>
-            </select>
-        </div>
-    </div>
     <div id="table_data">
         @include('admin.product.pagination_data')
     </div>
