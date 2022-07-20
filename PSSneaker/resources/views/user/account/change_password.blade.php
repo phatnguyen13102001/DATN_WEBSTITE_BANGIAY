@@ -5,9 +5,9 @@
     <div class="container">
         <div class="row_none">
             <div class="col-sm-4 col-sm-offset-1">
-                @if(session()->has('status'))
+                @if(session()->has('success'))
                 <div class="alert alert-success">
-                    {!! session()->get('status')!!}
+                    {!! session()->get('success')!!}
                 </div>
                 @elseif(session()->has('error'))
                 <div class="alert alert-danger">

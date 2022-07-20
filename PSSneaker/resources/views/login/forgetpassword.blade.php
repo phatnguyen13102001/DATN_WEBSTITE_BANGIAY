@@ -14,6 +14,7 @@
                 {!! session()->get('error')!!}
                 </div>
                 @endif
+                
                 <div class="login-form">
                     <!--login form-->
                     <h2>Điền Email để lấy lại mật khẩu</h2>

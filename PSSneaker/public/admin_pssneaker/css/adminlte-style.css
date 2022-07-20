@@ -1384,7 +1384,11 @@ select.form-control option:disabled {
 
 
 /* Pagination */
-.pagination{flex-wrap:wrap;margin-top: 0.5rem;}
+
+.pagination {
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
 
 
 /* Responsive */
@@ -1448,15 +1452,15 @@ select.form-control option:disabled {
 }
 
 .modal {
-	position: fixed;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	z-index: 1050;
-	display: none;
-	overflow: hidden;
-	-webkit-overflow-scrolling: touch;
-	outline: 0
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    outline: 0
 }
 
 .modal.fade .modal-dialog {
@@ -1626,4 +1630,21 @@ select.form-control option:disabled {
     font-size: 15px;
     cursor: pointer;
     display: none;
+}
+
+.flex_tk {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.col-md-4.datetime_tungay {
+    margin-top: 30px;
+}
+
+input#btn-dashboard-filter {
+    margin-top: 10px;
 }

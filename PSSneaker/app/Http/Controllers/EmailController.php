@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
@@ -27,7 +26,6 @@ class EmailController extends Controller
   }
   public function create()
   {
-    
     $mangxh = Social::all();
     $lstlogo = Logo::first();
     $chinhsach = Policies::all();
@@ -38,7 +36,6 @@ class EmailController extends Controller
     $this->fixImage($lstlogo);
     return View::make('user.contact.index', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'user.contact.index', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'));
   }
-
   public function sendEmail(Request $request)
   {
     Mail::send('Email.email', [
@@ -56,7 +53,6 @@ class EmailController extends Controller
     return redirect()->guest('lienhe');
   }
   public function quenmatkhau(){
-     
     $mangxh = Social::all();
     $lstlogo = Logo::first();
     $chinhsach = Policies::all();
@@ -66,9 +62,17 @@ class EmailController extends Controller
     }
     $this->fixImage($lstlogo);
     return View::make('login.forgetpassword', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'))->nest('user.layoutuser.footer', 'login.forgetpassword', compact('mangxh', 'setting', 'lstlogo', 'hangsx', 'chinhsach'));
-
   }
   public function recover_pass(Request $request){
+    $validatedData = $request->validate(
+      [
+          'email' => 'required|email'
+      ],
+      [
+          'email.required' => 'Email Không Được Bỏ Trống',
+          'email.email' => 'Email Không đúng kí tự',
+      ]
+  );
     $data= $request->all();
     $title_mail="Lấy lại mật khẩu";
     $user= User::where('email','=',$data['email'])->get();
@@ -98,6 +102,15 @@ class EmailController extends Controller
     }
   }
   public function reset_new_pass(Request $request){
+    $validatedData = $request->validate(
+      [
+          'email' => 'required|email'
+      ],
+      [
+          'email.required' => 'Email Không Được Bỏ Trống',
+          'email.email' => 'Email Không đúng kí tự',
+      ]
+   );
     $data= $request->all();
     $token_random= Str::random();
     $user= User::where('email','=',$data['email'])->where('provider','=',$data['token'])->get();
@@ -111,9 +124,13 @@ class EmailController extends Controller
       $reset->provider =  $token_random;
       $reset->save();
       return redirect('dangnhap')->with('success','Mật khẩu đã được cập nhật mới. Quay lại đăng nhập');
-    } else{
-      return redirect('recover-password')->with('error','Vui lòng nhập lại email vì linh quá hạng');
+    } elseif($count==0){
+      return redirect()->back()->with('errort','Vui lòng nhập mật khẩu mới');
     }
+    else{
+      return redirect('recover-password')->with('error','Vui lòng nhập lại email vì link quá hạng');
+    }
+
   }
   public function update_new_pass(Request $request){
     $mangxh = Social::all();
