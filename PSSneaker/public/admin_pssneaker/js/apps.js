@@ -1,55 +1,4 @@
 $(document).ready(function() {
-
-    // thống kê 
-
-    // thống kê số lượng sản phẩm, đơn hàng
-    // thống kê tiền
-    var chart = Morris.Area({
-        element: 'mychart',
-        data: [0, 0],
-        lineColors: ['#819C79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
-        pointFillColors: ['#ffffff'],
-        pointStrokeColors: ['black'],
-        fillOpacity: 0.6,
-        hideHover: 'auto',
-        parseTime: false,
-        xkey: 'created_at',
-        ykeys: ['total'],
-
-        behaveLikeLine: true,
-        labels: ['Tổng tiền', 'Mã đơn hàng']
-    });
-    // 
-    $('#btn-dashboard-filter').click(function() {
-        var _token = $('input[name="_token"]').val();
-        var from_date = $('#datepicker').val();
-        var to_date = $('#datepicker1').val();
-        $.ajax({
-            url: "/filter-by-date",
-            method: "POST",
-            dataType: "JSON",
-            data: { from_date: from_date, to_date: to_date, _token: _token },
-            success: function(data) {
-                chart.setData(data);
-            }
-        });
-
-    });
-    $("#datepicker").datepicker({
-        prevText: "Tháng trước",
-        nextText: "Tháng sau",
-        dateFormat: "yy-mm-dd",
-        dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
-        duration: "slow"
-    });
-    $("#datepicker1").datepicker({
-        prevText: "Tháng trước",
-        nextText: "Tháng sau",
-        dateFormat: "yy-mm-dd",
-        dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
-        duration: "slow"
-    });
-    // end thống kê
     /* Modal Delete*/
     $(document).on('click', '.deleteBtn', function() {
         var id = $(this).val();
@@ -365,5 +314,56 @@ $(document).ready(function() {
             }
         });
     }
+
+    // thống kê 
+
+    // thống kê số lượng sản phẩm, đơn hàng
+    // thống kê tiền
+    var chart = Morris.Area({
+        element: 'mychart',
+        data: [0, 0],
+        lineColors: ['#819C79', '#fc8710', '#FF6541', '#A4ADD3', '#766B56'],
+        pointFillColors: ['#ffffff'],
+        pointStrokeColors: ['black'],
+        fillOpacity: 0.6,
+        hideHover: 'auto',
+        parseTime: false,
+        xkey: 'created_at',
+        ykeys: ['total'],
+
+        behaveLikeLine: true,
+        labels: ['Tổng tiền', 'Mã đơn hàng']
+    });
+    // 
+    $('#btn-dashboard-filter').click(function() {
+        var _token = $('input[name="_token"]').val();
+        var from_date = $('#datepicker').val();
+        var to_date = $('#datepicker1').val();
+        $.ajax({
+            url: "/filter-by-date",
+            method: "POST",
+            dataType: "JSON",
+            data: { from_date: from_date, to_date: to_date, _token: _token },
+            success: function(data) {
+                chart.setData(data);
+            }
+        });
+
+    });
+    $("#datepicker").datepicker({
+        prevText: "Tháng trước",
+        nextText: "Tháng sau",
+        dateFormat: "yy-mm-dd",
+        dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+        duration: "slow"
+    });
+    $("#datepicker1").datepicker({
+        prevText: "Tháng trước",
+        nextText: "Tháng sau",
+        dateFormat: "yy-mm-dd",
+        dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+        duration: "slow"
+    });
+    // end thống kê
 
 });
