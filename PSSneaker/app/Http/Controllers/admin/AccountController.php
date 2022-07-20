@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Support\Facades\Hash;
 class AccountController extends Controller
 {
     protected function fixImage(User $user)
@@ -148,5 +148,24 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+    // đổi mật khẩu admin
+    public function changepasswordadmin(){
+        return view('admin.changepassword.index');
+    }
+    public function updatepasswordadmin(Request $request){
+        $request ->validate([
+            'password'=> 'required|min:8',
+            'new_password'=>'required|min:8',
+        ]);
+        $user = auth()->user();
+        if(Hash::check($request->password, $user->password)){
+            $user ->update([
+                'password'=>bcrypt($request->new_password)
+            ]);
+            return redirect()->back()->with('success','Cập nhật thành công');
+        }else{
+            return redirect()->back()->with('error','Mật khẩu cũ không khớp');
+        }
     }
 }

@@ -25,6 +25,7 @@ class Order extends Model
         'email',
         'note',
         'total',
+        'created_at'
     ];
     public function orderdetail()
     {

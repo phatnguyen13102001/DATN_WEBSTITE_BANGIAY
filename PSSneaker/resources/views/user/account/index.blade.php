@@ -2,8 +2,8 @@
 @section('content')
 <div class="wrap_acount">
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
-
-        <!-- The Grid -->
+    <form class="validation-form" method="post" action="{{route('capnhatthongtin')}}" enctype="multipart/form-data">
+    @csrf  <!-- The Grid -->
         <div class="w3-row-padding">
 
             <!-- Left Column -->
@@ -12,6 +12,8 @@
                 <div class="w3-white w3-text-grey w3-card-4">
                     <div class="w3-display-container">
                         <img src="/storage/{{$taikhoan->avatar}}" style="width:100%" alt="Avatar">
+                        <input type="file" id="file" name="avatar">
+                            <label for="file" id="uploadBtn">Chọn Ảnh</label>
                     </div>
                     <div class="w3-container">
                         <div class="accountcontent">
@@ -39,8 +41,8 @@
                 <div class="w3-container w3-card w3-white w3-margin-bottom">
                     <h2 class="w3-twothird_title_main">Tài khoản của bạn</h2>
                 </div>
-                <form class="validation-form" method="post" action="{{route('capnhatthongtin')}}" enctype="multipart/form-data">
-                    @csrf
+          
+                   
                     @if(session('success'))
                     <div class="alert alert-success" role="alert">
                         {{session('success')}}
@@ -90,13 +92,14 @@
                     <div class="btn_profile_update">
                         <button class="btn btn-fefault cart_view01" type="submit">Cập nhật</button>
                     </div>
-                </form>
+               
             </div>
             <!-- End Grid -->
         </div>
 
         <!-- End Page Container -->
+        </form>
     </div>
-
+   
 </div>
 @endsection

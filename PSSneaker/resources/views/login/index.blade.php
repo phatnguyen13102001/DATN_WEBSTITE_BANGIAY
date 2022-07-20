@@ -22,7 +22,10 @@
                             {{$errors->first('password')}}
                         </div>
                         @endif
+                        <div class="center123">
                         <button type="submit" class="btn btn-default">Đăng Nhập</button>
+                        </div>
+                        
                     </form>
                     <div class="title_login_quenml">
                         <a href="{{url('/quen-mat-khau')}}">Quên mật khẩu</a>

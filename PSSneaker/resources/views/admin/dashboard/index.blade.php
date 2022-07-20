@@ -41,7 +41,7 @@
                       <!-- ./col -->
                       <div class="col-lg-4 col-6">
                           <!-- small box -->
-                          <a class="my-info-box info-box" href="#" title="Đổi mật khẩu">
+                          <a class="my-info-box info-box" href="{{route('doimatkhauadmin')}}" title="Đổi mật khẩu">
                               <span class="my-info-box-icon info-box-icon bg-success"><i class="fas fa-key"></i></span>
                               <div class="info-box-content text-dark">
                                   <span class="info-box-text text-capitalize">Đổi mật khẩu</span>

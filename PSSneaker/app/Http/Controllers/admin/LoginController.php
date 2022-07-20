@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 class LoginController extends Controller
 {
     protected function fixImagelogo($logo)
@@ -66,6 +67,7 @@ class LoginController extends Controller
                 'email.required' => 'Email Không Được Bỏ Trống',
                 'password.required' => 'Mật Khẩu Không Được Bỏ Trống',
                 'email.email' => 'Email Không Đúng Định Dạng',
+                'password.min'=> 'Mật khẩu phải nhập đủ 8 kí tự'
             ]
         );
         if (Auth::attempt($credentials) && Auth::user()->permission == 1  && Auth::user()->deleted_at == null) {
@@ -122,6 +124,7 @@ return back()->withErrors([
                 'gender.required' => 'Giới tính Không Được Bỏ Trống',
                 'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
                 'password.required' => 'Mật khẩu Không Được Bỏ Trống',
+                'password.min' => 'Mật khẩu phải nhập đủ 8 kí tự',
             ]
         );
         $user = new User();
@@ -134,13 +137,13 @@ return back()->withErrors([
         $user->address = $request->address;
         $user->password = bcrypt($request->password);
         $user->permission = '0';
-
+        
         $user->save();
         if ($request->hasFile('avatar')) {
             $user->avatar = $request->file('avatar')->store('images/user/', 'public');
         }
         $user->save();
-        return redirect()->route('dangnhapweb')->with('Đăng kí thành công');
+        return redirect()->route('dangnhapweb')->with('Đăng kí thành công');    
     }
     public function email()
     {
@@ -165,12 +168,16 @@ $r = User::where('email', '=', $req->email)->first();
                 echo "password not exit";
             }
         } else {
-            echo "email not exsỉt";
+            echo "email not exit";
         }
     }
     public function editprofile()
-    {
-        return view('user.account.index')->with('user', auth()->user());
+    { 
+        $lstuser = auth()->user();
+        foreach ($lstuser as $user) {
+            $this->fixImage($user);
+        }
+        return view('user.account.index', ['user' => $user]);
     }
     public function Updateprofile(Request $request, User $user)
     {
@@ -195,7 +202,24 @@ $r = User::where('email', '=', $req->email)->first();
             $user->birthday = $request['birthday'];
             $user->gender = $request['gender'];
             $user->address = $request['address'];
+            if (request()->hasFile('avatar')) {
+                $imagePath = public_path('storage/' . $user->avatar);
+                if (File::exists($imagePath)) {
+                    if ($imagePath == (public_path('storage/'))) {
+                        $image = request()->file('avatar')->store('images/user/', 'public');
+                        $user->avatar = $image;
+                        $user->save();
+                    } else {
+                        unlink($imagePath);
+                    }
+                }
+                $image = request()->file('avatar')->store('images/user/', 'public');
+                $user->avatar = $image;
+                $user->save();
+            }
+          
             $user->save();
+
             $request->session()->flash('success', 'cập nhật thành công');
             return redirect()->back();
         } else {
@@ -205,5 +229,38 @@ $r = User::where('email', '=', $req->email)->first();
     public function loadcthd(){
         $ctdh = Order::where('id_user',Auth::user()->id);
         return view('user.account.history')->with(compact('ctdh'));
+    }
+    public function changepassword(){
+        $mangxh=Social::all();
+        $lstlogo = Logo::first();
+        $chinhsach = Policies::all();
+        $hangsx = Manufacturer::all();
+        $lstsetting = Setting::all();
+        foreach ($lstsetting as $setting) {
+        }
+        $this->fixImagelogo($lstlogo);
+        return View::make('user.account.change_password', compact('mangxh','setting', 'hangsx', 'lstlogo', 'chinhsach'))->nest('user.layoutuser.footer', 'user.account.change_password', compact('mangxh','setting', 'lstlogo', 'hangsx', 'chinhsach'));
+    }
+    public function updatepassword(Request $request){
+        $request ->validate([
+            'password'=> 'required|min:8',
+            'new_password'=>'required|min:8',
+        ],
+        [
+            'password.required' => 'Mật khẩu không Được Bỏ Trống',
+            'new_password.required' => 'Mật khẩu mới Không Được Bỏ Trống',
+            'password.min' => 'Mật khẩu phải nhập đủ 8 kí tự',
+            'new_password.min' => 'Mật khẩu phải nhập đủ 8 kí tự',
+        ]
+    );
+        $user = auth()->user();
+        if(Hash::check($request->password, $user->password)){
+            $user ->update([
+                'password'=>bcrypt($request->new_password)
+            ]);
+            return redirect()->back()->with('success','Cập nhật thành công');
+        }else{
+            return redirect()->back()->with('error','Mật khẩu cũ không khớp');
+        }
     }
 }

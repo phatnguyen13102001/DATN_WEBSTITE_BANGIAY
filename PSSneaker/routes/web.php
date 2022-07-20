@@ -19,6 +19,7 @@ use App\Http\Controllers\admin\GoogleController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\OrderAdminController;
+use App\Http\Controllers\admin\StatisticController;
 /* Controller FrontEnd */
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\EmailController;
@@ -56,9 +57,14 @@ Route::middleware('admin')->group(function () {
     Route::resource('/admin/social', SocialController::class);
     Route::resource('/admin/product', ProductController::class);
     Route::resource('/admin/order', OrderAdminController::class);
+    Route::resource('/admin/statistic', StatisticController::class);
+    Route::get('admin/doimatkhauadmin', [AccountController::class, 'changepasswordadmin'])->name('doimatkhauadmin'); 
+    Route::post('admin/capnhatmatkhauadmin', [AccountController::class, 'updatepasswordadmin'])->name('capnhatmatkhauadmin');
     Route::get('admin', function () {
         return view('admin.dashboard.index');
     })->name('admin');
+    // 
+    Route::post('/filter-by-date', [StatisticController::class, 'filter_by_date']);
     /* Destroy */
     Route::get('/admin/size/destroy', [SizeController::class, 'destroy'])->name('size.destroy');
     Route::get('/admin/slideshow/destroy', [SlideshowController::class, 'destroy'])->name('slideshow.destroy');

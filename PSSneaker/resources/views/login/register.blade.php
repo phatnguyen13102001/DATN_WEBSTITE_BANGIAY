@@ -72,7 +72,9 @@
                             {{$errors->first('password')}}
                         </div>
                         @endif
+                        <div class="center123">
                         <button type="submit" class="btn btn-default">Đăng Ký</button>
+</div>
                     </form>
                     <div class="title_login_quenml">
                         <a href="{{route('dangnhapweb')}}">Quay lại Đăng nhập</a>

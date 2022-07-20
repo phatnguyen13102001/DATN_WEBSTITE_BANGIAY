@@ -13,6 +13,10 @@
                 <div class="alert alert-danger">
                 {!! session()->get('error')!!}
                 </div>
+                @elseif(session()->has('errort'))
+                <div class="alert alert-danger">
+                {!! session()->get('errort')!!}
+                </div>
                 @endif
                 <div class="login-form">
                     @php
@@ -31,7 +35,7 @@
                             {{$errors->first('email')}}
                         </div>
                         @endif
-                        <button type="submit" class="btn btn-default">Gửi</button>
+                        <button type="submit" class="btn btn-default">Cập nhật</button>
                     </form>
                 </div>
                 <!--/login form-->

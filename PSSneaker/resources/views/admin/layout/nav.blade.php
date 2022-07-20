@@ -28,7 +28,7 @@
                 </li>
                 <div class="dropdown-divider"></div>
                 <li>
-                    <a href="" class="dropdown-item">
+                    <a href="{{route('doimatkhauadmin')}}" class="dropdown-item">
                         <i class="fas fa-key"></i>
                         <span>Đổi mật khẩu</span>
                     </a>

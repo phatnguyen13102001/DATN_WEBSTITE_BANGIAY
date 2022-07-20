@@ -526,7 +526,6 @@ a#scrollUp i {
     font-weight: 300;
 }
 
-
 .mainmenu ul li a:hover,
 .mainmenu ul li a.active,
 .shop-menu ul li a.active {
@@ -541,10 +540,12 @@ input[type="text"] {
     border: 0px;
     background: transparent;
     font-size: 12px;
+    width: 282px;
 }
 
+
 .search_box.pull-right {
-    width: 249px;
+    width: 360px;
     background: #ffffff;
     margin-bottom: 5px;
     display: flex;
@@ -558,6 +559,7 @@ input[type="text"] {
     left: 0;
     top: 0;
 }
+
 
 /* wrap gioi thieu */
 
@@ -1221,7 +1223,6 @@ a.title_backarrow {
         -webkit-transform: translateY(20px);
         transform: translateY(20px);
     }
-
     100% {
         opacity: 1;
         -webkit-transform: translateY(0);
@@ -3975,12 +3976,10 @@ p.txt_name_profile {
         width: 400px;
         margin: auto;
     }
-
     .modal-content {
         -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
         box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
     }
-
     .modal-sm {
         width: 300px
     }
@@ -4023,23 +4022,28 @@ p.txt_name_profile {
 }
 
 /*Stock Problem*/
+
 .main__header {
     text-align: center;
     margin-bottom: 55px;
 }
+
 .main__header p {
     color: #999;
 }
+
 .main__header p {
     max-width: 50%;
     margin: 0 auto;
 }
+
 .subsection table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     border-bottom: 1px solid #ededed;
 }
+
 .inventory-issues-table th {
     color: #555;
     text-align: center;
@@ -4047,15 +4051,18 @@ p.txt_name_profile {
     padding-bottom: 1em;
     border-bottom: 1px solid #ededed;
 }
+
 .status-label--reduced {
     color: #e7a321;
     background-image: url(//hstatic.net/0/0/global/design/imgs/status-reduced.svg);
     background-position: center center;
     background-repeat: no-repeat;
 }
+
 .product-image {
     float: left;
 }
+
 .product__image {
     display: block;
     width: 5em;
@@ -4064,14 +4071,17 @@ p.txt_name_profile {
     overflow: hidden;
     margin-right: 1em;
 }
+
 .inventory-issues-table .product__info {
     margin: 1.5em 0;
     float: left;
 }
+
 .inventory-issues-table td {
     padding: 2rem 0;
     color: #777;
 }
+
 .inventory-issues-table td strong {
     font-weight: 500;
     color: #777;
@@ -4086,10 +4096,12 @@ p.txt_name_profile {
 .call-to-action {
     margin-bottom: 20px;
 }
+
 .status-label {
     padding-left: 20px;
     background-position: center left !important;
 }
+
 .flex_mangxh {
     display: flex;
     align-items: center;
@@ -4097,56 +4109,71 @@ p.txt_name_profile {
     flex-direction: row;
     flex-wrap: nowrap;
 }
+
 .title_footer_mangxh {
     margin-right: 10px;
 }
+
 table.tablehistory {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
     border: 1px solid #ddd;
 }
+
 table.tablehistory tbody tr td {
     text-align: left;
     padding: 8px;
     border: 1px solid #00000057;
 }
+
 table.tablehistory tbody tr {
     background-color: #f2f2f2;
 }
+
+
 /* 
 lich su
 */
+
 tr.trhistory {
     background-color: black;
     color: white;
     font-size: 12px;
 }
+
 tr.trhistory th {
     border: 1px solid #dac3c357;
 }
+
 tr.trtdhistory {
     font-size: 13px;
 }
+
 .wrapcthd {
     padding: 30px 0;
 }
+
 .title_ctlichsu {
     padding: 10px 2px;
     border-bottom: 1px solid #16141473;
     font-size: 14px;
     font-weight: bold;
 }
+
 .flex_kh {
     border: 1px solid;
     margin: 10px 0;
 }
+
 .thongtinkhcthd {
     line-height: 2;
 }
+
 .w3-content.w3-margin-top {
     padding: 0 0 20px;
 }
+
 table.tablehistory tbody tr td a {
     color: blue;
 }
@@ -4343,4 +4370,14 @@ table.tablehistory tbody tr td a {
     color: #1faf5b;
     font-size: 20px;
     line-height: 40px;
+}
+.title_login_quenml {
+    text-align: center;
+}
+
+.center123 {
+    width: 100%;
+    /* left: 50%; */
+    display: flex;
+    justify-content: center;
 }
