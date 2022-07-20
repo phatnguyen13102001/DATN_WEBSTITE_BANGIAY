@@ -52,10 +52,16 @@
                         <div class="contact-input col-sm-12">
                             <p class="txt_name_profile">Họ và tên:</p>
                             <input type="text" class="form-control text-sm" name="name" placeholder="" value="{{$taikhoan->name}}" required />
+                            @if($errors->has('name'))
+                <p class="mb-1 bg-danger"> {{$errors->first('name')}}</p>
+                @endif
                         </div>
                         <div class="contact-input col-sm-12">
                             <p class="txt_name_profile">Số điện thoại:</p>
                             <input type="number" class="form-control text-sm" name="phone" placeholder="" value="{{$taikhoan->phone}}" required />
+                            @if($errors->has('phone'))
+                <p class="mb-1 bg-danger"> {{$errors->first('phone')}}</p>
+                @endif
                         </div>
                         <div class="contact-input col-sm-12">
                             <p class="txt_name_profile">Email:</p>
@@ -74,7 +80,9 @@
                             <div class="ngaysinh col-sm-6">
                                 <p class="txt_name_profile">Ngày sinh:</p>
                                 <input type="date" class="form-control text-sm" name="birthday" placeholder="" value="{{$taikhoan->birthday}}" required />
-
+                                @if($errors->has('birthday'))
+                                 <p class="mb-1 bg-danger"> {{$errors->first('birthday')}}</p>
+                                @endif
                             </div>
                             <div class=" ngaysinh col-sm-5">
                                 <div class="ngaysinhprofile">{{$taikhoan->birthday}}</div>
@@ -87,6 +95,9 @@
                         <div class="contact-input col-sm-12">
                             <p class="txt_name_profile">Địa chỉ:</p>
                             <input type="text" class="form-control text-sm" name="address" placeholder="" value="{{$taikhoan->address}}" required />
+                            @if($errors->has('address'))
+                                 <p class="mb-1 bg-danger"> {{$errors->first('address')}}</p>
+                                @endif
                         </div>
                     </div>
                     <div class="btn_profile_update">

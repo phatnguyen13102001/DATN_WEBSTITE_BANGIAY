@@ -16,7 +16,9 @@
                             {{$errors->first('email')}}
                         </div>
                         @endif
-                        <input type="password" name="password" placeholder="Nhập mật khẩu" />
+                        <input type="password" name="password" autocomplete="current-password" required=""
+                                id="id_password"  placeholder="Nhập mật khẩu">
+                            <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                         @if($errors->has('password'))
                         <div class="alert alert-danger" style="margin-top:10px;">
                             {{$errors->first('password')}}
@@ -25,7 +27,6 @@
                         <div class="center123">
                         <button type="submit" class="btn btn-default">Đăng Nhập</button>
                         </div>
-                        
                     </form>
                     <div class="title_login_quenml">
                         <a href="{{url('/quen-mat-khau')}}">Quên mật khẩu</a>

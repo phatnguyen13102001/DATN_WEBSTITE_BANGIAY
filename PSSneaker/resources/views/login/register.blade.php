@@ -66,7 +66,9 @@
                             </div>
                         </div>
                         <!--  -->
-                        <input type="password" name="password" placeholder="Mật khẩu" />
+                        <input type="password" name="password" autocomplete="current-password" required=""
+                                id="id_password"  placeholder="Nhập mật khẩu">
+                            <i class="far fa-eye" id="togglePassword" style="cursor: pointer;"></i>
                         @if($errors->has('password'))
                         <div class="alert alert-danger" style="margin-top:10px;">
                             {{$errors->first('password')}}

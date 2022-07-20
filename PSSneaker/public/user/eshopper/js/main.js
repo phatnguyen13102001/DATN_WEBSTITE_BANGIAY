@@ -1,4 +1,3 @@
-
 jQuery(document).ready(function($) {
 
     $('#etalage').etalage({
@@ -15,16 +14,50 @@ jQuery(document).ready(function($) {
 
 });
 
-$(document).ready(function () {
-    /* Modal Add To Cart*/
-    $(document).on('click', '.BtnAddToCart', function () {
-        $('#AddCartModal').modal({
-            show: true
-        });
-    });
+$(document).ready(function() {
 
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#id_password');
+    if (togglePassword) {
+        togglePassword.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+        /* Modal Add To Cart*/
+        $(document).on('click', '.BtnAddToCart', function() {
+            $('#AddCartModal').modal({
+                show: true
+            });
+        });
+        // 
+    }
+
+
+    const togglePassword1 = document.querySelector('#togglePassword1');
+    const password1 = document.querySelector('#id_password1');
+    if (togglePassword1) {
+        togglePassword1.addEventListener('click', function(e) {
+            // toggle the type attribute
+            const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+            password1.setAttribute('type', type);
+            // toggle the eye slash icon
+            this.classList.toggle('fa-eye-slash');
+        });
+        /* Modal Add To Cart*/
+        $(document).on('click', '.BtnAddToCart', function() {
+            $('#AddCartModal').modal({
+                show: true
+            });
+        });
+    }
+
+
+    // 
     /* Quantity */
-    $('.quantity-plus-pro-detail').click(function (e) {
+    $('.quantity-plus-pro-detail').click(function(e) {
         e.preventDefault();
         var incre_value = $(this).parents('.quantity-pro-detail').find('.qty-pro').val();
         var value = parseInt(incre_value);
@@ -33,7 +66,7 @@ $(document).ready(function () {
         $(this).parents('.quantity-pro-detail').find('.qty-pro').val(value);
     });
 
-    $('.quantity-minus-pro-detail').click(function (e) {
+    $('.quantity-minus-pro-detail').click(function(e) {
         e.preventDefault();
         var decre_value = $(this).parents('.quantity-pro-detail').find('.qty-pro').val();
         var value = parseInt(decre_value, 10);
@@ -45,17 +78,17 @@ $(document).ready(function () {
     });
 
     /* Dynamic Address */
-    $('#city').change(function () {
+    $('#city').change(function() {
         var cityID = $(this).val();
         if (cityID) {
             $.ajax({
                 type: "get",
                 url: "getdistrict?id_city=" + cityID,
-                success: function (res) {
+                success: function(res) {
                     if (res) {
                         $("#district").empty();
                         $("#district").append('<option>Quận/huyện</option>');
-                        $.each(res, function (key, value) {
+                        $.each(res, function(key, value) {
                             $("#district").append('<option value="' + key + '">' + value +
                                 '</option>');
                         });
@@ -71,17 +104,17 @@ $(document).ready(function () {
     });
 
     // when state dropdown changes
-    $('#district').on('change', function () {
+    $('#district').on('change', function() {
         var districtID = $(this).val();
         if (districtID) {
             $.ajax({
                 type: "get",
                 url: "getward?id_district=" + districtID,
-                success: function (res) {
+                success: function(res) {
                     if (res) {
                         $("#ward").empty();
                         $("#ward").append('<option>Phường/xã</option>');
-                        $.each(res, function (key, value) {
+                        $.each(res, function(key, value) {
                             $("#ward").append('<option value="' + key + '">' + value +
                                 '</option>');
                         });
@@ -96,7 +129,7 @@ $(document).ready(function () {
     });
 
     // Delete Item Cart Ajax
-    $('.del-procart').click(function (e) {
+    $('.del-procart').click(function(e) {
 
         var $removeBtn = $(this);
         var id = $removeBtn.data('id');
@@ -104,7 +137,7 @@ $(document).ready(function () {
         $.ajax({
             type: "get",
             url: "/delete-to-cart/" + id,
-            success: function (data) {
+            success: function(data) {
                 location.reload();
             }
         });
@@ -112,9 +145,9 @@ $(document).ready(function () {
         return false;
     });
 
-    
+
     // Update Quantity Cart
-    $('.update_procart').click(function (e) {
+    $('.update_procart').click(function(e) {
 
         var $updateBtn = $(this);
         var id = $updateBtn.data('id');
@@ -122,7 +155,7 @@ $(document).ready(function () {
         $.ajax({
             type: "get",
             url: "/update-to-cart/" + id + "/" + qty,
-            success: function (data) {
+            success: function(data) {
                 location.reload();
             }
         });
@@ -130,7 +163,7 @@ $(document).ready(function () {
         return false;
     });
 
-    $(".payments-label").click(function () {
+    $(".payments-label").click(function() {
         var payments = $(this).data("payments");
         $(".payments-cart .payments-label, .payments-info").removeClass("active");
         $(this).addClass("active");
@@ -138,7 +171,7 @@ $(document).ready(function () {
     });
 
     //Search Ajax
-    $('#keywords').keyup(function () {
+    $('#keywords').keyup(function() {
         var query = $(this).val();
 
         if (query != '') {
@@ -148,7 +181,7 @@ $(document).ready(function () {
                 url: "/autocomplete-ajax",
                 method: "POST",
                 data: { query: query, _token: _token },
-                success: function (data) {
+                success: function(data) {
                     $('#search_ajax').fadeIn();
                     $('#search_ajax').html(data);
                 }
@@ -157,41 +190,41 @@ $(document).ready(function () {
             $('#search_ajax').fadeOut();
         }
     });
-    $(document).on('click', '.li_search_ajax', function () {
+    $(document).on('click', '.li_search_ajax', function() {
         $('#keywords').val($(this).text());
         $('#search_ajax').fadeOut();
     });
 
     /*Owl Carousel*/
     $('#news .owl-carousel').owlCarousel({
-        loop:true,
-        margin:20,
+        loop: true,
+        margin: 20,
         nav: false,
         autoplay: true,
-        rewind:1,
-        responsive:{
-            0:{
-                items:1
+        rewind: 1,
+        responsive: {
+            0: {
+                items: 1
             },
-            600:{
-                items:3
+            600: {
+                items: 3
             },
-            1000:{
-                items:3
+            1000: {
+                items: 3
             }
         }
     })
 
     $('#slider .owl-carousel').owlCarousel({
-        loop:true,
-        margin:10,
-        nav:false,
+        loop: true,
+        margin: 10,
+        nav: false,
         items: 1,
     })
 
     //Sort
-    $('#sort').on('change', function () {
-        
+    $('#sort').on('change', function() {
+
         var url = $(this).val();
         if (url) {
             window.location = url;
@@ -209,27 +242,24 @@ $(document).ready(function () {
     api.resume();
 
     //Rating
-    function remove_background(product_id)
-    {
-        for (var count = 1; count <= 5; count++)
-        {
+    function remove_background(product_id) {
+        for (var count = 1; count <= 5; count++) {
             $('#' + product_id + '-' + count).css('color', '#ccc');
         }
     }
 
-    $(document).on('mouseenter', '.rating', function () {
+    $(document).on('mouseenter', '.rating', function() {
         var index = $(this).data("index");
         var product_id = $(this).data('product-id');
 
         remove_background(product_id);
 
-        for (var count = 1; count <= index; count++)
-        {
+        for (var count = 1; count <= index; count++) {
             $('#' + product_id + '-' + count).css('color', '#ffcc00');
         }
     });
 
-    $(document).on('mouseleave', '.rating', function () {
+    $(document).on('mouseleave', '.rating', function() {
         var index = $(this).data("index");
         var product_id = $(this).data('product-id');
         var rating = $(this).data("rating");
@@ -240,7 +270,7 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on('click', '.rating', function () {
+    $(document).on('click', '.rating', function() {
         var index = $(this).data("index");
         var product_id = $(this).data('product-id');
         var _token = $('input[name="_token"]').val();
@@ -248,12 +278,11 @@ $(document).ready(function () {
             url: "/insert-rating",
             method: "POST",
             data: { index: index, product_id: product_id, _token: _token },
-            success: function (data) {
+            success: function(data) {
                 if (data == 'done') {
                     alert("Bạn đã đánh giá " + index + " trên 5 sao");
                     location.reload();
-                }
-                else {
+                } else {
                     alert("Lỗi đánh giá");
                 }
             }
@@ -261,20 +290,19 @@ $(document).ready(function () {
     });
 
     /* Scroll top top */
-    $(window).scroll(function () {
+    $(window).scroll(function() {
         if ($(this).scrollTop() > 40) {
             $('#topBtn').fadeIn();
-        }
-        else {
+        } else {
             $('#topBtn').fadeOut();
         }
     });
 
-    $("#topBtn").click(function () {
+    $("#topBtn").click(function() {
         $('html,body').animate({ scrollTop: 0 }, 800);
     });
 
-    $('.BtnAddToCart').click(function () {
+    $('.BtnAddToCart').click(function() {
         $('.alert_success').removeClass("hiden");
         $('.alert_success').addClass("show");
         $('.alert_success').addClass("showAlert");
@@ -283,7 +311,7 @@ $(document).ready(function () {
         //     $('.alert').removeClass("show");
         // },5000)
     });
-    $('.close-btn').click(function () {
+    $('.close-btn').click(function() {
         $('.alert_success').addClass("hiden");
         $('.alert_success').removeClass("show");
     });

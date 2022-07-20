@@ -44,6 +44,28 @@ class EmailController extends Controller
   }
   public function sendEmail(Request $request)
   {
+    $validatedData = $request->validate(
+      [
+        'name'=> 'required',
+        'email' => 'required|email',
+        'phone'=>'required|min:10|max:11',
+        'address'=>'required',
+        'topic'=>'required',
+        'content'=>'required'
+        
+      ],
+      [
+        'name.required' =>'Tên không được bỏ trống',
+        'email.required' => 'Email Không Được Bỏ Trống',
+        'email.email' => 'Email Không đúng kí tự',
+        'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
+        'phone.min' => 'Số điện thoại ít nhất 10 số',
+        'phone.max' => 'Số điện thoại nhiều nhất 11 số',
+        'address.required' => 'địa chỉ Không Được Bỏ Trống',
+        'topic.required' => 'Chủ đề Không Được Bỏ Trống',
+        'content.required' => 'Nội dung Không Được Bỏ Trống',
+      ]
+    );
     Mail::send('Email.email', [
       'name' => $request->name,
       'email' => $request->email,
@@ -56,7 +78,7 @@ class EmailController extends Controller
       $mail->from($request->email, $request->name);
       $mail->subject('Liên hệ');
     });
-    return redirect()->guest('lienhe');
+    return redirect()->guest('lienhe')->with('success','Gửi Mail thành công');
   }
   public function quenmatkhau()
   {
