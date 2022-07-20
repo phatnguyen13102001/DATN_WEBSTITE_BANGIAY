@@ -5,7 +5,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
 @import url(http://fonts.googleapis.com/css?family=Abel);
-
 @font-face {
     font-family: 'font1';
     src: url('../fonts/transfonter.org-20220614-041712/BladeRunnerMovieFont.eot');
@@ -542,7 +541,6 @@ input[type="text"] {
     font-size: 12px;
     width: 282px;
 }
-
 
 .search_box.pull-right {
     width: 360px;
@@ -1092,12 +1090,12 @@ select#pa_size {
     color: white;
 }
 
-.number_rating{
-    color:#ffcc00;
+.number_rating {
+    color: #ffcc00;
     font-weight: bold;
 }
 
-.qty_rating{
+.qty_rating {
     margin-bottom: 10px;
 }
 
@@ -1105,8 +1103,8 @@ select#pa_size {
     color: #0089ff;
 }
 
-.name_manufacturer{
-   font-weight: bold; 
+.name_manufacturer {
+    font-weight: bold;
 }
 
 .border_giaandtien {
@@ -3840,6 +3838,7 @@ p.txt_name_profile {
     transform: translateY(40px);
 }
 
+
 /* CSS Modal */
 
 .fade.in {
@@ -3970,7 +3969,6 @@ p.txt_name_profile {
     overflow: scroll
 }
 
-
 @media (min-width:768px) {
     .modal-dialog {
         width: 400px;
@@ -3989,7 +3987,6 @@ p.txt_name_profile {
     .modal-lg {
         width: 900px
     }
-
     /* 
  */
     .flex_mangxh {
@@ -3999,27 +3996,24 @@ p.txt_name_profile {
         flex-direction: row;
         flex-wrap: nowrap;
     }
-
     .title_footer_mangxh {
         margin-right: 10px;
     }
-
     table.tablehistory {
         border-collapse: collapse;
         border-spacing: 0;
         width: 100%;
         border: 1px solid #ddd;
     }
-
     table.tablehistory tbody tr td {
         text-align: left;
         padding: 8px;
     }
-
     table.tablehistory tbody tr {
         background-color: #f2f2f2;
     }
 }
+
 
 /*Stock Problem*/
 
@@ -4086,12 +4080,14 @@ p.txt_name_profile {
     font-weight: 500;
     color: #777;
 }
+
 .inventory-issues-table .cell--quantity,
 .inventory-issues-table .cell--price,
 .inventory-issues-table .cell--status,
 .inventory-issues-table .cell--size {
     text-align: center;
 }
+
 .subsection,
 .call-to-action {
     margin-bottom: 20px;
@@ -4177,20 +4173,24 @@ tr.trtdhistory {
 table.tablehistory tbody tr td a {
     color: blue;
 }
+
 .avatar_user {
     border-radius: 50%;
     width: 50px;
     border: 1px solid black;
     margin-right: 20px;
 }
+
 .lst-user-rate {
     display: flex;
     justify-content: space-between;
 }
+
 .box-user-rate {
     display: flex;
     margin-bottom: 20px;
 }
+
 .box-date-rate {
     margin-top: 20px;
     color: #b5b5b5;
@@ -4209,7 +4209,9 @@ table.tablehistory tbody tr td a {
     color: orange;
 }
 
+
 /* Three column layout */
+
 .side {
     float: left;
     width: 15%;
@@ -4222,19 +4224,25 @@ table.tablehistory tbody tr td a {
     width: 70%;
 }
 
+
 /* Place text to the right */
+
 .right {
     text-align: right;
 }
 
+
 /* Clear floats after the columns */
+
 .row:after {
     content: "";
     display: table;
     clear: both;
 }
 
+
 /* The bar container */
+
 .bar-container {
     width: 100%;
     background-color: #f1f1f1;
@@ -4242,7 +4250,9 @@ table.tablehistory tbody tr td a {
     color: white;
 }
 
+
 /* Individual bars */
+
 .bar-5 {
     height: 18px;
     background-color: #04aa6d;
@@ -4267,11 +4277,15 @@ table.tablehistory tbody tr td a {
     height: 18px;
     background-color: #f44336;
 }
+
 #rating-pro-detail .row {
     margin-bottom: 40px;
 }
+
+
 /* Scroll To Top*/
-#topBtn{
+
+#topBtn {
     position: fixed;
     bottom: 40px;
     right: 40px;
@@ -4285,7 +4299,7 @@ table.tablehistory tbody tr td a {
     border-radius: 5px;
 }
 
-.alert_success{
+.alert_success {
     background: #c1f3d7;
     padding: 15px 40px;
     border-radius: 4px;
@@ -4297,7 +4311,8 @@ table.tablehistory tbody tr td a {
     color: #1faf5b;
     font-size: 25px;
 }
-.alert_success .msg{
+
+.alert_success .msg {
     padding: 0 20px;
     font-size: 15px;
     color: #1faf5b;
@@ -4332,4 +4347,18 @@ table.tablehistory tbody tr td a {
     /* left: 50%; */
     display: flex;
     justify-content: center;
+}
+
+#hide1 {
+    display: none;
+}
+
+i#togglePassword1 {
+    margin: 0 0 0 93%;
+    /* top: 0px; */
+}
+
+i#togglePassword {
+    margin: 0 0 0 93%;
+    /* top: 0px; */
 }

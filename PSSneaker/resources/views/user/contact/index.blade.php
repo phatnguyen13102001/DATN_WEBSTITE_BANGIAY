@@ -11,27 +11,50 @@
             </div>
         </div>
         <form action="{{route('lienheweb.post')}}" method="POST" role="form">
+        @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        {{session('success')}}
+                    </div>
+                    @endif
             <div class="row">
                 <div class="col-sm-8">
                     <div class="contact-form">
                         @csrf
                         <div class="form-group col-md-6">
                             <input type="text" name="name" class="form-control" placeholder="Họ và tên">
+                            @if($errors->has('name'))
+                            <p class="mb-1 bg-danger"> {{$errors->first('name')}}</p>
+                            @endif
                         </div>
                         <div class="form-group col-md-6">
                             <input type="email" name="email" class="form-control" placeholder="Email">
+                            @if($errors->has('email'))
+                <p class="mb-1 bg-danger"> {{$errors->first('email')}}</p>
+                @endif
                         </div>
                         <div class="form-group col-md-6">
                             <input type="number" name="phone" class="form-control" placeholder="Số điện thoại">
+                            @if($errors->has('phone'))
+                <p class="mb-1 bg-danger"> {{$errors->first('phone')}}</p>
+                @endif
                         </div>
                         <div class="form-group col-md-6">
                             <input type="text" name="address" class="form-control" placeholder="Địa chỉ">
+                            @if($errors->has('address'))
+                <p class="mb-1 bg-danger"> {{$errors->first('address')}}</p>
+                @endif
                         </div>
                         <div class="form-group col-md-12">
                             <input type="text" name="topic" class="form-control" placeholder="Chủ đề">
+                            @if($errors->has('topic'))
+                <p class="mb-1 bg-danger">{{$errors->first('topic')}}</p>
+                @endif
                         </div>
                         <div class="form-group col-md-12">
                             <textarea name="content" id="message" class="form-control" rows="8" placeholder="Nội dung"></textarea>
+                            @if($errors->has('content'))
+                <p class="mb-1 bg-danger md-1"> {{$errors->first('content')}}</p>
+                @endif
                         </div>
                         <div class="form-group1 col-md-12">
                             <button type="submit" class="btnpull-right_gui">Gửi</button>

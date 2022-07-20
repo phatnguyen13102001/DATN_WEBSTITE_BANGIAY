@@ -68,7 +68,7 @@ class AccountController extends Controller
             [
                 'email' => 'required|email|unique:colors,name,NULL,id,deleted_at,NULL',
                 'name' => 'required',
-                'phone' => 'required',
+                'phone' => 'required|min:10|max:11|numeric',
                 'gender' => 'required',
                 'birthday' => 'required',
             ],
@@ -78,6 +78,9 @@ class AccountController extends Controller
                 'email.email' => 'Email Không Đúng Định Dạng',
                 'name.required' => 'Tên Không Được Bỏ Trống',
                 'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
+                'phone.min' => 'Số điện thoại ít nhất 10 số',
+                'phone.max' => 'Số điện thoại nhiều nhất 11 số',
+                'phone.numeric' => 'Số điện thoại phải là số',
                 'gender.required' => 'Giới tính Không Được Bỏ Trống',
                 'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
             ]
@@ -157,7 +160,14 @@ class AccountController extends Controller
         $request ->validate([
             'password'=> 'required|min:8',
             'new_password'=>'required|min:8',
-        ]);
+        ],
+        [
+            'password.required'=>'Mật  khẩu cũ không được bỏ trống',
+            'password.min'=>'Mật khẩu nhập ít nhất 8 kí tự',
+            'new_password.required'=>'Mật  khẩu mới không được bỏ trống',
+            'new_password.min'=>'Mật khẩu nhập ít nhất 8 kí tự',
+        ]
+    );
         $user = auth()->user();
         if(Hash::check($request->password, $user->password)){
             $user ->update([

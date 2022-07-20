@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -67,7 +66,7 @@ class LoginController extends Controller
                 'email.required' => 'Email Không Được Bỏ Trống',
                 'password.required' => 'Mật Khẩu Không Được Bỏ Trống',
                 'email.email' => 'Email Không Đúng Định Dạng',
-                'password.min'=> 'Mật khẩu phải nhập đủ 8 kí tự'
+                'password.min'=> 'Mật khẩu phải nhập ít nhất 8 kí tự'
             ]
         );
         if (Auth::attempt($credentials) && Auth::user()->permission == 1  && Auth::user()->deleted_at == null) {
@@ -110,7 +109,7 @@ return back()->withErrors([
             [
                 'email' => 'required|email|unique:colors,name,NULL,id,deleted_at,NULL',
                 'name' => 'required',
-                'phone' => 'required',
+                'phone' => 'required|min:10|numeric',
                 'gender' => 'required',
                 'birthday' => 'required',
                 'password' =>'required|min:8',
@@ -121,6 +120,9 @@ return back()->withErrors([
                 'email.email' => 'Email Không Đúng Định Dạng',
                 'name.required' => 'Tên Không Được Bỏ Trống',
                 'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
+                'phone.min' => 'Số điện thoại ít nhất 10 số',
+                'phone.max' => 'Số điện thoại nhiều nhất 11 số',
+                'phone.numeric' => 'Số điện thoại phải là số',
                 'gender.required' => 'Giới tính Không Được Bỏ Trống',
                 'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
                 'password.required' => 'Mật khẩu Không Được Bỏ Trống',
@@ -137,7 +139,6 @@ return back()->withErrors([
         $user->address = $request->address;
         $user->password = bcrypt($request->password);
         $user->permission = '0';
-        
         $user->save();
         if ($request->hasFile('avatar')) {
             $user->avatar = $request->file('avatar')->store('images/user/', 'public');
@@ -184,13 +185,16 @@ $r = User::where('email', '=', $req->email)->first();
         $validatedData = $request->validate(
             [
                 'name' => 'required',
-                'phone' => 'required',
+                'phone' => 'required|min:10|numeric',
                 'birthday' => 'required',
                 'gender' => 'required'
             ],
             [
                 'name.required' => 'Tên Không Được Bỏ Trống',
                 'phone.required' => 'Số điện thoại Không Được Bỏ Trống',
+                'phone.min' => 'Số điện thoại ít nhất 10 số',
+                'phone.max' => 'Số điện thoại nhiều nhất 11 số',
+                'phone.numeric' => 'Số điện thoại phải là số',
                 'birthday.required' => 'Ngày sinh Không Được Bỏ Trống',
                 'gender.required' => 'Giới tính Không Được Bỏ Trống',
             ]
@@ -217,9 +221,7 @@ $r = User::where('email', '=', $req->email)->first();
                 $user->avatar = $image;
                 $user->save();
             }
-          
             $user->save();
-
             $request->session()->flash('success', 'cập nhật thành công');
             return redirect()->back();
         } else {
@@ -248,8 +250,8 @@ $r = User::where('email', '=', $req->email)->first();
         ],
         [
             'password.required' => 'Mật khẩu không Được Bỏ Trống',
-            'new_password.required' => 'Mật khẩu mới Không Được Bỏ Trống',
             'password.min' => 'Mật khẩu phải nhập đủ 8 kí tự',
+            'new_password.required' => 'Mật khẩu mới Không Được Bỏ Trống',
             'new_password.min' => 'Mật khẩu phải nhập đủ 8 kí tự',
         ]
     );
