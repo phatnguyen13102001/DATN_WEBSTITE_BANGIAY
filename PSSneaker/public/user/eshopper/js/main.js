@@ -274,18 +274,4 @@ $(document).ready(function () {
         $('html,body').animate({ scrollTop: 0 }, 800);
     });
 
-    $('.BtnAddToCart').click(function () {
-        $('.alert_success').removeClass("hiden");
-        $('.alert_success').addClass("show");
-        $('.alert_success').addClass("showAlert");
-        // setTimeout(function () {
-        //     $('.alert').addClass("hiden");
-        //     $('.alert').removeClass("show");
-        // },5000)
-    });
-    $('.close-btn').click(function () {
-        $('.alert_success').addClass("hiden");
-        $('.alert_success').removeClass("show");
-    });
-
 });

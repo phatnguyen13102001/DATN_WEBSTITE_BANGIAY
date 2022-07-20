@@ -293,6 +293,16 @@ class ProductController extends Controller
     }
     public function insertlib(Request $request)
     {
+        $validatedData = $request->validate(
+            [
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            [
+                'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
+            ]
+        );
         $library = new Library;
         $library->fill([
             'id_product' => $request->input('idproduct'),
@@ -315,6 +325,16 @@ class ProductController extends Controller
     }
     public function updatelib(Request $request)
     {
+        $validatedData = $request->validate(
+            [
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ],
+            [
+                'image.image' => 'Hình ảnh không đúng định dạng',
+                'image.mimes' => 'Đuôi hình ảnh không đúng định dạng',
+                'image.max' => 'Kích thước hình ảnh phải nhỏ hơn 2048MB',
+            ]
+        );
         $library_id = $request->input('updateting_id');
         $library = library::find($library_id);
         $library->fill([

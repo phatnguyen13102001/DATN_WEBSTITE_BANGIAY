@@ -304,6 +304,11 @@ $(document).ready(function() {
         }
     });
 
+    /* Rounde number */
+    function roundNumber(rnum, rlength)
+    {
+        return Math.round(rnum*Math.pow(10,rlength))/Math.pow(10,rlength);
+    }
     /* Datetimepicker */
     $('#datepicker').datepicker();
     if (input) {

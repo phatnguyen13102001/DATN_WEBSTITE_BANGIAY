@@ -3,16 +3,7 @@
 <div class="wrap_cart_main">
     <div class="container">
         <form class="form-cart validation-cart" method="post" action="{{route('order')}}" enctype="multipart/form-data">
-            <div class=" wrap-cart">
-                @if(session()->has('message'))
-                <div class="alert alert-danger">
-                    {!! session()->get('message')!!}
-                </div>
-                @elseif(session()->has('error'))
-                <div class="alert alert-danger">
-                    {!! session()->get('error')!!}
-                </div>
-                @endif
+            <div class="wrap-cart">
                 @if((Cart::instance(Auth::user())->count())!=0)
                 <a href="{{route('index')}}" class="btn btn-dark">
                     <i class="fas fa-backward"></i> Tiếp tục mua hàng</a>

@@ -20,6 +20,19 @@
         <button class="btn btn-sm bg-gradient-primary text-white insertBtn" type="button" title="Thêm mới"><i class="fas fa-plus mr-2"></i>Thêm mới</button>
         <a class="btn btn-sm bg-gradient-danger" href="{{route('product.index')}}" title="Thoát"><i class="fas fa-sign-out-alt mr-2"></i>Thoát</a>
     </div>
+    @if($errors->has('image'))
+    <div class="card bg-gradient-danger">
+        <div class="card-header">
+            <h3 class="card-title">Thông báo</h3>
+            <div class="card-tools"><button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button><button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button></div>
+        </div>
+        <div class="card-body" style="display: block;">
+            @if($errors->has('image'))
+            <p class="mb-1">- {{$errors->first('image')}}</p>
+            @endif
+        </div>
+    </div>
+    @endif
     <div class="card card-primary card-outline text-sm mb-0">
         <div class="card-header">
             <h3 class="card-title">Danh sách thư viện</h3>

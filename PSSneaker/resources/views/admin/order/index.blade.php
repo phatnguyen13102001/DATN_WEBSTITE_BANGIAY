@@ -52,60 +52,8 @@
                 <div class="info-box-content">
                     <span class="info-box-text text-danger font-weight-bold text-capitalize text-sm">Đã hủy</span>
                     <p class="info-box-text text-sm mb-0">Số lượng: <span class="text-danger font-weight-bold">{{$lstorder4}}</span></p>
-                    <p class="info-box-text text-sm mb-0">Tổng giá: <span class="text-danger font-weight-bold">{{$lstordertotal3 == null ? '0₫' : number_format($lstordertotal3->total3).'₫' }}</span></p>
+                    <p class="info-box-text text-sm mb-0">Tổng giá: <span class="text-danger font-weight-bold">{{$lstordertotal4 == null ? '0₫' : number_format($lstordertotal4->total4).'₫' }}</span></p>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="card card-primary card-outline text-sm">
-        <div class="card-header">
-            <h3 class="card-title">Tìm kiếm đơn hàng</h3>
-        </div>
-        <div class="card-body row">
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Ngày đặt:</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                    </div>
-                    <input type="text" class="form-control float-right text-sm" name="order_date" id="order_date" value="" readonly="">
-                </div>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Tình trạng:</label>
-                <select id="order_status" name="data[order_status]" class="form-control custom-select text-sm">
-                    <option value="0">Chọn tình trạng</option>
-                </select>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Hình thức thanh toán:</label>
-                <select id="order_payment" name="order_payment" class="form-control custom-select text-sm">
-                    <option value="0">Chọn hình thức thanh toán</option>
-                    <option value="16">Thanh toán sau khi nhận hàng</option>
-                    <option value="15">hasgcj</option>
-                </select>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Tỉnh thành:</label>
-                <select id="id_city" name="data[id_city]" data-level="0" data-table="#_district" data-child="id_district" class="form-control select2 select-place select2-hidden-accessible" data-select2-id="id_city" tabindex="-1" aria-hidden="true">
-                    <option value="0" data-select2-id="2">Chọn danh mục</option>
-                </select>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Quận huyện:</label>
-                <select id="id_district" name="data[id_district]" data-level="1" data-table="#_ward" data-child="id_ward" class="form-control select2 select-place select2-hidden-accessible" data-select2-id="id_district" tabindex="-1" aria-hidden="true">
-                    <option value="0" data-select2-id="4">Chọn danh mục</option>
-                </select>
-            </div>
-            <div class="form-group col-md-3 col-sm-3">
-                <label>Phường xã:</label>
-                <select id="id_ward" name="data[id_ward]" class="form-control select2 select-place select2-hidden-accessible" data-select2-id="id_ward" tabindex="-1" aria-hidden="true">
-                    <option value="0" data-select2-id="6">Chọn danh mục</option>
-                </select>
-            </div>
-            <div class="form-group text-center mt-2 mb-0 col-12">
-                <a class="btn btn-sm bg-gradient-success text-white" onclick="actionOrder('index.php?com=order&amp;act=man')" title="Tìm kiếm"><i class="fas fa-search mr-1"></i>Tìm kiếm</a>
-                <a class="btn btn-sm bg-gradient-danger text-white ml-1" href="index.php?com=order&amp;act=man" title="Hủy lọc"><i class="fas fa-times mr-1"></i>Hủy lọc</a>
             </div>
         </div>
     </div>

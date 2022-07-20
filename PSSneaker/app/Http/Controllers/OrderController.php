@@ -118,6 +118,6 @@ class OrderController extends Controller
         Orderdetail::insert($orderdetail);
 
         Cart::instance(Auth::user())->destroy();
-        return View::make('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment', 'mangxh'));
+        return view('user.cart.index', compact('lstlogo', 'setting', 'hangsx', 'chinhsach', 'lstcity', 'lstpayment', 'mangxh'));
     }
 }

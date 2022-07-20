@@ -2,22 +2,17 @@
 @section('content')
 <section>
     <div class="container">
-        @if(session('fail'))
-        <div class="alert alert-danger">
-            {{session('fail')}}
+        @if(session('success'))
+        <div class="alert_success">
+            <span class="fas fa-check-circle"></span>
+            <span class="msg">Thông báo: {{session('success')}}</span>
         </div>
         @endif
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{session('success')}}
+        @if(session('fail'))
+        <div class="alert_fail">
+            <span class="fas fa-times-circle"></span>
+            <span class="msg">Thông báo: {{session('fail')}}</span>
         </div>
-        <!-- <div class="alert_success hiden">
-            <span class="fas fa-check-circle"></span>
-            <span class="msg">Thông báo: Thêm vào giỏ hàng thành công</span>
-            <span class="close-btn">
-                <span class="fas fa-times"></span>
-            </span>
-        </div> -->
         @endif
         <div>
             <div class="padding_category">
@@ -256,10 +251,12 @@
                                         @endif
                                         <div class="box-name-rate">
                                             <p>{{$v_rate->user->name}}</p>
+                                            <p>
                                             <ul class="list-inline">
                                                 @for($count=1 ; $count<=5; $count++) @php if($count <=$v_rate->rate){ $color='color:#ffcc00;' ; } else { $color='color:#ccc;' ; } @endphp <li style="{{$color}}; font-size:15px;"><i class="fas fa-star"></i></li>
                                                     @endfor
                                             </ul>
+                                            </p>
                                         </div>
                                     </div>
                                     <div class="box-date-rate">
@@ -273,6 +270,7 @@
                     </div>
                     <!--/category-tab-->
                     @if(count($lstproductsame)===0)
+                    <h2 class="title text-center">SẢN PHẨM CÙNG LOẠI</h2>
                     <div class="alert alert-warning w-100" role="alert">
                         <p>Không có sản phẩm cùng loại nào</p>
                     </div>

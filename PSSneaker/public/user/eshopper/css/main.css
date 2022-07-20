@@ -4185,12 +4185,10 @@ table.tablehistory tbody tr td a {
 }
 .lst-user-rate {
     display: flex;
-    text-align: center;
     justify-content: space-between;
 }
 .box-user-rate {
     display: flex;
-    text-align: center;
     margin-bottom: 20px;
 }
 .box-date-rate {
@@ -4198,7 +4196,7 @@ table.tablehistory tbody tr td a {
     color: #b5b5b5;
     font-size: 13px;
 }
-#rating-pro-detail {
+.rating, #rating-pro-detail p{
     text-align: center;
 }
 
@@ -4290,62 +4288,12 @@ table.tablehistory tbody tr td a {
 .alert_success{
     background: #c1f3d7;
     padding: 15px 40px;
-    min-width: 420px;
-    position: absolute;
-    right: 0px;
-    top: 270px;
-    overflow: hidden;
     border-radius: 4px;
     border-left: 8px solid #25d971 !important;
-    opacity: 0;
-    pointer-events: none;
-}
-.alert_success.showAlert{
-    opacity: 1;
-    pointer-events: auto;
-}
-.alert_success.show{
-    animation: show_slide 1s ease forwards;
-}
-@keyframes show_slide{
-    0%{
-        transform: translateX(100%);
-    }
-    40% {
-        transform: translateX(-10%);
-    }
-    80% {
-        transform: translateX(0%);
-    }
-    100% {
-        transform: translateX(-10px);
-    }
-}
-.alert_success.hiden {
-    animation: hiden_slide 1s ease forwards;
-}
-@keyframes hiden_slide {
-    0% {
-        transform: translateX(-10px);
-    }
-
-    40% {
-        transform: translateX(0);
-    }
-
-    80% {
-        transform: translateX(-10%);
-    }
-
-    100% {
-        transform: translateX(100%);
-    }
+    border-right: 8px solid #25d971 !important;
+    margin-top: 20px;
 }
 .alert_success .fa-check-circle{
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
     color: #1faf5b;
     font-size: 25px;
 }
@@ -4354,23 +4302,27 @@ table.tablehistory tbody tr td a {
     font-size: 15px;
     color: #1faf5b;
 }
-.alert_success .close-btn{
-    position: absolute;
-    right: 0px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #96ebb9;
-    padding: 20px 18px;
-    cursor: pointer;
+
+.alert_fail {
+    background: #ffdfe4;
+    padding: 15px 40px;
+    border-radius: 4px;
+    border-left: 8px solid #f83548 !important;
+    border-right: 8px solid #f83548 !important;
+    margin-top: 20px;
 }
-.close-btn:hover{
-    background: #40df73;
+
+.alert_fail .fa-times-circle {
+    color: #f83548;
+    font-size: 25px;
 }
-.close-btn .fa-times{
-    color: #1faf5b;
-    font-size: 20px;
-    line-height: 40px;
+
+.alert_fail .msg {
+    padding: 0 20px;
+    font-size: 15px;
+    color: #f83548;
 }
+
 .title_login_quenml {
     text-align: center;
 }
