@@ -71,7 +71,7 @@
                                     </div>
                                     <div>
                                         <span>Màu:</span>
-                                        <span style="color:{{$lstproduct->color->code}}">{{$lstproduct->color->name}}</span>
+                                        <span style="color:{{$lstproduct->color->code}}; background:{{$lstproduct->color->code}}; padding:0 10px; border: 1px solid black">{{$lstproduct->color->name}}</span>
                                     </div>
                                     <div class="box-size">
                                         <table class="variations" cellspacing="0">
